@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #231942;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,6 +23,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.card-body{
+  background-color: #231942;
+}
+
+.mb-3{
+  font-size: medium;
+  text-align: left;
+  border-radius: 5px;
+}
+
 
 .App-link {
   color: #61dafb;
