@@ -1,6 +1,6 @@
 import './App.css';
-import Login from './components/sig-in/login';
-import RegistrationPage from './components/sig-in/registration.js';
+import Login from './components/auth/login';
+import RegistrationPage from './components/auth/registration.js';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/bar/navbar';
 
