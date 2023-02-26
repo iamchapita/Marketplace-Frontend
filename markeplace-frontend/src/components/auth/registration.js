@@ -21,10 +21,7 @@ function RegistrationPage() {
             dni: dni,
             phoneNumber: phoneNumber,
             birthDate: birthDate,
-            password: password,
-            isAdmin: 0,
-            isClient: 1,
-            isSeller: 0
+            password: password
         }).then(response => {
             console.log(response.data);
         })
