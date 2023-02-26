@@ -15,6 +15,9 @@ function RegistrationPage() {
         event.preventDefault();
         
         apiClient.post('api/register', {
+            // Este sera el orden de los parametros en
+            // el objeto request y en la funcion validator
+            // en el backend
             firstName: name,
             lastName: name,
             email: email,
