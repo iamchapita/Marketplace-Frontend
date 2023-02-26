@@ -6,10 +6,6 @@ function Navbar(){
 
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-                
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="/navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-                </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul className="navbar-nav">
                     <li className="nav-item">
@@ -24,14 +20,12 @@ function Navbar(){
                     <li className="nav-item">
                     <a className="navbar-brand" href="/">Vender</a>
                     </li>
-
                 </ul>
-                
-                
                 </div>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Escriba su Busqueda"/>
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                <form className="d-flex" role="search">
+                    <a className="navbar-brand" href="/" >Iniciar Sesión</a>
+                    <input className="form-control me-2" type="search" placeholder="Escriba su Busqueda"/>
+                    <button className="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
             </div>
             </nav>
