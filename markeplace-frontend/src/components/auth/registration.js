@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-
+import apiClient from '../../services/apiClient';
 
 function RegistrationPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [birthdate, setBirthdate] = useState('');
+    const [phoneNumber, setphoneNumber] = useState('');
+    const [birthDate, setBirthDate] = useState('');
     const [address, setAddress] = useState('');
-    const [identification, setIdentification] = useState('');
+    const [dni, setDni] = useState('');
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle login logic
+        
+        apiClient.post('api/register', {
+            firstName: name,
+            lastName: name,
+            email: email,
+            dni: dni,
+            phoneNumber: phoneNumber,
+            birthDate: birthDate,
+            password: password,
+            isAdmin: 0,
+            isClient: 1,
+            isSeller: 0
+        }).then(response => {
+            console.log(response.data);
+        })
+        
     };
 
     return (
@@ -32,11 +47,11 @@ function RegistrationPage() {
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>DNI</label>
-                            <input className='form-control' type="text" value={identification} onChange={(e) => setIdentification(e.target.value)} />
+                            <input className='form-control' type="text" value={dni} onChange={(e) => setDni(e.target.value)} />
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Número de teléfono</label>
-                            <input className='form-control' type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                            <input className='form-control' type="tel" value={phoneNumber} onChange={(e) => setphoneNumber(e.target.value)} />
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Dirección</label>
@@ -48,7 +63,7 @@ function RegistrationPage() {
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Fecha de Nacimiento</label>
-                            <input className='form-control' type="date" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
+                            <input className='form-control' type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                         </div>
                         <button className='btn btn-primary' type="submit">Registrarse</button>
                     </form>
