@@ -22,7 +22,7 @@ function Navbar(){
                     <a className="navbar-brand" href="/">Favoritos</a>
                     </li>
                     <li className="nav-item">
-                    <a className="navbar-brand" href="/">Perfil de vendedor</a>
+                    <a className="navbar-brand" href="/">Vender</a>
                     </li>
 
                 </ul>
