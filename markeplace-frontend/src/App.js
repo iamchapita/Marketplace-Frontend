@@ -1,8 +1,8 @@
 import './App.css';
-import Login from './component/sig-in/login';
-import RegistrationPage from './component/sig-in/registration.js';
+import Login from './components/sig-in/login';
+import RegistrationPage from './components/sig-in/registration.js';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navbar from './component/bar/navbar';
+import Navbar from './components/bar/navbar';
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
             <header className="App-header">
                 <BrowserRouter>
                     <Routes>
-                        <Route path='/' element={<Login />} ></Route>
+                        <Route path='/login' element={<Login />} ></Route>
                         <Route path='/registro' element={<RegistrationPage />} ></Route>
                     </Routes>
 
