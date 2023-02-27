@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import apiClient from '../../services/apiClient';
+import UserAgreement from './useragreement';
+import '../../style/style-registration.css'
+
 
 function RegistrationPage() {
     const [email, setEmail] = useState('');
@@ -9,7 +12,16 @@ function RegistrationPage() {
     const [birthDate, setBirthDate] = useState('');
     const [address, setAddress] = useState('');
     const [dni, setDni] = useState('');
-    
+    const [aceptado, setAceptado] = useState(false);
+    const [denegado, setDenegado] = useState(false);
+  
+    const handleAceptar = () => {
+      setAceptado(true);
+    };
+  
+    const handleDenegar = () => {
+      setDenegado(true);
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -69,7 +81,10 @@ function RegistrationPage() {
                             <label className='form-label'>Fecha de Nacimiento</label>
                             <input className='form-control' type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                         </div>
+                            <UserAgreement></UserAgreement>
+                        <br></br>
                         <button className='btn btn-primary' type="submit">Registrarse</button>
+                        
                     </form>
                 </div>
             </div>
