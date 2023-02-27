@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import apiClient from '../../services/apiClient';
 
+
 const Login = ({ login }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,9 +18,8 @@ const Login = ({ login }) => {
     };
 
     return (
-        <div className='container'>
-            <div className='card'>
-                <div className='card-body'>
+        <div className='box'>
+            <div className='card-body'>
                     <form onSubmit={handleSubmit}>
                         <h2>Iniciar Sesion</h2>
                         <div className='mb-3'>
@@ -34,7 +34,6 @@ const Login = ({ login }) => {
                             <button className='btn btn-primary' type='submit' >Iniciar Sesión</button>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     );

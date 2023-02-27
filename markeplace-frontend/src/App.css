@@ -21,7 +21,13 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #fff;
+}
+
+/*CSS Aplicados a Login, Registro y NavBar*/
+
+.box{
+  width: 1000px;
 }
 
 .card-body{
@@ -29,10 +35,22 @@
 }
 
 .mb-3{
-  font-size: medium;
   text-align: left;
-  border-radius: 5px;
+  font-size: medium;
 }
+
+.Nav-Bar{
+  
+}
+
+.agreement{
+  background-color: #61dafb;
+  color: #fff;
+}
+
+
+
+/*Hasta aqui llegan*/
 
 
 .App-link {

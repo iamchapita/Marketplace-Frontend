@@ -9,7 +9,7 @@ function RegistrationPage() {
     const [birthDate, setBirthDate] = useState('');
     const [address, setAddress] = useState('');
     const [dni, setDni] = useState('');
-
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,12 +33,16 @@ function RegistrationPage() {
 
     return (
         <div>
-            <div className='card'>
+            <div className='box'>
                 <div className='card-body' >
                     <h2>Registro</h2>
                     <form onSubmit={handleSubmit}>
                         <div className='mb-3'>
-                            <label className='form-label'>Nombre completo</label>
+                            <label className='form-label'>Nombres</label>
+                            <input className='form-control' type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                        </div>
+                        <div className='mb-3'>
+                            <label className='form-label'>Apellidos</label>
                             <input className='form-control' type="text" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className='mb-3'>

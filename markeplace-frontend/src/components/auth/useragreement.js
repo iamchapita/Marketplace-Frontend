@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AcuerdoUsuario() {
+function UserAgreement() {
   const [aceptado, setAceptado] = useState(false);
   const [denegado, setDenegado] = useState(false);
 
@@ -14,21 +14,27 @@ function AcuerdoUsuario() {
 
   return (
     <div>
-      <h2>Acuerdo de usuario</h2>
-      <p>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</p>
-      <p>...Me Falta Escribir el Acuerdo...</p> 
+    <div className="box">
+      <div className="card-body">
+        <div className='agreement'>
+            <h5>Acuerdo de usuario</h5>
+            <h6>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</h6>
+            <h6>...Me Falta Escribir el Acuerdo...</h6> 
 
-      {!aceptado && !denegado && (
-        <div>
-          <button onClick={handleAceptar}>Aceptar</button>
-          <button onClick={handleDenegar}>Denegar</button>
+                {!aceptado && !denegado && (
+                <div>
+                <button onClick={handleAceptar} className='btn btn-primary' type="submit">Aceptar</button>
+                <button onClick={handleDenegar} className='btn btn-primary' type="submit">Denegar</button>
+                </div>
+                )}
+                        
+           {aceptado && <h6>Has aceptado el acuerdo de usuario.</h6>}
+           {denegado && <h6>Has denegado el acuerdo de usuario.</h6>}
         </div>
-      )}
-      
-      {aceptado && <p>Has aceptado el acuerdo de usuario.</p>}
-      {denegado && <p>Has denegado el acuerdo de usuario.</p>}
+      </div>  
+    </div>
     </div>
   );
 }
 
-export default AcuerdoUsuario;
+export default UserAgreement;
