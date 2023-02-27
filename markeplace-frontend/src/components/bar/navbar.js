@@ -27,7 +27,7 @@ function Navbar(){
                 <form className="d-flex" role="search">
                     <a className="navbar-brand" href="/registro" >Registrarse</a>
                     <input className="form-control me-2" type="search" placeholder="Escriba su Busqueda"/>
-                    <button className="btn btn-outline-success" type="submit">Buscar</button>
+                    <button className="btn btn-success" type="submit">Buscar</button>
                 </form>
             </div>
             </nav>

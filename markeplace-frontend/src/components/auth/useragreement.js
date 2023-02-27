@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../../style/style-useragreement.css'
 
 function UserAgreement() {
   const [aceptado, setAceptado] = useState(false);
@@ -23,7 +24,7 @@ function UserAgreement() {
 
                 {!aceptado && !denegado && (
                 <div>
-                <button onClick={handleAceptar} className='btn btn-secondary' type="submit">Aceptar</button>
+                <button onClick={handleAceptar} className='btn btn-primary' type="submit">Aceptar</button>
                 <button onClick={handleDenegar} className='btn btn-secondary' type="submit">Denegar</button>
                 </div>
                 )}

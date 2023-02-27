@@ -83,7 +83,7 @@ function RegistrationPage() {
                         </div>
                             <UserAgreement></UserAgreement>
                         <br></br>
-                        <button className='btn btn-primary' type="submit">Registrarse</button>
+                        <button className='btn btn-success' type="submit">Registrarse</button>
                         
                     </form>
                 </div>

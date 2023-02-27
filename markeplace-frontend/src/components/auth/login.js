@@ -33,7 +33,7 @@ const Login = ({ login }) => {
                             <input className='form-control' name='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className='mb-2'>
-                            <button className='btn btn-primary' type='submit' >Iniciar Sesión</button>
+                            <button className='btn btn-success' type='submit' >Iniciar Sesión</button>
                         </div>
                     </form>
             </div>

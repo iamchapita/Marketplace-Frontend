@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #231942;
+  background-color: #00509d;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,35 +23,6 @@
   font-size: calc(10px + 2vmin);
   color: #fff;
 }
-
-/*CSS Aplicados a Login, Registro y NavBar*/
-
-.box{
-  width: 1000px;
-}
-
-.card-body{
-  background-color: #231942;
-}
-
-.mb-3{
-  text-align: left;
-  font-size: medium;
-}
-
-.Nav-Bar{
-  
-}
-
-.agreement{
-  background-color: #231942;
-  color: #b4b3b8;
-  text-align: left;
-}
-
-
-
-/*Hasta aqui llegan*/
 
 
 .App-link {

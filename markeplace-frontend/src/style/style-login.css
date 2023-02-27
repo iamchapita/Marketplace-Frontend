@@ -1,3 +1,15 @@
-.login{
-    background-color: #081653;
-}
+/*CSS Login*/
+
+
+.box{
+    width: 1000px;
+  }
+  
+  .card-body{
+    background-color: #00509d;
+  }
+  
+  .mb-3{
+    text-align: left;
+    font-size: medium;
+  }
