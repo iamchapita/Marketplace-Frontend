@@ -17,17 +17,13 @@
 .App-header {
   background-color: #14599a;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: #fff;
 }
 
 
 .App-link {
   color: #61dafb;
+  display: fle;
 }
 
 @keyframes App-logo-spin {

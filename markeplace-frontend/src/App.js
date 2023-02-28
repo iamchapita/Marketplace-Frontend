@@ -1,9 +1,10 @@
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 import Login from './components/auth/login';
 import RegistrationPage from './components/auth/registration.js';
 import Navbar from './components/bar/navbar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import Sidebar from './components/bar/sidebar';
 import ProductForm from "./components/product/productForm";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <div className="App">
             <Navbar></Navbar>
             <header className="App-header">
+                <Sidebar></Sidebar>
                 <BrowserRouter>
                     <Routes>
                         <Route path='/login' element={<Login login={login} />} ></Route>
