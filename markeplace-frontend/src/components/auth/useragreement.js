@@ -24,7 +24,6 @@ function UserAgreement() {
                 <div className="form-check">
                 <a className="nav-link" href="/acuerdo" >Acuerdo de usuario</a>
                 <p>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</p>
-                  
                 <input onClick={handleAceptar} id="btn-check-act" className='form-check-input' type="checkbox"/>
                 <label className="form-check-label" for="btn-check-act" >aceptar</label>
                 <br></br>

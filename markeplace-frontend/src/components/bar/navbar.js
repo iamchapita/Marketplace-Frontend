@@ -1,5 +1,6 @@
 import React from "react";
 import '../../style/style-navbar.css'
+import Search from '../bar/search';
 
 function Navbar(){
     return(
@@ -21,14 +22,12 @@ function Navbar(){
                     <a className="navbar-brand text-white " href="/">Vender</a>
                     </li>
                 </ul>
+                    <Search></Search>
                 </div>
-                
-                <form className="d-flex" role="search">
-                    <a className="navbar-brand text-white text-link " href="/login" >Iniciar Sesión</a>
-                    <input className="form-control me-2" type="search" placeholder="Escriba su Busqueda"/>
-                    <button className="btn btn-success" type="submit">Buscar</button>
-                </form>
-            </div>
+                    <form className="d-flex" role="search">
+                        <a className="navbar-brand text-white text-link " href="/login" >Iniciar Sesión</a>
+                    </form>
+                </div>
             </nav>
             
         </div>

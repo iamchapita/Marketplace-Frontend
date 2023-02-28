@@ -13,17 +13,7 @@ function RegistrationPage() {
     const [birthDate, setBirthDate] = useState('');
     const [address, setAddress] = useState('');
     const [dni, setDni] = useState('');
-    //const [aceptado, setAceptado] = useState(false);
-    //const [denegado, setDenegado] = useState(false);
-    /*
-    const handleAceptar = () => {
-      setAceptado(true);
-    };
-  
-    const handleDenegar = () => {
-      setDenegado(true);
-    };
-    */
+   
     const handleSubmit = (event) => {
         event.preventDefault();
         

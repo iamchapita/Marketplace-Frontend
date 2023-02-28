@@ -2,15 +2,15 @@
 
 .box{
     width: 800px;
-    border-color: #07325a;
+    border-color: #14599a;
 }
   
 .card-body-registration{
-    background-color: #07325a;
+    background-color: #14599a;
     border: solid;
     align-items: center;
     border-radius: 1%;
-    border-color: #07325a;
+    border-color: #14599a;
 }
   
 .mb-3{
