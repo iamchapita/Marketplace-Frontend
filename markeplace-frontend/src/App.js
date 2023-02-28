@@ -16,10 +16,13 @@ function App() {
     }
 
     return (
+        
         <div className="App">
+            
             <Navbar></Navbar>
-            <header className="App-header">
+            <div className='flex'>
                 <Sidebar></Sidebar>
+            <div className="App-header">
                 <BrowserRouter>
                     <Routes>
                         <Route path='/login' element={<Login login={login} />} ></Route>
@@ -30,8 +33,8 @@ function App() {
 
                 </BrowserRouter>
 
-
-            </header>
+                </div>
+            </div>
         </div>
     );
 }
