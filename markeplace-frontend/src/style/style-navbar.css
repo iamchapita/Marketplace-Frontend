@@ -1,13 +1,13 @@
-<<<<<<< Updated upstream
-/*CSS NavBar*/
-
 
 .Nav-Bar{
     background-color: #231942;
-=======
+    color: #ffff;
+    
+}
 .navbar{
     background-color: #171927;
     
->>>>>>> Stashed changes
 }
-
+.text-white{
+    color:#ffff
+}

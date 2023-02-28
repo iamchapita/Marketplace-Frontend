@@ -5,10 +5,15 @@
   }
   
   .card-body{
-    background-color: #00509d;
+    background-color: #0a1a29;
+    border: solid;
+    border-radius: 1%;
   }
   
   .mb-3{
     text-align: left;
     font-size: medium;
+  }
+  .form-control{
+    
   }
