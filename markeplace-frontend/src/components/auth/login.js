@@ -20,8 +20,8 @@ const Login = ({ login }) => {
     };
 
     return (
-        <div >
-            <div className='card-body login'>
+        <div className='box-login'>
+            <div className='card-body-login'>
                     <form onSubmit={handleSubmit}>
                         <h2>Iniciar Sesion</h2>
                         <div className='mb-3'>

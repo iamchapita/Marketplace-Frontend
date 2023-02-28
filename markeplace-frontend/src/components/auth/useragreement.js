@@ -15,7 +15,7 @@ function UserAgreement() {
 
   return (
     <div>
-    <div className="box">
+    <div className="box-agreement">
       <div >
         <div className='agreement'>
             

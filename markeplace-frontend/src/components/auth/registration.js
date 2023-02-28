@@ -47,7 +47,7 @@ function RegistrationPage() {
     return (
         <div>
             <div className='box'>
-                <div className='card-body' >
+                <div className='card-body-registration' >
                     <h2>Registro</h2>
                     <form onSubmit={handleSubmit}>
                         <div className='mb-3'>
@@ -64,11 +64,11 @@ function RegistrationPage() {
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>DNI</label>
-                            <input className='form-control' type="text" value={dni} onChange={(e) => setDni(e.target.value)} />
+                            <input className='form-control' type="number" value={dni} onChange={(e) => setDni(e.target.value)} />
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Número de teléfono</label>
-                            <input className='form-control' type="tel" value={phoneNumber} onChange={(e) => setphoneNumber(e.target.value)} />
+                            <input className='form-control' type="number" value={phoneNumber} onChange={(e) => setphoneNumber(e.target.value)} />
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Dirección</label>

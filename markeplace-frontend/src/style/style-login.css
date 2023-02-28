@@ -1,30 +1,26 @@
 /*CSS Login*/
 
-
-.login{
+.box-login{
     width: 500px;
-    height: 400px;
-    margin: 10px;
-    border-radius: 4%;
-    align-items: center;
-    
-  }
-  
-  .card-body{
+    border-color: #07325a;
+} 
+
+.card-body-login{
     background-color: #07325a;
-  }
+}
   
-  .mb-3{
+.mb-3{
     text-align: left;
     font-size: medium;
-  }
+}
 
-  .text-wrd{
+.text-wrd{
     font-size: medium;
     
-  }
-  .text-link{
+}
+
+.text-link{
     font-size: medium;
     text-decoration: underline;
     color: aliceblue;
-  }
+}

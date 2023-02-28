@@ -1,8 +1,13 @@
 /*CSS UserAgreemet*/
 
+
+.box-agreement{
+    background-color: #07325a;
+}
+
 .agreement{
     color: #b4b3b8;
     text-align: left;
     font-size: small;
-  }
+}
   
