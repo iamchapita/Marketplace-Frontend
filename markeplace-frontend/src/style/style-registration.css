@@ -1,7 +1,7 @@
 /*CSS Registration*/
 
 .box{
-    width: 800px;
+    width: 600px;
     border-color: #14599a;
 }
   
@@ -17,3 +17,14 @@
     text-align: left;
     font-size: medium;
 }
+
+.col-md-4{
+    text-align: left;
+    font-size: medium;
+}
+
+.col-6{
+    text-align: left;
+    font-size: medium;
+}
+
