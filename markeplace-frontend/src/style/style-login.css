@@ -2,7 +2,12 @@
 
 
 .box{
-    width: 1000px;
+    width: 100px;
+    height: 400px;
+    margin: 10px;
+    border-radius: 2%;
+    align-items: center;
+    padding: auto;
   }
   
   .card-body{
@@ -11,5 +16,9 @@
   
   .mb-3{
     text-align: left;
+    font-size: medium;
+  }
+
+  .text-link{
     font-size: medium;
   }

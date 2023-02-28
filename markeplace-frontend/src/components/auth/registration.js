@@ -82,11 +82,18 @@ function RegistrationPage() {
                             <label className='form-label'>Fecha de Nacimiento</label>
                             <input className='form-control' type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                         </div>
+                        <div className='agreements'>
                             <UserAgreement></UserAgreement>
-                        <br></br>
-                        <button className='btn btn-success' type="submit">Registrarse</button>
-                        
+                        </div>
+                        <div>
+                            <button className='btn btn-success' type="submit">Registrarse</button>
+                            <div className='text-link'>
+                            <p className=''>¿Ya tienes cuenta?</p>
+                            <a className='nav-link ' href='/login' >Inicia Sessión</a>
+                            </div>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </div>

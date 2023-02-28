@@ -20,8 +20,8 @@ const Login = ({ login }) => {
     };
 
     return (
-        <div className='box'>
-            <div className='card-body'>
+        <div >
+            <div className='card-body box'>
                     <form onSubmit={handleSubmit}>
                         <h2>Iniciar Sesion</h2>
                         <div className='mb-3'>
@@ -34,6 +34,10 @@ const Login = ({ login }) => {
                         </div>
                         <div className='mb-2'>
                             <button className='btn btn-success' type='submit' >Iniciar Sesión</button>
+                        </div>
+                        <div className='text-link'>
+                            <p >¿No tienes cuenta?</p>
+                            <a className='nav-link' href='/registro'>Registrate</a>
                         </div>
                     </form>
             </div>

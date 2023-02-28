@@ -2,18 +2,19 @@
 
 .box{
     width: 1000px;
+    margin-top: 0%;
+    height: 0px;
   }
   
   .card-body{
     background-color: #0a1a29;
     border: solid;
+    align-items: center;
     border-radius: 1%;
+
   }
   
   .mb-3{
     text-align: left;
     font-size: medium;
-  }
-  .form-control{
-    
   }

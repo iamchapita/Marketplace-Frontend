@@ -16,21 +16,25 @@ function UserAgreement() {
   return (
     <div>
     <div className="box">
-      <div className="card-body">
+      <div >
         <div className='agreement'>
-            <h5>Acuerdo de usuario</h5>
-            <h6>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</h6>
-            <h6>...Me Falta Escribir el Acuerdo...</h6> 
-
+            
                 {!aceptado && !denegado && (
-                <div>
-                <button onClick={handleAceptar} className='btn btn-primary' type="submit">Aceptar</button>
-                <button onClick={handleDenegar} className='btn btn-secondary' type="submit">Denegar</button>
+
+                <div className="form-check">
+                <a className="nav-link" href="/acuerdo" >Acuerdo de usuario</a>
+                <p>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</p>
+                  
+                <input onClick={handleAceptar} id="btn-check-act" className='form-check-input' type="checkbox"/>
+                <label className="form-check-label" for="btn-check-act" >aceptar</label>
+                <br></br>
+                <input onClick={handleDenegar} id="btn-check-dng" className='form-check-input' type="checkbox"/>
+                <label className="form-check-label" for="btn-check-dng">denegar</label>
                 </div>
                 )}
                         
-           {aceptado && <h6>Has aceptado el acuerdo de usuario.</h6>}
-           {denegado && <h6>Has denegado el acuerdo de usuario.</h6>}
+           {aceptado && <p>Has aceptado el acuerdo de usuario.</p>}
+           {denegado && <p>Has denegado el acuerdo de usuario.</p>}
         </div>
       </div>  
     </div>
