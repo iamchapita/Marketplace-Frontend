@@ -27,7 +27,7 @@ function App() {
                     <Routes>
                         <Route path='/login' element={<Login login={login} />} ></Route>
                         <Route path='/registro' element={<RegistrationPage />} ></Route>
-                        <Route path='/crear-productos' element={<ProductForm/>} ></Route>
+                        <Route path='/crear-producto' element={<ProductForm/>} ></Route>
 
                     </Routes>
 
