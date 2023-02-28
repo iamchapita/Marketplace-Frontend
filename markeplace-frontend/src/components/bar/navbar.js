@@ -1,11 +1,12 @@
 import React from "react";
 import '../../style/style-navbar.css'
 
-
 function Navbar(){
     return(
         <div className="Nav-Bar">
-
+           
+            
+            
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
@@ -24,6 +25,7 @@ function Navbar(){
                     </li>
                 </ul>
                 </div>
+                
                 <form className="d-flex" role="search">
                     <a className="navbar-brand" href="/registro" >Registrarse</a>
                     <input className="form-control me-2" type="search" placeholder="Escriba su Busqueda"/>

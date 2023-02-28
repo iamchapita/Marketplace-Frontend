@@ -8,6 +8,7 @@ function RegistrationPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [phoneNumber, setphoneNumber] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [address, setAddress] = useState('');
@@ -31,7 +32,7 @@ function RegistrationPage() {
             // el objeto request y en la funcion validator
             // en el backend
             firstName: name,
-            lastName: name,
+            lastName: lastName,
             email: email,
             dni: dni,
             phoneNumber: phoneNumber,
@@ -55,7 +56,7 @@ function RegistrationPage() {
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Apellidos</label>
-                            <input className='form-control' type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input className='form-control' type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Correo electronico</label>
