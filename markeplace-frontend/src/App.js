@@ -4,7 +4,7 @@ import RegistrationPage from './components/auth/registration.js';
 import Navbar from './components/bar/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
-import ProductForm from "./components/product/productform";
+import ProductForm from "./components/product/productForm";
 
 function App() {
 
