@@ -87,9 +87,9 @@ function RegistrationPage() {
                         </div>
                         <div>
                             <button className='btn btn-success' type="submit">Registrarse</button>
-                            <div className='text-link'>
+                            <div className='text-wrd'>
                             <p className=''>¿Ya tienes cuenta?</p>
-                            <a className='nav-link ' href='/login' >Inicia Sessión</a>
+                            <a className='text-link' href='/login' >Inicia Sessión</a>
                             </div>
                         </div>
                     </form>

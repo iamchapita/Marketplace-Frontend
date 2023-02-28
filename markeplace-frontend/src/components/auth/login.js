@@ -35,9 +35,9 @@ const Login = ({ login }) => {
                         <div className='mb-2'>
                             <button className='btn btn-success' type='submit' >Iniciar Sesión</button>
                         </div>
-                        <div className='text-link'>
+                        <div className='text-wrd'>
                             <p >¿No tienes cuenta?</p>
-                            <a className='nav-link' href='/registro'>Registrate</a>
+                            <a className='text-link' href='/registro'>Registrate</a>
                         </div>
                     </form>
             </div>

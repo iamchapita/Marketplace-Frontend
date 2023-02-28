@@ -19,6 +19,12 @@
     font-size: medium;
   }
 
+  .text-wrd{
+    font-size: medium;
+    
+  }
   .text-link{
     font-size: medium;
+    text-decoration: underline;
+    color: aliceblue;
   }
