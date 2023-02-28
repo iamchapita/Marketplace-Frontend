@@ -1,0 +1,15 @@
+.sidebar{
+    width: 14rem;
+    height: calc(100vh - 52px);
+    border-right: 1px solid #313802;
+    background-color: #101027;
+    font-size: medium;
+}
+
+.side-list{
+    list-style: none;
+    padding: 1rem 2rem;
+}
+.side-a{
+    margin-bottom: 1rem;
+}
