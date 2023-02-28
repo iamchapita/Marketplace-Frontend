@@ -5,6 +5,7 @@ import Categories from './components/product/categories';
 import Navbar from './components/bar/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
+import ModifyProductPage from "./component/product/productform";
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
                     <Routes>
                         <Route path='/login' element={<Login login={login} />} ></Route>
                         <Route path='/registro' element={<RegistrationPage />} ></Route>
-                        <Route path='/categorias' element={<Categories></Categories>} ></Route>
+                        <Route path='/ingresarProducto' element={<ModifyProductPage/>} ></Route>
 
                     </Routes>
 
