@@ -10,16 +10,16 @@ function Navbar(){
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                    <a className="navbar-brand text-white " href="/">Inicio</a>
+                    <a className="navbar-brand text-white " href="/home">Inicio</a>
                     </li>
                     <li className="nav-item">
-                    <a className="navbar-brand text-white " aria-current="page" href="/">Market</a>
+                    <a className="navbar-brand text-white " aria-current="page" href="/productos">Market</a>
                     </li>
                     <li className="nav-item">
-                    <a className="navbar-brand text-white " href="/">Favoritos</a>
+                    <a className="navbar-brand text-white " href="/favoritos">Favoritos</a>
                     </li>
                     <li className="nav-item">
-                    <a className="navbar-brand text-white " href="/">Vender</a>
+                    <a className="navbar-brand text-white " href="/crear-producto">Vender</a>
                     </li>
                 </ul>
                     <Search></Search>

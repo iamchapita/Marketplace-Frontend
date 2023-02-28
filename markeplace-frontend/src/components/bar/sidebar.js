@@ -17,10 +17,10 @@ function Sidebar(){
                         <a className="navbar-brand side-a " href="/favoritos" >Favoritos</a>
                     </li>
                     <li>
-                        <a className="navbar-brand side-a " href="/deseos" >Lista de deseos</a>
+                        <a className="navbar-brand side-a " href="/favoritos" >Lista de deseos</a>
                     </li>
                     <li>
-                        <a className="navbar-brand side-a " href="/vender" >Perfil Vendedor</a>
+                        <a className="navbar-brand side-a " href="/crear-producto" >Perfil Vendedor</a>
                     </li>
                     <li>
                         <a className="navbar-brand side-a " href="/login">Salir</a>
