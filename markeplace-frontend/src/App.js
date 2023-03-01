@@ -12,6 +12,7 @@ import RegistrationPage from './components/auth/registration.js';
 import Home from './components/home/home';
 
 import ProductForm from "./components/product/productForm";
+import Agreement from "./components/auth/agreement"
 
 function App() {
 
@@ -22,18 +23,15 @@ function App() {
             <Navbar></Navbar>
             <div className='flex'>
                 <Sidebar></Sidebar>
-
-            <div className="App-header">
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='/login' element={<Login login={login} />} ></Route>
-                        <Route path='/registro' element={<RegistrationPage />} ></Route>
-                        <Route path='/crear-producto' element={<ProductForm/>} ></Route>
-                        <Route path='/home' element={Home} ></Route>
-
-                    </Routes>
-
-                </BrowserRouter>
+                <div className="App-header">
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+                            <Route path='/registro' element={<RegistrationPage />} ></Route>
+                            <Route path='/crear-producto' element={<ProductForm />} ></Route>
+                            <Route path='/acuerdo' element={<Agreement />} ></Route>
+                        </Routes>
+                    </BrowserRouter>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ function UserAgreement() {
                 {!aceptado && !denegado && (
 
                 <div className="form-check">
-                <a className="nav-link" href="/acuerdo" >Acuerdo de usuario</a>
+                <a className="text-link" href="/acuerdo" >Acuerdo de usuario</a>
                 <p>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</p>
                 <form className="row">
                   <div className="col-2">  
