@@ -11,6 +11,11 @@ const Login = ({ loggedIn, setLoggedIn }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(!validateEmail(email) || !validatePassword(password)){
+            setShowAlert(true);
+        }
+        
         apiClient.post('api/login', {
             email: email,
             password: password
@@ -21,7 +26,7 @@ const Login = ({ loggedIn, setLoggedIn }) => {
                 setLoggedIn(true);
                 // Redirigir a vista 
 
-            // Si las credenciales son incorrectas
+                // Si las credenciales son incorrectas
             } else {
                 setLoggedIn(false);
                 setShowAlert(true);
@@ -29,12 +34,22 @@ const Login = ({ loggedIn, setLoggedIn }) => {
         });
     };
 
+    const validateEmail = (email) => {
+        const emailRegex = /(^[^\s@]+@[^\s@]+\.[^\s@]+$)/;
+        return emailRegex.test(email);
+    };
+
+    const validatePassword = (password) => {
+        const passwordRegex = /(^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,35}$)/;
+        return passwordRegex.test(password);
+    };
+
     return (
         <div className='box-login'>
             <div className='card-body-login'>
                 <form onSubmit={handleSubmit}>
                     <h2>Iniciar Sesion</h2>
-                    <Alert text={'Credenciales Incorrectas.'} showAlert={showAlert} setShowAlert={setShowAlert}/>
+                    <Alert text={'Credenciales Incorrectas.'} showAlert={showAlert} setShowAlert={setShowAlert} />
                     <div className='mb-3'>
                         <label className='form-label'>Correo Electrónico</label>
                         <input className='form-control' name='email' type='emailHelp' value={email} onChange={(e) => setEmail(e.target.value)} />
