@@ -1,0 +1,9 @@
+
+.card-body-agree{
+    background-color: #00296b;
+    border: solid;
+    align-items: center; 
+    border-left-width: 50px; 
+    border-top-width: 50px;
+    border-color: #00296b;
+}

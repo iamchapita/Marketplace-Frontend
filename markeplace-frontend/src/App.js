@@ -6,6 +6,7 @@ import RegistrationPage from './components/auth/registration.js';
 import Navbar from './components/bar/navbar';
 import Sidebar from './components/bar/sidebar';
 import ProductForm from "./components/product/productForm";
+import Agreement from "./components/auth/agreement"
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                             <Route path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
                             <Route path='/registro' element={<RegistrationPage />} ></Route>
                             <Route path='/crear-producto' element={<ProductForm />} ></Route>
+                            <Route path='/acuerdo' element={<Agreement />} ></Route>
                         </Routes>
                     </BrowserRouter>
                 </div>
