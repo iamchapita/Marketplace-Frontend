@@ -24,11 +24,16 @@ function UserAgreement() {
                 <div className="form-check">
                 <a className="nav-link" href="/acuerdo" >Acuerdo de usuario</a>
                 <p>Por favor, lee atentamente el acuerdo de usuario antes de continuar:</p>
-                <input onClick={handleAceptar} id="btn-check-act" className='form-check-input' type="checkbox"/>
-                <label className="form-check-label" for="btn-check-act" >aceptar</label>
-                <br></br>
-                <input onClick={handleDenegar} id="btn-check-dng" className='form-check-input' type="checkbox"/>
-                <label className="form-check-label" for="btn-check-dng">denegar</label>
+                <form className="row">
+                  <div className="col-2">  
+                  <input onClick={handleAceptar} id="btn-check-act" className='form-check-input' type="checkbox"/>
+                  <label className="form-check-label" for="btn-check-act" >Aceptar</label>
+                  </div>
+                  <div className="col-2">
+                  <input onClick={handleDenegar} id="btn-check-dng" className='form-check-input' type="checkbox"/>
+                  <label className="form-check-label" for="btn-check-dng">Denegar</label>
+                  </div>
+                </form>
                 </div>
                 )}
                         

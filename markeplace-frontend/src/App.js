@@ -17,17 +17,12 @@ function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
 
-    const login = () => {
-        setLoggedIn(true);
-    }
-
     return (
-        
         <div className="App">
-            
             <Navbar></Navbar>
             <div className='flex'>
                 <Sidebar></Sidebar>
+
             <div className="App-header">
                 <BrowserRouter>
                     <Routes>
@@ -39,7 +34,6 @@ function App() {
                     </Routes>
 
                 </BrowserRouter>
-
                 </div>
             </div>
         </div>

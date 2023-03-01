@@ -1,16 +1,19 @@
 /*CSS Registration*/
 
-.box{
-    width: 600px;
-    border-color: #14599a;
+.box-registration{
+    width: 800px;
+    
+    border: solid;
+    border-color: #00296b;
 }
   
 .card-body-registration{
-    background-color: #14599a;
+    background-color: #00296b;
     border: solid;
     align-items: center;
-    border-radius: 1%;
-    border-color: #14599a;
+    border-left-width: 150px; 
+    border-top-width: 10px;
+    border-color: #00296b;
 }
   
 .mb-3{

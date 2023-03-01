@@ -1,8 +1,8 @@
 .sidebar{
     width: 14rem;
-    height: calc(100vh - 52px);
-    border-right: 1px solid #313802;
-    background-color: #101027;
+    height: calc(112vh);
+    border-right: 10px solid #fdc500;
+    background-color: #1b1942;
     font-size: medium;
 }
 

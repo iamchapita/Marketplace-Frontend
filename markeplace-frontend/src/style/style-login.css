@@ -1,12 +1,17 @@
 /*CSS Login*/
 
 .box-login{
-    width: 500px;
-    border-color: #14599a;
-} 
-
+    width: 800px;
+    border-color: #00296b;
+}
+  
 .card-body-login{
-    background-color: #14599a;
+    background-color: #00296b;
+    border: solid;
+    align-items: center; 
+    border-left-width: 150px; 
+    border-top-width: 50px;
+    border-color: #00296b;
 }
   
 .mb-3{
