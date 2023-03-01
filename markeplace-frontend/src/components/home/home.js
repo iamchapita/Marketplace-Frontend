@@ -18,7 +18,7 @@ function Home(){
 
 
         <div className="card" >
-        <img src="/jj" ></img>
+        
         <div className="card-body">
             <h5 className="card-title">{products.name}</h5>
             <p className="card-text">{products.description}</p>

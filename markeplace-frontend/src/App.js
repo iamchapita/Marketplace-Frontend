@@ -30,6 +30,7 @@ function App() {
                             <Route path='/registro' element={<RegistrationPage />} ></Route>
                             <Route path='/crear-producto' element={<ProductForm />} ></Route>
                             <Route path='/acuerdo' element={<Agreement />} ></Route>
+                            <Route path='/home' element={<Home></Home>} ></Route>
                         </Routes>
                     </BrowserRouter>
                 </div>
