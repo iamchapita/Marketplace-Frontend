@@ -9,29 +9,35 @@ const Login = ({ loggedIn, setLoggedIn }) => {
     const [password, setPassword] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(!validateEmail(email) || !validatePassword(password)){
+        // Comprobacion de campos correo electronico y contraseña
+
+        if (!validateEmail(email) || !validatePassword(password)) {
             setShowAlert(true);
+            return
+        } else {
+            // Envio de las credenciales al backend
+            apiClient.post('api/login', {
+                email: email,
+                password: password
+            }).then((response) => {
+                
+                // Si las credenciales enviadas existen en la BD y son 
+                // las correctas
+                if (response === true) {
+                    setLoggedIn(true);
+                    // Redirigir a vista 
+
+                    // Si las credenciales no son las correctas
+                } else {
+                    setLoggedIn(false);
+                    setShowAlert(true);
+                }
+            });
         }
-        
-        apiClient.post('api/login', {
-            email: email,
-            password: password
-        }).then((response) => {
-
-            // Si las credenciale son correctas
-            if (response === true) {
-                setLoggedIn(true);
-                // Redirigir a vista 
-
-                // Si las credenciales son incorrectas
-            } else {
-                setLoggedIn(false);
-                setShowAlert(true);
-            }
-        });
     };
 
     const validateEmail = (email) => {
