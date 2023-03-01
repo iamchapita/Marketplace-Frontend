@@ -9,6 +9,11 @@ const Login = ({ loggedIn, setLoggedIn }) => {
     const [password, setPassword] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
+    // Limpieza de los campos del formulario
+    const clearFields = () => {
+        setEmail('');
+        setPassword('');
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,6 +22,7 @@ const Login = ({ loggedIn, setLoggedIn }) => {
 
         if (!validateEmail(email) || !validatePassword(password)) {
             setShowAlert(true);
+            clearFields();
             return
         } else {
             // Envio de las credenciales al backend
@@ -24,17 +30,18 @@ const Login = ({ loggedIn, setLoggedIn }) => {
                 email: email,
                 password: password
             }).then((response) => {
-                
+
                 // Si las credenciales enviadas existen en la BD y son 
                 // las correctas
                 if (response === true) {
                     setLoggedIn(true);
-                    // Redirigir a vista 
+                    // Pendiente redireccion a la vista necesaria
 
                     // Si las credenciales no son las correctas
                 } else {
                     setLoggedIn(false);
                     setShowAlert(true);
+                    clearFields();
                 }
             });
         }
@@ -58,11 +65,11 @@ const Login = ({ loggedIn, setLoggedIn }) => {
                     <Alert text={'Credenciales Incorrectas.'} showAlert={showAlert} setShowAlert={setShowAlert} />
                     <div className='mb-3'>
                         <label className='form-label'>Correo Electrónico</label>
-                        <input className='form-control' name='email' type='emailHelp' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input className='form-control' name='email' type='emailHelp' value={email} onChange={(e) => setEmail(e.target.value)} autoComplete='off' />
                     </div>
                     <div className='mb-3'>
                         <label className='form-label' >Contraseña</label>
-                        <input className='form-control' name='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <input className='form-control' name='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} autoComplete='off' />
                     </div>
                     <div className='mb-2'>
                         <button className='btn btn-success' type='submit' >Iniciar Sesión</button>
