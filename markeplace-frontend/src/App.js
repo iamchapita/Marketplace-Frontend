@@ -11,28 +11,19 @@ function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
 
-    const login = () => {
-        setLoggedIn(true);
-    }
-
     return (
-        
         <div className="App">
-            
             <Navbar></Navbar>
             <div className='flex'>
                 <Sidebar></Sidebar>
-            <div className="App-header">
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='/login' element={<Login login={login} />} ></Route>
-                        <Route path='/registro' element={<RegistrationPage />} ></Route>
-                        <Route path='/crear-producto' element={<ProductForm/>} ></Route>
-
-                    </Routes>
-
-                </BrowserRouter>
-
+                <div className="App-header">
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+                            <Route path='/registro' element={<RegistrationPage />} ></Route>
+                            <Route path='/crear-producto' element={<ProductForm />} ></Route>
+                        </Routes>
+                    </BrowserRouter>
                 </div>
             </div>
         </div>

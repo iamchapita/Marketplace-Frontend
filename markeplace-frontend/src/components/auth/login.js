@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import apiClient from '../../services/apiClient';
-import '../../style/style-login.css'
+import '../../style/style-login.css';
+import Alert from '../alert';
 
 
-
-const Login = ({ login }) => {
+const Login = ({ loggedIn, setLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,9 +15,17 @@ const Login = ({ login }) => {
             email: email,
             password: password
         }).then((response) => {
-            console.log(response.data.message);
-        }).catch((error) => {
-            console.log(error.response.data.message);
+
+            // Si las credenciale son correctas
+            if (response === true) {
+                setLoggedIn(true);
+                // Redirigir a vista 
+
+            // Si las credenciales son incorrectas
+            } else {
+                setLoggedIn(false);
+                setShowAlert(true);
+            }
         });
     };
 
@@ -25,6 +34,7 @@ const Login = ({ login }) => {
             <div className='card-body-login'>
                 <form onSubmit={handleSubmit}>
                     <h2>Iniciar Sesion</h2>
+                    <Alert text={'Credenciales Incorrectas.'} showAlert={showAlert} setShowAlert={setShowAlert}/>
                     <div className='mb-3'>
                         <label className='form-label'>Correo Electrónico</label>
                         <input className='form-control' name='email' type='emailHelp' value={email} onChange={(e) => setEmail(e.target.value)} />
