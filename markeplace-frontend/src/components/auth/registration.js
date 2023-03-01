@@ -37,7 +37,7 @@ function RegistrationPage() {
 
     return (
         <div>
-            <div className='box'>
+            <div className='box-registration'>
                 <div className='card-body-registration' >
                     <h2>Registro</h2>
                     <p></p>
