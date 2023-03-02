@@ -60,7 +60,7 @@ const Login = ({ loggedIn, setLoggedIn }) => {
     return (
         <div className='box-login'>
             <div className='card-body-login'>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='row'>
                     <h2>Iniciar Sesion</h2>
                     <Alert text={'Credenciales Incorrectas.'} showAlert={showAlert} setShowAlert={setShowAlert} />
                     <div className='mb-3'>

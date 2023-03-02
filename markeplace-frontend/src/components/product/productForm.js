@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from "react";
+import '../../style/style-productForm.css'
 
 
 function ProductForm (){

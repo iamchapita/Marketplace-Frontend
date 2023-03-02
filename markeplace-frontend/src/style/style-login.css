@@ -1,15 +1,11 @@
 /*CSS Login*/
 
-.box-login{
-    width: 800px;
-    border-color: #00296b;
-}
-  
 .card-body-login{
     background-color: #00296b;
     border: solid;
     align-items: center; 
     border-left-width: 150px; 
+    border-right-width: 150px;
     border-top-width: 50px;
     border-color: #00296b;
 }
@@ -17,6 +13,7 @@
 .mb-3{
     text-align: left;
     font-size: medium;
+    
 }
 
 .text-wrd{

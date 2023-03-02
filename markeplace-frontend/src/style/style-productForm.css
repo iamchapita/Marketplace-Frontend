@@ -1,21 +1,16 @@
-/*CSS Registration*/
+/**/
 
-.card-body-registration{
+.card-body-productForm{
     background-color: #00296b;
     border: solid;
     align-items: center;
-    border-left-width: 150px; 
-    border-right-width: 150px;
+    border-left-width: 80px; 
+    border-right-width: 80px;
     border-top-width: 10px;
     border-color: #00296b;
 }
-  
-.mb-3{
-    text-align: left;
-    font-size: medium;
-}
 
-.col-md-4{
+.mb-3{
     text-align: left;
     font-size: medium;
 }
@@ -24,4 +19,3 @@
     text-align: left;
     font-size: medium;
 }
-

@@ -61,7 +61,7 @@ function RegistrationPage() {
                         </div>
 
                         <div className='col-md-4'>
-                            <label className='form-label'>Número de teléfono</label>
+                            <label className='form-label'>Teléfono</label>
                             <input className='form-control' type="number" value={phoneNumber} onChange={(e) => setphoneNumber(e.target.value)} />
                         </div>
 
