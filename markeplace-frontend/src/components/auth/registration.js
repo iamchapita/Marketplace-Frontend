@@ -37,6 +37,8 @@ function RegistrationPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        let $user;
+
         apiClient.post('api/register', {
             // Este sera el orden de los parametros en
             // el objeto request y en la funcion validator
@@ -49,9 +51,15 @@ function RegistrationPage() {
             birthDate: birthDate,
             password: password
         }).then(response => {
-            console.log(response.data);
+            apiClient.post('api/createDirection', {
+                departmentIdFK: addressDepartment,
+                municipalityIdFK: addressMunicipality,
+                description: `Direccion: ${addressDepartment}, ${addressMunicipality}`,
+                userIdFK: response.data['user']['id']
+            }).then((response) => {
+                console.log(response.data);
+            })
         })
-
     };
 
     return (
