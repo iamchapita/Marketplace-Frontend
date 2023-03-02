@@ -14,10 +14,11 @@ function RegistrationPage() {
     const [addressdepartment, setAddressdepartment] = useState('');
     const [addresscity, setAddresscity] = useState('');
     const [dni, setDni] = useState('');
-   
+    const [isDisabled, setIsDisabled] = useState(false);
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         apiClient.post('api/register', {
             // Este sera el orden de los parametros en
             // el objeto request y en la funcion validator
@@ -32,7 +33,7 @@ function RegistrationPage() {
         }).then(response => {
             console.log(response.data);
         })
-        
+
     };
 
     return (
@@ -53,11 +54,11 @@ function RegistrationPage() {
                             <input className='form-control' type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         </div>
 
-                        <div><p></p></div> 
+                        <div><p></p></div>
 
                         <div className='col-md-4'>
                             <label className='form-label'>DNI</label>
-                            <input className='form-control' type="number" value={dni} onChange={(e) => setDni(e.target.value)} />
+                            <input className='form-control' type="text" value={dni} onChange={(e) => setDni(e.target.value)} />
                         </div>
 
                         <div className='col-md-4'>
@@ -70,7 +71,7 @@ function RegistrationPage() {
                             <input className='form-control' type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                         </div>
 
-                        <div><p></p></div> 
+                        <div><p></p></div>
 
                         <div className='col-6'>
                             <label className='form-label'>Departamento</label>
@@ -78,11 +79,11 @@ function RegistrationPage() {
                         </div>
 
                         <div className='col-6'>
-                        <label className='form-label'>Municipio</label>
+                            <label className='form-label'>Municipio</label>
                             <select className='form-select' type="list" value={addresscity} onChange={(e) => setAddresscity(e.target.value)} />
-                        </div>   
+                        </div>
 
-                        <div><p></p></div> 
+                        <div><p></p></div>
 
                         <div className='mb-3'>
                             <label className='form-label'>Correo electronico</label>
@@ -93,15 +94,15 @@ function RegistrationPage() {
                             <label className='form-label'>Contraseña</label>
                             <input className='form-control' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        
+
                         <div className='agreements'>
-                            <UserAgreement></UserAgreement>
+                            <UserAgreement isDisabled={isDisabled} setIsDisabled={setIsDisabled}></UserAgreement>
                         </div>
                         <div>
-                            <button className='btn btn-success' type="submit">Registrarse</button>
+                            <button className='btn btn-success' type="submit" disabled={!isDisabled} >Registrarse</button>
                             <div className='text-wrd'>
-                            <p className=''>¿Ya tienes cuenta?</p>
-                            <a className='text-link' href='/login' >Inicia Sesión</a>
+                                <p className=''>¿Ya tienes cuenta?</p>
+                                <a className='text-link' href='/login' >Inicia Sesión</a>
                             </div>
                         </div>
                     </form>
