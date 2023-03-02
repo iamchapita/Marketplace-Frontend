@@ -22,7 +22,6 @@ function ProductForm() {
                     <h2>Registro de Producto</h2>
                     <p></p>
                     <form onSubmit={handleSubmit} className="row">
-
                         <div className="col-6">
                             <label className="form-label" for="name">
                                 Nombre
@@ -30,10 +29,11 @@ function ProductForm() {
                             <input
                                 value={name}
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 id="name"
                                 name="name"
                                 required
+                                pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
                                 onChange={(e) => setName(e.target.value)}>
                             </input>
                         </div>
@@ -45,12 +45,13 @@ function ProductForm() {
                             <input
                                 value={price}
                                 type="number"
-                                class="form-control"
+                                className="form-control"
                                 id="price"
                                 name="price"
                                 min="0"
                                 step="0.01"
                                 required
+                                pattern='/(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)/'
                                 onChange={(e) => setPrice(e.target.value)}
                             ></input>
                         </div>
@@ -61,11 +62,12 @@ function ProductForm() {
                             </label>
                             <textarea
                                 value={description}
-                                class="form-control"
+                                className="form-control"
                                 id="description"
                                 name="description"
                                 rows="3"
                                 required
+                                pattern='/([a-zA-Z \.\(\)0-9 \, \:\-\+\=\!\$\%\&\*\?\"\"\{\}\n\<\>\?\¿]+)//'
                                 onChange={(e) => setDescription(e.target.value)}
                             ></textarea>
                         </div>
@@ -76,7 +78,7 @@ function ProductForm() {
                             </label>
                             <select
                                 value={status}
-                                class="form-control"
+                                className="form-control"
                                 id="status"
                                 name="status"
                                 required
@@ -88,34 +90,33 @@ function ProductForm() {
                         </div>
 
                         <div className="col-6">
-                            <label className="form-label" for="category">
-                                Categoría
-                            </label>
-                            <select
-                                value={category}
-                                class="form-control"
-                                id="category"
-                                name="category"
-                                required
-                                onChange={(e) => setCategory(e.target.value)}>
-                                <option value="">Selecciona una opción</option>
-                                <option value="Categoria 1">Categoria 1</option>
-                                <option value="Categoria 2">Categoria 2</option>
-                                <option value="Categoria 3">Categoria 3</option>
-                            </select>
+                            <div className='form-group'>
+                                <label className="form-label" for="category">
+                                    Categoría
+                                </label>
+                                <select
+                                    value={category}
+                                    className="form-control"
+                                    id="category"
+                                    name="category"
+                                    required
+                                    onChange={(e) => setCategory(e.target.value)}>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="Categoria 1">Categoria 1</option>
+                                    <option value="Categoria 2">Categoria 2</option>
+                                    <option value="Categoria 3">Categoria 3</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <div><p></p></div>
-
                         <div className="form-group">
                             <label className="form-label" for="photos">
                                 Fotos
                             </label>
                             <input
                                 value={photos}
+                                className="form-control"
                                 required
                                 type="file"
-                                class="form-control-file"
                                 id="photos"
                                 name="photos"
                                 accept="image/png,image/jpeg,image/jpg"
@@ -123,16 +124,15 @@ function ProductForm() {
                                 onChange={(e) => setPhotos(e.target.value)}>
                             </input>
                         </div>
-
                         <div>
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" className="btn btn-success">
                                 Registrar
                             </button>
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 export default ProductForm
