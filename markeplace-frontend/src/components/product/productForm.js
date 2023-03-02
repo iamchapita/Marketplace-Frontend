@@ -1,15 +1,23 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import apiClient from '../../services/apiClient';
 import '../../style/style-productForm.css'
 
 
-function ProductForm() {
+function ProductForm () {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [status, setStatus] = useState("new");
     const [photos, setPhotos] = useState([]);
     const [category, setCategory] = useState("");
+    const [categoryOptions, setCategoryOptions] = useState([]);
+
+    useEffect(() => {
+        apiClient.get('api/categories').then((response) => {
+            setCategoryOptions(response.data);
+        })
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,7 +31,7 @@ function ProductForm() {
                     <p></p>
                     <form onSubmit={handleSubmit} className="row">
                         <div className="col-6">
-                            <label className="form-label" for="name">
+                            <label className="form-label" htmlFor="name">
                                 Nombre
                             </label>
                             <input
@@ -39,7 +47,7 @@ function ProductForm() {
                         </div>
 
                         <div className="col-6">
-                            <label className="form-label" for="price">
+                            <label className="form-label" htmlFor="price">
                                 Precio
                             </label>
                             <input
@@ -57,7 +65,7 @@ function ProductForm() {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label" for="description">
+                            <label className="form-label" htmlFor="description">
                                 Descripción
                             </label>
                             <textarea
@@ -73,7 +81,7 @@ function ProductForm() {
                         </div>
 
                         <div className="col-6">
-                            <label className="form-label" for="status">
+                            <label className="form-label" htmlFor="status">
                                 Estado
                             </label>
                             <select
@@ -91,7 +99,7 @@ function ProductForm() {
 
                         <div className="col-6">
                             <div className='form-group'>
-                                <label className="form-label" for="category">
+                                <label className="form-label" htmlFor="category">
                                     Categoría
                                 </label>
                                 <select
@@ -102,14 +110,15 @@ function ProductForm() {
                                     required
                                     onChange={(e) => setCategory(e.target.value)}>
                                     <option value="">Selecciona una opción</option>
-                                    <option value="Categoria 1">Categoria 1</option>
-                                    <option value="Categoria 2">Categoria 2</option>
-                                    <option value="Categoria 3">Categoria 3</option>
+                                    {
+                                        categoryOptions.map((category) =>
+                                            <option key={category.id} value={category.id}>{category.name}</option>
+                                        )}
                                 </select>
                             </div>
                         </div>
                         <div className="form-group">
-                            <label className="form-label" for="photos">
+                            <label className="form-label" htmlFor="photos">
                                 Fotos
                             </label>
                             <input
