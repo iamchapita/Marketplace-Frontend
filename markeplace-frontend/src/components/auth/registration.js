@@ -46,58 +46,113 @@ function RegistrationPage() {
 
                         <div className='col-6'>
                             <label className='form-label'>Nombres</label>
-                            <input className='form-control' type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input 
+                            className='form-control' 
+                            type="text" 
+                            value={name} 
+                            id="name"
+                            name="name"
+                            required
+                            pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
+                            maxlength="45"
+                            onChange={(e) => setName(e.target.value)} />
                         </div>
 
                         <div className='col-6'>
                             <label className='form-label'>Apellidos</label>
-                            <input className='form-control' type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <input 
+                            className='form-control' 
+                            type="text" 
+                            value={lastName} 
+                            id="lastName"
+                            name="lastName"
+                            required
+                            pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
+                            maxlength="45"
+                            onChange={(e) => setLastName(e.target.value)} />
                         </div>
 
                         <div><p></p></div>
 
                         <div className='col-md-4'>
                             <label className='form-label'>DNI</label>
-                            <input className='form-control' type="text" value={dni} onChange={(e) => setDni(e.target.value)} />
+                            <input 
+                            className='form-control' 
+                            type="text" 
+                            value={dni}
+                            pattern="[0-9]+{4}\-[0-9]+{4}\- [0-9]+{5}"
+                            required
+                            onChange={(e) => setDni(e.target.value)} />
                         </div>
 
                         <div className='col-md-4'>
                             <label className='form-label'>Teléfono</label>
-                            <input className='form-control' type="number" value={phoneNumber} onChange={(e) => setphoneNumber(e.target.value)} />
+                            <input className='form-control' 
+                            type="number" 
+                            value={phoneNumber} 
+                            pattern="[0-9]+{4}\-[0-9]+{4}"
+                            required
+                            onChange={(e) => setphoneNumber(e.target.value)} />
                         </div>
 
                         <div className='col-md-4'>
                             <label className='form-label'>Fecha de Nacimiento</label>
-                            <input className='form-control' type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                            <input className='form-control' 
+                            type="date" 
+                            value={birthDate} 
+                            required
+                            onChange={(e) => setBirthDate(e.target.value)} />
                         </div>
 
                         <div><p></p></div>
 
                         <div className='col-6'>
                             <label className='form-label'>Departamento</label>
-                            <select className='form-select' type="list" value={addressdepartment} onChange={(e) => setAddressdepartment(e.target.value)} />
+                            <select className='form-select' 
+                            type="list" 
+                            value={addressdepartment} 
+                            required
+                            onChange={(e) => setAddressdepartment(e.target.value)} />
                         </div>
 
                         <div className='col-6'>
                             <label className='form-label'>Municipio</label>
-                            <select className='form-select' type="list" value={addresscity} onChange={(e) => setAddresscity(e.target.value)} />
+                            <select 
+                            className='form-select' 
+                            type="list" 
+                            value={addresscity} 
+                            required
+                            onChange={(e) => setAddresscity(e.target.value)} />
                         </div>
 
                         <div><p></p></div>
 
                         <div className='mb-3'>
                             <label className='form-label'>Correo electronico</label>
-                            <input className='form-control' type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input 
+                            className='form-control' 
+                            type="email" 
+                            value={email} 
+                            required
+                            maxlength="50"
+                            onChange={(e) => setEmail(e.target.value)} />
                         </div>
 
                         <div className='mb-3'>
                             <label className='form-label'>Contraseña</label>
-                            <input className='form-control' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input 
+                            className='form-control' 
+                            type="password" 
+                            value={password} 
+                            required
+                            maxlength="50"
+                            onChange={(e) => setPassword(e.target.value)} />
                         </div>
 
                         <div className='agreements'>
                             <UserAgreement isDisabled={isDisabled} setIsDisabled={setIsDisabled}></UserAgreement>
                         </div>
+
                         <div>
                             <button className='btn btn-success' type="submit" disabled={!isDisabled} >Registrarse</button>
                             <div className='text-wrd'>
