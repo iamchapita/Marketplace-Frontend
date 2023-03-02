@@ -4,11 +4,12 @@ import apiClient from '../../services/apiClient';
 import '../../style/style-productForm.css'
 
 
-function ProductForm () {
+function ProductForm() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [status, setStatus] = useState("new");
+    const [inputFiles, setInputFiles] = useState('');
     const [photos, setPhotos] = useState([]);
     const [category, setCategory] = useState("");
     const [categoryOptions, setCategoryOptions] = useState([]);
@@ -17,10 +18,41 @@ function ProductForm () {
         apiClient.get('api/categories').then((response) => {
             setCategoryOptions(response.data);
         })
-    }, [])
+    }, []);
+
+    const loadFiles = (e) => {
+        setInputFiles(e.target.value)
+        var files = [];
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            let reader = new FileReader();
+            reader.readAsDataURL(e.target.files[i]);
+            reader.onload = function () {
+                files.push(
+                    {
+                        'name': i,
+                        'base64Image': reader.result
+                    }
+                );
+            };
+        }
+        setPhotos(files);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        apiClient.post('api/createProduct', {
+            name: name,
+            description: description,
+            price: price,
+            photos: photos,
+            status: status,
+            userIdFK: 1,
+            categoryIdFK: category
+        }).then((response) => {
+            console.log(response);
+        })
+
     };
 
     return (
@@ -29,7 +61,7 @@ function ProductForm () {
                 <div className='card-body-productForm' >
                     <h2>Registro de Producto</h2>
                     <p></p>
-                    <form onSubmit={handleSubmit} className="row">
+                    <form onSubmit={handleSubmit} className="row" encType="multipart/form-data">
                         <div className="col-6">
                             <label className="form-label" htmlFor="name">
                                 Nombre
@@ -41,7 +73,7 @@ function ProductForm () {
                                 id="name"
                                 name="name"
                                 required
-                                pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
+                                // pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
                                 onChange={(e) => setName(e.target.value)}>
                             </input>
                         </div>
@@ -59,7 +91,7 @@ function ProductForm () {
                                 min="0"
                                 step="0.01"
                                 required
-                                pattern='/(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)/'
+                                // pattern='/(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)/'
                                 onChange={(e) => setPrice(e.target.value)}
                             ></input>
                         </div>
@@ -75,7 +107,7 @@ function ProductForm () {
                                 name="description"
                                 rows="3"
                                 required
-                                pattern='/([a-zA-Z \.\(\)0-9 \, \:\-\+\=\!\$\%\&\*\?\"\"\{\}\n\<\>\?\¿]+)//'
+                                // pattern='/([a-zA-Z \.\(\)0-9 \, \:\-\+\=\!\$\%\&\*\?\"\"\{\}\n\<\>\?\¿]+)//'
                                 onChange={(e) => setDescription(e.target.value)}
                             ></textarea>
                         </div>
@@ -122,15 +154,15 @@ function ProductForm () {
                                 Fotos
                             </label>
                             <input
-                                value={photos}
+                                value={inputFiles}
                                 className="form-control"
                                 required
                                 type="file"
                                 id="photos"
                                 name="photos"
-                                accept="image/png,image/jpeg,image/jpg"
+                                accept=".png, .jpeg, .jpg"
                                 multiple
-                                onChange={(e) => setPhotos(e.target.value)}>
+                                onChange={loadFiles}>
                             </input>
                         </div>
                         <div>
