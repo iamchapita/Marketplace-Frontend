@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import '../../style/style-home.css';
 import apiClient from '../../services/apiClient';
 import Card from "./card";
@@ -7,27 +7,32 @@ import Search from '../bar/search';
 
 function Home(){
 
-    const producto = {
-            name: 'xiaomi',
-            photo: '../../img-test/xiaomi.jpg',
-            price : '7999',
-            description : 'Es un telefono',
-            id : '1'
-        }
-    /**  
-    const [products, setProducts] = useState('');
-    useEffect( ()=>{
-        getproducts()}, []);
+    
+    const [products, setProducts] = useState([]);
+    //const [filterProducts, setFilterProducts] = useState('');
+    const [filter, setFilter] = useState('');
 
+    useEffect( ()=>{
+        getProducts()}, []);
+
+    
 
     const getProducts = async() =>{
-        const res = await apiClient('api/product');
+        const res = await apiClient('api/products');
         setProducts(res.data);
         
         
         
     }
-    */
+
+    const filtro = async(e) =>{
+        setFilter(e.target.value);
+        const res = await apiClient(`api/products/${filter}`);
+        var none = [];
+        setProducts(none);
+        setProducts(res.data);
+    }
+    
     return(
         <div>
             <nav className="navbar  navbar-expand-lg bg-body-tertiary  ">
@@ -48,138 +53,25 @@ function Home(){
                         
 
                     </ul>
-                    <Search></Search>
+                    <input className="form-control me-2" type="search" placeholder="Escriba su Busqueda"
+                    value={filter} onChange={(event) => filtro(event)} />
+                    <button className='btn btn-success' type="submit">Buscar</button>
 
                 </div>
 
             </nav>
+            { products.map ((product)=>(
             <div className="card container-card" >
                 <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
+                key={product.id}
+                name = {product.name}
+                photo = {product.photo}
+                price = {product.price}
+                description = {product.description}
+                id = {product.id}
                 ></Card>
             </div>
-
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-
-            <div className="card container-card" >
-                <Card
-                name = {producto.name}
-                photo = {producto.photo}
-                price = {producto.price}
-                description = {producto.description}
-                id = {producto.id}
-                ></Card>
-            </div>
-
-
-            
+            ))}
 
         </div>
 

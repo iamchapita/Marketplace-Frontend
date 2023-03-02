@@ -16,7 +16,7 @@ function Card ({name,photo,price, description, id}){
         <div>
             <div className="card" >
         
-                <div className="card-body text-black">
+                <div className="card-body text-black" key={id}>
                     <h5 className="card-title">{name}</h5>
                     <img src={photo} ></img>
                     <p className="card-text">{price}</p>
