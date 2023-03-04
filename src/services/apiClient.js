@@ -6,10 +6,11 @@
 */
 
 import axios from "axios";
+import { redirect } from "react-router-dom";
 
 // Configuración de Axios
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://localhost:8000/api',
     withCredentials: true,
 });
 
@@ -19,27 +20,17 @@ apiClient.interceptors.request.use(async (config) => {
     const refreshToken = localStorage.getItem('refresh_token');
     if (accessToken && refreshToken) {
         try {
-            const { data } = await apiClient.post('/api/token/refresh', { refresh_token: refreshToken });
+            const { data } = await apiClient.post('/token/refresh', { refresh_token: refreshToken });
             localStorage.setItem('access_token', data.access_token);
             config.headers.Authorization = `Bearer ${data.access_token}`;
         } catch (error) {
             console.error('Error refreshing token:', error);
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
-            // Redirigir a la página de inicio de sesión o mostrar una ventana modal para que el usuario inicie sesión nuevamente
+            <redirect to='/login'/>
         }
     }
     return config;
 });
 
 export default apiClient;
-// // Ejemplo de uso de Axios
-// async function getData() {
-//     try {
-//         const { data } = await axiosInstance.get('/api/data');
-//         console.log('Data:', data);
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         // Si el token de autenticación expiró y no se pudo actualizar, redirigir a la página de inicio de sesión o mostrar una ventana modal para que el usuario inicie sesión nuevamente
-//     }
-// }
