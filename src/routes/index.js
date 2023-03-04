@@ -1,16 +1,21 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 
 // import PrivateRoute from './routes/PrivateRoute';
 
 const RoutesList = () => {
+
+    const [isLoggedIn, setLoggedIn] = useState(false);
+
     return (
-        <Routes>
-            <Route path="/login" element={Login} />
-        </Routes>
+        <BrowserRouter>
+            <Routes>
+                {/* <Route path="/" element={Login} /> */}
+                <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+            </Routes>
+        </BrowserRouter>
     );
 };
 
-export default Routes;
+export default RoutesList;

@@ -1,33 +1,57 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
+import apiClient from '../../utils/apiClient';
+import InputText from '../../components/InputText';
+import Button from '../../components/Button';
 
-const Login = () => {
 
-    // useEffect(() => {
+const Login = ({ isLoggedIn, setLoggedIn }) => {
 
-    //     const action = async () => {
-    //         const response = await apiClient.post('/login', {
-    //             email: 'alejandrom646@gmail.com',
-    //             password: 'HolaAlejandro1*'
-    //         }).then((response) => {
-    //             console.log(response);
-    //             if(response.statusCode === 200) {
-    //                 setLoggedIn(true)
-    //             }else{
-    //                 setLoggedIn(false);
-    //             }
-    //         }).catch((error) => {
-    //             console.log(error);
-    //         })
-    //     }
+    const [emailValue, setEmailValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
 
-    //     action();
+    const handleEmailChange = (e) => {
+        setEmailValue(e.target.value);
+    }
+    
+    const handlePasswordChange = (e) => {
+        setPasswordValue(e.target.value);
+    }
 
-    // }, []);
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const action = async () => {
+            try {
+                const response = await apiClient.post('/login', {
+                    email: emailValue,
+                    password: passwordValue
+                }).then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        setLoggedIn(true)
+                    } else {
+                        setLoggedIn(false);
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                })
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
+        action();
+
+    }
 
     return (
-        <div>
-            <h1>Hola</h1>
-        </div>
+        <form encType='multipart/form-data'>
+            <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} onChangeHandler={handleEmailChange} />
+            
+            <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={passwordValue} required={true} onChangeHandler={handlePasswordChange} />
+            <Button type={'submit'} fieldName={'Iniciar Sesión'} onClick={submitHandler}/>
+        </form>
     );
 
 }

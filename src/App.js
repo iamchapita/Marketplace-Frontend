@@ -1,11 +1,13 @@
+import React, { useState } from 'react';
+import RoutesList from './routes/index';
+
 import './App.css';
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes/index';
+
 
 function App() {
+    
     return (
-        <div></div>
+        <RoutesList></RoutesList>
     );
 }
 
