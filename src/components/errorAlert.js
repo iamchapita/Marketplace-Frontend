@@ -1,6 +1,6 @@
 import React from "react";
 
-const Alert = ({ text, showAlert, setShowAlert }) => {
+const errorAlert = ({ text, showAlert, setShowAlert }) => {
 
     if (showAlert) {
         return (
@@ -15,4 +15,4 @@ const Alert = ({ text, showAlert, setShowAlert }) => {
 }
 
 
-export default Alert;
+export default errorAlert;

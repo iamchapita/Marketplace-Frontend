@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import apiClient from '../../services/apiClient';
+import apiClient from '../../utils/apiClient';
 import UserAgreement from './useragreement';
 import '../../style/style-registration.css'
 
