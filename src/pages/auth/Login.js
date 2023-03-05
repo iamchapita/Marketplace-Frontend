@@ -4,7 +4,7 @@ import apiClient from '../../utils/apiClient';
 import InputText from '../../components/InputText';
 import Button from '../../components/Button';
 import Alert from '../../components/common/Alert';
-import '../../style/style-views.css'
+import '../../style/style-views.css';
 
 const Login = ({ isLoggedIn, setLoggedIn }) => {
 
@@ -49,7 +49,8 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
     }
 
     return (
-        
+        <div className='container-lg'>
+        <br></br>
         <div className='container-sm'>
             <div className='tittle'>
             <br></br>
@@ -70,6 +71,8 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
             </div>
         </div>  
             <br></br>  
+        </div>
+        <br></br>
         </div>
     );
 

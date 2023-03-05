@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import UserRegistration from '../pages/auth/UserRegitration';
+import Navbar from '../pages/auth/Navbar';
 import '../style/style-views.css'
 
 
@@ -13,6 +14,7 @@ const RoutesList = () => {
 
     return (
         <div className='app'>
+            <Navbar></Navbar>
             <header className='app-header'>
             <BrowserRouter>
                 <Routes>

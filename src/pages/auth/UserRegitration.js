@@ -5,7 +5,7 @@ import InputText from '../../components/InputText';
 import Date from '../../components/Date';
 import Checkbox from '../../components/Checkbox';
 import Agreement from '../../pages/auth/Agreement';
-import '../../style/style-views.css'
+import '../../style/style-views.css';
 
 
 
@@ -107,6 +107,8 @@ const UserRegitration = () => {
     }
 
     return (
+        <div className='container-lg'>
+        <br></br>
         <div className='container-sm'>
              <div className='tittle'>
             <br></br>
@@ -169,6 +171,8 @@ const UserRegitration = () => {
                 </div>
             </div>
             <br></br>
+        </div>
+        <br></br>
         </div>
     );
 }
