@@ -1,208 +1,158 @@
 import React, { useEffect, useState } from 'react';
 import apiClient from '../../utils/apiClient';
-import UserAgreement from './useragreement';
-import '../../style/style-registration.css'
+import Button from '../../components/Button';
+import InputText from '../../components/InputText';
+import Date from '../../components/Date';
+import Checkbox from '../../components/Checkbox';
+import Agreement from '../../pages/auth/Agreement';
 
 
-function RegistrationPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+const UserRegitration = () => {
+    const [firtsName, setFirtsName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phoneNumber, setphoneNumber] = useState('');
+    const [dni, setDni] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [birthDate, setBirthDate] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [addressDepartment, setAddressDepartment] = useState('');
     const [addressMunicipality, setAddressMunicipality] = useState('');
-    const [dni, setDni] = useState('');
-    const [isDisabled, setIsDisabled] = useState(false);
     const [departments, setDepartments] = useState([]);
     const [municipalities, setMunicipalities] = useState([]);
+    const [isAccepted, setIsAccepted] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // Obtencion de Departamentos para el select de Dirección
     useEffect(() => {
-        apiClient.get('api/departments').then((response) => {
-            setDepartments(response.data);
-        })
+        const action = async () => {
+            try {
+                const response = await apiClient.get('/departments').then((response) => {
+                    setDepartments(response.data);
+                }).catch((error) => {
+                    console.log(error);
+                })
+            } catch (error) {
+            }
+        }
+
+        action();
+    }, [])
+
+    // Obtencion de Municipios para el select de Dirección
+    useEffect(() => {
+        const action = async () => {
+            try {
+                const response = await apiClient.get('/municipalities', {
+                }).then((response) => {
+                    setMunicipalities(response.data);
+                }).catch((error) => {
+                    console.log(error);
+                })
+            } catch (error) {
+            }
+        }
+
+        action();
     }, []);
 
-    useEffect(() => {
-        apiClient.get('api/municipalities').then((response) => {
-            setMunicipalities(response.data);
-        })
-    }, []);
 
-    const handleChange = (e) => {
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    }
+
+    const handleFirtsNameValueChange = (e) => {
+        setFirtsName(e.target.value);
+    };
+    const handleLastNameValueChange = (e) => {
+        setLastName(e.target.value);
+    };
+    const handleDniValueChange = (e) => {
+        setDni(e.target.value);
+    };
+    const handleEmailValueChange = (e) => {
+        setEmail(e.target.value);
+    };
+    const handlePhoneNumberValueChange = (e) => {
+        setPhoneNumber(e.target.value);
+    };
+    const handleBirthDateValueChange = (e) => {
+        setBirthDate(e.target.value);
+    };
+    const handlePasswordValueChange = (e) => {
+        setPassword(e.target.value);
+    };
+    const handlePasswordConfirmationValueChange = (e) => {
+        setPasswordConfirmation(e.target.value);
+    };
+    const handleAddressDepartmentValueChange = (e) => {
         setAddressDepartment(e.target.value);
     };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        let $user;
-
-        apiClient.post('api/register', {
-            // Este sera el orden de los parametros en
-            // el objeto request y en la funcion validator
-            // en el backend
-            firstName: name,
-            lastName: lastName,
-            email: email,
-            dni: dni,
-            phoneNumber: phoneNumber,
-            birthDate: birthDate,
-            password: password
-        }).then(response => {
-            apiClient.post('api/createDirection', {
-                departmentIdFK: addressDepartment,
-                municipalityIdFK: addressMunicipality,
-                description: `Direccion: ${addressDepartment}, ${addressMunicipality}`,
-                userIdFK: response.data['user']['id']
-            }).then((response) => {
-                console.log(response.data);
-            })
-        })
+    const handleAddressMunicipalityValueChange = (e) => {
+        setAddressMunicipality(e.target.value);
+    };
+    const handleIsAcceptedValueChange = (e) => {
+        setIsAccepted(e.target.value);
     };
 
+    // Envio de formulario
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+    }
+
     return (
-        <div>
-            <div className='box-registration'>
-                <div className='card-body-registration' >
-                    <h2>Registro</h2>
-                    <p></p>
-                    <form onSubmit={handleSubmit} className='row'>
+        <form encType='multipart/form-data'>
+            <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} onChangeHandler={handleFirtsNameValueChange} />
+            <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} onChangeHandler={handleLastNameValueChange} />
+            <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} onChangeHandler={handleDniValueChange} />
+            <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} onChangeHandler={handleEmailValueChange} />
+            <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} onChangeHandler={handlePhoneNumberValueChange} />
+            <Date fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
 
-                        <div className='col-6'>
-                            <label className='form-label'>Nombres</label>
-                            <input
-                                className='form-control'
-                                type="text"
-                                value={name}
-                                id="name"
-                                name="name"
-                                required
-                                pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
-                                maxlength="45"
-                                onChange={(e) => setName(e.target.value)} />
-                        </div>
-
-                        <div className='col-6'>
-                            <label className='form-label'>Apellidos</label>
-                            <input
-                                className='form-control'
-                                type="text"
-                                value={lastName}
-                                id="lastName"
-                                name="lastName"
-                                required
-                                pattern='/([\w \,\+\-\/\#\$\(\)]+)/'
-                                maxlength="45"
-                                onChange={(e) => setLastName(e.target.value)} />
-                        </div>
-
-                        <div><p></p></div>
-
-                        <div className='col-md-4'>
-                            <label className='form-label'>DNI</label>
-                            <input
-                                className='form-control'
-                                type="text"
-                                value={dni}
-                                pattern="[0-9]+{4}\-[0-9]+{4}\- [0-9]+{5}"
-                                required
-                                onChange={(e) => setDni(e.target.value)} />
-                        </div>
-
-                        <div className='col-md-4'>
-                            <label className='form-label'>Teléfono</label>
-                            <input className='form-control'
-                                type="number"
-                                value={phoneNumber}
-                                pattern="[0-9]+{4}\-[0-9]+{4}"
-                                required
-                                onChange={(e) => setphoneNumber(e.target.value)} />
-                        </div>
-
-                        <div className='col-md-4'>
-                            <label className='form-label'>Fecha de Nacimiento</label>
-                            <input className='form-control'
-                                type="date"
-                                value={birthDate}
-                                required
-                                onChange={(e) => setBirthDate(e.target.value)} />
-                        </div>
-
-                        <div><p></p></div>
-
-                        <div className='col-6'>
-                            <label className='form-label'>Departamento</label>
-                            <select className='form-select'
-                                type="list"
-                                value={addressDepartment}
-                                required
-                                onChange={handleChange}>
-                                <option value="">Seleccione un Departamento</option>
-                                {departments.map((department) => (
-                                    <option key={department.id} value={department.id}>{department.name}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div className='col-6'>
-                            <label className='form-label'>Municipio</label>
-                            <select
-                                className='form-select'
-                                type="list"
-                                value={addressMunicipality}
-                                required
-                                onChange={(e) => setAddressMunicipality(e.target.value)}>
-                                <option value="">Seleccione un Municipio</option>
-                                {municipalities.map((municipality) => (
-                                    <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div><p></p></div>
-
-                        <div className='mb-3'>
-                            <label className='form-label'>Correo electronico</label>
-                            <input
-                                className='form-control'
-                                type="email"
-                                value={email}
-                                required
-                                maxlength="50"
-                                onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-
-                        <div className='mb-3'>
-                            <label className='form-label'>Contraseña</label>
-                            <input
-                                className='form-control'
-                                type="password"
-                                value={password}
-                                required
-                                maxlength="50"
-                                onChange={(e) => setPassword(e.target.value)} />
-                        </div>
-
-                        <div className='agreements'>
-                            <UserAgreement isDisabled={isDisabled} setIsDisabled={setIsDisabled}></UserAgreement>
-                        </div>
-
-                        <div>
-                            <button className='btn btn-success' type="submit" disabled={!isDisabled} >Registrarse</button>
-                            <div className='text-wrd'>
-                                <p className=''>¿Ya tienes cuenta?</p>
-                                <a className='text-link' href='/login' >Inicia Sesión</a>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
+            <div className="input-group mb-3">
+                <label className='input-group-text'>Departamento</label>
+                <select className='form-select'
+                    type="list"
+                    value={addressDepartment}
+                    required
+                    onChange={handleAddressDepartmentValueChange}
+                >
+                    <option value="">Seleccione un Departamento</option>
+                    {departments.map((department) => (
+                        <option key={department.id} value={department.id}>{department.name}</option>
+                    ))}
+                </select>
             </div>
-        </div>
 
+            <div className="input-group mb-3">
+                <label className='input-group-text'>Municipio</label>
+                <select
+                    className='form-select'
+                    type="list"
+                    value={addressMunicipality}
+                    required
+                    onChange={handleAddressMunicipalityValueChange}
+                >
+                    <option value="">Seleccione un Municipio</option>
+                    {municipalities.map((municipality) => (
+                        <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
+                    ))}
+                </select>
+            </div>
+
+            <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={password} required={true} onChangeHandler={handlePasswordValueChange} />
+            <InputText type={'password'} fieldLabel={'Confirmación Contraseña'} fieldName={'passwordConfirmation'} placeholder={'Escriba la confirmación de la contraseña.'} inputValue={passwordConfirmation} required={true} onChangeHandler={handlePasswordConfirmationValueChange} />
+            <a href='#' onClick={handleOpenModal}>Open Modal</a>
+            <Agreement isOpen={isModalOpen} onClose={handleCloseModal}/>
+
+            <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} inputValue={isAccepted} onChangeHandler={handleIsAcceptedValueChange} />
+            <Button type={'submit'} fieldLabel={'Registrar'} onClick={handleFormSubmit} />
+        </form>
     );
 }
 
-export default RegistrationPage;
+export default UserRegitration;
