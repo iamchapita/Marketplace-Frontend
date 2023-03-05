@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const Button = ({ type, fieldName, onClick }) => {
 
     return(

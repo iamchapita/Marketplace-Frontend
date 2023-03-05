@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const InputText = ({ type, fieldLabel, fieldName, placeholder, inputValue, onChangeHandler, required = true }) => {
 
     if (required) {
