@@ -1,9 +1,9 @@
 import React from "react";
 
-const Button = ({ type, fieldName, onClick }) => {
+const Button = ({ type, fieldLabel, onClick }) => {
 
     return(
-        <button className='btn btn-success'type={type} onClick={onClick}>{fieldName}</button>
+        <button className='btn btn-success'type={type} onClick={onClick}>{fieldLabel}</button>
     );
 
 }
