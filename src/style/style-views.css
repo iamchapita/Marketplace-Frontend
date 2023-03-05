@@ -1,0 +1,21 @@
+/*CSS PANTALLA DE FONDO*/
+
+.app-header{
+    background-color: #383f42;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/*CSS CONTENEDORES*/
+
+.container-sm{
+    background-color: #00b7fd;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.tittle{
+    text-align: center;
+}
+

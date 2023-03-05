@@ -5,6 +5,8 @@ import InputText from '../../components/InputText';
 import Date from '../../components/Date';
 import Checkbox from '../../components/Checkbox';
 import Agreement from '../../pages/auth/Agreement';
+import '../../style/style-views.css'
+
 
 
 const UserRegitration = () => {
@@ -105,53 +107,69 @@ const UserRegitration = () => {
     }
 
     return (
-        <form encType='multipart/form-data'>
-            <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} onChangeHandler={handleFirtsNameValueChange} />
-            <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} onChangeHandler={handleLastNameValueChange} />
-            <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} onChangeHandler={handleDniValueChange} />
-            <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} onChangeHandler={handleEmailValueChange} />
-            <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} onChangeHandler={handlePhoneNumberValueChange} />
-            <Date fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
-
-            <div className="input-group mb-3">
-                <label className='input-group-text'>Departamento</label>
-                <select className='form-select'
-                    type="list"
-                    value={addressDepartment}
-                    required
-                    onChange={handleAddressDepartmentValueChange}
-                >
-                    <option value="">Seleccione un Departamento</option>
-                    {departments.map((department) => (
-                        <option key={department.id} value={department.id}>{department.name}</option>
-                    ))}
-                </select>
+        <div className='container-sm'>
+             <div className='tittle'>
+            <br></br>
+            <h1>REGISTRO DE USUSARIO</h1>
+            <br></br>
             </div>
+            <div className='row'>
+                <div className='col'>
+                    <img class="rounded mx-auto d-block" src=''>
+                    </img>
+                </div>
+                <div className='col'>  
+                    <form encType='multipart/form-data'>
+                        <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} onChangeHandler={handleFirtsNameValueChange} />
+                        <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} onChangeHandler={handleLastNameValueChange} />
+                        <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} onChangeHandler={handleDniValueChange} />
+                        <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} onChangeHandler={handleEmailValueChange} />
+                        <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} onChangeHandler={handlePhoneNumberValueChange} />
+                        <Date fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
 
-            <div className="input-group mb-3">
-                <label className='input-group-text'>Municipio</label>
-                <select
-                    className='form-select'
-                    type="list"
-                    value={addressMunicipality}
-                    required
-                    onChange={handleAddressMunicipalityValueChange}
-                >
-                    <option value="">Seleccione un Municipio</option>
-                    {municipalities.map((municipality) => (
-                        <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
-                    ))}
-                </select>
+                        <div className="input-group mb-3">
+                            <label className='input-group-text'>Departamento</label>
+                            <select className='form-select'
+                                type="list"
+                                value={addressDepartment}
+                                required
+                                onChange={handleAddressDepartmentValueChange}
+                            >
+                                <option value="">Seleccione un Departamento</option>
+                                {departments.map((department) => (
+                                    <option key={department.id} value={department.id}>{department.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="input-group mb-3">
+                            <label className='input-group-text'>Municipio</label>
+                            <select
+                                className='form-select'
+                                type="list"
+                                value={addressMunicipality}
+                                required
+                                onChange={handleAddressMunicipalityValueChange}
+                            >
+                                <option value="">Seleccione un Municipio</option>
+                                {municipalities.map((municipality) => (
+                                    <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={password} required={true} onChangeHandler={handlePasswordValueChange} />
+                        <InputText type={'password'} fieldLabel={'Confirmación Contraseña'} fieldName={'passwordConfirmation'} placeholder={'Escriba la confirmación de la contraseña.'} inputValue={passwordConfirmation} required={true} onChangeHandler={handlePasswordConfirmationValueChange} />
+                        <a href='#' onClick={handleOpenModal}>Open Modal</a>
+                        <Agreement isOpen={isModalOpen} onClose={handleCloseModal}/>
+
+                        <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} inputValue={isAccepted} onChangeHandler={handleIsAcceptedValueChange} />
+                        <Button type={'submit'} fieldLabel={'Registrar'} onClick={handleFormSubmit} />
+                    </form>
+                </div>
             </div>
-
-            <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={password} required={true} onChangeHandler={handlePasswordValueChange} />
-            <InputText type={'password'} fieldLabel={'Confirmación Contraseña'} fieldName={'passwordConfirmation'} placeholder={'Escriba la confirmación de la contraseña.'} inputValue={passwordConfirmation} required={true} onChangeHandler={handlePasswordConfirmationValueChange} />
-            <a href='#' onClick={handleOpenModal}>Open Modal</a>
-            <Agreement isOpen={isModalOpen} onClose={handleCloseModal}/>
-
-            <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} inputValue={isAccepted} onChangeHandler={handleIsAcceptedValueChange} />
-            <Button type={'submit'} fieldLabel={'Registrar'} onClick={handleFormSubmit} />
-        </form>
+            <br></br>
+        </div>
     );
 }
 
