@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import RoutesList from './routes/index';
 import Navbar from './components/Navbar';
-
 import './App.css';
 
 

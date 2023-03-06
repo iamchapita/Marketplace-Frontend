@@ -5,7 +5,6 @@ import InputText from '../../components/InputText';
 import Date from '../../components/Date';
 import Checkbox from '../../components/Checkbox';
 import Agreement from '../../pages/auth/Agreement';
-import '../../style/style-views.css';
 
 
 
@@ -127,12 +126,13 @@ const UserRegitration = () => {
     }
 
     return (
+        
         <div className='container-lg'>
         <br></br>
         <div className='container-sm'>
              <div className='tittle'>
             <br></br>
-            <h1>REGISTRO DE USUSARIO</h1>
+            <h1>Registro de Usuario</h1>
             <br></br>
             </div>
             <div className='row'>

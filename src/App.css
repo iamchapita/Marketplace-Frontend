@@ -1,4 +1,4 @@
-
+/*BORDES DE LOS CAMPOS*/
 
 input:required:invalid{
     border-color: red;
@@ -6,4 +6,52 @@ input:required:invalid{
 
 select:required:invalid{
     border-color: red;
+}
+
+/*CSS PANTALLA DE FONDO*/
+
+.app-header{
+    background-color: #0092ca;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/*CSS CONTENEDORES*/
+
+.container-sm{
+    background-color: #22252a;
+    border-radius: 10px;
+    align-items: center;
+    color: #0092ca;
+}
+
+.container-fluid{
+    color: #0092ca;
+}
+
+.tittle{
+    text-align: center;
+}
+
+
+
+/*NAVBAR*/
+
+.navbar{
+    background-color: #22252a;
+    color: #0092ca;
+}
+
+.navbar-item{
+    color: #0092ca;
+    font-weight: 500;
+    font-size: large;
+    text-decoration: none;
+}
+
+.toggler{
+    color: #0092ca;
+    background-color: #0092ca;
+    border-radius: 5px;
 }

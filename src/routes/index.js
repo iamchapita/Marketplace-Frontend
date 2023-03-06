@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import UserRegistration from '../pages/auth/UserRegitration';
-import '../style/style-views.css'
 
 
 // import PrivateRoute from './routes/PrivateRoute';

@@ -4,7 +4,7 @@ import apiClient from '../../utils/apiClient';
 import InputText from '../../components/InputText';
 import Button from '../../components/Button';
 import Alert from '../../components/common/Alert';
-import '../../style/style-views.css';
+
 
 const Login = ({ isLoggedIn, setLoggedIn }) => {
 
@@ -54,7 +54,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
         <div className='container-sm'>
             <div className='tittle'>
             <br></br>
-            <h1>INICIO DE SESIÓN</h1>
+            <h1>Inicio de Sesión</h1>
             <br></br>
             </div>
         <div className='row'>
@@ -66,7 +66,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
                     <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} onChangeHandler={handleEmailChange} />
                     
                     <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={passwordValue} required={true} onChangeHandler={handlePasswordChange} />
-                    <Button type={'submit'} fieldName={'Iniciar Sesión'} onClick={submitHandler}/>
+                    <Button type={'submit'} fieldLabel={'Iniciar Sesión'} onClick={submitHandler}/>
                 </form>
             </div>
         </div>  
