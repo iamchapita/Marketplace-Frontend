@@ -101,9 +101,29 @@ const UserRegitration = () => {
         setIsAccepted(e.target.value);
     };
 
+    //Se crea una funcion con las validaciones
+    const isEmailValid=(email)=>{
+        const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    const isNameValid=(name)=>{
+        const nameRegex=/^(\d{4}-){2}\d{4}$/;
+        return nameRegex.test(name);
+    }
+
     // Envio de formulario
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        if(!isEmailValid(email)){
+            alert('No es valido');
+            return;
+        }
+        //Alerta de Nombre
+        /*
+        if(!isNameValid(name)){
+            alert('Nombre no valido');
+            return;
+        }*/
     }
 
     return (
@@ -124,7 +144,7 @@ const UserRegitration = () => {
                     <form encType='multipart/form-data'>
                         <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} onChangeHandler={handleFirtsNameValueChange} />
                         <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} onChangeHandler={handleLastNameValueChange} />
-                        <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} onChangeHandler={handleDniValueChange} />
+                        <InputText type={'number'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} onChangeHandler={handleDniValueChange} />
                         <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} onChangeHandler={handleEmailValueChange} />
                         <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} onChangeHandler={handlePhoneNumberValueChange} />
                         <Date fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
