@@ -137,8 +137,7 @@ const UserRegitration = () => {
             </div>
             <div className='row'>
                 <div className='col'>
-                    <img class="rounded mx-auto d-block" src=''>
-                    </img>
+                    <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" />
                 </div>
                 <div className='col'>  
                     <form encType='multipart/form-data'>

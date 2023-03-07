@@ -1,5 +1,8 @@
-/*BORDES DE LOS CAMPOS*/
+/********************CSS****************************/
 
+
+/*BORDES DE LOS CAMPOS*/
+/***************************************************/
 input:required:invalid{
     border-color: red;
 }
@@ -8,20 +11,40 @@ select:required:invalid{
     border-color: red;
 }
 
-/*CSS PANTALLA DE FONDO*/
 
+
+/*CAMPOS*/
+/***************************************************/
+
+
+
+
+
+/*CSS PANTALLA DE FONDO*/
+/***************************************************/
 .app-header{
-    background-color: #0092ca;
+    background-color: #393e46;
     min-height: 100vh;
     display: flex;
     align-items: center;
 }
 
-/*CSS CONTENEDORES*/
 
+/*CSS INICIO*/
+/***************************************************/
+
+
+
+
+
+/*CSS CONTENEDORES*/
+/***************************************************/
 .container-sm{
     background-color: #22252a;
     border-radius: 10px;
+    border: solid;
+    border-width: 5px;
+    border-color: #22252a;
     align-items: center;
     color: #0092ca;
 }
@@ -34,10 +57,13 @@ select:required:invalid{
     text-align: center;
 }
 
+.row{
+    align-items: center;
+}
 
 
 /*NAVBAR*/
-
+/***************************************************/
 .navbar{
     background-color: #22252a;
     color: #0092ca;
@@ -46,12 +72,24 @@ select:required:invalid{
 .navbar-item{
     color: #0092ca;
     font-weight: 500;
-    font-size: large;
+    font-size: x-large;
     text-decoration: none;
 }
 
 .toggler{
     color: #0092ca;
-    background-color: #0092ca;
+    font-weight: 500;
+    font-size: larger;
+    border: solid;
+    border-color: #0092ca;
+    background-color: #22252a;
     border-radius: 5px;
 }
+
+.sidebar-item{
+    color: #0092ca;
+    font-weight: 500;
+    font-size: large;
+    text-decoration: none;
+}
+

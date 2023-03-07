@@ -57,19 +57,18 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
             <h1>Inicio de Sesión</h1>
             <br></br>
             </div>
-        <div className='row'>
-            <div className='col'>
-                <h6>Imagen Aqui</h6>
-            </div>
-            <div className='col'>        
-                <form encType='multipart/form-data'>
-                    <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} onChangeHandler={handleEmailChange} />
-                    
-                    <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={passwordValue} required={true} onChangeHandler={handlePasswordChange} />
-                    <Button type={'submit'} fieldLabel={'Iniciar Sesión'} onClick={submitHandler}/>
-                </form>
-            </div>
-        </div>  
+            <div className='row'>
+                <div className='col'>
+                    <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" />
+                </div>
+                <div className='col'>        
+                    <form encType='multipart/form-data'>
+                        <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} onChangeHandler={handleEmailChange} />
+                        <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={passwordValue} required={true} onChangeHandler={handlePasswordChange} />
+                        <Button type={'submit'} fieldLabel={'Iniciar Sesión'} onClick={submitHandler}/>
+                    </form>
+                </div>
+            </div>  
             <br></br>  
         </div>
         <br></br>
