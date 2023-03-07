@@ -3,14 +3,9 @@
 
 /*BORDES DE LOS CAMPOS*/
 /***************************************************/
-input:required:invalid{
+input.invalid{
     border-color: red;
 }
-
-select:required:invalid{
-    border-color: red;
-}
-
 
 
 /*CAMPOS*/
