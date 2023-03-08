@@ -16,21 +16,18 @@ const apiClient = axios.create({
 
 // Interceptor para actualizar el token de autenticación en caso que este haya 'vencido'
 apiClient.interceptors.request.use(async (config) => {
-    const accessToken = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (accessToken && refreshToken) {
-        try {
-            const { data } = await apiClient.post('/token/refresh', { refresh_token: refreshToken });
-            localStorage.setItem('access_token', data.access_token);
-            config.headers.Authorization = `Bearer ${data.access_token}`;
-        } catch (error) {
-            console.error('Error refreshing token:', error);
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            <redirect to='/login'/>
-        }
+
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
-});
+
+},
+    error => {
+        return Promise.reject(error);
+    });
 
 export default apiClient;
