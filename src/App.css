@@ -28,11 +28,13 @@ select:invalid{
     background-color: #393e46;
     align-items: center;
     background-size: cover;
+    min-height: 100vh;
 }
 
 body {
     background-color: #393e46;
     background-size: cover;
+    min-height: 100vh;
 }
   
 
