@@ -17,6 +17,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
         }
 
         registerUser();
+        setLoggedIn(false);
     }
 
     const onLogin = () => {};
