@@ -44,7 +44,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
         }
 
         if (!passwordRegex.test(passwordValue)) {
-            validationMessages = validationMessages + '<p>La Contraseña debe tener:<br>- 8 caractéres mínimo y 35 caractéres máximo.<br>- Al menos 1 letra minúscula.<br>- Al menos 1 letra mayúscula.<br>- Al menos un número.</p>'
+            validationMessages = validationMessages + '<br>La Contraseña debe tener:<ul> <li>8 caractéres mínimo y 35 caractéres máximo.</li> <li>Al menos 1 letra minúscula.</li> <li>Al menos 1 letra mayúscula.</li> <li>Al menos un número.</li> <li>Al menos un símbolo (-+_*@#$!%.¿?).</li></ul>';
         }
 
         // Se comprueba si hay mensajes de error
