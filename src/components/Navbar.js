@@ -12,7 +12,7 @@ function Navbar() {
                 <div className="container-fluid">
                     <a className="navbar-item" href="/home">MarketPlace</a>
                     <button className="toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                        <span className="navbar-toggler-icon"></span>
+                        <span className="toggler-item">M♥</span>
                     </button>
                     <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                         <div className="offcanvas-header">

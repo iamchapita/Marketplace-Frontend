@@ -127,7 +127,7 @@ const UserRegitration = () => {
 
     return (
         
-        <div className='container-lg'>
+        <div>
         <br></br>
         <div className='container-sm'>
              <div className='tittle'>

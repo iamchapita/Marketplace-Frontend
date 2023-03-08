@@ -79,7 +79,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
     }
 
     return (
-        <div className='container-lg'>
+        <div>
             <br></br>
             <div className='container-sm'>
                 <div className='tittle'>

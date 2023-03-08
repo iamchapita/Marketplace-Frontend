@@ -8,7 +8,6 @@ function App() {
     
     return (
         <div>
-        <Navbar></Navbar>
         <RoutesList></RoutesList>
         </div>
     );

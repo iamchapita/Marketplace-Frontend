@@ -26,9 +26,8 @@ select:invalid{
 /***************************************************/
 .app-header{
     background-color: #393e46;
-    min-height: 100vh;
-    display: flex;
     align-items: center;
+    
 }
 
 
@@ -88,6 +87,10 @@ select:invalid{
     border-radius: 5px;
 }
 
+.toggler-item{
+    font-size: larger;
+}
+
 .sidebar-item{
     color: #0092ca;
     font-weight: 500;
@@ -95,3 +98,9 @@ select:invalid{
     text-decoration: none;
 }
 
+/*IMAGENES*/
+/***************************************************/
+img {
+    display: block;
+    margin: auto;
+}

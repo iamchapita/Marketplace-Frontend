@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import UserRegistration from '../pages/auth/UserRegitration';
-
+import Navbar from '../components/Navbar';
 
 // import PrivateRoute from './routes/PrivateRoute';
 
@@ -14,6 +14,7 @@ const RoutesList = () => {
         <div className='app'>
             <header className='app-header'>
             <BrowserRouter>
+                <Navbar></Navbar>
                 <Routes>
                     {/* <Route path="/" element={Login} /> */}
                     <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
