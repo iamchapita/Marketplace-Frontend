@@ -27,9 +27,14 @@ select:invalid{
 .app-header{
     background-color: #393e46;
     align-items: center;
-    
+    background-size: cover;
 }
 
+body {
+    background-color: #393e46;
+    background-size: cover;
+}
+  
 
 /*CSS INICIO*/
 /***************************************************/
@@ -56,10 +61,20 @@ select:invalid{
 
 .tittle{
     text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .row{
     align-items: center;
+    border: solid;
+    border-color: #22252a;
+}
+
+.col{
+    align-items: center;
+    border: solid;
+    border-color: #22252a;
 }
 
 
@@ -80,7 +95,7 @@ select:invalid{
 .toggler{
     color: #0092ca;
     font-weight: 500;
-    font-size: larger;
+    font-size: large;
     border: solid;
     border-color: #0092ca;
     background-color: #22252a;
@@ -88,19 +103,21 @@ select:invalid{
 }
 
 .toggler-item{
-    font-size: larger;
+    font-size: large;
 }
 
 .sidebar-item{
     color: #0092ca;
-    font-weight: 500;
+    font-weight: 400;
     font-size: large;
     text-decoration: none;
 }
+
 
 /*IMAGENES*/
 /***************************************************/
 img {
     display: block;
     margin: auto;
+    align-items: center;
 }

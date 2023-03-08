@@ -11,7 +11,7 @@ const RoutesList = () => {
     const [isLoggedIn, setLoggedIn] = useState(false);
 
     return (
-        <div className='app'>
+        <div>
             <header className='app-header'>
             <BrowserRouter>
                 <Navbar></Navbar>
