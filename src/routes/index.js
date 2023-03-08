@@ -18,7 +18,7 @@ const RoutesList = () => {
                 <Routes>
                     {/* <Route path="/" element={Login} /> */}
                     <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-                    <Route path="/register" element={<UserRegistration/>} />
+                    <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn}/>} />
                 </Routes>
             </BrowserRouter>
         </header>
