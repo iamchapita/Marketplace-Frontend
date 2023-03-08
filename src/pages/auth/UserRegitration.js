@@ -214,7 +214,7 @@ const UserRegitration = () => {
                             <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} isValid={isLastNameValid} onChangeHandler={handleLastNameValueChange} />
                             <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} isValid={isDNIValid} onChangeHandler={handleDniValueChange} />
                             <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} isValid={isEmailValid} onChangeHandler={handleEmailValueChange} />
-                            <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} isValid={isPhoneNumberValid} onChangeHandler={handlePhoneNumberValueChange} />
+                            <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxxxxxx'} inputValue={phoneNumber} isValid={isPhoneNumberValid} onChangeHandler={handlePhoneNumberValueChange} />
                             <BirthDateInput fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
 
                             <div className="input-group mb-3">
