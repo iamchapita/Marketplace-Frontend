@@ -60,7 +60,11 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
                         email: emailValue,
                         password: passwordValue
                     }).then((response) => {
+
                         if (response.status === 200) {
+                            // Guardando el Token de sesion
+                            const token = response.data.access_token;
+                            localStorage.setItem('access_token', token);
                             setLoggedIn(true);
                             // Redireccionando a la ruta base
                             navigate('/');
