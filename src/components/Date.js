@@ -1,6 +1,16 @@
 import React from "react";
 
-const Date = ({ fieldLabel, fieldName, inputValue, onChangeHandler, required = true, min = '1923-01-01', max = '2005-01-01' }) => {
+const DateInput = ({ fieldLabel, fieldName, inputValue, onChangeHandler, required = true, min = '', max = '' }) => {
+
+    // Obteniendo fechas limite para el input type Date
+    var today = new Date();
+    // Se obtiene la fecha limite superior. Fecha de mayoria de edad.
+    max = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    // Se obtiene el limite inferior. Fecha de nacimieneto.
+    min = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+
+    max = max.toISOString().split('T')[0];
+    min = min.toISOString().split('T')[0];
 
     if(required){
         return (
@@ -19,4 +29,4 @@ const Date = ({ fieldLabel, fieldName, inputValue, onChangeHandler, required = t
     }
 }
 
-export default Date;
+export default DateInput;
