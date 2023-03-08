@@ -198,6 +198,10 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                     birthDate: birthDate,
                     password: password
                 }).then(response => {
+                    // Guardando el Token de sesion
+                    const token = response.data.access_token;
+                    localStorage.setItem('access_token', token);
+
                     apiClient.post('/createDirection', {
                         departmentIdFK: addressDepartment,
                         municipalityIdFK: addressMunicipality,
