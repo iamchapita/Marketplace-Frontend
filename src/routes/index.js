@@ -14,7 +14,7 @@ const RoutesList = () => {
         <div>
             <header className='app-header'>
             <BrowserRouter>
-                <Navbar></Navbar>
+                <Navbar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
                 <Routes>
                     {/* <Route path="/" element={Login} /> */}
                     <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
