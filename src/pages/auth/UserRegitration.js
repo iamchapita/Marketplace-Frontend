@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import apiClient from '../../utils/apiClient';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
@@ -7,8 +8,8 @@ import Checkbox from '../../components/Checkbox';
 import Agreement from '../../pages/auth/Agreement';
 import Alert from '../../components/common/Alert';
 
-const UserRegitration = () => {
-    const [firtsName, setFirtsName] = useState('');
+const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
+    const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dni, setDni] = useState('');
     const [email, setEmail] = useState('');
@@ -18,7 +19,8 @@ const UserRegitration = () => {
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [addressDepartment, setAddressDepartment] = useState('');
     const [addressMunicipality, setAddressMunicipality] = useState('');
-    
+    const [userIdFK, setUserIdFK] = useState('');
+
     // Almacena los departamentos y municipios 
     const [departments, setDepartments] = useState([]);
     const [municipalities, setMunicipalities] = useState([]);
@@ -47,6 +49,9 @@ const UserRegitration = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-záéíóúüñ])(?=.*[A-ZÁÉÍÓÚÜÑ])(?=.*[-+_*@#$!%.¿?\sáéíóúüñÁÉÍÓÚÜÑ]).{8,35}$/;
     const addressDepartmentRegex = /^(1[0-8]|[1-9])$/;
     const addressMunicipalityRegex = /^(?:[1-9]|[1-9][0-9]|[12][0-8][0-9]|29[0-8])$/;
+
+    // Se utiliza para redireccionar a una ruta
+    const navigate = useNavigate();
 
     //  Variable que almacena el mensaje de error retornado en el Alert
     let validationMessages = '';
@@ -93,7 +98,7 @@ const UserRegitration = () => {
     }
 
     const handleFirtsNameValueChange = (e) => {
-        setFirtsName(e.target.value);
+        setFirstName(e.target.value);
         namesRegex.test(e.target.value) ? setIsFirstNameValid(true) : setIsFirstNameValid(false);
     };
     const handleLastNameValueChange = (e) => {
@@ -138,7 +143,7 @@ const UserRegitration = () => {
     const validatingAllFields = () => {
 
         // Validando Nombres
-        !namesRegex.test(firtsName) ? validationMessages = validationMessages + '<br>El contenido del campo Nombre no es válido.' : validationMessages = validationMessages + '';
+        !namesRegex.test(firstName) ? validationMessages = validationMessages + '<br>El contenido del campo Nombre no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Apellidos
         !namesRegex.test(lastName) ? validationMessages = validationMessages + '<br>El contenido del campo Apellidos no es válido.' : validationMessages = validationMessages + '';
@@ -150,16 +155,16 @@ const UserRegitration = () => {
         !emailRegex.test(email) ? validationMessages = validationMessages + '<br>El contenido del campo Correo Electrónico no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Telefono
-        !phoneNumberRegex.test(phoneNumber) ? validationMessages = validationMessages + '<br>El contenido del campo Teléfono Celular no es válido.' :  validationMessages = validationMessages + '';
+        !phoneNumberRegex.test(phoneNumber) ? validationMessages = validationMessages + '<br>El contenido del campo Teléfono Celular no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Fecha de Nacimiento
         birthDate.length == 0 ? validationMessages = validationMessages + '<br>El contenido del Campo Fecha de Nacimiento no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Departamento
-        !addressDepartmentRegex.test(addressDepartment) ? validationMessages = validationMessages + '<br>El Departamento seleccionado no es válido.': validationMessages = validationMessages + '';
+        !addressDepartmentRegex.test(addressDepartment) ? validationMessages = validationMessages + '<br>El Departamento seleccionado no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Municipio
-        !addressMunicipalityRegex.test(addressMunicipality) ? validationMessages = validationMessages + '<br>El Municipio seleccionado no es válido.': validationMessages = validationMessages + '';
+        !addressMunicipalityRegex.test(addressMunicipality) ? validationMessages = validationMessages + '<br>El Municipio seleccionado no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Contraseña
         !passwordRegex.test(password) ? validationMessages = validationMessages + '<br>La Contraseña debe tener:<ul> <li>8 caractéres mínimo y 35 caractéres máximo.</li> <li>Al menos 1 letra minúscula.</li> <li>Al menos 1 letra mayúscula.</li> <li>Al menos un número.</li> <li>Al menos un símbolo (-+_*@#$!%.¿?).</li></ul>' : validationMessages = validationMessages + '';
@@ -174,22 +179,48 @@ const UserRegitration = () => {
     // Envio de formulario
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        
-        // Ejecutanto las validaciones de los campos
-        validatingAllFields();
 
-        if(validationMessages.length > 1){
+        // Ejecutanto las validaciones de los campos
+        // validatingAllFields();
+
+        if (validationMessages.length > 1) {
             console.log(validationMessages);
             setAlertMessage(validationMessages);
             setShowAlert(true);
-        }else{
-            console.log('Perfecto');
+        } else {
             // Envio de datos del form, realizacion de registro de usuarios
-            // const action = async () => {
+            const registerUser = async () => {
+                const register = await apiClient.post('/register', {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    dni: dni,
+                    phoneNumber: phoneNumber,
+                    birthDate: birthDate,
+                    password: password
+                }).then(response => {
+                    apiClient.post('/createDirection', {
+                        departmentIdFK: addressDepartment,
+                        municipalityIdFK: addressMunicipality,
+                        userIdFK: response.data.id
+                    }).then(response => {
+                        if (response.status === 200) {
+                            setLoggedIn(true);
+                            // Redireccionando a la ruta base
+                            navigate('/');
+                        }
+                    }).catch(error => {
+                        setShowAlert(true);
+                        setAlertMessage(error);
+                    })
+                }).catch(error => {
+                    setShowAlert(true);
+                    setAlertMessage(error);
+                });
+            }
 
-            // }
-
-            // action();
+            registerUser();
+            
         }
     }
 
@@ -209,8 +240,8 @@ const UserRegitration = () => {
                     </div>
                     <div className='col'>
                         <form encType='multipart/form-data'>
-                            <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert}/>
-                            <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} isValid={isFirstNameValid} onChangeHandler={handleFirtsNameValueChange} />
+                            <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
+                            <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firstName} isValid={isFirstNameValid} onChangeHandler={handleFirtsNameValueChange} />
                             <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} isValid={isLastNameValid} onChangeHandler={handleLastNameValueChange} />
                             <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} isValid={isDNIValid} onChangeHandler={handleDniValueChange} />
                             <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} isValid={isEmailValid} onChangeHandler={handleEmailValueChange} />
@@ -219,7 +250,7 @@ const UserRegitration = () => {
 
                             <div className="input-group mb-3">
                                 <label className='input-group-text'>Departamento</label>
-                                <select className={`form-control ${isAddressdDepartmentValid ? "": "invalid"}`}
+                                <select className={`form-control ${isAddressdDepartmentValid ? "" : "invalid"}`}
                                     type="list"
                                     value={addressDepartment}
                                     required
@@ -235,7 +266,7 @@ const UserRegitration = () => {
                             <div className="input-group mb-3">
                                 <label className='input-group-text'>Municipio</label>
                                 <select
-                                    className={`form-control ${isAddressdMunicipalityValid ? "": "invalid"}`}
+                                    className={`form-control ${isAddressdMunicipalityValid ? "" : "invalid"}`}
                                     type="list"
                                     value={addressMunicipality}
                                     required
