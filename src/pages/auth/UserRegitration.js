@@ -209,7 +209,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                             navigate('/');
                         }
                     }).catch(error => {
-                        console.log(error.response);
+                        // console.log(error.response);
                     });
                 }).catch(error => {
                     
