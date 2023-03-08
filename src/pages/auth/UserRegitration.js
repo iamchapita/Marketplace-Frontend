@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import apiClient from '../../utils/apiClient';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
-import Date from '../../components/Date';
+import BirthDateInput from '../../components/BirthDateInput';
 import Checkbox from '../../components/Checkbox';
 import Agreement from '../../pages/auth/Agreement';
-
-
+import Alert from '../../components/common/Alert';
 
 const UserRegitration = () => {
     const [firtsName, setFirtsName] = useState('');
@@ -19,10 +18,38 @@ const UserRegitration = () => {
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [addressDepartment, setAddressDepartment] = useState('');
     const [addressMunicipality, setAddressMunicipality] = useState('');
+    
+    // Almacena los departamentos y municipios 
     const [departments, setDepartments] = useState([]);
     const [municipalities, setMunicipalities] = useState([]);
+
+    // Almacena el estado de las validaciones de cada campo
     const [isAccepted, setIsAccepted] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFirstNameValid, setIsFirstNameValid] = useState(true);
+    const [isLastNameValid, setIsLastNameValid] = useState(true);
+    const [isDNIValid, setIsDNIValid] = useState(true);
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
+    const [isPasswordConfirmationValid, setIsPasswordConfirmationValid] = useState(true);
+    const [isAddressdDepartmentValid, setIsAddressdDepartmentValid] = useState(true);
+    const [isAddressdMunicipalityValid, setIsAddressdMunicipalityValid] = useState(true);
+
+    // variables de estado para el alert donde se mostrara los errores
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+
+    const namesRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ']{3,30}( [a-zA-ZáéíóúÁÉÍÓÚñÑüÜ']{3,30})*$/;
+    const dniRegex = /^\d{4}-\d{4}-\d{5}$/;
+    const emailRegex = /[a-z0-9_-]+(?:\.[a-z0-9-_]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const phoneNumberRegex = /^[389]\d{7}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-záéíóúüñ])(?=.*[A-ZÁÉÍÓÚÜÑ])(?=.*[-+_*@#$!%.¿?\sáéíóúüñÁÉÍÓÚÜÑ]).{8,35}$/;
+    const addressDepartmentRegex = /^(1[0-8]|[1-9])$/;
+    const addressMunicipalityRegex = /^(?:[1-9]|[1-9][0-9]|[12][0-8][0-9]|29[0-8])$/;
+
+    //  Variable que almacena el mensaje de error retornado en el Alert
+    let validationMessages = '';
 
     // Obtencion de Departamentos para el select de Dirección
     useEffect(() => {
@@ -57,141 +84,183 @@ const UserRegitration = () => {
         action();
     }, []);
 
-
+    // Apertura y Cierre de Ventana Modal para el Acuerdo de Usuario
     const handleOpenModal = () => {
         setIsModalOpen(true);
     }
-
     const handleCloseModal = () => {
         setIsModalOpen(false);
     }
 
     const handleFirtsNameValueChange = (e) => {
         setFirtsName(e.target.value);
+        namesRegex.test(e.target.value) ? setIsFirstNameValid(true) : setIsFirstNameValid(false);
     };
     const handleLastNameValueChange = (e) => {
         setLastName(e.target.value);
+        namesRegex.test(e.target.value) ? setIsLastNameValid(true) : setIsLastNameValid(false);
     };
     const handleDniValueChange = (e) => {
         setDni(e.target.value);
+        dniRegex.test(e.target.value) ? setIsDNIValid(true) : setIsDNIValid(false);
     };
     const handleEmailValueChange = (e) => {
         setEmail(e.target.value);
+        emailRegex.test(e.target.value) ? setIsEmailValid(true) : setIsEmailValid(false);
     };
     const handlePhoneNumberValueChange = (e) => {
         setPhoneNumber(e.target.value);
+        phoneNumberRegex.test(e.target.value) ? setIsPhoneNumberValid(true) : setIsPhoneNumberValid(false);
     };
     const handleBirthDateValueChange = (e) => {
         setBirthDate(e.target.value);
     };
     const handlePasswordValueChange = (e) => {
         setPassword(e.target.value);
+        passwordRegex.test(e.target.value) ? setIsPasswordValid(true) : setIsPasswordValid(false);
     };
     const handlePasswordConfirmationValueChange = (e) => {
         setPasswordConfirmation(e.target.value);
+        password === e.target.value ? setIsPasswordConfirmationValid(true) : setIsPasswordConfirmationValid(false);
     };
     const handleAddressDepartmentValueChange = (e) => {
         setAddressDepartment(e.target.value);
+        addressDepartmentRegex.test(e.target.value) ? setIsAddressdDepartmentValid(true) : setIsAddressdDepartmentValid(false);
     };
     const handleAddressMunicipalityValueChange = (e) => {
         setAddressMunicipality(e.target.value);
+        addressMunicipalityRegex.test(e.target.value) ? setIsAddressdMunicipalityValid(true) : setIsAddressdMunicipalityValid(false);
     };
     const handleIsAcceptedValueChange = (e) => {
         setIsAccepted(e.target.value);
     };
 
-    //Se crea una funcion con las validaciones
-    const isEmailValid=(email)=>{
-        const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-    const isNameValid=(name)=>{
-        const nameRegex=/^(\d{4}-){2}\d{4}$/;
-        return nameRegex.test(name);
+    const validatingAllFields = () => {
+
+        // Validando Nombres
+        !namesRegex.test(firtsName) ? validationMessages = validationMessages + '<br>El contenido del campo Nombre no es válido.' : validationMessages = validationMessages + '';
+
+        // Validando Apellidos
+        !namesRegex.test(lastName) ? validationMessages = validationMessages + '<br>El contenido del campo Apellidos no es válido.' : validationMessages = validationMessages + '';
+
+        // Validando DNI
+        !dniRegex.test(dni) ? validationMessages = validationMessages + '<br>El contenido del campo DNI no es válido.' : validationMessages = validationMessages + '';
+
+        // Validando el Correo Electrónico
+        !emailRegex.test(email) ? validationMessages = validationMessages + '<br>El contenido del campo Correo Electrónico no es válido.' : validationMessages = validationMessages + '';
+
+        // Validando Telefono
+        !phoneNumberRegex.test(phoneNumber) ? validationMessages = validationMessages + '<br>El contenido del campo Teléfono Celular no es válido.' :  validationMessages = validationMessages + '';
+
+        // Validando Fecha de Nacimiento
+        birthDate.length == 0 ? validationMessages = validationMessages + '<br>El contenido del Campo Fecha de Nacimiento no es válido.' : validationMessages = validationMessages + '';
+
+        // Validando Departamento
+        !addressDepartmentRegex.test(addressDepartment) ? validationMessages = validationMessages + '<br>El Departamento seleccionado no es válido.': validationMessages = validationMessages + '';
+
+        // Validando Municipio
+        !addressMunicipalityRegex.test(addressMunicipality) ? validationMessages = validationMessages + '<br>El Municipio seleccionado no es válido.': validationMessages = validationMessages + '';
+
+        // Validando Contraseña
+        !passwordRegex.test(password) ? validationMessages = validationMessages + '<br>La Contraseña debe tener:<ul> <li>8 caractéres mínimo y 35 caractéres máximo.</li> <li>Al menos 1 letra minúscula.</li> <li>Al menos 1 letra mayúscula.</li> <li>Al menos un número.</li> <li>Al menos un símbolo (-+_*@#$!%.¿?).</li></ul>' : validationMessages = validationMessages + '';
+
+        // Validando la Confirmacion de la Contraseña
+        !passwordRegex.test(passwordConfirmation) ? validationMessages = validationMessages + 'Las Contraseñas no coinciden.' : validationMessages = validationMessages + '';
+
+        // Validando que el usuario Acepte los Términos y Condiciones
+        !isAccepted ? validationMessages = validationMessages + '<br>Debe aceptar los Términos y Condiciones.' : validationMessages = validationMessages + '';
     }
 
     // Envio de formulario
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        if(!isEmailValid(email)){
-            alert('No es valido');
-            return;
+        
+        // Ejecutanto las validaciones de los campos
+        validatingAllFields();
+
+        if(validationMessages.length > 1){
+            console.log(validationMessages);
+            setAlertMessage(validationMessages);
+            setShowAlert(true);
+        }else{
+            console.log('Perfecto');
+            // Envio de datos del form, realizacion de registro de usuarios
+            // const action = async () => {
+
+            // }
+
+            // action();
         }
-        //Alerta de Nombre
-        /*
-        if(!isNameValid(name)){
-            alert('Nombre no valido');
-            return;
-        }*/
     }
 
     return (
-        
+
         <div>
-        <br></br>
-        <div className='container-sm'>
-             <div className='tittle'>
             <br></br>
-            <h1>Registro de Usuario</h1>
-            <br></br>
-            </div>
-            <div className='row'>
-                <div className='col'>
-                    <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" />
+            <div className='container-sm'>
+                <div className='tittle'>
+                    <br></br>
+                    <h1>Registro de Usuario</h1>
+                    <br></br>
                 </div>
-                <div className='col'>  
-                    <form encType='multipart/form-data'>
-                        <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} onChangeHandler={handleFirtsNameValueChange} />
-                        <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} onChangeHandler={handleLastNameValueChange} />
-                        <InputText type={'number'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} onChangeHandler={handleDniValueChange} />
-                        <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} onChangeHandler={handleEmailValueChange} />
-                        <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} onChangeHandler={handlePhoneNumberValueChange} />
-                        <Date fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
+                <div className='row'>
+                    <div className='col'>
+                        <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" />
+                    </div>
+                    <div className='col'>
+                        <form encType='multipart/form-data'>
+                            <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert}/>
+                            <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firtsName} isValid={isFirstNameValid} onChangeHandler={handleFirtsNameValueChange} />
+                            <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} isValid={isLastNameValid} onChangeHandler={handleLastNameValueChange} />
+                            <InputText type={'text'} fieldLabel={'DNI'} fieldName={'dni'} placeholder={'Ingrese el DNI con formato xxxx-xxxx-xxxxx'} inputValue={dni} isValid={isDNIValid} onChangeHandler={handleDniValueChange} />
+                            <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={email} isValid={isEmailValid} onChangeHandler={handleEmailValueChange} />
+                            <InputText type={'text'} fieldLabel={'Teléfono Celular'} fieldName={'phoneNumber'} placeholder={'Número de teléfono celular del tipo xxxx-xxxx'} inputValue={phoneNumber} isValid={isPhoneNumberValid} onChangeHandler={handlePhoneNumberValueChange} />
+                            <BirthDateInput fieldLabel={'Fecha de Nacimiento'} fieldName={'birthDate'} inputValue={birthDate} onChangeHandler={handleBirthDateValueChange} />
 
-                        <div className="input-group mb-3">
-                            <label className='input-group-text'>Departamento</label>
-                            <select className='form-select'
-                                type="list"
-                                value={addressDepartment}
-                                required
-                                onChange={handleAddressDepartmentValueChange}
-                            >
-                                <option value="">Seleccione un Departamento</option>
-                                {departments.map((department) => (
-                                    <option key={department.id} value={department.id}>{department.name}</option>
-                                ))}
-                            </select>
-                        </div>
+                            <div className="input-group mb-3">
+                                <label className='input-group-text'>Departamento</label>
+                                <select className={`form-control ${isAddressdDepartmentValid ? "": "invalid"}`}
+                                    type="list"
+                                    value={addressDepartment}
+                                    required
+                                    onChange={handleAddressDepartmentValueChange}
+                                >
+                                    <option value="">Seleccione un Departamento</option>
+                                    {departments.map((department) => (
+                                        <option key={department.id} value={department.id}>{department.name}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-                        <div className="input-group mb-3">
-                            <label className='input-group-text'>Municipio</label>
-                            <select
-                                className='form-select'
-                                type="list"
-                                value={addressMunicipality}
-                                required
-                                onChange={handleAddressMunicipalityValueChange}
-                            >
-                                <option value="">Seleccione un Municipio</option>
-                                {municipalities.map((municipality) => (
-                                    <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
-                                ))}
-                            </select>
-                        </div>
+                            <div className="input-group mb-3">
+                                <label className='input-group-text'>Municipio</label>
+                                <select
+                                    className={`form-control ${isAddressdMunicipalityValid ? "": "invalid"}`}
+                                    type="list"
+                                    value={addressMunicipality}
+                                    required
+                                    onChange={handleAddressMunicipalityValueChange}
+                                >
+                                    <option value="">Seleccione un Municipio</option>
+                                    {municipalities.map((municipality) => (
+                                        <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-                        <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={password} required={true} onChangeHandler={handlePasswordValueChange} />
-                        <InputText type={'password'} fieldLabel={'Confirmación Contraseña'} fieldName={'passwordConfirmation'} placeholder={'Escriba la confirmación de la contraseña.'} inputValue={passwordConfirmation} required={true} onChangeHandler={handlePasswordConfirmationValueChange} />
-                        <a href='#' onClick={handleOpenModal}>Open Modal</a>
-                        <Agreement isOpen={isModalOpen} onClose={handleCloseModal}/>
+                            <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={password} required={true} isValid={isPasswordValid} onChangeHandler={handlePasswordValueChange} />
+                            <InputText type={'password'} fieldLabel={'Confirmación Contraseña'} fieldName={'passwordConfirmation'} placeholder={'Escriba la confirmación de la contraseña.'} inputValue={passwordConfirmation} required={true} isValid={isPasswordConfirmationValid} onChangeHandler={handlePasswordConfirmationValueChange} />
+                            <a href='#' onClick={handleOpenModal}>Términos y Condiciones</a>
+                            <Agreement isOpen={isModalOpen} onClose={handleCloseModal} />
 
-                        <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} inputValue={isAccepted} onChangeHandler={handleIsAcceptedValueChange} />
-                        <Button type={'submit'} fieldLabel={'Registrar'} onClick={handleFormSubmit} />
-                    </form>
+                            <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} inputValue={isAccepted} required={true} onChangeHandler={handleIsAcceptedValueChange} />
+                            <Button type={'submit'} fieldLabel={'Registrar'} onClick={handleFormSubmit} />
+                        </form>
+                    </div>
                 </div>
+                <br></br>
             </div>
             <br></br>
-        </div>
-        <br></br>
         </div>
     );
 }
