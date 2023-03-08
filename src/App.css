@@ -7,6 +7,13 @@ input.invalid{
     border-color: red;
 }
 
+input:invalid{
+    border-color: red;
+}  
+
+select:invalid{
+    border-color: red;
+}
 
 /*CAMPOS*/
 /***************************************************/
