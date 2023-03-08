@@ -5,7 +5,7 @@ import 'popper.js/dist/popper.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 
-function Navbar() {
+const Navbar = ({isLoggedIn, setLoggedIn}) => {
     return (
         <div>
             <nav className="navbar">
