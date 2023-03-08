@@ -181,7 +181,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
         e.preventDefault();
 
         // Ejecutanto las validaciones de los campos
-        // validatingAllFields();
+        validatingAllFields();
 
         if (validationMessages.length > 1) {
             console.log(validationMessages);
