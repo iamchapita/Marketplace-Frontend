@@ -19,7 +19,6 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [addressDepartment, setAddressDepartment] = useState('');
     const [addressMunicipality, setAddressMunicipality] = useState('');
-    const [userIdFK, setUserIdFK] = useState('');
 
     // Almacena los departamentos y municipios 
     const [departments, setDepartments] = useState([]);
@@ -210,12 +209,20 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                             navigate('/');
                         }
                     }).catch(error => {
-                        setShowAlert(true);
-                        setAlertMessage(error);
-                    })
+                        console.log(error.response);
+                    });
                 }).catch(error => {
+                    
+                    let errors = error.response.data.error;
+                    let keys = Object.keys(errors);
+                    let errorMessage = ''
+                    
+                    keys.map((key) => {
+                        errorMessage = errorMessage + '<br>' + errors[key][0];
+                    })
+
                     setShowAlert(true);
-                    setAlertMessage(error);
+                    setAlertMessage(errorMessage);
                 });
             }
 
