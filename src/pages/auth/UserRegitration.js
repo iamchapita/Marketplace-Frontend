@@ -157,7 +157,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
         !phoneNumberRegex.test(phoneNumber) ? validationMessages = validationMessages + '<br>El contenido del campo Teléfono Celular no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Fecha de Nacimiento
-        birthDate.length == 0 ? validationMessages = validationMessages + '<br>El contenido del Campo Fecha de Nacimiento no es válido.' : validationMessages = validationMessages + '';
+        birthDate.length === 0 ? validationMessages = validationMessages + '<br>El contenido del Campo Fecha de Nacimiento no es válido.' : validationMessages = validationMessages + '';
 
         // Validando Departamento
         !addressDepartmentRegex.test(addressDepartment) ? validationMessages = validationMessages + '<br>El Departamento seleccionado no es válido.' : validationMessages = validationMessages + '';
@@ -284,7 +284,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                                 >
                                     <option value="">Seleccione un Municipio</option>
                                     {municipalities.map((municipality) => (
-                                        <option hidden={municipality.departmentIdFK != addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
+                                        <option hidden={municipality.departmentIdFK !== addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
                                     ))}
                                 </select>
                             </div>
