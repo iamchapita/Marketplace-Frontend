@@ -12,12 +12,14 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
         e.preventDefault();
         const registerUser = async () => {
             const logout = await apiClient.get('/logout').then(response => {
-                console.log(response);
+                setLoggedIn(false);
+                localStorage.removeItem('access_token');
+            }).catch(error => {
+                console.log(error);
             })
         }
 
         registerUser();
-        setLoggedIn(false);
     }
 
     const onLogin = () => {};
