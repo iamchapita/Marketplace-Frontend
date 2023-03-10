@@ -284,7 +284,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                                 >
                                     <option value="">Seleccione un Municipio</option>
                                     {municipalities.map((municipality) => (
-                                        <option hidden={municipality.departmentIdFK !== addressDepartment} key={municipality.id} value={municipality.id}>{municipality.name}</option>
+                                        <option hidden={municipality.departmentIdFK !== parseInt(addressDepartment)} key={municipality.id} value={municipality.id}>{municipality.name}</option>
                                     ))}
                                 </select>
                             </div>
