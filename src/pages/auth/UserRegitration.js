@@ -136,7 +136,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
         addressMunicipalityRegex.test(e.target.value) ? setIsAddressdMunicipalityValid(true) : setIsAddressdMunicipalityValid(false);
     };
     const handleIsAcceptedValueChange = (e) => {
-        setIsAccepted(e.target.value);
+        e.target.checked ? setIsAccepted(true) : setIsAccepted(false);
     };
 
     const validatingAllFields = () => {
@@ -183,7 +183,6 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
         validatingAllFields();
 
         if (validationMessages.length > 1) {
-            console.log(validationMessages);
             setAlertMessage(validationMessages);
             setShowAlert(true);
         } else {
@@ -295,7 +294,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                             <a href='#' onClick={handleOpenModal}>Términos y Condiciones</a>
                             <Agreement isOpen={isModalOpen} onClose={handleCloseModal} />
 
-                            <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} inputValue={isAccepted} required={true} onChangeHandler={handleIsAcceptedValueChange} />
+                            <Checkbox fieldLabel={'Acepto Términos y Condiciones'} fieldName={'userAgreement'} checkedValue={isAccepted} required={true} onChangeHandler={handleIsAcceptedValueChange} />
                             <Button type={'submit'} fieldLabel={'Registrar'} onClick={handleFormSubmit} />
                         </form>
                     </div>
