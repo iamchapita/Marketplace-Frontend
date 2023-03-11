@@ -5,7 +5,7 @@ const BirthDateInput = ({ fieldLabel, fieldName, inputValue, onChangeHandler, re
     // Obteniendo fechas limite para el input type Date
     var today = new Date();
     // Se obtiene la fecha limite superior. Fecha de mayoria de edad.
-    max = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    max = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     // Se obtiene el limite inferior. Fecha de nacimieneto.
     min = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
 
