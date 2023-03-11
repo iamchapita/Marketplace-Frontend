@@ -245,10 +245,10 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                     <br></br>
                 </div>
                 <div className='row'>
-                    <div className='col'>
+                    <div className='col-sm'>
                         <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" />
                     </div>
-                    <div className='col'>
+                    <div className='col-sm'>
                         <form encType='multipart/form-data'>
                             <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                             <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firstName} isValid={isFirstNameValid} onChangeHandler={handleFirtsNameValueChange} />

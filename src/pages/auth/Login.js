@@ -92,10 +92,10 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
 
                 </div>
                 <div className='row'>
-                    <div className='col'>
-                        <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" />
+                    <div className='col-sm'>
+                        <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>
-                    <div className='col'>
+                    <div className='col-sm'>
                         <form encType='multipart/form-data'>
                             <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                             <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} isValid={isEmailValid} onChangeHandler={handleEmailChange} />

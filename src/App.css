@@ -59,14 +59,16 @@ body {
 
 .row {
 	align-items: center;
+	align-content: center;
 	border: solid;
 	border-color: #22252a;
 }
 
-.col {
+.col-sm {
 	align-items: center;
 	border: solid;
 	border-color: #22252a;
+	align-content: center;
 }
 
 /*NAVBAR*/
@@ -111,4 +113,13 @@ body {
 	display: flex;
 	align-items: center;
 	height: 100%;
+}
+
+
+img {
+    display: block;
+    margin: auto;
+    align-items: center;
+    max-width: 100%;  
+    height: auto;
 }
