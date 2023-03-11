@@ -95,7 +95,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
                     <div className='col-sm'>
                         <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>
-                    <div className='col-sm'>
+                    <div className='col-md'>
                         <form encType='multipart/form-data'>
                             <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                             <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} isValid={isEmailValid} onChangeHandler={handleEmailChange} />

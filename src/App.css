@@ -71,6 +71,13 @@ body {
 	align-content: center;
 }
 
+.col-md{
+	align-items: center;
+	border: solid;
+	border-color: #22252a;
+	align-content: center;
+}
+
 /*NAVBAR*/
 /***************************************************/
 .navbar {
