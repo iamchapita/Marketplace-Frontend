@@ -84,12 +84,9 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
 
     return (
         <div>
-            <br></br>
             <div className='container-sm'>
                 <div className='tittle'>
-
                     <h1>Inicio de Sesión</h1>
-
                 </div>
                 <div className='row'>
                     <div className='col-sm'>
@@ -104,9 +101,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
                         </form>
                     </div>
                 </div>
-                <br></br>
             </div>
-            <br></br>
         </div>
     );
 
