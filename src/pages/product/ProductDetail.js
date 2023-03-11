@@ -72,7 +72,7 @@ const ProductDetail = () => {
                     <h3>Precio: $XXX</h3>
                     <p>Ubicación: Ciudad, Estado</p>
                     <p>Estado del producto: Nuevo/Usado</p>
-                    <button type="button" className="btn btn-primary">Agregar al carrito</button>
+                    <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button>
                 </div>
             </div>
         </div>
