@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import UserRegistration from '../pages/auth/UserRegitration';
 import Navbar from '../components/Navbar';
+import ProductDetail from '../pages/product/ProductDetail';
 
 // import PrivateRoute from './routes/PrivateRoute';
 
@@ -13,15 +14,15 @@ const RoutesList = () => {
     return (
         <div>
             <header className='app-header'>
-            <BrowserRouter>
-                <Navbar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-                <Routes>
-                    {/* <Route path="/" element={Login} /> */}
-                    <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-                    <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn}/>} />
-                </Routes>
-            </BrowserRouter>
-        </header>
+                <BrowserRouter>
+                    <Navbar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+                    <Routes>
+                        <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+                        <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+                        <Route path='/productDetail' element={<ProductDetail />} />
+                    </Routes>
+                </BrowserRouter>
+            </header>
         </div>
     );
 };
