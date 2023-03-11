@@ -1,125 +1,114 @@
 /********************CSS****************************/
 
-
 /*BORDES DE LOS CAMPOS*/
 /***************************************************/
-input.invalid{
-    border-color: red;
+input.invalid {
+	border-color: red;
 }
 
-input:invalid{
-    border-color: red;
-}  
+input:invalid {
+	border-color: red;
+}
 
-select:invalid{
-    border-color: red;
+select:invalid {
+	border-color: red;
 }
 
 /*CAMPOS*/
 /***************************************************/
 
-
-
-
-
 /*CSS PANTALLA DE FONDO*/
 /***************************************************/
-.app-header{
-    background-color: #393e46;
-    align-items: center;
-    background-size: cover;
-    min-height: 100vh;
+.app-header {
+	background-color: #393e46;
+	align-items: center;
+	background-size: cover;
+	min-height: 100vh;
 }
 
 body {
-    background-color: #393e46;
-    background-size: cover;
-    min-height: 100vh;
+	background-color: #393e46;
+	background-size: cover;
+	min-height: 100vh;
 }
-  
 
 /*CSS INICIO*/
 /***************************************************/
 
-
-
-
-
 /*CSS CONTENEDORES*/
 /***************************************************/
-.container-sm{
-    background-color: #22252a;
-    border-radius: 10px;
-    border: solid;
-    border-width: 5px;
-    border-color: #22252a;
-    align-items: center;
-    color: #0092ca;
+.container-sm {
+	background-color: #22252a;
+	border-radius: 10px;
+	border: solid;
+	border-width: 5px;
+	border-color: #22252a;
+	align-items: center;
+	color: #0092ca;
 }
 
-.container-fluid{
-    color: #0092ca;
+.container-fluid {
+	color: #0092ca;
 }
 
-.tittle{
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.tittle {
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-.row{
-    align-items: center;
-    border: solid;
-    border-color: #22252a;
+.row {
+	align-items: center;
+	border: solid;
+	border-color: #22252a;
 }
 
-.col{
-    align-items: center;
-    border: solid;
-    border-color: #22252a;
+.col {
+	align-items: center;
+	border: solid;
+	border-color: #22252a;
 }
-
 
 /*NAVBAR*/
 /***************************************************/
-.navbar{
-    background-color: #22252a;
-    color: #0092ca;
+.navbar {
+	background-color: #22252a;
+	color: #0092ca;
 }
 
-.navbar-item{
-    color: #0092ca;
-    font-weight: 500;
-    font-size: x-large;
-    text-decoration: none;
+.navbar-item {
+	color: #0092ca;
+	font-weight: 500;
+	font-size: x-large;
+	text-decoration: none;
 }
 
-.toggler{
-    color: #0092ca;
-    font-weight: 500;
-    font-size: large;
-    border: solid;
-    border-color: #0092ca;
-    background-color: #22252a;
-    border-radius: 5px;
+.toggler {
+	color: #0092ca;
+	font-weight: 500;
+	font-size: large;
+	border: solid;
+	border-color: #0092ca;
+	background-color: #22252a;
+	border-radius: 5px;
 }
 
-.toggler-item{
-    font-size: large;
+.toggler-item {
+	font-size: large;
 }
 
-.sidebar-item{
-    color: #0092ca;
-    font-weight: 400;
-    font-size: large;
-    text-decoration: none;
+.sidebar-item {
+	color: #0092ca;
+	font-weight: 400;
+	font-size: large;
+	text-decoration: none;
 }
-
 
 /*IMAGENES*/
 /***************************************************/
-img {
-    display: block;
-    margin: auto;
-    align-items: center;
+
+.carousel-inner {
+	display: flex;
+	align-items: center;
+	height: 100%;
 }
