@@ -4,6 +4,7 @@ import Login from '../pages/auth/Login';
 import UserRegistration from '../pages/auth/UserRegitration';
 import Navbar from '../components/Navbar';
 import ProductDetail from '../pages/product/ProductDetail';
+import PorducInsert from '../pages/product/PorducInsert';
 import Home from '../pages/home/Home';
 
 // import PrivateRoute from './routes/PrivateRoute';
@@ -20,6 +21,7 @@ const RoutesList = () => {
                     <Routes>
                         <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+                        <Route path='/ProductInsert' element={<PorducInsert />} />
                         <Route path='/productDetail' element={<ProductDetail />} />
                         <Route path='/home' element={<Home/>}/>
                     </Routes>
