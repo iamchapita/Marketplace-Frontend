@@ -237,12 +237,9 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
     return (
 
         <div>
-            <br></br>
             <div className='container-sm'>
                 <div className='tittle'>
-                    <br></br>
                     <h1>Registro de Usuario</h1>
-                    <br></br>
                 </div>
                 <div className='row'>
                     <div className='col-sm'>
@@ -299,9 +296,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                         </form>
                     </div>
                 </div>
-                <br></br>
             </div>
-            <br></br>
         </div>
     );
 }

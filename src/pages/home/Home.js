@@ -51,11 +51,15 @@ function Home (){
         
     },[]);
     return(
+
         <div>
+            
             <div className="container">
+            
             {
                 products.map ((product)=>(
                     <Card
+                    key={product.id}
                     name = {product.name}
                     price =  {product.price}
                     description = {product.description}
