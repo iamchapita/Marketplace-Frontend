@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import apiClient from '../../utils/apiClient';
 import InputText from '../../components/InputText';
 import TextArea from "../../components/TextArea";
@@ -8,7 +9,7 @@ import SelectInput from "../../components/SelectInput";
 import Alert from "../../components/common/Alert";
 
 
-const ProductInsert = (isLoggedIn, setLoggedIn) => {
+const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
 
     const [name, setName] = useState('');
     const [isNameValid, setIsNameValid] = useState(false);
@@ -37,6 +38,9 @@ const ProductInsert = (isLoggedIn, setLoggedIn) => {
 
     // Variable que almacena las fotos convertidas
     const [photosConvertered, setPhotosConvertered] = useState({});
+
+    // Se utiliza para redireccionar a una ruta
+    const navigate = useNavigate();
 
     // Expresiones regulares para validacion
     const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-\_\.\,\;\:\(\)\"\'\!]{2,50}$/;
@@ -152,18 +156,29 @@ const ProductInsert = (isLoggedIn, setLoggedIn) => {
             setShowAlert(false);
             const action = async () => {
                 try {
-                    const response = await apiClient.post('/createProduct', {
-                        name: name,
-                        description: description,
-                        price: price,
-                        photos: photosConvertered,
-                        status: status === '1' ? 'Usado' : 'Nuevo',
-                        userIdFK: '1',
-                        categoryIdFK: productCategory
-                    }).then((response) => {
-                        console.log(response.data);
+                    const response = await apiClient.get('/user').then((response) => {
+                        var id = response.data['id'];
+
+                        apiClient.post('/createProduct', {
+                            name: name,
+                            description: description,
+                            price: price,
+                            photos: photosConvertered,
+                            status: status === '1' ? 'Nuevo' : 'Usado',
+                            userIdFK: id,
+                            categoryIdFK: productCategory
+
+                        }).then((response) => {
+                            // Redireccionando a la ruta base
+                            navigate('/home');
+
+                        }).catch((error) => {
+                            setAlertMessage(error.response.data.message);
+                            setShowAlert(true);
+                        })
                     }).catch((error) => {
-                        console.log(error);
+                        setAlertMessage(error.response.data.message);
+                        setShowAlert(true);
                     })
                 } catch (error) {
                 }
