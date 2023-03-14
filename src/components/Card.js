@@ -1,9 +1,27 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 //import '../utilities/img/huaweip30.jpg'
-function Card ({name, price, description, img, urlDetalles, id}){
+import CountBar from "./CountBar";
+function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSeller, favoriteClass}){
+    //const[favoriteClass, setFavoriteClass] = ('');
+    
+    //      var [user, setUser] =useState('');
+    useEffect(()=>{
+      
+       
+    },[]);
+
     
     return(
+        
+
         <div className="container card-publication">
+        <div className="account-container">
+            <CountBar 
+            name={nameSeller}
+            id={idSeller}
+            />
+        </div>    
+        
         <div className="card">
             <div className="carousel-item active">
             <img className="img-fluid" src={img}/>
@@ -14,8 +32,8 @@ function Card ({name, price, description, img, urlDetalles, id}){
                 <p className="card-text" >{description}</p>
                 <a className="card-link"  href={urlDetalles}>Detalles</a>
                 <div className="check-container">
-                <label for={`check${id}`}><i className="material-icons icon md-5" >favorite</i></label>
-                <input className="check-invisible" type="checkbox" id={`check${id}`} onClick="favorite()" />
+                <label for={`check${id}`}><i className={`material-icons ${favoriteClass ? 'icon-favorite-active ': 'icon-favorite'}`} >favorite</i></label>
+                <input className="check-invisible" type="checkbox" id={`check${id}`}  />
                 </div>
             </div>
             

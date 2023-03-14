@@ -143,7 +143,47 @@ img {
 	height: 50%;
 	margin-bottom: 2rem;
 	margin-top: 2rem;
+	position: relative;
+	display: flex;
 }
 .check-invisible{
 	visibility: hidden;
+}
+.account-container{
+	background-color: aliceblue;
+	border-radius: 3%;
+	height: 40px;
+	width: 100%;
+	
+	
+}
+.count-bar{
+	display: flex;
+
+}
+.link-perfil{
+	color: #0092ca;
+}
+.icon-perfil{
+	font-size: 40px;
+}
+.icon-favorite-active{
+	font-size: 30px;
+	color: #ea2d2d;
+}
+.icon-favorite{
+	font-size: 30px;
+	color: #555050;
+}
+.home{
+	display: block;
+}
+.sidebar-products{
+	background-color: #656e7b;
+	width: 300px;
+	height: 500px;
+	border-radius: 5%;
+	border: solid #22252a;
+	align-items: center;
+	position: fixed;
 }
