@@ -15,7 +15,7 @@ const SelecInput = ({ fieldLabel, fieldName, firstOptionValue, optionsValues, in
                 >
                     <option value="">{firstOptionValue}</option>
                     {optionsValues.map((optionValue) => (
-                        <option key={optionValue.id} value={optionValue.id}>{optionValue.value}</option>
+                        <option key={optionValue.id} value={optionValue.id}>{optionValue.name}</option>
                     ))}
                 </select>
             </div>
@@ -33,7 +33,7 @@ const SelecInput = ({ fieldLabel, fieldName, firstOptionValue, optionsValues, in
                     >
                         <option value="">{firstOptionValue}</option>
                         {optionsValues.map((optionValue) => (
-                            <option key={optionValue.id} value={optionValue.id}>{optionValue.value}</option>
+                            <option key={optionValue.id} value={optionValue.id}>{optionValue.name}</option>
                         ))}
                     </select>
                 </div>
