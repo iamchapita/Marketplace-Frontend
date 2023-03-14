@@ -215,11 +215,11 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                         // console.log(error.response);
                     });
                 }).catch(error => {
-                    
+
                     let errors = error.response.data.error;
                     let keys = Object.keys(errors);
                     let errorMessage = ''
-                    
+
                     keys.map((key) => {
                         errorMessage = errorMessage + '<br>' + errors[key][0];
                     })
@@ -230,7 +230,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
             }
 
             registerUser();
-            
+
         }
     }
 
@@ -243,7 +243,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                 </div>
                 <div className='row'>
                     <div className='col-sm'>
-                    <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
+                        <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>
                     <div className='col-md'>
                         <form encType='multipart/form-data'>
