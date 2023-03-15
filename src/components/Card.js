@@ -13,7 +13,7 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
     
     return(
         
-        <div className="container-sm">
+        <div className="container-home">
         <div className="row"> 
             <div className="col-3">
             
