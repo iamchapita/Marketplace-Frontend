@@ -13,32 +13,39 @@ const ProductDetail = () => {
 
     useEffect(() => {
         const action = () => {
-            const response = apiClient.get(`/product/${id}`).then((response) => {
-                setProduct(response.data[0]);
-                setProductImages(response.data[0]['photos']);
-
-                apiClient.post('/sellerDetails', {
-                    id: response.data[0]['userIdFK']
-                }).then((response) =>{
-                    setSellerDetails(response.data);
+            try {
+                const response = apiClient.get(`/product/${id}`).then((response) => {
+                    setProduct(response.data[0]);
+                    setProductImages(response.data[0]['photos']);
+                    apiClient.post('/sellerDetails', {
+                        id: response.data[0]['userIdFK']
+                    }).then((response) => {
+                        setSellerDetails(response.data);
+                    }).catch((error) => {
+                        setIsReadyToRender(false);
+                    })
                 }).catch((error) => {
-                    console.log(error);
+                    setIsReadyToRender(false);
                 })
-            }).catch((error) => {
-                console.log(error);
-            })
+            } catch (error) {
+                setIsReadyToRender(false);
+            }
         }
         action();
     }, [id]);
 
     useEffect(() => {
-        const extensions = productImages.map((productImage) => {
-            const extension = productImage.name.split('.').pop();
-            return extension;
-        })
-        setProductExtensions(extensions);
-        setIsReadyToRender(true);
-    }, [productImages]);
+        try {
+            const extensions = productImages.map((productImage) => {
+                const extension = productImage.name.split('.').pop();
+                return extension;
+            })
+            setProductExtensions(extensions);
+            setIsReadyToRender(true);
+        } catch (error) {
+            setIsReadyToRender(false);
+        }
+    }, [sellerDetails]);
 
     return (
         <div className="container-sm">
@@ -47,9 +54,11 @@ const ProductDetail = () => {
                     <div className="col-sm-12 col-md-12 col-lg-12">
                         <div id="carouselExampleIndicators" className="carousel slide" style={{ height: '60vh' }}>
                             <div className="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                {
+                                    productImages.map((image, index) => (
+                                        <button key={index} type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? 'active':''} aria-label={`Slide ${index}`}></button>
+                                    ))
+                                }
                             </div>
                             <div className="carousel-inner">
                                 {
@@ -82,7 +91,7 @@ const ProductDetail = () => {
                             <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button>
                         </div>
                     </div>
-                </div>) : (<div><h1>Cargando</h1></div>)}
+                </div>) : (<div><h1 className="text-center">No Encontrado</h1></div>)}
         </div>
     )
 
