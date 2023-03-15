@@ -1,84 +1,70 @@
-/********************CSS****************************/
 
-/*BORDES DE LOS CAMPOS*/
-/***************************************************/
-input.invalid {
-	border-color: red;
-}
+/***********************CSS*************************/
 
-textarea.invalid {
-	border-color: red;
-}
 
-input:invalid {
-	border-color: red;
-}
-
-select:invalid {
-	border-color: red;
-}
-
-/*CAMPOS*/
-/***************************************************/
-
-/*CSS PANTALLA DE FONDO*/
+/***************CSS PANTALLA DE FONDO***************/
 /***************************************************/
 .app-header {
-	background-color: #393e46;
-	align-items: center;
-	background-size: cover;
-	min-height: 100vh;
+    background-color: #393e46;
+    align-items: center;
+    background-size: cover;
+    min-height: 100vh;
 }
 
 body {
-	background-color: #393e46;
-	background-size: cover;
-	min-height: 100vh;
+    background-color: #393e46;
+    background-size: cover;
+    min-height: 100vh;
 }
 
-/*CSS INICIO*/
-/***************************************************/
 
-/*CSS CONTENEDORES*/
+
+/************CSS CONTENEDORES PRICIPALES************/
 /***************************************************/
 .container-sm {
-	background-color: #22252a;
-	border-radius: 10px;
-	border: solid;
-	border-width: 5px;
-	border-color: #22252a;
-	align-items: center;
-	color: white;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    background-color: #22252a;
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: #22252a;
+    align-items: center;
+    color: white;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .container-fluid {
-	color: #0092ca;
-}
-
-.tittle {
-	text-align: center;
-	margin-top: 15px;
-	margin-bottom: 15px;
+    color: #0092ca;
 }
 
 .row {
-	align-items: center;
-	align-content: center;
-	border: solid;
-	border-color: #22252a;
+    align-items: center;
+    align-content: center;
+    border: solid;
+    border-color: #22252a;
+    border-radius: 20px;
 }
 
 .col-sm {
-	align-items: center;
-	border: solid;
-	border-color: #22252a;
-	align-content: center;
+    align-items: center;
+    border: solid;
+    border-color: #22252a;
+    align-content: center;
+    border-radius: 5px;
 }
 
-h1{
-    margin-top: 5%;
+.col-3{
+	align-items: center;
+    border: solid;
+    border-color: #22252a;
+    align-content: center;
+    border-radius: 5px;
+}
+
+.tittle {
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 2%;
 }
 
 .productDetailText{
@@ -90,48 +76,150 @@ h1{
 }
 
 
-/*NAVBAR*/
+
+/********************CSS INICIO*********************/
+/***************************************************/
+
+.check-invisible{
+    visibility: hidden;
+}
+
+.card{
+	background-color: #22252a;
+	margin-top: 1px;
+	padding: 5px;
+	border: solid;
+	border-color: #22252a;
+	border-radius: 10px;
+}
+
+.card-body{
+	background-color: white;
+	border: solid;
+	border-color: #22252a;
+	border-radius: 10px;
+	margin-top: 1px;
+	padding: 5px;
+	color: #22252a;
+}
+
+.account-container{
+    background-color: #393e46;
+	border: solid;
+	border-color: #22252a;
+    border-radius: 10px;
+	padding: 5px;
+    height: 60px;
+    width: 100%;  
+	align-items: center;
+	align-content: center;  
+}
+
+.count-bar{
+    display: flex;
+}
+
+.link-perfil{
+    color: #0092ca;
+	text-decoration: none;
+	font-size: large;
+	align-items: center;
+	align-content: center; 
+}
+
+.icon-perfil{
+    font-size: 40px;
+}
+
+.icon-favorite-active{
+    font-size: 30px;
+    color: #ea2d2d;
+}
+
+.icon-favorite{
+    font-size: 30px;
+    color: #555050;
+}
+
+.home{
+    display: block;
+}
+
+.sidebar-products{
+    background-color: #656e7b;
+    width: 300px;
+    height: 500px;
+    border-radius: 5%;
+    border: solid #22252a;
+    align-items: center;
+    position: fixed;
+}
+
+
+
+/****************BORDES DE LOS CAMPOS***************/
+/***************************************************/
+input.invalid {
+    border-color: red;
+}
+
+textarea.invalid {
+    border-color: red;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+select:invalid {
+    border-color: red;
+}
+
+
+
+/***********************NAVBAR**********************/
 /***************************************************/
 .navbar {
-	background-color: #22252a;
-	color: #0092ca;
+    background-color: #22252a;
+    color: white;
 }
 
 .navbar-item {
-	color: #0092ca;
-	font-weight: 500;
-	font-size: x-large;
-	text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: x-large;
+    text-decoration: none;
 }
 
 .toggler {
-	color: #0092ca;
-	font-weight: 500;
-	font-size: large;
-	border: solid;
-	border-color: #0092ca;
-	background-color: #22252a;
-	border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: large;
+    border: solid;
+    border-color: white;
+    background-color: #22252a;
+    border-radius: 5px;
 }
 
 .toggler-item {
-	font-size: large;
+    font-size: large;
 }
 
 .sidebar-item {
-	color: #0092ca;
-	font-weight: 400;
-	font-size: large;
-	text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: large;
+    text-decoration: none;
 }
 
-/*IMAGENES*/
-/***************************************************/
 
+
+/**********************IMAGENES*********************/
+/***************************************************/
 .carousel-inner {
-	display: flex;
-	align-items: center;
-	height: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 img {
@@ -142,52 +230,5 @@ img {
     height: auto;
 }
 
-.card-publication{
-	width: 70%;
-	height: 50%;
-	margin-bottom: 2rem;
-	margin-top: 2rem;
-	position: relative;
-	display: flex;
-}
-.check-invisible{
-	visibility: hidden;
-}
-.account-container{
-	background-color: aliceblue;
-	border-radius: 3%;
-	height: 40px;
-	width: 100%;
-	
-	
-}
-.count-bar{
-	display: flex;
 
-}
-.link-perfil{
-	color: #0092ca;
-}
-.icon-perfil{
-	font-size: 40px;
-}
-.icon-favorite-active{
-	font-size: 30px;
-	color: #ea2d2d;
-}
-.icon-favorite{
-	font-size: 30px;
-	color: #555050;
-}
-.home{
-	display: block;
-}
-.sidebar-products{
-	background-color: #656e7b;
-	width: 300px;
-	height: 500px;
-	border-radius: 5%;
-	border: solid #22252a;
-	align-items: center;
-	position: fixed;
-}
+
