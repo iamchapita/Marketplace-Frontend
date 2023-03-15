@@ -23,7 +23,7 @@ const RoutesList = () => {
                         <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-                        <Route path='/productDetail' element={<ProductDetail />} />
+                        <Route path='/productDetail/:id' element={<ProductDetail />} />
                         <Route path='/home' element={<Home/>}/>
                         <Route path='/wishlist' element={<WishList/>}/>
 
