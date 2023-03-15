@@ -45,6 +45,12 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
                                 <li className="nav-item">
                                     {isLoggedIn ? <a className="sidebar-item" href="/">Perfil</a> : <a className="sidebar-item" href="/register">Registro</a>}
                                 </li>
+                                <li className="nav-item">
+                                    <a className="sidebar-item" href="/productInsert">Publicar Producto</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="sidebar-item" href="/WishList">Lista de Deseos</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

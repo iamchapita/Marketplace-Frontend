@@ -5,7 +5,7 @@ import images from "../../utilities/json-images/images";
 
 
 
-function Home (){
+function WishList (){
 
     var userRegister = {'name' : 'Demsey Euceda ', 'id' : '1'};
     
@@ -75,7 +75,7 @@ function Home (){
 
         <div>
             
-            <div className="container home">
+            <div className="container wish">
                
             {
                 products.map ((product)=>(
@@ -98,4 +98,4 @@ function Home (){
         </div>
     );
 }
-export default Home;
+export default WishList;

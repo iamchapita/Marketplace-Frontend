@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import ProductDetail from '../pages/product/ProductDetail';
 import Home from '../pages/home/Home';
 import ProductInsert from '../pages/product/ProductInsert';
+import WishList from '../pages/auth/WishList';
 
 // import PrivateRoute from './routes/PrivateRoute';
 
@@ -24,6 +25,8 @@ const RoutesList = () => {
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/productDetail' element={<ProductDetail />} />
                         <Route path='/home' element={<Home/>}/>
+                        <Route path='/wishlist' element={<WishList/>}/>
+
                     </Routes>
                 </BrowserRouter>
             </header>

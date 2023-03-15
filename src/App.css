@@ -107,13 +107,13 @@ body {
 }
 
 .card-body{
-	background-color: white;
+	background-color: #393e46;
 	border: solid;
 	border-color: #22252a;
 	border-radius: 10px;
 	margin-top: 1px;
 	padding: 5px;
-	color: #22252a;
+	color: white;
 }
 
 .account-container{
@@ -174,7 +174,11 @@ body {
     position: fixed;
 }
 
-
+/*******************LISTA DE DESEOS*****************/
+/***************************************************/
+.wish{
+    display: flex;
+}
 
 /****************BORDES DE LOS CAMPOS***************/
 /***************************************************/
@@ -208,6 +212,7 @@ select:invalid {
     font-weight: 500;
     font-size: x-large;
     text-decoration: none;
+    ;
 }
 
 .toggler {
@@ -229,6 +234,8 @@ select:invalid {
     font-weight: 400;
     font-size: large;
     text-decoration: none;
+    margin-top: 2%;
+    margin-bottom: 2%
 }
 
 
@@ -247,6 +254,13 @@ img {
     align-items: center;
     max-width: 100%;  
     height: auto;
+}
+
+.img-fluid{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: block;
+    align-items: center;
 }
 
 

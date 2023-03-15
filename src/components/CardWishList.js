@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 //import '../utilities/img/huaweip30.jpg'
 import CountBar from "./CountBar";
-function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSeller, favoriteClass}){
+
+
+function CardWishList ({name, price, description, img, urlDetalles, id, nameSeller, idSeller, favoriteClass}){
     //const[favoriteClass, setFavoriteClass] = ('');
     
     //      var [user, setUser] =useState('');
@@ -13,13 +15,13 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
     
     return(
         
-        <div className="container-home">
+        <div className="container-WL">
         
-              
+            
                 <div className="container card-publication">
                    
                 
-                <div className="card">
+                <div className="cardWL">
                     <div className="account-container">
                         <CountBar 
                         name={nameSeller}
@@ -47,4 +49,4 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
 
     );
 }
-export default Card;
+export default CardWishList;
