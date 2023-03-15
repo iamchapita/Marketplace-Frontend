@@ -136,6 +136,8 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
             }
         });
 
+        photos.length > 6 ? validationMessages = validationMessages + '<br>Solamente se pueden subir 6 imágenes por producto.' : validationMessages = validationMessages + '';
+
         photos.length === 0 ? validationMessages = validationMessages + '<br>No se ha seleccionado ningún archivo.' : validationMessages = validationMessages + '';
 
         !categoryRegex.test(productCategory) ? validationMessages = validationMessages + '<br> El valor de Estado del Producto no es válido.' : validationMessages = validationMessages + '';
