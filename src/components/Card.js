@@ -1,13 +1,64 @@
 import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
+import apiClient from "../utils/apiClient";
+
+
+function Card ({name, price, description, img, urlDetalles, id, idSeller}){
+    const[favoriteClass, setFavoriteClass] = useState(false);
+    const[userId, setUserId] =useState();
+    
+    var [nameUser, setNameUser] =useState('');
+
+    const user = () =>{
+        apiClient.get('/user').then((res)=>{
+            //console.log(res.data.id);
+            setUserId(res.data.id);
+        });
+       
+    }
+
+    const getNameUser = async (idSeller) => {
+        await apiClient.post('/sellerDetails', {
+            id : idSeller
+        }).then((res)=>{
+            setNameUser(res.data.name);
+            
+            
+
+        });
+    }
+    const favorite = async (id) =>{
+
+        var checkValue = document.getElementById('check'+id).checked;
+        var addedDate = new Date();
+        setFavoriteClass(checkValue);
+        if(favoriteClass){
+        await apiClient.post('/wishlistInsert', {
+            productIdFK : id,
+            userIdFK : userId
+        });
+        alert('se agregó a lista de favoritos');
+    }else{
+        
+        await apiClient.post('/wishlistDelete',  {
+            productIdFK : id,
+            userIdFK : userId,
+
+        });
+        alert('se eliminó de la lista de deseos')
+    }
+    }
+    
+
 
 
 function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSeller, favoriteClass}){
     //const[favoriteClass, setFavoriteClass] = ('');
+    //9e3f374c0dc00eb6967011f2b618e7b2047c0d4e
     
-    //      var [user, setUser] =useState('');
     useEffect(()=>{
-      
+      getNameUser(idSeller);
+      user();
        
     },[]);
 
@@ -23,7 +74,7 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
                 <div className="card">
                     <div className="account-container">
                         <CountBar 
-                        name={nameSeller}
+                        name={nameUser}
                         id={idSeller}
                         />
                     </div> 
@@ -36,8 +87,8 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
                         <p className="card-text" >{description}</p>
                         <a className="card-link"  href={urlDetalles}>Detalles</a>
                         <div className="check-container">
-                        <label for={`check${id}`}><i className={`material-icons ${favoriteClass ? 'icon-favorite-active ': 'icon-favorite'}`} >favorite</i></label>
-                        <input className="check-invisible" type="checkbox" id={`check${id}`}  />
+                        <label id={`labelCheck${id}`}  htmlFor={`check${id}`}><i className={`material-icons ${favoriteClass ? 'icon-favorite-active ': 'icon-favorite'}`} >favorite</i></label>
+                        <input className="check-invisible" onClick={()=>favorite(id)} type="checkbox" id={`check${id}`}  />
                         </div>
                     </div>
 
@@ -48,4 +99,6 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
 
     );
 }
+}
+
 export default Card;
