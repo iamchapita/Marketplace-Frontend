@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
-//import '../utilities/img/huaweip30.jpg'
 import CountBar from "./CountBar";
+
+
 function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSeller, favoriteClass}){
     //const[favoriteClass, setFavoriteClass] = ('');
     

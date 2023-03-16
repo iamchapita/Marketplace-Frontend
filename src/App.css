@@ -177,12 +177,60 @@ body {
 /*******************LISTA DE DESEOS*****************/
 /***************************************************/
 .wish{
-    display: flex;
+ display: block;
+}
+
+.col-3{
+    align-items: center;
+    background-color: #22252a;
+    border: solid;
+    border: #22252a;
+    margin-left: 5%;
+}
+
+.col-8{
+    align-items: center;  
+    height: ; 
+}
+
+.container-WL{
+    background-color: #393e46;
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: #393e46;
+    align-items: center;
+    align-content: center;
+    color: white;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+
+.cardWL{
+	background-color: #22252a;
+	margin-top: 1px;
+	padding: 5px;
+	border: solid;
+	border-color: #22252a;
+	border-radius: 10px;
+}
+
+.card-body-wl{
+	background-color: #393e46;
+	border: solid;
+	border-color: #22252a;
+	border-radius: 10px;
+	margin-top: 1px;
+	padding: 5px;
+	color: white;
+    height: 200px;
 }
 
 /****************BORDES DE LOS CAMPOS***************/
 /***************************************************/
 input.invalid {
+
     border-color: red;
 }
 
@@ -261,6 +309,11 @@ img {
     margin-bottom: 1%;
     display: block;
     align-items: center;
+}
+
+.img-wl{
+    height: auto;
+    width: 60%;
 }
 
 

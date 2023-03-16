@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
-import Card from "../../components/Card";
-import SidebarProducts from "../../components/sidebarProducts";
+import CardWishList from "../../components/CardWishList";
 import images from "../../utilities/json-images/images";
 
 
@@ -74,12 +73,11 @@ function WishList (){
     return(
 
         <div>
-            
-            <div className="container wish">
-               
-            {
-                products.map ((product)=>(
-                    <Card
+            <div>
+                <div className="container wish">
+                    {
+                    products.map ((product)=>(
+                    <CardWishList
                     nameSeller={product.user.name}
                     idSeller={product.user.id}
                     key={product.id}
@@ -90,11 +88,10 @@ function WishList (){
                     urlDetalles = {`/product/${product.id}`}
                     favoriteClass = {true}
                     />
-                ))
-            }
-            
+                    ))
+                    }
+                </div>
             </div>
-
         </div>
     );
 }
