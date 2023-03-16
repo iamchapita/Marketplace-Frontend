@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
-
-
 function Card ({name, price, description, img, urlDetalles, id, idSeller}){
     const[favoriteClass, setFavoriteClass] = useState(false);
     const[userId, setUserId] =useState();
@@ -49,13 +47,7 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
     }
     }
     
-
-
-
-function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSeller, favoriteClass}){
-    //const[favoriteClass, setFavoriteClass] = ('');
-    //9e3f374c0dc00eb6967011f2b618e7b2047c0d4e
-    
+ 
     useEffect(()=>{
       getNameUser(idSeller);
       user();
@@ -99,6 +91,4 @@ function Card ({name, price, description, img, urlDetalles, id, nameSeller, idSe
 
     );
 }
-}
-
 export default Card;
