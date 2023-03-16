@@ -35,7 +35,7 @@ function Home (){
                 products.map ((product, id)=>(
                     
                     <Card
-                    key={product.id}
+                    key={id}
                     id ={product.id}
                     nameSeller={getUserName}
                     idSeller={product.userIdFK}

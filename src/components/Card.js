@@ -34,6 +34,12 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
         await apiClient.post('/wishlistInsert', {
             productIdFK : id,
             userIdFK : userId
+        }).then((res)=>{
+            if(res.statusText == 'OK'){
+                alert('se agrego a la lista de favoritos');
+            }else{
+                alert(res.data.error);
+            }
         });
         alert('se agregó a lista de favoritos');
     }else{
@@ -42,6 +48,12 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
             productIdFK : id,
             userIdFK : userId,
 
+        }).then((res)=>{
+            if(res.statusText == 'OK'){
+                alert('se elimino de la lista de favoritos');
+            }else{
+                alert(res.data.error);
+            }
         });
         alert('se eliminó de la lista de deseos')
     }
