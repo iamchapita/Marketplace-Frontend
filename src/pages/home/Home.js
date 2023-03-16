@@ -22,6 +22,7 @@ function Home (){
     }
     useEffect(()=>{
         getProducts();
+        console.log(products[0])
 
         
     },[]);
@@ -42,7 +43,7 @@ function Home (){
                     name = {product.name}
                     price =  {product.price}
                     description = {product.description}
-                    img = {product.photo}
+                    img = {`data:image/jpg;base64,${product.photos[0].base64Image}`}
                     urlDetalles = {`/productDetail/${product.id}`}
                     />
                 ))

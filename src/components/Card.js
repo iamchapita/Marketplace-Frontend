@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
 function Card ({name, price, description, img, urlDetalles, id, idSeller}){
-    const[favoriteClass, setFavoriteClass] = useState(false);
+    const[favoriteClass, setFavoriteClass] = useState();
     const[userId, setUserId] =useState();
+
     
     var [nameUser, setNameUser] =useState('');
 
@@ -28,9 +29,8 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
     const favorite = async (id) =>{
 
         var checkValue = document.getElementById('check'+id).checked;
-        var addedDate = new Date();
         setFavoriteClass(checkValue);
-        if(favoriteClass){
+        if(!favoriteClass){
         await apiClient.post('/wishlistInsert', {
             productIdFK : id,
             userIdFK : userId
