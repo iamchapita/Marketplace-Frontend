@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiClient from '../../utils/apiClient';
+import { Spinner } from 'react-bootstrap';
 
 const ProductDetail = () => {
-    const [isReadyToRender, setIsReadyToRender] = useState(false);
+
+    const [waitingResponse, setWaitingResponse] = useState(true);
+    const [wasProductFound, setWasProductFound] = useState(null);
+    const [responseMessage, setResponseMessage] = useState('');
     // La variable product almacena un objeto
     const [product, setProduct] = useState([]);
     const [productImages, setProductImages] = useState([]);
@@ -12,51 +16,94 @@ const ProductDetail = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        const action = () => {
+        const action = async () => {
             try {
-                const response = apiClient.get(`/product/${id}`).then((response) => {
-                    setProduct(response.data[0]);
-                    setProductImages(response.data[0]['photos']);
+                const response = await apiClient.get(`/product/${id}`).then((productResponse) => {
+                    setProduct(productResponse.data);
+
                     apiClient.post('/sellerDetails', {
-                        id: response.data[0]['userIdFK']
+                        id: productResponse.data['userIdFK']
                     }).then((response) => {
                         setSellerDetails(response.data);
                     }).catch((error) => {
-                        setIsReadyToRender(false);
+
                     })
                 }).catch((error) => {
-                    setIsReadyToRender(false);
+                    setResponseMessage(error.response.data.message);
+                    setWasProductFound(false);
+                    setWaitingResponse(false);
                 })
             } catch (error) {
-                setIsReadyToRender(false);
+                setResponseMessage('Error');
+                setWaitingResponse(false);
             }
         }
         action();
     }, [id]);
 
     useEffect(() => {
-        try {
-            const extensions = productImages.map((productImage) => {
-                const extension = productImage.name.split('.').pop();
-                return extension;
-            })
-            setProductExtensions(extensions);
-            setIsReadyToRender(true);
-        } catch (error) {
-            setIsReadyToRender(false);
-        }
-    }, [sellerDetails]);
 
-    return (
-        <div className="container-sm">
-            {isReadyToRender ? (
+        if (product.length !== 0) {
+            try {
+                apiClient.post('/getProductImages', {
+                    path: product['photos']
+                }).then((response) => {
+                    setProductImages(response.data);
+                }).catch((error) => {
+                    setResponseMessage(error.response.data.message);
+                    setWasProductFound(false);
+                    setWaitingResponse(false);
+                });
+            } catch (error) {
+                setResponseMessage('Error');
+                setWaitingResponse(false);
+            }
+        }
+
+    }, [product]);
+
+    useEffect(() => {
+        if (productImages.length !== 0) {
+            try {
+                const extensions = productImages.map((productImage) => {
+                    const extension = productImage.name.split('.').pop();
+                    return extension;
+                })
+                setProductExtensions(extensions);
+                setWaitingResponse(false);
+            } catch (error) {
+                setResponseMessage('Error');
+                setWaitingResponse(false);
+            }
+        }
+    }, [productImages]);
+
+    if (waitingResponse === true) {
+        return (
+            <div className="container-sm d-flex justify-content-center">
+                <Spinner animation="border" />
+            </div>
+        );
+    }
+
+    if (wasProductFound === false) {
+        return (
+            <div className="container-sm">
+                <h1 className="text-center">{responseMessage}</h1>
+            </div>
+        );
+    }
+
+    if (waitingResponse === false) {
+        return (
+            <div className="container-sm">
                 <div className="row align-items-start">
                     <div className="col-sm-12 col-md-12 col-lg-12">
                         <div id="carouselExampleIndicators" className="carousel slide" style={{ height: '60vh' }}>
                             <div className="carousel-indicators">
                                 {
                                     productImages.map((image, index) => (
-                                        <button key={index} type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? 'active':''} aria-label={`Slide ${index}`}></button>
+                                        <button key={index} type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? 'active' : ''} aria-label={`Slide ${index}`}></button>
                                     ))
                                 }
                             </div>
@@ -91,10 +138,10 @@ const ProductDetail = () => {
                             <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button>
                         </div>
                     </div>
-                </div>) : (<div><h1 className="text-center">No Encontrado</h1></div>)}
-        </div>
-    )
-
+                </div>
+            </div>
+        )
+    }
 }
 
 export default ProductDetail;
