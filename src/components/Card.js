@@ -4,16 +4,24 @@ import apiClient from "../utils/apiClient";
 function Card ({name, price, description, img, urlDetalles, id, idSeller}){
     const[favoriteClass, setFavoriteClass] = useState();
     const[userId, setUserId] =useState();
+    const[productImage, setProductImage] = useState ();
 
     
     var [nameUser, setNameUser] =useState('');
 
     const user = () =>{
         apiClient.get('/user').then((res)=>{
-            //console.log(res.data.id);
+            
             setUserId(res.data.id);
         });
        
+    }
+
+    const image = async () =>{
+        apiClient.post('/getProductImages', {
+            path: img }).then((res)=>{
+                setProductImage(res.data[0].base64Image);
+            }); 
     }
 
     const getNameUser = async (idSeller) => {
@@ -41,7 +49,7 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
                 alert(res.data.error);
             }
         });
-        alert('se agregó a lista de favoritos');
+       
     }else{
         
         await apiClient.post('/wishlistDelete',  {
@@ -55,7 +63,7 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
                 alert(res.data.error);
             }
         });
-        alert('se eliminó de la lista de deseos')
+        
     }
     }
     
@@ -63,6 +71,7 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
     useEffect(()=>{
       getNameUser(idSeller);
       user();
+      image();
        
     },[]);
 
@@ -83,7 +92,7 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
                         />
                     </div> 
                     <div className="carousel-item active">
-                        <img className="img-fluid" src={img}/>
+                        <img className="img-fluid" src={`data:image/jpg;base64,${productImage}`}/>
                     </div>
                     <div className="card-body" key={id} >
                         <h5 className="card-title">{name}</h5>

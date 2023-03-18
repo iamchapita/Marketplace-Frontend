@@ -129,7 +129,7 @@ const ProductDetail = () => {
                             {
                                 <div>
                                     <h1>{product.name}</h1>
-                                    Vendedor: <a href="#">{sellerDetails.name}</a>
+                                    Vendedor: <a href="/">{sellerDetails.name}</a>
                                     <h3>L. {product.price}</h3>
                                     <h4>{sellerDetails.direction}</h4>
                                     <h4>Estado del Producto: {product.status}</h4>
