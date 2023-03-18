@@ -3,11 +3,12 @@ import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
 
 
-function CardWishList ({name, price, description, img, urlDetalles, id, nameSeller, idSeller}){
+function CardWishList ({name, price, description, img, urlDetalles, id, idSeller}){
   
     const[favoriteClassWL, setFavoriteClassWL] = useState(false);
     const[userId, setUserId] =useState();
     var [nameUser, setNameUser] =useState('');
+    var [productImage, setProductImage] = useState();
 
     const user = () =>{
         apiClient.get('/user').then((res)=>{
@@ -15,6 +16,13 @@ function CardWishList ({name, price, description, img, urlDetalles, id, nameSell
             setUserId(res.data.id);
         });
        
+    }
+
+    const image = async () =>{
+        apiClient.post('/getProductImages', {
+            path: img }).then((res)=>{
+                setProductImage(res.data[0].base64Image);
+            }); 
     }
 
     const getNameUser = async (idSeller) => {
@@ -48,6 +56,7 @@ function CardWishList ({name, price, description, img, urlDetalles, id, nameSell
     useEffect(()=>{
       getNameUser(idSeller);
       user();
+      image();
     },[]);
 
     return(
@@ -57,7 +66,7 @@ function CardWishList ({name, price, description, img, urlDetalles, id, nameSell
                 <div className="row">
                 <div className="col-3">
                         <div>
-                            <img className="img-wl" src={img}/>
+                            <img className="img-wl" src={`data:image/jpg;base64,${productImage}`}/>
                         </div>
                 </div>
                 <div className="col-8">

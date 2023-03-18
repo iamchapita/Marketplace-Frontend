@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
-function Card ({name, price, description, img, urlDetalles, id, idSeller}){
+function Card ({name, price, img, urlDetalles, id, idSeller}){
     const[favoriteClass, setFavoriteClass] = useState();
     const[userId, setUserId] =useState();
     const[productImage, setProductImage] = useState ();
@@ -97,7 +97,6 @@ function Card ({name, price, description, img, urlDetalles, id, idSeller}){
                     <div className="card-body" key={id} >
                         <h5 className="card-title">{name}</h5>
                         <h6 className="card-text" >{price}</h6>
-                        <p className="card-text" >{description}</p>
                         <a className="card-link"  href={urlDetalles}>Detalles</a>
                         <div className="check-container">
                         <label id={`labelCheck${id}`}  htmlFor={`check${id}`}><i className={`material-icons ${favoriteClass ? 'icon-favorite-active ': 'icon-favorite'}`} >favorite</i></label>

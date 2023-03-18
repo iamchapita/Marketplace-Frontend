@@ -14,7 +14,7 @@ function WishList (){
  
     const getWishlist = async () =>{
         apiClient.get('/wishlist').then((res)=>{
-            setWishlist(res.data[0]);
+            setWishlist(res.data);
             //console.log(wishlist);
             for (let i in wishlist){
                 getProduct(wishlist[i].productIdFK);
@@ -34,7 +34,7 @@ function WishList (){
 
     const getProducts =async() =>{
         apiClient.get('/products').then((res)=>{
-            setProduts(res.data[0]);
+            setProduts(res.data);
             //console.log(res.data[0]);
         })
     }
@@ -60,12 +60,10 @@ function WishList (){
                     <CardWishList
                     key={id}
                     id ={product.id}
-                    nameSeller={getUserName}
                     idSeller={product.userIdFK}
                     name = {product.name}
                     price =  {product.price}
-                    description = {product.description}
-                    img = {`data:image/jpg;base64,${product.photos[0].base64Image}`}
+                    img = {product.photos}
                     urlDetalles = {`/productDetail/${product.id}`}
                     />
                 ))
