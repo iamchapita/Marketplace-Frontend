@@ -20,14 +20,12 @@ const ProductDetail = () => {
             try {
                 const response = await apiClient.get(`/product/${id}`).then((productResponse) => {
                     setProduct(productResponse.data);
-
-                    apiClient.post('/sellerDetails', {
-                        id: productResponse.data['userIdFK']
-                    }).then((response) => {
-                        setSellerDetails(response.data);
-                    }).catch((error) => {
-
-                    })
+                    const sellerData = {
+                        'id': productResponse.data.userIdFK,
+                        'name': productResponse.data.userFirstName + ' ' + productResponse.data.userLastName,
+                        'direction': productResponse.data.departmentName + ', ' + productResponse.data.municipalityName
+                    };
+                    setSellerDetails(sellerData);
                 }).catch((error) => {
                     setResponseMessage(error.response.data.message);
                     setWasProductFound(false);
@@ -129,9 +127,9 @@ const ProductDetail = () => {
                             {
                                 <div>
                                     <h1>{product.name}</h1>
-                                    Vendedor: <a href="/">{sellerDetails.name}</a>
-                                    <h3>L. {product.price}</h3>
-                                    <h4>{sellerDetails.direction}</h4>
+                                    Vendedor: <a href={`/sellerDetail/${sellerDetails.id}`}>{sellerDetails.name}</a>
+                                    <h3>Precio: L {product.price}</h3>
+                                    <h4>Dirección: {sellerDetails.direction}</h4>
                                     <h4>Estado del Producto: {product.status}</h4>
                                 </div>
                             }
