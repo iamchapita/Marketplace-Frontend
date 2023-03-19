@@ -291,6 +291,7 @@ select:invalid {
     text-decoration: none;
     margin-top: 2%;
     margin-bottom: 2%
+    
 }
 
 
@@ -322,6 +323,8 @@ img {
     height: auto;
     width: 60%;
 }
-
+.col-5{
+    align-self: center;
+}
 
 

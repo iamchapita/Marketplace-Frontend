@@ -1,49 +1,38 @@
-import React, {useState, useEffect} from "react";
-import CardWishList from "../../components/CardWishList";
-import images from "../../utilities/json-images/images";
+import React, {useState, useEffect, lazy, Suspense} from "react";
+import { Spinner } from "react-bootstrap";
+
+//import CardWishList from "../../components/CardWishList";
+//import images from "../../utilities/json-images/images";
 import apiClient from "../../utils/apiClient";
+
+const CardWishList = lazy(()=>import("../../components/CardWishList"));
 
 
 function WishList (){
 
     var [products , setProduts]=useState(['']);
-    var [wishlist, setWishlist] = useState([]);
-    var [product, setProduct] = useState();
-    var listProduct =[];
-    //var [user, setUser]=useState('');
+    var [user, setUser]=useState('');
  
-    const getWishlist = async () =>{
-        apiClient.get('/wishlist').then((res)=>{
-            setWishlist(res.data);
-            //console.log(wishlist);
-            for (let i in wishlist){
-                getProduct(wishlist[i].productIdFK);
-                
-
-            }
-            console.log(listProduct);   
-        })
-    }
-
-    const getProduct = async (id) =>{
-        apiClient.get('/product/'+id).then((res)=>{
-            setProduct(res.data[0][0]);
-            //console.log(product)
-        })
-    }
-
-    const getProducts =async() =>{
-        apiClient.get('/products').then((res)=>{
+    const getWishlist = async (id) =>{
+        apiClient.post('/wishlist', {userIdFK : id}).then((res)=>{
             setProduts(res.data);
-            //console.log(res.data[0]);
+            
+
+               
         })
     }
-    const getUserName = async (id) =>{
-        
+
+    const getUser = () =>{
+        apiClient.get('/user').then((res)=>{  
+            setUser(res.data);
+        });
+       
     }
+
+
     useEffect(()=>{
-        //getWishlist();
-        getProducts();
+        getUser();
+        getWishlist(user.id);
         
 
         
@@ -56,7 +45,7 @@ function WishList (){
                
             {
                 products.map ((product, id)=>(
-                    
+                    <Suspense fallback={<Spinner/>} >
                     <CardWishList
                     key={id}
                     id ={product.id}
@@ -66,6 +55,7 @@ function WishList (){
                     img = {product.photos}
                     urlDetalles = {`/productDetail/${product.id}`}
                     />
+                    </Suspense>
                 ))
             }
             

@@ -1,21 +1,12 @@
 import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
-function Card ({name, price, img, urlDetalles, id, idSeller}){
+function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard}){
     const[favoriteClass, setFavoriteClass] = useState();
-    const[userId, setUserId] =useState();
     const[productImage, setProductImage] = useState ();
 
     
-    var [nameUser, setNameUser] =useState('');
-
-    const user = () =>{
-        apiClient.get('/user').then((res)=>{
-            
-            setUserId(res.data.id);
-        });
-       
-    }
+   
 
     const image = async () =>{
         apiClient.post('/getProductImages', {
@@ -23,25 +14,14 @@ function Card ({name, price, img, urlDetalles, id, idSeller}){
                 setProductImage(res.data[0].base64Image);
             }); 
     }
-
-    const getNameUser = async (idSeller) => {
-        await apiClient.post('/sellerDetails', {
-            id : idSeller
-        }).then((res)=>{
-            setNameUser(res.data.name);
-            
-            
-
-        });
-    }
     const favorite = async (id) =>{
-
+        document.getElementById('check'+id).value = heard;
         var checkValue = document.getElementById('check'+id).checked;
         setFavoriteClass(checkValue);
         if(!favoriteClass){
         await apiClient.post('/wishlistInsert', {
             productIdFK : id,
-            userIdFK : userId
+            userIdFK : idSeller
         }).then((res)=>{
             if(res.statusText == 'OK'){
                 alert('se agrego a la lista de favoritos');
@@ -54,7 +34,7 @@ function Card ({name, price, img, urlDetalles, id, idSeller}){
         
         await apiClient.post('/wishlistDelete',  {
             productIdFK : id,
-            userIdFK : userId,
+            userIdFK : idSeller,
 
         }).then((res)=>{
             if(res.statusText == 'OK'){
@@ -69,8 +49,6 @@ function Card ({name, price, img, urlDetalles, id, idSeller}){
     
  
     useEffect(()=>{
-      getNameUser(idSeller);
-      user();
       image();
        
     },[]);
@@ -87,12 +65,14 @@ function Card ({name, price, img, urlDetalles, id, idSeller}){
                 <div className="card">
                     <div className="account-container">
                         <CountBar 
-                        name={nameUser}
+                        name={nameSeller}
                         id={idSeller}
                         />
                     </div> 
+                    <div className="col-5">
                     <div className="carousel-item active">
                         <img className="img-fluid" src={`data:image/jpg;base64,${productImage}`}/>
+                    </div>
                     </div>
                     <div className="card-body" key={id} >
                         <h5 className="card-title">{name}</h5>
