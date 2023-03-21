@@ -18,7 +18,7 @@ function CardWishList ({name, price, img, urlDetalles, id, idSeller, userId}){
 
     const favorite = async (id) =>{
 
-        var checkValue = document.getElementById('checkwish'+id).checked;
+        var checkValue = !favoriteClassWL;
         setFavoriteClassWL(checkValue);
         if(!favoriteClassWL){
         await apiClient.post('/wishlistInsert', {
@@ -57,7 +57,7 @@ function CardWishList ({name, price, img, urlDetalles, id, idSeller, userId}){
                             <a className="card-link"  href={urlDetalles}>Detalles</a>
                             <div className="check-container">
                             <label id={`labelCheck${id}`}  htmlFor={`checkwish${id}`}><i className={`material-icons ${favoriteClassWL ? 'icon-favorite-active ': 'icon-favorite'}`} >favorite</i></label>
-                            <input className="check-invisible" onClick={()=>favorite(id)} type="checkbox" id={`checkwish${id}`}  />
+                            <input className="check-invisible" onClick={()=>favorite(id)} type="checkbox" id={`checkwish${id}`} checked />
                             </div>
                         </div>
                 </div>    

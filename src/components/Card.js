@@ -15,8 +15,7 @@ function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard, 
             }); 
     }
     const favorite = async (id) =>{
-        document.getElementById('check'+id).value = heard;
-        var checkValue = document.getElementById('check'+id).checked;
+        let checkValue = !favoriteClass;
         setFavoriteClass(checkValue);
         if(!favoriteClass){
         await apiClient.post('/wishlistInsert', {
