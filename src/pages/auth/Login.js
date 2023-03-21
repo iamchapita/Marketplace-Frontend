@@ -19,8 +19,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
 
     // Declarando expresiones regulares a usarse para la validacion de campos
     const emailRegex = /[a-z0-9_-]+(?:\.[a-z0-9-_]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    const passwordRegex = /^(?=.*\d)(?=.*[a-záéíóúüñ])(?=.*[A-ZÁÉÍÓÚÜÑ])(?=.*[^\w\sáéíóúüñÁÉÍÓÚÜÑ]).{8,35}$/;
-
+    const passwordRegex = /^(?=.*\d)(?=.*[a-záéíóúüñ])(?=.*[A-ZÁÉÍÓÚÜÑ])(?=.*[-+_*@#$!%.¿?\sáéíóúüñÁÉÍÓÚÜÑ]).{8,35}$/;
     //  Variable que almacena el mensaje de error retornado en el Alert
     let validationMessages = '';
 
