@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 import 'popper.js/dist/popper.min.js';
@@ -7,6 +7,17 @@ import apiClient from '../utils/apiClient';
 
 
 const Navbar = ({ isLoggedIn, setLoggedIn }) => {
+
+    useEffect(() => {
+        const getUser = async () => {
+            const response = await apiClient.get('/user').then((res) => {
+                setLoggedIn(true);
+            }).catch((error) => {
+                setLoggedIn(false);
+            })
+        }
+        getUser();
+    }, []);
 
     const onLogout = (e) => {
         e.preventDefault();
