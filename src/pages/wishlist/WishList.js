@@ -76,6 +76,7 @@ function WishList() {
                                 price={product.price}
                                 img={product.photos}
                                 urlDetalles={`/productDetail/${product.id}`}
+                                userId = {user.id}
                             />
                         </Suspense>
                     ))

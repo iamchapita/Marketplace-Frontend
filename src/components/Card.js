@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
-function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard}){
-    const[favoriteClass, setFavoriteClass] = useState();
+function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard, userId}){
+    const[favoriteClass, setFavoriteClass] = useState(heard);
     const[productImage, setProductImage] = useState ();
 
     
@@ -21,7 +21,7 @@ function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard})
         if(!favoriteClass){
         await apiClient.post('/wishlistInsert', {
             productIdFK : id,
-            userIdFK : idSeller
+            userIdFK : userId
         }).then((res)=>{
             if(res.statusText == 'OK'){
                 alert('se agrego a la lista de favoritos');
@@ -34,7 +34,7 @@ function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard})
         
         await apiClient.post('/wishlistDelete',  {
             productIdFK : id,
-            userIdFK : idSeller,
+            userIdFK : userId
 
         }).then((res)=>{
             if(res.statusText == 'OK'){

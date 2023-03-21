@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 import apiClient from "../utils/apiClient";
 
 
-function CardWishList ({name, price, img, urlDetalles, id, idSeller}){
+function CardWishList ({name, price, img, urlDetalles, id, idSeller, userId}){
   
-    const[favoriteClassWL, setFavoriteClassWL] = useState();
+    const[favoriteClassWL, setFavoriteClassWL] = useState(true);
     var [productImage, setProductImage] = useState();
 
 
@@ -23,13 +23,13 @@ function CardWishList ({name, price, img, urlDetalles, id, idSeller}){
         if(!favoriteClassWL){
         await apiClient.post('/wishlistInsert', {
             productIdFK : id,
-            userIdFK : idSeller
+            userIdFK : userId
         });
         alert('se agregó a lista de favoritos');
         }else{
         await apiClient.post('/wishlistDelete',  {
             productIdFK : id,
-            userIdFK : idSeller,
+            userIdFK : userId
         });
         alert('se eliminó de la lista de deseos')
     }
