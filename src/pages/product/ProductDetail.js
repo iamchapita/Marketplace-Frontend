@@ -133,7 +133,7 @@ const ProductDetail = () => {
                                     <h4>Estado del Producto: {product.status}</h4>
                                 </div>
                             }
-                            <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button>
+                            {/* <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button> */}
                         </div>
                     </div>
                 </div>
