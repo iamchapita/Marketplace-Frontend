@@ -54,13 +54,14 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
                                     <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/logout' : '/login'} onClick={isLoggedIn ? onLogout : onLogin}>{isLoggedIn ? 'Cerrar Sesión' : 'Inicio de Sesión'}</a>
                                 </li>
                                 <li className="nav-item">
-                                    {isLoggedIn ? <a className="sidebar-item" href="/">Perfil</a> : <a className="sidebar-item" href="/register">Registro</a>}
+                                    <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/logout' : '/register'} onClick={isLoggedIn ? onLogout : onLogin}>{isLoggedIn ? '' : 'Registro de Usuario'}</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="sidebar-item" href="/productInsert">Publicar Producto</a>
+                                    <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/productInsert' : '/productInsert'} onClick={isLoggedIn ? onLogin : onLogout}>{isLoggedIn ? 'Publicar Productos' : ''}</a>
+
                                 </li>
                                 <li className="nav-item">
-                                    <a className="sidebar-item" href="/WishList">Lista de Deseos</a>
+                                    <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/wishlist' : '/wishlist'} onClick={isLoggedIn ? onLogin : onLogout}>{isLoggedIn ? 'Lista de Deseos' : ''}</a>
                                 </li>
                             </ul>
                         </div>

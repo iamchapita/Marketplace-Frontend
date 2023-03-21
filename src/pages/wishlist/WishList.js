@@ -9,6 +9,9 @@ function WishList() {
 
     const [products, setProduts] = useState([]);
     const [user, setUser] = useState(' ');
+    const [wasUserFound, setWasUserFound] = useState(null);
+    const [wasWishListFound, setWasWishListFound] = useState(null);
+
 
     useEffect(() => {
         const getUser = async () => {
@@ -17,6 +20,7 @@ function WishList() {
             }).catch((error) => {
                 if (error.response.status === 401) {
                     console.log('Debe Iniciar Sesión.');
+                    setWasUserFound(false);
                 }
             })
         }
@@ -27,13 +31,34 @@ function WishList() {
         const getWishlist = async () => {
             const response = await apiClient.post('/wishlist', { userIdFK: user.id }).then((res) => {
                 setProduts(res.data);
+                console.log(res.data.length)
+                if(res.data.length === 0){
+                    setWasWishListFound(false);
+                }else(setWasWishListFound(true))
             }).catch((error) => {
-                console.log(error);
+                    console.log(error);
             })
         }
         getWishlist();
-
     }, [user]);
+
+
+    if (wasUserFound === false) {
+        return (
+            <div className="container-sm">
+                <h1 className="text-center">Debe de Iniciar Sesión</h1>
+            </div>
+        );
+    }
+
+    
+    if (wasWishListFound === false) {
+        return (
+            <div className="container-sm">
+                <h1 className="text-center">Aun no hay producto en la Lista de Deseos</h1>
+            </div>
+        );
+    }
 
     return (
 
