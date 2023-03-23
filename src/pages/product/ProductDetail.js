@@ -133,7 +133,26 @@ const ProductDetail = () => {
                                     <h4>Estado del Producto: {product.status}</h4>
                                 </div>
                             }
-                            {/* <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button> */}
+                            {
+                            /* <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button> */
+                            
+                            <button onClick={() => {
+                                if (navigator.share) {
+                                    navigator.share({
+                                        title: product.name,
+                                        text: '¡Mira este producto que encontré en la tienda en línea!',
+                                        url: window.location.href
+                                    }).then(() => {
+                                        console.log('Gracias por compartir!');
+                                    }).catch((error) => {
+                                        console.error('Hubo un error al compartir', error);
+                                    });
+                                } else {
+                                    console.log('La función share no está disponible en este dispositivo');
+                                }
+                            }} className="btn btn-info">Compartir</button>
+                            
+                            }
                         </div>
                     </div>
                 </div>
