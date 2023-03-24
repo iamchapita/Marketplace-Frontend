@@ -14,39 +14,75 @@ function Home (){
  
     var [products , setProduts]=useState(['']);
     var [user, setUser]=useState('');
+    var [images, setImages] = useState([]);
+
+
+    const getImages = async (product) => {
+        let arrayImages = [];
+        for(let i = 0 ; i<products.length ; i++){
+            await apiClient.post('/getProductImages', {
+                path : products.photos[0] }).then((res)=>{
+                    arrayImages.push(res.data.base64Image);
+                    setImages(arrayImages);
+                }).catch((error) => {
+                    if (error.response.status === 401) {
+                        console.log('Debe Iniciar Sesión.');
+                        
+                    }
+                });
+        }   
+            
+    }
     
 
     
 
     const getProducts =async() =>{
-        apiClient.get('/products').then((res)=>{
+        await apiClient.get('/products').then((res)=>{
             setProduts(res.data); 
             
+        }).catch((error) => {
+            if (error.response.status === 401) {
+                console.log('Debe Iniciar Sesión.');
+                
+            }
         });
     }
-    useEffect(()=>{
-        const getUser = () =>{
-            apiClient.get('/user').then((res)=>{  
-                setUser(res.data);
+    const getUser = async() =>{
+        await apiClient.get('/user').then((res)=>{  
+            setUser(res.data);
+        }).catch((error) => {
+            if (error.response.status === 401) {
+                console.log('Debe Iniciar Sesión.');
+            }
+        });
+    }
+
+    const getProduct2 = async (id) =>{
+        await apiClient.get('/productsWishList/'+user.id).then((res)=>{
+            setProduts(res.data);
+            }).catch((error) => {
+                if (error.response.status === 401) {
+                    console.log('Debe Iniciar Sesión.');
+                    
+                }
             });
-           
         }
+
+    useEffect(()=>{
         getUser();
+       //getProduct2(user.id);
 
-    }, [])
-   
+    }, []);
+
     useEffect(()=>{
-        const getProduct2 = async (id) =>{
-            apiClient.get('/productsWishList/'+user.id).then((res)=>{
-                setProduts(res.data);
-            });
-        }
+        
         getProduct2(user.id);
+        getImages(products);
+        console.log(images);
         
-    
-
-        
-    },[products]);
+    }, [user]);
+   
 
     return(
 

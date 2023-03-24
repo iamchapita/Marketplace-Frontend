@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 import CountBar from "./CountBar";
 import apiClient from "../utils/apiClient";
+import { Spinner } from "react-bootstrap";
 function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard, userId}){
+    const [load, setLoad] = useState(false);
     const[favoriteClass, setFavoriteClass] = useState(heard);
     const[productImage, setProductImage] = useState ();
 
@@ -9,11 +11,12 @@ function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard, 
    
 
     const image = async () =>{
-        apiClient.post('/getProductImages', {
+       await apiClient.post('/getProductImages', {
             path: img }).then((res)=>{
                 setProductImage(res.data[0].base64Image);
             }); 
     }
+    
     const favorite = async (id) =>{
         let checkValue = !favoriteClass;
         setFavoriteClass(checkValue);
@@ -45,12 +48,16 @@ function Card ({name, price, img, urlDetalles, id, idSeller, nameSeller, heard, 
         
     }
     }
-    
+   
  
     useEffect(()=>{
-      image();
-       
+        image();
+        setLoad(true);
     },[]);
+
+    if(load== false){
+        return(<Spinner animation="border"/>)
+    }
 
     
     return(
