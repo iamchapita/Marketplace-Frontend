@@ -26,6 +26,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
             const logout = await apiClient.get('/logout').then(response => {
                 setLoggedIn(false);
                 localStorage.removeItem('access_token');
+                localStorage.removeItem('id');
             }).catch(error => {
                 console.log(error);
             })
