@@ -200,6 +200,12 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                     // Guardando el Token de sesion
                     const token = response.data.access_token;
                     localStorage.setItem('access_token', token);
+                    
+                    apiClient.get('/user').then((response) => {
+                        localStorage.setItem('id', response.data.id);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
 
                     apiClient.post('/createDirection', {
                         departmentIdFK: addressDepartment,
