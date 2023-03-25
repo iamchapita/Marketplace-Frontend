@@ -10,11 +10,12 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const response = await apiClient.get('/user').then((res) => {
-                setLoggedIn(true);
-            }).catch((error) => {
-                setLoggedIn(false);
-            })
+            // const response = await apiClient.get('/user').then((res) => {
+            //     setLoggedIn(true);
+            // }).catch((error) => {
+            //     setLoggedIn(false);
+            // })
+            localStorage.getItem('access_token') ? setLoggedIn(true) : setLoggedIn(false);
         }
         getUser();
     }, []);
