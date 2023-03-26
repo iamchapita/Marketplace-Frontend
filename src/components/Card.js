@@ -94,7 +94,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                             <a className="card-link" href={urlDetalles}>Detalles</a>
                             <div className="check-container">
                                 <label id={`labelCheck${id}`} htmlFor={`check${id}`}>
-                                    <i className={`material-icons ${heart ? 'icon-favorite-active ' : 'icon-favorite'}`} >favorite
+                                    <i className={`material-icons ${favoriteClass == true ? 'icon-favorite-active ' : 'icon-favorite'}`} >favorite
                                     </i>
                                 </label>
                                 <input className="check-invisible" onClick={() => favorite(id)} type="checkbox" id={`check${id}`} />
