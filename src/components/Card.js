@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
+import { Spinner } from "react-bootstrap";
 
-function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller, heart = null }) {
+function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller, heart, isWhisListStatusInclude = false }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
     const [favoriteClass, setFavoriteClass] = useState(heart);
+    const [isReadyToRender, setIsReadyToRender] = useState(false);
 
     useEffect(() => {
 
@@ -31,6 +33,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                     return extension;
                 })
                 setProductExtension(extensions);
+                setIsReadyToRender(true);
             } catch (error) {
                 // setResponseMessage('Error');
                 console.log(error.response.data);
@@ -39,8 +42,8 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
     }, [productImage]);
 
     const favorite = async (id) => {
-        let checkValue = !favoriteClass;
-        setFavoriteClass(checkValue);
+        setFavoriteClass(!favoriteClass);
+
         if (!favoriteClass) {
             await apiClient.post('/wishlistInsert', {
                 productIdFK: id,
@@ -58,7 +61,6 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
             await apiClient.post('/wishlistDelete', {
                 productIdFK: id,
                 userIdFK: userId
-
             }).then((res) => {
                 if (res.statusText == 'OK') {
                     console.log('Aqui debe haber un alert de bootstrap que se desvanezca');
@@ -70,7 +72,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
         }
     }
 
-    if (heart !== null) {
+    if (isWhisListStatusInclude) {
         return (
             <div className="container-home">
                 <div className="container card-publication">
@@ -83,9 +85,13 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                         </div>
                         <div className="col-5">
                             {
-                                productImage.map((image, index) => (
+                                !isReadyToRender ? (<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    <div className="d-flex align-items-center justify-content-center">
+                                        <Spinner animation="border" variant="light" />
+                                    </div>
+                                </div>) : (productImage.map((image, index) => (
                                     <img key={index} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid" />
-                                ))
+                                )))
                             }
                         </div>
                         <div className="card-body" key={id} >
@@ -94,7 +100,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                             <a className="card-link" href={urlDetalles}>Detalles</a>
                             <div className="check-container">
                                 <label id={`labelCheck${id}`} htmlFor={`check${id}`}>
-                                    <i className={`material-icons ${favoriteClass == true ? 'icon-favorite-active ' : 'icon-favorite'}`} >favorite
+                                    <i className={`material-icons ${favoriteClass ? 'icon-favorite-active ' : 'icon-favorite'}`} >favorite
                                     </i>
                                 </label>
                                 <input className="check-invisible" onClick={() => favorite(id)} type="checkbox" id={`check${id}`} />
