@@ -75,7 +75,9 @@ const Home = ({ isLoggedIn }) => {
 
     if (isWhisListStatusInclude) {
         return (
+            
             <div className="container home">
+                <div className="grid-3">
                 {
                     products.map((product, id) => (
                         <Card
@@ -95,14 +97,18 @@ const Home = ({ isLoggedIn }) => {
                     ))
                 }
             </div>
+            </div>
         );
     }
 
     if (isWhisListStatusInclude === false) {
         return (
+           
             <div className="container home">
+                <div className="grid-3">
                 {
                     products.map((product, id) => (
+                        <div>
                         <Card
                             key={id}
                             id={product.id}
@@ -114,10 +120,11 @@ const Home = ({ isLoggedIn }) => {
                             nameSeller={product.userFirstName + ' ' + product.userLastName}
                         // description={product.description}
                         />
+                        </div>
                     ))
                 }
             </div>
-        );
+            </div>        );
     }
 }
 export default Home;
