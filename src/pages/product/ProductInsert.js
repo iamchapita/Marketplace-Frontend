@@ -195,6 +195,7 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
                 <h1>Registro de Producto</h1>
             </div>
             <div className='row'>
+                <div className="col-12">
                 <form encType='multipart/form-data'>
                     <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                     <InputText type={'text'} fieldLabel={'Nombre'} fieldName={'name'} placeholder={'Ingrese un nombre descriptivo del Producto'} inputValue={name} onChangeHandler={nameChangeHandler} isValid={isNameValid} />
@@ -211,6 +212,7 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
 
                     <Button type={'submit'} fieldLabel={'Registrar Producto'} onClick={submitHandler} />
                 </form>
+                </div>
             </div>
         </div>
     );

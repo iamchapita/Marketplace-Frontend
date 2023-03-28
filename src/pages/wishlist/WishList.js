@@ -64,7 +64,7 @@ function WishList() {
 
         <div>
 
-            <div className="container home">
+            <div className="container wish">
 
                 {
                     products.map((product, id) => (

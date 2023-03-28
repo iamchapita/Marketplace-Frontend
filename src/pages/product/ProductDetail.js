@@ -109,7 +109,7 @@ const ProductDetail = () => {
                                 {
                                     productImages.map((image, index) => (
                                         <div key={index} className={`carousel-item ${index == 0 ? 'active' : ''}`}>
-                                            <img src={`data:image/${productExtensions[index]};base64,${image.base64Image}`} className="d-block w-100" alt="..." style={{ objectFit: 'cover' }} />
+                                            <img src={`data:image/${productExtensions[index]};base64,${image.base64Image}`} className="img-fluids" alt="..." style={{ objectFit: 'cover' }} />
                                         </div>
                                     ))
                                 }
@@ -125,10 +125,10 @@ const ProductDetail = () => {
                         </div>
                         <div className="col-sm-10 col-md-10 col-lg-12 productDetailText">
                             {
-                                <div>
+                                <div className="product-description">
                                     <h1>{product.name}</h1>
-                                    Vendedor: <a href={`/sellerDetail/${sellerDetails.id}`}>{sellerDetails.name}</a>
-                                    <h3>Precio: L {product.price}</h3>
+                                    <h4>Vendedor: <a href={`/sellerDetail/${sellerDetails.id}`}>{sellerDetails.name}</a></h4> 
+                                    <h4>Precio: L. {product.price}</h4>
                                     <h4>Dirección: {sellerDetails.direction}</h4>
                                     <h4>Estado del Producto: {product.status}</h4>
                                 </div>

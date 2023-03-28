@@ -83,7 +83,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                                 <a className="link-perfil" >{nameSeller}</a>
                             </div>
                         </div>
-                        <div className="col-5">
+                        <div className="col-4">
                             {
                                 !isReadyToRender ? (<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     <div className="d-flex align-items-center justify-content-center">
@@ -121,7 +121,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                                 <a className="link-perfil" >{nameSeller}</a>
                             </div>
                         </div>
-                        <div className="col-5">
+                        <div className="col-4">
                             {
                                 productImage.map((image, index) => (
                                     <img key={index} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid" />

@@ -9,12 +9,14 @@
     align-items: center;
     background-size: cover;
     min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
     background-color: #393e46;
     background-size: cover;
     min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -32,16 +34,19 @@ body {
     margin-top: 1%;
     margin-bottom: 1%;
     padding: 1%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container-fluid {
     color: #0092ca;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .row {
     align-items: center;
     align-content: center;
     border-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .col-sm {
@@ -51,6 +56,7 @@ body {
     border-color: #22252a;
     align-content: center;
     border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .col-3{
@@ -60,26 +66,29 @@ body {
     border-color: #393e46;
     align-content: center;
     border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .tittle {
     text-align: center;
     margin-bottom: 2%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .productDetailText{
     margin-top: 5%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .carousel{
     margin-top: 5%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
 
 /********************CSS INICIO*********************/
 /***************************************************/
-
 .check-invisible{
     visibility: hidden;
 }
@@ -94,6 +103,7 @@ body {
     color: white;
     margin-top: 1%;
     margin-bottom: 1%;
+    font-family: Arial, Helvetica, sans-serif;
 	
 }
 
@@ -104,6 +114,7 @@ body {
 	border: solid;
 	border-color: #22252a;
 	border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .card-body{
@@ -114,6 +125,7 @@ body {
 	margin-top: 1px;
 	padding: 5px;
 	color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .account-container{
@@ -126,10 +138,12 @@ body {
     width: 100%;  
 	align-items: center;
 	align-content: center;  
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .count-bar{
     display: flex;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .link-perfil{
@@ -138,7 +152,8 @@ body {
 	text-decoration: none;
 	font-size: larger;
 	align-items: center;
-	align-content: center; 
+	align-content: center;
+    font-family: Arial, Helvetica, sans-serif; 
 }
 
 .icon-perfil{
@@ -158,8 +173,15 @@ body {
     cursor: pointer;
 }
 
+.col-4{
+    height: auto;
+    align-self: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .home{
     display: block;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sidebar-products{
@@ -174,12 +196,16 @@ body {
 	border-color: #22252a;
     align-items: center;
     position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+
 
 /*******************LISTA DE DESEOS*****************/
 /***************************************************/
 .wish{
- display: block;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .tittle-wl{
@@ -187,6 +213,7 @@ body {
     margin-bottom: 1%;
     margin-top: 1%;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .col-3{
@@ -195,11 +222,13 @@ body {
     border: solid;
     border: #22252a;
     margin-left: 5%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .col-8{
     align-items: center;  
     height: auto ; 
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container-WL{
@@ -213,6 +242,7 @@ body {
     color: white;
     margin-top: 1%;
     margin-bottom: 1%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -223,6 +253,7 @@ body {
 	border: solid;
 	border-color: #22252a;
 	border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .card-body-wl{
@@ -234,7 +265,29 @@ body {
 	padding: 5px;
 	color: white;
     height: auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+/****************DETALLES DE PRODUCTO***************/
+/***************************************************/
+.product-description{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-decoration: none;
+}
+
+
+.carousel-item{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.carousel-inner{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
 
 /****************BORDES DE LOS CAMPOS***************/
 /***************************************************/
@@ -262,6 +315,7 @@ select:invalid {
 .navbar {
     background-color: #22252a;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .navbar-item {
@@ -269,6 +323,7 @@ select:invalid {
     font-weight: 500;
     font-size: x-large;
     text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .toggler {
@@ -279,10 +334,12 @@ select:invalid {
     border-color: white;
     background-color: #22252a;
     border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .toggler-item {
     font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sidebar-item {
@@ -291,8 +348,41 @@ select:invalid {
     font-size: large;
     text-decoration: none;
     margin-top: 2%;
-    margin-bottom: 2%
-    
+    margin-bottom: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+/**********************---H---**********************/
+/***************************************************/
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h3{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h4{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h5{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h6{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+    line-height: 30px;
+    text-decoration: none;
 }
 
 
@@ -302,6 +392,8 @@ select:invalid {
 .carousel-inner {
     display: flex;
     align-items: center;
+    align-self: center;
+    align-content: center;
     height: 100%;
 }
 
@@ -320,12 +412,19 @@ img {
     align-items: center;
 }
 
+.img-fluids{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    align-items: center;
+    max-height: 70vh;
+    max-width: 50%;
+}
+
 .img-wl{
     height: auto;
     width: 60%;
 }
-.col-5{
-    align-self: center;
-}
+
 
 
