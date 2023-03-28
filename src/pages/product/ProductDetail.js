@@ -138,7 +138,7 @@ const ProductDetail = () => {
                             
 
                             //BOTON PARA COMPARTIR 
-                            /*
+                            
                             <button onClick={() => {
                                 if (navigator.share) {
                                     navigator.share({
@@ -154,8 +154,6 @@ const ProductDetail = () => {
                                     console.log('La función share no está disponible en este dispositivo');
                                 }
                             }} className="btn btn-info">Compartir</button>
-                            */
-
                             }
                         </div>
                     </div>
