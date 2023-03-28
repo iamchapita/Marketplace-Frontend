@@ -140,6 +140,15 @@ body {
     grid-row-gap: 0.5em;
 }
 
+.grid-6{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 0.5em;
+}
+
 .account-container{
     background-color: #393e46;
 	border: solid;
@@ -443,6 +452,12 @@ img {
     width: 150px;
     height: 150px;
     display: flex;
+}
+.filtro-container{
+    margin: 10px;
+    margin-left: 250px;
+    margin-right: 250px;
+    border-radius: 5%;
 }
 
 

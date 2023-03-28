@@ -2,6 +2,7 @@ import React, { useState, useEffect, } from "react";
 import apiClient from "../../utils/apiClient";
 import Card from "../../components/Card";
 import { Spinner } from "react-bootstrap";
+import { async } from "q";
 
 const Home = ({ isLoggedIn }) => {
 
@@ -9,6 +10,37 @@ const Home = ({ isLoggedIn }) => {
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [userId, setUserId] = useState(null);
     const [isWhisListStatusInclude, setIsWhisListStatusInclude] = useState(null);
+    const [categories , setCategories] = useState(null)
+    const [departaments, setDepartaments] = useState(null);
+
+    const filter = () =>{
+        
+    }
+
+
+    useEffect(()=>{
+        const getCategories = async () =>{
+            await apiClient.get('/categories').then((res)=>{
+                setCategories(res.data)
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+        getCategories();
+
+    },[])
+
+    useEffect(()=>{
+        const getDepartaments = async () =>{
+            await apiClient.get('/departments').then((res)=>{
+                setDepartaments(res.data)
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+        getDepartaments();
+
+    },[])
 
     useEffect(() => {
         const getUser = async () => {
@@ -75,28 +107,80 @@ const Home = ({ isLoggedIn }) => {
 
     if (isWhisListStatusInclude) {
         return (
-            
-            <div className="container home">
-                <div className="grid-3">
-                {
-                    products.map((product, id) => (
-                        <Card
-                            key={id}
-                            id={product.id}
-                            userId={userId}
-                            name={product.name}
-                            price={product.price}
-                            urlDetalles={`/productDetail/${product.id}`}
-                            path={product.photos}
-                            idSeller={product.userIdFK}
-                            nameSeller={product.userFirstName + ' ' + product.userLastName}
-                            isWhisListStatusInclude={true}
-                            heart={product.isProductInWishList}
-                        // description={product.description}
-                        />
-                    ))
-                }
-            </div>
+            <div>
+                <div className="filtro-container">
+                    <nav className="navbar">
+                        <div className="container-fluid" >
+                            <div className="grid-6">
+                            <div>
+                            <select className="form-select" >
+                                <option defaultValue={null} >Categoría</option>
+                                {
+                                    categories.map((categorie, id)=>(
+                                        <option  key={id} value={categorie.id} >{categorie.name}</option>
+
+
+                                    ))
+                                }
+                            </select>
+                            </div>
+                            <div>
+                            <select className="form-select" >
+                                <option defaultValue={null} >Departamento</option>
+                                {
+                                    departaments.map((departament, id)=>(
+                                        <option key={id} value={departament.id}  >{departament.name}</option>
+                                    ))
+                                }
+                               
+                            </select>
+                            </div>
+                            <div>
+                            <select className="form-select" >
+                                <option defaultValue={null} >Estrellas de vendedor</option>
+                            </select>
+                            </div>
+                            <div>
+                            <input className="form-control" type="number" placeholder="Precio mínimo" ></input>
+                            </div>
+                            <div>
+                            <input className="form-control" type="number" placeholder="Precio máximo" ></input>
+                            </div>
+                            <div> 
+                                <button className="btn btn-primary" onClick={filter()} >
+                                <i className="material-icons" >search</i>
+                                </button>
+                            </div>
+                            </div>
+                            
+
+                        </div>
+                        
+                    </nav>
+                </div>
+                
+                    <div className="container home">
+                        <div className="grid-3">
+                        {
+                            products.map((product, id) => (
+                                <Card
+                                    key={id}
+                                    id={product.id}
+                                    userId={userId}
+                                    name={product.name}
+                                    price={product.price}
+                                    urlDetalles={`/productDetail/${product.id}`}
+                                    path={product.photos}
+                                    idSeller={product.userIdFK}
+                                    nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                    isWhisListStatusInclude={true}
+                                    heart={product.isProductInWishList}
+                                // description={product.description}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         );
     }

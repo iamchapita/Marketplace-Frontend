@@ -12,7 +12,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
     useEffect(() => {
 
         const getProductImage = async () => {
-            const response = await apiClient.post('/getProductImages', {
+            await apiClient.post('/getProductImages', {
                 path: path,
                 imagesToObtain: 1
             }).then((respose) => {
@@ -74,7 +74,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
 
     if (isWhisListStatusInclude) {
         return (
-            <div className="container-home">
+            <div className="container-home" key={id}>
                 <div className="container card-publication">
                     <div className="card">
                         <div className="account-container">
@@ -114,7 +114,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
         );
     } else {
         return (
-            <div className="container-home">
+            <div className="container-home" key={id}>
                 <div className="container card-publication">
                     <div className="card">
                         <div className="account-container">
