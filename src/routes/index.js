@@ -44,6 +44,7 @@ const RoutesList = () => {
                                 <Login
                                     isLoggedIn={isLoggedIn}
                                     setLoggedIn={setLoggedIn}
+                                    isAdmin={isAdmin}
                                     setIsAdmin={setIsAdmin}
                                     setIsClient={setIsClient}
                                     setIsSeller={setIsSeller}
