@@ -11,18 +11,31 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
     const [isReadyToRender, setIsReadyToRender] = useState(false);
 
     useEffect(() => {
-        const getUser = async () => {
 
-            localStorage.getItem('access_token') ? setLoggedIn(true) : setLoggedIn(false);
-            localStorage.getItem('isAdmin') ? setIsAdmin(true) : setIsAdmin(false);
-            localStorage.getItem('isClient') ? setIsClient(true) : setIsClient(false);
-            localStorage.getItem('isSeller') ? setIsSeller(true) : setIsSeller(false);
-            localStorage.getItem('isEnabled') ? setIsEnabled(true) : setIsEnabled(false);
-            setIsReadyToRender(true);
+        const action = async () => {
+
+            const response = await apiClient.get('/user').then((response) => {
+
+                localStorage.setItem('id', response.data.id);
+                localStorage.setItem('isAdmin', response.data.isAdmin);
+                localStorage.setItem('isClient', response.data.isClient);
+                localStorage.setItem('isSeller', response.data.isSeller);
+                localStorage.setItem('isEnabled', response.data.isEnabled);
+
+                setIsAdmin(Boolean(response.data.isAdmin));
+                setIsClient(Boolean(response.data.isClient));
+                setIsSeller(Boolean(response.data.isSeller));
+                setIsEnabled(Boolean(response.data.isEnabled));
+
+                setLoggedIn(true);
+                setIsReadyToRender(true);
+                console.log('Ejecuta');
+
+            }).catch((error) => {
+
+            })
         }
-
-        getUser();
-
+        action();
     }, []);
 
     const onLogout = (e) => {
