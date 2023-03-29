@@ -4,6 +4,7 @@ import 'jquery/dist/jquery.min.js';
 import 'popper.js/dist/popper.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import apiClient from '../utils/apiClient';
+import { Navigate } from 'react-router-dom';
 
 
 const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsClient, isSeller, setIsSeller, isBanned, setIsBanned, isEnabled, setIsEnabled }) => {
@@ -52,10 +53,13 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                 setIsEnabled(false);
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('id');
-                localStorage.removeItem('isAdmin')
-                localStorage.removeItem('isClient')
-                localStorage.removeItem('isSeller')
-                localStorage.removeItem('isEnabled')
+                localStorage.removeItem('isAdmin');
+                localStorage.removeItem('isClient');
+                localStorage.removeItem('isSeller');
+                localStorage.removeItem('isEnabled');
+
+                return <Navigate to="/login" replace />
+
             }).catch(error => {
                 console.log(error);
             })
