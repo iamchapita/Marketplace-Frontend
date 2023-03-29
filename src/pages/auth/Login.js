@@ -63,23 +63,24 @@ const Login = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, setIsClient, setI
                             // Guardando el Token de sesion
                             const token = response.data.access_token;
                             localStorage.setItem('access_token', token);
+                            localStorage.setItem('id', response.data.id);
+                            localStorage.setItem('isAdmin', response.data.isAdmin);
+                            localStorage.setItem('isClient', response.data.isClient);
+                            localStorage.setItem('isSeller', response.data.isSeller);
+                            localStorage.setItem('isEnabled', response.data.isEnabled);
+
+                            setIsAdmin(Boolean(response.data.isAdmin));
+                            setIsClient(Boolean(response.data.isClient));
+                            setIsSeller(Boolean(response.data.isSeller));
+                            setIsEnabled(Boolean(response.data.isEnabled));
+
+                            setLoggedIn(true);
                         }
                     }).catch((error) => {
                         setShowAlert(true);
                         setAlertMessage(error.response.data.message);
                     })
 
-                    const secondResponse = await apiClient.get('/user').then((response) => {
-                        localStorage.setItem('id', response.data.id);
-                        setIsAdmin(Boolean(response.data.isAdmin));
-                        setIsClient(Boolean(response.data.isClient));
-                        setIsSeller(Boolean(response.data.isSeller));
-                        setIsEnabled(Boolean(response.data.isEnabled));
-                        setLoggedIn(true);
-
-                    }).catch((error) => {
-                        console.log(error.response.data);
-                    })
                 } catch (error) {
 
                 }
@@ -90,7 +91,7 @@ const Login = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, setIsClient, setI
     }
 
     useEffect(() => {
-        if (isLoggedIn === true){
+        if (isLoggedIn === true) {
             isAdmin ? navigate('/admin') : navigate('/')
         }
     }, [isLoggedIn, isAdmin]);
