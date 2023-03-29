@@ -33,6 +33,14 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+.container-style {
+	background-color: #22252a;
+	border: solid;
+	border-color: #22252a;
+	border-radius: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 .container-fluid {
 	color: #0092ca;
 	font-family: Arial, Helvetica, sans-serif;
