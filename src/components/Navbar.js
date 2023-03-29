@@ -29,10 +29,12 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
 
                 setLoggedIn(true);
                 setIsReadyToRender(true);
-                console.log('Ejecuta');
 
             }).catch((error) => {
-
+                if (error.response.status === 401) {
+                    setLoggedIn(false);
+                    setIsReadyToRender(true);
+                }
             })
         }
         action();
