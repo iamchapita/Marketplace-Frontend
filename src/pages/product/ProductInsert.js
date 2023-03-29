@@ -194,7 +194,7 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
             <div className='tittle'>
                 <h1>Registro de Producto</h1>
             </div>
-            <div className='row'>
+            <div className='row center'>
                 <div className="col-12">
                 <form encType='multipart/form-data'>
                     <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />

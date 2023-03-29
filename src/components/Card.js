@@ -76,7 +76,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
         return (
             <div className="container-home" key={id}>
                 <div className="container card-publication">
-                    <div className="card">
+                    <div className="card home-card">
                         <div className="account-container">
                             <div className="count-bar">
                                 <i className="material-icons icon-perfil" >person</i>
@@ -96,7 +96,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                                 )))
                             }
                         </div>
-                        <div className="card-body" key={id} >
+                        <div className="card-body home-card-body" key={id} >
                             <h5 className="card-title">{name}</h5>
                             <h6 className="card-text" >{price}</h6>
                             <a className="card-link" href={urlDetalles}>Detalles</a>
@@ -116,7 +116,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
         return (
             <div className="container-home" key={id}>
                 <div className="container card-publication">
-                    <div className="card">
+                    <div className="card home-card">
                         <div className="account-container">
                             <div className="count-bar">
                                 <i className="material-icons icon-perfil" >person</i>
@@ -130,7 +130,7 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
                                 ))
                             }
                         </div>
-                        <div className="card-body" key={id} >
+                        <div className="card-body home-card-body" key={id} >
                             <h5 className="card-title">{name}</h5>
                             <h6 className="card-text" >{price}</h6>
                             <a className="card-link" href={urlDetalles}>Detalles</a>

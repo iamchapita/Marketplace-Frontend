@@ -95,7 +95,7 @@ const ProductDetail = () => {
     if (waitingResponse === false) {
         return (
             <div className="container-sm">
-                <div className="row align-items-start">
+                <div className="row center align-items-start">
                     <div className="col-sm-12 col-md-12 col-lg-12">
                         <div id="carouselExampleIndicators" className="carousel slide" style={{ height: '60vh' }}>
                             <div className="carousel-indicators">

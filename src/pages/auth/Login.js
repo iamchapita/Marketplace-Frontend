@@ -103,7 +103,7 @@ const Login = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, setIsClient, setI
                 <div className='tittle'>
                     <h1>Inicio de Sesión</h1>
                 </div>
-                <div className='row'>
+                <div className='row center'>
                     <div className='col-sm'>
                         <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>

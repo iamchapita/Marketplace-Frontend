@@ -247,7 +247,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                 <div className='tittle'>
                     <h1>Registro de Usuario</h1>
                 </div>
-                <div className='row'>
+                <div className='row center'>
                     <div className='col-sm'>
                         <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>

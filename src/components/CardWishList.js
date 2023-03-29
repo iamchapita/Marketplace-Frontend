@@ -44,7 +44,7 @@ function CardWishList ({name, price, img, urlDetalles, id, idSeller, userId}){
         
         <div className="container-WL">
             <div className="cardWL">
-                <div className="row">
+                <div className="row center">
                 <div className="col-3">
                         <div>
                             <img className="img-wl" src={`data:image/jpg;base64,${productImage}`}/>

@@ -1,125 +1,119 @@
-
 /***********************CSS*************************/
-
 
 /***************CSS PANTALLA DE FONDO***************/
 /***************************************************/
 .app-header {
-    background-color: #393e46;
-    align-items: center;
-    background-size: cover;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+	background-color: #393e46;
+	align-items: center;
+	background-size: cover;
+	min-height: 100vh;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: #393e46;
-    background-size: cover;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+	background-color: #393e46;
+	background-size: cover;
+	min-height: 100vh;
+	font-family: Arial, Helvetica, sans-serif;
 }
-
-
 
 /************CSS CONTENEDORES PRICIPALES************/
 /***************************************************/
 .container-sm {
-    background-color: #22252a;
-    border-radius: 10px;
-    border: solid;
-    border-width: 2px;
-    border-color: #22252a;
-    align-items: center;
-    color: white;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    padding: 1%;
-    font-family: Arial, Helvetica, sans-serif;
+	background-color: #22252a;
+	border-radius: 10px;
+	border: solid;
+	border-width: 2px;
+	border-color: #22252a;
+	align-items: center;
+	color: white;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	padding: 1%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .container-fluid {
-    color: #0092ca;
-    font-family: Arial, Helvetica, sans-serif;
+	color: #0092ca;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.row {
-    align-items: center;
-    align-content: center;
-    border-radius: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+
+.center {
+	align-items: center;
+	align-content: center;
+	border-radius: 20px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .col-sm {
 	background-color: #22252a;
-    align-items: center;
-    border: solid;
-    border-color: #22252a;
-    align-content: center;
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+	align-items: center;
+	border: solid;
+	border-color: #22252a;
+	align-content: center;
+	border-radius: 10px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.col-3{
+.col-3 {
 	background-color: #393e46;
 	align-items: center;
-    border: solid;
-    border-color: #393e46;
-    align-content: center;
-    border-radius: 5px;
-    font-family: Arial, Helvetica, sans-serif;
+	border: solid;
+	border-color: #393e46;
+	align-content: center;
+	border-radius: 5px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .tittle {
-    text-align: center;
-    margin-bottom: 2%;
-    font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	margin-bottom: 2%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.productDetailText{
-    margin-top: 5%;
-    font-family: Arial, Helvetica, sans-serif;
+.productDetailText {
+	margin-top: 5%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.carousel{
-    margin-top: 5%;
-    font-family: Arial, Helvetica, sans-serif;
+.carousel {
+	margin-top: 5%;
+	font-family: Arial, Helvetica, sans-serif;
 }
-
-
 
 /********************CSS INICIO*********************/
 /***************************************************/
-.check-invisible{
-    visibility: hidden;
+.check-invisible {
+	visibility: hidden;
 }
 
-.container-home{
+.container-home {
 	background-color: #393e46;
-    border-radius: 10px;
-    border: solid;
-    border-width: 2px;
-    border-color: #393e46;
-    align-items: center;
-    color: white;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    font-family: Arial, Helvetica, sans-serif;
-	
+	border-radius: 10px;
+	border: solid;
+	border-width: 2px;
+	border-color: #393e46;
+	align-items: center;
+	color: white;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.card{
+.home-card {
 	background-color: #22252a;
 	margin-top: 1px;
 	padding: 5px;
 	border: solid;
 	border-color: #22252a;
 	border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    height: 400px;
-    width: 300px;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 400px;
+	width: 300px;
 }
 
-.card-body{
+.home-card-body {
 	background-color: #393e46;
 	border: solid;
 	border-color: #22252a;
@@ -127,158 +121,154 @@ body {
 	margin-top: 1px;
 	padding: 5px;
 	color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.grid-3{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 0.5em;
+.grid-3 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 10px;
+	grid-row-gap: 0.5em;
 }
 
-.grid-6{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 0.5em;
+.grid-6 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-column-gap: 10px;
+	grid-row-gap: 0.5em;
 }
 
-.account-container{
-    background-color: #393e46;
+.account-container {
+	background-color: #393e46;
 	border: solid;
 	border-color: #22252a;
-    border-radius: 10px;
+	border-radius: 10px;
 	padding: 5px;
-    height: 60px;
-    width: 100%;  
-    height: 80px;
+	height: 60px;
+	width: 100%;
+	height: 80px;
 	align-items: center;
-	align-content: center;  
-    font-family: Arial, Helvetica, sans-serif;
+	align-content: center;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.count-bar{
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
+.count-bar {
+	display: flex;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.link-perfil{
-    color: white;
+.link-perfil {
+	color: white;
 	font-weight: 500;
 	text-decoration: none;
 	font-size: larger;
 	align-items: center;
 	align-content: center;
-    font-family: Arial, Helvetica, sans-serif; 
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.icon-perfil{
-    font-size: 40px;
+.icon-perfil {
+	font-size: 40px;
 	color: #0092ca;
 }
 
-.icon-favorite-active{
-    font-size: 30px;
-    color: #ea2d2d;
-    cursor: pointer;
+.icon-favorite-active {
+	font-size: 30px;
+	color: #ea2d2d;
+	cursor: pointer;
 }
 
-.icon-favorite{
-    font-size: 30px;
-    color: #555050;
-    cursor: pointer;
+.icon-favorite {
+	font-size: 30px;
+	color: #555050;
+	cursor: pointer;
 }
 
-.col-4{
-    height: auto;
-    align-self: center;
-    font-family: Arial, Helvetica, sans-serif;
+.col-4 {
+	height: auto;
+	align-self: center;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.home{
-    display: block;
-    font-family: Arial, Helvetica, sans-serif;
+.home {
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.sidebar-products{
-    background-color: #22252a;
+.sidebar-products {
+	background-color: #22252a;
 	text-decoration: none;
 	font-size: x-large;
 	font-weight: 500;
-    width: 300px;
-    height: 600px;
-    border-radius: 10px;
-    border: solid;
+	width: 300px;
+	height: 600px;
+	border-radius: 10px;
+	border: solid;
 	border-color: #22252a;
-    align-items: center;
-    position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
+	align-items: center;
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
 }
-
-
 
 /*******************LISTA DE DESEOS*****************/
 /***************************************************/
-.wish{
-    display: block;
-    font-family: Arial, Helvetica, sans-serif;
+.wish {
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.tittle-wl{
-    text-align: center;
-    margin-bottom: 1%;
-    margin-top: 1%;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+.tittle-wl {
+	text-align: center;
+	margin-bottom: 1%;
+	margin-top: 1%;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.col-3{
-    align-items: center;
-    background-color: #22252a;
-    border: solid;
-    border: #22252a;
-    margin-left: 5%;
-    font-family: Arial, Helvetica, sans-serif;
+.col-3 {
+	align-items: center;
+	background-color: #22252a;
+	border: solid;
+	border: #22252a;
+	margin-left: 5%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.col-8{
-    align-items: center;  
-    height: auto ; 
-    font-family: Arial, Helvetica, sans-serif;
+.col-8 {
+	align-items: center;
+	height: auto;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.container-WL{
-    background-color: #393e46;
-    border-radius: 10px;
-    border: solid;
-    border-width: 2px;
-    border-color: #393e46;
-    align-items: center;
-    align-content: center;
-    color: white;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    font-family: Arial, Helvetica, sans-serif;
+.container-WL {
+	background-color: #393e46;
+	border-radius: 10px;
+	border: solid;
+	border-width: 2px;
+	border-color: #393e46;
+	align-items: center;
+	align-content: center;
+	color: white;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-
-.cardWL{
+.cardWL {
 	background-color: #22252a;
 	margin-top: 1px;
 	padding: 5px;
 	border: solid;
 	border-color: #22252a;
 	border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.card-body-wl{
+.card-body-wl {
 	background-color: #393e46;
 	border: solid;
 	border-color: #22252a;
@@ -286,179 +276,162 @@ body {
 	margin-top: 1px;
 	padding: 5px;
 	color: white;
-    height: auto;
-    font-family: Arial, Helvetica, sans-serif;
+	height: auto;
+	font-family: Arial, Helvetica, sans-serif;
 }
-
-
 
 /****************DETALLES DE PRODUCTO***************/
 /***************************************************/
-.product-description{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
-    text-decoration: none;
+.product-description {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: large;
+	text-decoration: none;
 }
 
-
-.carousel-item{
-    font-family: Arial, Helvetica, sans-serif;
+.carousel-item {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.carousel-inner{
-    font-family: Arial, Helvetica, sans-serif;
+.carousel-inner {
+	font-family: Arial, Helvetica, sans-serif;
 }
-
-
 
 /****************BORDES DE LOS CAMPOS***************/
 /***************************************************/
 input.invalid {
-
-    border-color: red;
+	border-color: red;
 }
 
 textarea.invalid {
-    border-color: red;
+	border-color: red;
 }
 
 input:invalid {
-    border-color: red;
+	border-color: red;
 }
 
 select:invalid {
-    border-color: red;
+	border-color: red;
 }
-
-
 
 /***********************NAVBAR**********************/
 /***************************************************/
 .navbar {
-    background-color: #22252a;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+	background-color: #22252a;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .navbar-item {
-    color: white;
-    font-weight: 500;
-    font-size: x-large;
-    text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-weight: 500;
+	font-size: x-large;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .toggler {
-    color: white;
-    font-weight: 500;
-    font-size: large;
-    border: solid;
-    border-color: white;
-    background-color: #22252a;
-    border-radius: 5px;
-    font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-weight: 500;
+	font-size: large;
+	border: solid;
+	border-color: white;
+	background-color: #22252a;
+	border-radius: 5px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .toggler-item {
-    font-size: large;
-    font-family: Arial, Helvetica, sans-serif;
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .sidebar-item {
-    color: white;
-    font-weight: 400;
-    font-size: large;
-    text-decoration: none;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-weight: 400;
+	font-size: large;
+	text-decoration: none;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-/**********************---H---**********************/
-/***************************************************/
-h1{
-    font-family: Arial, Helvetica, sans-serif;
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-h2{
-    font-family: Arial, Helvetica, sans-serif;
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-h3{
-    font-family: Arial, Helvetica, sans-serif;
+h3 {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-h4{
-    font-family: Arial, Helvetica, sans-serif;
+h4 {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-h5{
-    font-family: Arial, Helvetica, sans-serif;
+h5 {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-h6{
-    font-family: Arial, Helvetica, sans-serif;
+h6 {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-a{
-    line-height: 30px;
-    text-decoration: none;
+a {
+	line-height: 30px;
+	text-decoration: none;
 }
-
-
 
 /**********************IMAGENES*********************/
 /***************************************************/
 .carousel-inner {
-    display: flex;
-    align-items: center;
-    align-self: center;
-    align-content: center;
-    height: 100%;
+	display: flex;
+	align-items: center;
+	align-self: center;
+	align-content: center;
+	height: 100%;
 }
 
 img {
-    display: block;
-    margin: auto;
-    align-items: center;
-    max-width: 100%;  
-    height: auto;
+	display: block;
+	margin: auto;
+	align-items: center;
+	max-width: 100%;
+	height: auto;
 }
 
-.img-fluid{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    display: block;
-    align-items: center;
-    width: 200px;
+.img-fluid {
+	margin-top: 1%;
+	margin-bottom: 1%;
+	display: block;
+	align-items: center;
+	width: 200px;
 }
 
-.img-fluids{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    display: flex;
-    align-items: center;
-    max-height: 70vh;
-    max-width: 50%;
+.img-fluids {
+	margin-top: 1%;
+	margin-bottom: 1%;
+	display: flex;
+	align-items: center;
+	max-height: 70vh;
+	max-width: 50%;
 }
 
-.img-wl{
-    height: auto;
-    width: 60%;
+.img-wl {
+	height: auto;
+	width: 60%;
 }
-.img-card{
-    width: 150px;
-    height: 150px;
-    display: flex;
+.img-card {
+	width: 150px;
+	height: 150px;
+	display: flex;
 }
-.filtro-container{
-    margin: 10px;
-    margin-left: 250px;
-    margin-right: 250px;
-    border-radius: 5%;
+.filtro-container {
+	margin: 10px;
+	margin-left: 250px;
+	margin-right: 250px;
+	border-radius: 5%;
 }
-
-
-
