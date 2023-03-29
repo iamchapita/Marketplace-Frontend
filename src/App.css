@@ -39,13 +39,8 @@ body {
 	border-color: #22252a;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
+    padding: 3%;
 }
-
-.container-fluid {
-	color: #0092ca;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 
 .center {
 	align-items: center;
@@ -237,14 +232,14 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-.col-3 {
+/* .col-3 {
 	align-items: center;
 	background-color: #22252a;
 	border: solid;
 	border: #22252a;
 	margin-left: 5%;
 	font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 .col-8 {
 	align-items: center;

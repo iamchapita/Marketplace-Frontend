@@ -19,50 +19,54 @@ const AdminHome = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin }) => {
 
     if (isAdmin === true) {
         return (
-            <div className='container-xl'>
-                <div className='row my-5 mx-5'>
-                    <div className='col-md-3 container-style' style={{ padding: '2em' }}>
-                        <ul>
-                            <li>
-                                <a href='/'>Home</a>
-                            </li>
-                        </ul>
+            <div className='container-fluid' style={{ marginTop: '3em' }}>
+                <div className='row mx-4 my-3'>
+                    <div className='col-md-3'>
+                        <div className='col-md-12 container-style' style={{ margin: '0 0 1em 0'}}>
+                            <ul>
+                                <li>
+                                    <a href='/'>Home</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div className='col-md-9 px-md-2 container-style' style={{ padding: '2em' }}>
-                        <div className="row row-cols-1 row-cols-md-3 g-4">
-                            <div className="col">
-                                <div className="card h-100">
-                                    <img src="..." className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div className='col-md-9'>
+                        <div className='col-md-12 container-style'>
+                            <div className="row row-cols-1 row-cols-md-3 g-4">
+                                <div className="col">
+                                    <div className="card h-100">
+                                        <img src="..." className="card-img-top" alt="..."></img>
+                                        <div className="card-body">
+                                            <h5 className="card-title">Card title</h5>
+                                            <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col">
-                                <div className="card h-100">
-                                    <img src="..." className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">This is a short card.</p>
+                                <div className="col">
+                                    <div className="card h-100">
+                                        <img src="..." className="card-img-top" alt="..."></img>
+                                        <div className="card-body">
+                                            <h5 className="card-title">Card title</h5>
+                                            <p className="card-text">This is a short card.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col">
-                                <div className="card h-100">
-                                    <img src="..." className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                                <div className="col">
+                                    <div className="card h-100">
+                                        <img src="..." className="card-img-top" alt="..."></img>
+                                        <div className="card-body">
+                                            <h5 className="card-title">Card title</h5>
+                                            <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col">
-                                <div className="card h-100">
-                                    <img src="..." className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div className="col">
+                                    <div className="card h-100">
+                                        <img src="..." className="card-img-top" alt="..."></img>
+                                        <div className="card-body">
+                                            <h5 className="card-title">Card title</h5>
+                                            <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
