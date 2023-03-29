@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiClient from '../../utils/apiClient';
 import { Spinner } from 'react-bootstrap';
+import ShareButton from "../../components/shareButton";
 
 const ProductDetail = () => {
 
@@ -136,24 +137,8 @@ const ProductDetail = () => {
                             {
                             /* <button type="button" className="btn btn-secondary">Agregar a Lista de Deseos</button> */
                             
-
                             //BOTON PARA COMPARTIR 
-                            
-                            <button onClick={() => {
-                                if (navigator.share) {
-                                    navigator.share({
-                                        title: product.name,
-                                        text: '¡Mira este producto que encontré en la tienda en línea!',
-                                        url: window.location.href
-                                    }).then(() => {
-                                        console.log('Gracias por compartir!');
-                                    }).catch((error) => {
-                                        console.error('Hubo un error al compartir', error);
-                                    });
-                                } else {
-                                    console.log('La función share no está disponible en este dispositivo');
-                                }
-                            }} className="btn btn-info">Compartir</button>
+                            <ShareButton></ShareButton>
                             }
                         </div>
                     </div>
