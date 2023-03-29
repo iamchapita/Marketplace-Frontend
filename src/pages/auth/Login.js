@@ -6,8 +6,7 @@ import InputText from '../../components/InputText';
 import Button from '../../components/Button';
 import Alert from '../../components/common/Alert';
 
-
-const Login = ({ isLoggedIn, setLoggedIn }) => {
+const Login = ({ isLoggedIn, setLoggedIn, setIsAdmin, setIsClient, setIsSeller, setIsEnabled }) => {
 
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
@@ -67,10 +66,14 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
 
                             apiClient.get('/user').then((response) => {
                                 localStorage.setItem('id', response.data.id);
+                                setIsAdmin(Boolean(response.data.isAdmin));
+                                setIsClient(Boolean(response.data.isClient));
+                                setIsSeller(Boolean(response.data.isSeller));
+                                setIsEnabled(Boolean(response.data.isEnabled));
                             }).catch((error) => {
                                 console.log(error.response.data);
                             })
-                            
+
                             setLoggedIn(true);
                             // Redireccionando a la ruta base
                             navigate('/');

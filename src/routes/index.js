@@ -7,25 +7,58 @@ import ProductDetail from '../pages/product/ProductDetail';
 import Home from '../pages/home/Home';
 import ProductInsert from '../pages/product/ProductInsert';
 import WishList from '../pages/wishlist/WishList';
-// import PrivateRoute from './routes/PrivateRoute';
+import AdminHome from '../pages/admin/AdminHome';
 
 const RoutesList = () => {
 
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setLoggedIn] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(null);
+    const [isClient, setIsClient] = useState(null);
+    const [isSeller, setIsSeller] = useState(null);
+    const [isBanned, setIsBanned] = useState(null);
+    const [isEnabled, setIsEnabled] = useState(null);
 
     return (
         <div>
             <header className='app-header'>
                 <BrowserRouter>
-                    <Navbar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+                    <Navbar
+                        isLoggedIn={isLoggedIn}
+                        setLoggedIn={setLoggedIn}
+                        isAdmin={isAdmin}
+                        setIsAdmin={setIsAdmin}
+                        isClient={isClient}
+                        setIsClient={setIsClient}
+                        isSeller={isSeller}
+                        setIsSeller={setIsSeller}
+                        isBanned={isBanned}
+                        setIsBanned={setIsBanned}
+                        isEnabled={isEnabled}
+                        setIsEnabled={setIsEnabled}
+                    />
                     <Routes>
-                        <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+                        {/* Rutas públicas */}
+                        <Route
+                            path="/login"
+                            element={
+                                <Login
+                                    isLoggedIn={isLoggedIn}
+                                    setLoggedIn={setLoggedIn}
+                                    setIsAdmin={setIsAdmin}
+                                    setIsClient={setIsClient}
+                                    setIsSeller={setIsSeller}
+                                    setIsEnabled={setIsEnabled}
+                                />}
+                        />
                         <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-                        <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/productDetail/:id' element={<ProductDetail />} />
-                        <Route path='/home' element={<Home isLoggedIn={isLoggedIn}/>}/>
-                        <Route path='/' element={<Home isLoggedIn={isLoggedIn}/>}/>
-                        <Route path='/wishlist' element={<WishList/>}/>
+                        <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
+                        <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
+
+                        {/* Rutas privadas */}
+                        <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+                        <Route path='/wishlist' element={<WishList />} />
+                        <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
 
                     </Routes>
                 </BrowserRouter>
