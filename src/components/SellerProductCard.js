@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
 
-function SellerProductCard({ id, name, price, path }) {
+function SellerProductCard({ id, name, price, path, createdAt }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
     const [isReadyToRender, setIsReadyToRender] = useState(false);
+    
+    createdAt = createdAt.split(' ')[0];
 
     useEffect(() => {
 
@@ -62,6 +64,9 @@ function SellerProductCard({ id, name, price, path }) {
                     <h5 className="card-title">{name}</h5>
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
                 </div>
             </div>
         </div>
