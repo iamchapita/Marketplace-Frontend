@@ -196,7 +196,7 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
             </div>
             <div className='row center'>
                 <div className="col-12">
-                <form encType='multipart/form-data'>
+                <form encType='multipart/form-data' className='formulario'>
                     <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                     <InputText type={'text'} fieldLabel={'Nombre'} fieldName={'name'} placeholder={'Ingrese un nombre descriptivo del Producto'} inputValue={name} onChangeHandler={nameChangeHandler} isValid={isNameValid} />
 

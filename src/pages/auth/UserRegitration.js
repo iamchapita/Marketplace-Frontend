@@ -252,7 +252,7 @@ const UserRegitration = ({ isLoggedIn, setLoggedIn }) => {
                         <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>
                     <div className='col-md'>
-                        <form encType='multipart/form-data'>
+                        <form encType='multipart/form-data' className='formulario'>
                             <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                             <InputText type={'text'} fieldLabel={'Nombres'} fieldName={'firstName'} placeholder={'Ingrese Nombres'} inputValue={firstName} isValid={isFirstNameValid} onChangeHandler={handleFirtsNameValueChange} />
                             <InputText type={'text'} fieldLabel={'Apellidos'} fieldName={'lastName'} placeholder={'Ingrese Apellidos'} inputValue={lastName} isValid={isLastNameValid} onChangeHandler={handleLastNameValueChange} />

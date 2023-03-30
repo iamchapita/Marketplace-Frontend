@@ -108,7 +108,7 @@ const Login = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, setIsClient, setI
                         <img src={process.env.PUBLIC_URL + '/Isotipo sin fondo.png'} alt="Descripción de la imagen" width='500' />
                     </div>
                     <div className='col-md'>
-                        <form encType='multipart/form-data'>
+                        <form encType='multipart/form-data' className='formulario'>
                             <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
                             <InputText type={'email'} fieldLabel={'Correo Electrónico'} fieldName={'email'} placeholder={'micorreo@dominio.com'} inputValue={emailValue} required={true} isValid={isEmailValid} onChangeHandler={handleEmailChange} />
                             <InputText type={'password'} fieldLabel={'Contraseña'} fieldName={'password'} invalid={isPasswordValid} placeholder={'Contraseña de entre 8 y 35 caractéres'} inputValue={passwordValue} required={true} isValid={isPasswordValid} onChangeHandler={handlePasswordChange} />
