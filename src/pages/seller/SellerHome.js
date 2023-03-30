@@ -73,13 +73,13 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
     if (!isSeller) {
         return (
-            <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'}/>
+            <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'} />
         )
     }
 
-    if(!productsWereFound){
+    if (!productsWereFound) {
         return (
-            <ErrorPage title={'Error'} text={'No se encontraron productos.'}/>
+            <ErrorPage title={'Error'} text={'No se encontraron productos.'} />
         )
     }
 
