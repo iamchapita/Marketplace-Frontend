@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import apiClient from "../../utils/apiClient";
-import Card from "../../components/Card";
+import HomeProductCard from "../../components/HomeProductCard";
 import { Spinner } from "react-bootstrap";
 import { async } from "q";
 
@@ -163,7 +163,7 @@ const Home = ({ isLoggedIn }) => {
                         <div className="grid-3">
                         {
                             products.map((product, id) => (
-                                <Card
+                                <HomeProductCard
                                     key={id}
                                     id={product.id}
                                     userId={userId}
@@ -193,7 +193,7 @@ const Home = ({ isLoggedIn }) => {
                 {
                     products.map((product, id) => (
                         <div>
-                        <Card
+                        <HomeProductCard
                             key={id}
                             id={product.id}
                             name={product.name}

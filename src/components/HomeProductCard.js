@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
 
-function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller, heart, isWhisListStatusInclude = false }) {
+function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller, heart, isWhisListStatusInclude = false }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
@@ -142,4 +142,4 @@ function Card({ id, userId, name, price, urlDetalles, path, idSeller, nameSeller
     }
 }
 
-export default Card;
+export default HomeProductCard;
