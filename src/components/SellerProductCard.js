@@ -49,21 +49,23 @@ function SellerProductCard({ id, name, price, path }) {
                         </div>
                     </div>
                 ) : (
-                    productImage.map((image, index) => (
-                        <div key={`${id}-${index}`} className="img-card">
-                            <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`}/>
-                        </div>
-                    ))
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div className="d-flex align-items-center justify-content-center">
+                            {productImage.map((image, index) => (
+                                <div key={`${id}-${index}`} className="img-card">
+                                    <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid w-100" />
+                                </div>
+                            ))}
+                        </div></div>
                 )}
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
-                    <h6 className="card-text">{price.toLocaleString()}</h6>
+                    <h6 className="card-text">L. {price.toLocaleString()}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
             </div>
         </div>
     );
-
 }
 
 export default SellerProductCard;
