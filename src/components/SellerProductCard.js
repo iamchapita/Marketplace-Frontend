@@ -57,7 +57,7 @@ function SellerProductCard({ id, name, price, path }) {
                 )}
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
-                    <h6 className="card-text">{price}</h6>
+                    <h6 className="card-text">{price.toLocaleString()}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
             </div>

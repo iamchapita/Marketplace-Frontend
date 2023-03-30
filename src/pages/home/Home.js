@@ -168,7 +168,7 @@ const Home = ({ isLoggedIn }) => {
                                     id={product.id}
                                     userId={userId}
                                     name={product.name}
-                                    price={product.price}
+                                    price={product.price.toLocaleString()}
                                     urlDetalles={`/productDetail/${product.id}`}
                                     path={product.photos}
                                     idSeller={product.userIdFK}

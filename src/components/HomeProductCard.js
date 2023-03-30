@@ -98,7 +98,7 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                         </div>
                         <div className="card-body home-card-body" key={id} >
                             <h5 className="card-title">{name}</h5>
-                            <h6 className="card-text" >{price}</h6>
+                            <h6 className="card-text" >{price.toLocaleString()}</h6>
                             <a className="card-link" href={urlDetalles}>Detalles</a>
                             <div className="check-container">
                                 <label id={`labelCheck${id}`} htmlFor={`check${id}`}>
@@ -132,7 +132,7 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                         </div>
                         <div className="card-body home-card-body" key={id} >
                             <h5 className="card-title">{name}</h5>
-                            <h6 className="card-text" >{price}</h6>
+                            <h6 className="card-text" >{price.toLocaleString()}</h6>
                             <a className="card-link" href={urlDetalles}>Detalles</a>
                         </div>
                     </div>

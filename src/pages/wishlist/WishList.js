@@ -73,7 +73,7 @@ function WishList() {
                                 id={product.id}
                                 idSeller={product.userIdFK}
                                 name={product.name}
-                                price={product.price}
+                                price={product.price.toLocaleString()}
                                 img={product.photos}
                                 urlDetalles={`/productDetail/${product.id}`}
                                 userId = {user.id}
