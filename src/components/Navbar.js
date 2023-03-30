@@ -100,31 +100,27 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                 </div>
                                 <div className="offcanvas-body">
                                     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                        <li className="nav-item">
-                                            <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/logout' : '/login'} onClick={isLoggedIn ? onLogout : onLogin}>{isLoggedIn ? 'Cerrar Sesión' : 'Inicio de Sesión'}</a>
-                                        </li>
-                                        {
-                                            !isLoggedIn ?
-                                                (
-                                                    <li className="nav-item">
-                                                        <a className="sidebar-item" aria-current="page" href='/register' onClick={isLoggedIn ? onLogout : onLogin}>Registro de Usuario</a>
-                                                    </li>
-                                                ) : (<div></div>)
-                                        }
                                         {
                                             isLoggedIn ?
                                                 (
                                                     isSeller ?
                                                         (
-                                                            <li className="nav-item">
-                                                                <a className="sidebar-item" aria-current="page" href='/productInsert'>Publicar Producto</a>
-                                                            </li>
+                                                            <div>
+                                                                <li className="nav-item">
+                                                                    <a className="sidebar-item" aria-current="page" href='/seller'>Perfil de Vendedor</a>
+                                                                </li>
+                                                                <li className="nav-item">
+                                                                    <a className="sidebar-item" aria-current="page" href='/productInsert'>Publicar Producto</a>
+                                                                </li>
+                                                            </div>
                                                         ) : (
                                                             <li className="nav-item">
                                                                 <a className="sidebar-item" aria-current="page" href='/productInsert' onClick={convertClientInSeller}>Convertirme en Vendedor</a>
                                                             </li>
                                                         )
-                                                ) : (<div></div>)
+                                                ) : (<li className="nav-item">
+                                                    <a className="sidebar-item" aria-current="page" href='/register' onClick={isLoggedIn ? onLogout : onLogin}>Registro de Usuario</a>
+                                                </li>)
                                         }
                                         {
                                             isLoggedIn ?
@@ -134,12 +130,15 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                                     </li>
                                                 ) : (<div></div>)
                                         }
+                                        <li className="nav-item">
+                                            <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/logout' : '/login'} onClick={isLoggedIn ? onLogout : onLogin}>{isLoggedIn ? 'Cerrar Sesión' : 'Inicio de Sesión'}</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </nav>
-                </div>
+                        </div >
+                    </nav >
+                </div >
             );
         }
 
