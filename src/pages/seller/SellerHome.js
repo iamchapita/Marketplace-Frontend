@@ -71,15 +71,15 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
         )
     }
 
-    if(!productsWereFound){
-        return (
-            <ErrorPage title={'Error'} text={'No se encontraron productos.'}/>
-        )
-    }
-
     if (!isSeller) {
         return (
             <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'}/>
+        )
+    }
+
+    if(!productsWereFound){
+        return (
+            <ErrorPage title={'Error'} text={'No se encontraron productos.'}/>
         )
     }
 
