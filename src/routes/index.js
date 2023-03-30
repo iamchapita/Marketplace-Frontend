@@ -7,7 +7,7 @@ import ProductDetail from '../pages/product/ProductDetail';
 import Home from '../pages/home/Home';
 import ProductInsert from '../pages/product/ProductInsert';
 import WishList from '../pages/wishlist/WishList';
-import AdminHome from '../pages/admin/AdminHome';   
+import AdminHome from '../pages/admin/AdminHome';
 import SellerHome from '../pages/seller/SellerHome';
 
 const RoutesList = () => {
@@ -51,14 +51,15 @@ const RoutesList = () => {
                                     setIsSeller={setIsSeller}
                                     setIsEnabled={setIsEnabled}
                                 />}
+
                         />
                         <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/productDetail/:id' element={<ProductDetail />} />
                         <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
-                        <Route path='/seller' element={<SellerHome isLoggedIn={isLoggedIn} />} />
-                        
+
                         {/* Rutas privadas */}
+                        <Route path='/seller' element={<SellerHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isSeller={isSeller} setIsSeller={setIsSeller}  />} />
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList />} />
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />

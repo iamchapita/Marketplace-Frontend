@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import apiClient from '../../utils/apiClient';
 import { Spinner } from 'react-bootstrap';
-import SellerProductCard from '../../components/SellerProductCard'
+import SellerProductCard from '../../components/SellerProductCard';
+import ErrorPage from '../../components/ErrorPage';
 
-const SellerHome = ({ isLoggedIn, setLoggedIn, isClient, setIsClient, isSeller, setIsSeller }) => {
+const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
     // Variables de estado, Se almacena la informacion a renderizar en la vista
     const [sellerInfo, setSellerInfo] = useState(null);
@@ -28,12 +29,14 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isClient, setIsClient, isSeller, 
                 // Se debe renderizar un error de que no se encontro productos. PENDIENTE.
                 if (error.response.status === 500) {
                     setProductsWereFound(false);
+                    setReadyToRender(true);
                 } else {
                     console.log(error.response.data);
                 }
             });
         }
         action();
+
     }, []);
 
     useEffect(() => {
@@ -66,8 +69,21 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isClient, setIsClient, isSeller, 
                 </div>
             </div>
         )
-    } else {
+    }
 
+    if(!productsWereFound){
+        return (
+            <ErrorPage title={'Error'} text={'No se encontraron productos.'}/>
+        )
+    }
+
+    if (!isSeller) {
+        return (
+            <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'}/>
+        )
+    }
+
+    if (readyToRender) {
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 {
