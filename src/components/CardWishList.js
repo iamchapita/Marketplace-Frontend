@@ -53,7 +53,7 @@ function CardWishList ({name, price, img, urlDetalles, id, idSeller, userId}){
                 <div className="col-8">
                         <div className="card-body-wl" key={id} >
                             <h5 className="card-title">{name}</h5>
-                            <h6 className="card-text" >{price}</h6>
+                            <h6 className="card-text">L {price}</h6>
                             <a className="card-link"  href={urlDetalles}>Detalles</a>
                             <div className="check-container">
                             <label id={`labelCheck${id}`}  htmlFor={`checkwish${id}`}><i className={`material-icons ${favoriteClassWL ? 'icon-favorite-active ': 'icon-favorite'}`} >favorite</i></label>
