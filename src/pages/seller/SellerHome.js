@@ -114,6 +114,7 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                                                     name={product.name}
                                                     price={product.price}
                                                     path={product.photos}
+                                                    createdAt={product.createdAt}
                                                 />
                                             ))
                                         }
