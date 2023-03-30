@@ -12,7 +12,7 @@ const AdminHome = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin }) => {
     if (isAdmin === false) {
         return (
             <div>
-                <ErrorPage />
+                <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'}/>
             </div>
         );
     }
