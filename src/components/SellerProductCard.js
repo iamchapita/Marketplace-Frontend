@@ -65,8 +65,8 @@ function SellerProductCard({ id, name, price, path, createdAt }) {
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
-                <div class="card-footer">
-                    <small class="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
+                <div className="card-footer">
+                    <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
                 </div>
             </div>
         </div>
