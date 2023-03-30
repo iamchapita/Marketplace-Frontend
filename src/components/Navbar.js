@@ -4,12 +4,13 @@ import 'jquery/dist/jquery.min.js';
 import 'popper.js/dist/popper.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import apiClient from '../utils/apiClient';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsClient, isSeller, setIsSeller, isBanned, setIsBanned, isEnabled, setIsEnabled }) => {
 
     const [isReadyToRender, setIsReadyToRender] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -41,34 +42,45 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
         action();
     }, []);
 
-    const onLogout = (e) => {
+    const onLogout = async (e) => {
         e.preventDefault();
-        const logout = async () => {
-            const logout = await apiClient.get('/logout').then(response => {
-                setLoggedIn(false);
-                setIsAdmin(false);
-                setIsClient(false);
-                setIsSeller(false);
-                setIsBanned(false);
-                setIsEnabled(false);
-                localStorage.removeItem('access_token');
-                localStorage.removeItem('id');
-                localStorage.removeItem('isAdmin');
-                localStorage.removeItem('isClient');
-                localStorage.removeItem('isSeller');
-                localStorage.removeItem('isEnabled');
 
-                return <Navigate to="/login" replace />
+        const response = await apiClient.get('/logout').then(response => {
+            setLoggedIn(false);
+            setIsAdmin(false);
+            setIsClient(false);
+            setIsSeller(false);
+            setIsBanned(false);
+            setIsEnabled(false);
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('id');
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('isClient');
+            localStorage.removeItem('isSeller');
+            localStorage.removeItem('isEnabled');
 
-            }).catch(error => {
-                console.log(error);
-            })
-        }
-        logout();
+        }).catch(error => {
+            console.log(error);
+        })
+
+        navigate('/login', { replace: true });
     }
 
     const onLogin = () => { };
 
+    const convertClientInSeller = async (e) => {
+        e.preventDefault();
+        const response = await apiClient.post('/setToSeller', {
+            id: localStorage.getItem('id')
+        }).then((response) => {
+            setIsSeller(true);
+        }).catch(error => {
+            console.log(error.response.data.message);
+        });
+
+        navigate('/productInsert', { replace: true });
+
+    };
 
     if (isReadyToRender) {
 
@@ -109,7 +121,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                                             </li>
                                                         ) : (
                                                             <li className="nav-item">
-                                                                <a className="sidebar-item" aria-current="page" href='/productInsert'>Convertirme en Vendedor</a>
+                                                                <a className="sidebar-item" aria-current="page" href='/productInsert' onClick={convertClientInSeller}>Convertirme en Vendedor</a>
                                                             </li>
                                                         )
                                                 ) : (<div></div>)
@@ -118,7 +130,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                             isLoggedIn ?
                                                 (
                                                     <li className="nav-item">
-                                                        <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/wishlist' : '/wishlist'} onClick={isLoggedIn ? onLogin : onLogout}>{isLoggedIn ? 'Lista de Deseos' : ''}</a>
+                                                        <a className="sidebar-item" aria-current="page" href='/wishlist'>Lista de Deseos</a>
                                                     </li>
                                                 ) : (<div></div>)
                                         }
