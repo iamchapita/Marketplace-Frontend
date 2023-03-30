@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import apiClient from '../../utils/apiClient';
 import { Spinner } from 'react-bootstrap';
+import SellerProductCard from '../../components/SellerProductCard'
 
 const SellerHome = ({ isLoggedIn, setLoggedIn, isClient, setIsClient, isSeller, setIsSeller }) => {
 
@@ -79,52 +80,27 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isClient, setIsClient, isSeller, 
                             <div className='col-md-3'>
                                 <div className='col-md-12 container-style' style={{ margin: '0 0 1em 0' }}>
                                     <div style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
-                                        <div className='row' style={{ color: 'white' }} >Nombre: { sellerInfo.firstName + ' ' + sellerInfo.lastName }</div>
+                                        <div className='row' style={{ color: 'white' }} >Nombre: {sellerInfo.firstName + ' ' + sellerInfo.lastName}</div>
                                         <div className='row' style={{ color: 'white' }} >Ubicación</div>
-                                        <div className='row' style={{ color: 'white' }} >{ sellerInfo.departmentName }</div>
-                                        <div className='row' style={{ color: 'white' }} >{ sellerInfo.municipalityName }</div>
+                                        <div className='row' style={{ color: 'white' }} >{sellerInfo.departmentName}</div>
+                                        <div className='row' style={{ color: 'white' }} >{sellerInfo.municipalityName}</div>
                                     </div>
                                 </div>
                             </div>
                             <div className='col-md-9'>
                                 <div className='col-md-12 container-style'>
                                     <div className="row row-cols-1 row-cols-md-3 g-4">
-                                        <div className="col">
-                                            <div className="card h-100">
-                                                <img src="..." className="card-img-top" alt="..."></img>
-                                                <div className="card-body">
-                                                    <h5 className="card-title">HomeProductCard title</h5>
-                                                    <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="card h-100">
-                                                <img src="..." className="card-img-top" alt="..."></img>
-                                                <div className="card-body">
-                                                    <h5 className="card-title">HomeProductCard title</h5>
-                                                    <p className="card-text">This is a short card.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="card h-100">
-                                                <img src="..." className="card-img-top" alt="..."></img>
-                                                <div className="card-body">
-                                                    <h5 className="card-title">HomeProductCard title</h5>
-                                                    <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="card h-100">
-                                                <img src="..." className="card-img-top" alt="..."></img>
-                                                <div className="card-body">
-                                                    <h5 className="card-title">HomeProductCard title</h5>
-                                                    <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {
+                                            products.map((product, index) => (
+                                                <SellerProductCard
+                                                    key={index}
+                                                    id={product.id}
+                                                    name={product.name}
+                                                    price={product.price}
+                                                    path={product.photos}
+                                                />
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             </div>

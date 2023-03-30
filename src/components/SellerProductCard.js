@@ -39,29 +39,31 @@ function SellerProductCard({ id, name, price, path }) {
         }
     }, [productImage]);
 
-
     return (
         <div key={id} className="col">
-            <div key={id} className="card h-100">
-                {
-                    !isReadyToRender ? (<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div className="card h-100">
+                {!isReadyToRender ? (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">
                             <Spinner animation="border" variant="dark" />
                         </div>
-                    </div>) : (productImage.map((image, index) => (
-                        <div className="img-card" >
-                            <img key={index} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid" />
+                    </div>
+                ) : (
+                    productImage.map((image, index) => (
+                        <div key={`${id}-${index}`} className="img-card">
+                            <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`}/>
                         </div>
-                    )))
-                }
-                <div key={id} className="card-body">
+                    ))
+                )}
+                <div className="card-body">
                     <h5 className="card-title">{name}</h5>
-                    <h6 className="card-text" >{price}</h6>
+                    <h6 className="card-text">{price}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
             </div>
         </div>
     );
+
 }
 
 export default SellerProductCard;
