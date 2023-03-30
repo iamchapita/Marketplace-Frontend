@@ -41,7 +41,7 @@ function SellerProductCard({ id, name, price, path }) {
 
     return (
         <div key={id} className="col">
-            <div className="card h-100">
+            <div className="card h-100" id="seller-products">
                 {!isReadyToRender ? (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">

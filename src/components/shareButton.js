@@ -28,7 +28,7 @@ const ShareButton = () => {
         <Modal.Header closeButton>
           <Modal.Title>Compartir enlace</Modal.Title>
         </Modal.Header>
-        <Modal.Body className='sharebutton'>
+        <Modal.Body id='sharebutton'>
           <Button type="button" className="btn btn-primary"  onClick={handleCopyLink}>
             Copiar enlace
           </Button>
