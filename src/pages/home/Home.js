@@ -12,11 +12,31 @@ const Home = ({ isLoggedIn }) => {
     const [isWhisListStatusInclude, setIsWhisListStatusInclude] = useState(null);
     const [categories , setCategories] = useState(null)
     const [departaments, setDepartaments] = useState(null);
+    const [category , setCategory] = useState(null)
+    const [department, setDepartment] = useState(null);
+    const [page, setPage] = useState(1);
 
-    const filter = () =>{
-        
+    const [pricemin, setPricemin] = useState(0)
+    const [pricemax, setPricemax] = useState(0)
+
+    const filter = async() =>{
+        await apiClient.post('/productst',
+        {
+            id : userId,
+            category : category,
+            department : department,
+            page : page, 
+            pricemin : pricemin, 
+            pricemax : pricemax
+        }).then((res)=>{
+            setProducts(res.data);
+
+        }).catch((error) => {
+                console.log(error)
+            });
+       
+
     }
-
 
     useEffect(()=>{
         const getCategories = async () =>{
@@ -113,8 +133,8 @@ const Home = ({ isLoggedIn }) => {
                         <div className="container-fluid" >
                             <div className="grid-6">
                             <div>
-                            <select className="form-select" >
-                                <option defaultValue={null} >Categoría</option>
+                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)} >
+                                <option value={0} >todos</option>
                                 {
                                     categories.map((categorie, id)=>(
                                         <option  key={id} value={categorie.id} >{categorie.name}</option>
@@ -125,8 +145,8 @@ const Home = ({ isLoggedIn }) => {
                             </select>
                             </div>
                             <div>
-                            <select className="form-select" >
-                                <option defaultValue={null} >Departamento</option>
+                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}  >
+                                <option value={0} >todos</option>
                                 {
                                     departaments.map((departament, id)=>(
                                         <option key={id} value={departament.id}  >{departament.name}</option>
@@ -141,13 +161,13 @@ const Home = ({ isLoggedIn }) => {
                             </select>
                             </div>
                             <div>
-                            <input className="form-control" type="number" placeholder="Precio mínimo" ></input>
+                                <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)} ></input>
                             </div>
                             <div>
-                            <input className="form-control" type="number" placeholder="Precio máximo" ></input>
+                                <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}  ></input>
                             </div>
                             <div> 
-                                <button className="btn btn-primary" onClick={filter()} >
+                                <button className="btn btn-primary" onClick={()=>filter()} >
                                 <i className="material-icons" >search</i>
                                 </button>
                             </div>
@@ -187,28 +207,80 @@ const Home = ({ isLoggedIn }) => {
 
     if (isWhisListStatusInclude === false) {
         return (
-           
-            <div className="container home">
-                <div className="grid-3">
-                {
-                    products.map((product, id) => (
-                        <div>
-                        <HomeProductCard
-                            key={id}
-                            id={product.id}
-                            name={product.name}
-                            price={product.price}
-                            urlDetalles={`/productDetail/${product.id}`}
-                            path={product.photos}
-                            idSeller={product.userIdFK}
-                            nameSeller={product.userFirstName + ' ' + product.userLastName}
-                        // description={product.description}
-                        />
+           <div>
+                <div className="filtro-container">
+                    <nav className="navbar">
+                        <div className="container-fluid" >
+                            <div className="grid-6">
+                            <div>
+                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)} >
+                                <option value={0} >todos</option>
+                                {
+                                    categories.map((categorie, id)=>(
+                                        <option  key={id} value={categorie.id} >{categorie.name}</option>
+
+
+                                    ))
+                                }
+                            </select>
+                            </div>
+                            <div>
+                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}  >
+                                <option value={0} >todos</option>
+                                {
+                                    departaments.map((departament, id)=>(
+                                        <option key={id} value={departament.id}  >{departament.name}</option>
+                                    ))
+                                }
+                               
+                            </select>
+                            </div>
+                            <div>
+                            <select className="form-select" >
+                                <option defaultValue={null} >Estrellas de vendedor</option>
+                            </select>
+                            </div>
+                            <div>
+                                <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)} ></input>
+                            </div>
+                            <div>
+                                <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}  ></input>
+                            </div>
+                            <div> 
+                                <button className="btn btn-primary" onClick={()=>filter()} >
+                                <i className="material-icons" >search</i>
+                                </button>
+                            </div>
+                            </div>
+                            
+
                         </div>
-                    ))
-                }
-            </div>
-            </div>        );
+                        
+                    </nav>
+                </div>
+
+                <div className="container home">
+                    <div className="grid-3">
+                    {
+                        products.map((product, id) => (
+                            <div>
+                            <HomeProductCard
+                                key={id}
+                                id={product.id}
+                                name={product.name}
+                                price={product.price}
+                                urlDetalles={`/productDetail/${product.id}`}
+                                path={product.photos}
+                                idSeller={product.userIdFK}
+                                nameSeller={product.userFirstName + ' ' + product.userLastName}
+                            // description={product.description}
+                            />
+                            </div>
+                        ))
+                    }
+                    </div>
+                </div>  
+            </div>      );
     }
 }
 export default Home;
