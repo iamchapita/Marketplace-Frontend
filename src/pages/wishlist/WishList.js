@@ -1,90 +1,77 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Spinner } from "react-bootstrap";
 import apiClient from "../../utils/apiClient";
+import CardWishList from "../../components/CardWishList";
+import ErrorPage from "../../components/ErrorPage";
 
-const CardWishList = lazy(() => import("../../components/CardWishList"));
-
-
-function WishList() {
+const WishList = ({ isLoggedIn }) => {
 
     const [products, setProduts] = useState([]);
-    const [user, setUser] = useState(' ');
-    const [wasUserFound, setWasUserFound] = useState(null);
     const [wasWishListFound, setWasWishListFound] = useState(null);
-
-
-    useEffect(() => {
-        const getUser = async () => {
-            const response = await apiClient.get('/user').then((res) => {
-                setUser(res.data);
-            }).catch((error) => {
-                if (error.response.status === 401) {
-                    console.log('Debe Iniciar Sesión.');
-                    setWasUserFound(false);
-                }
-            })
-        }
-        getUser();
-    }, []);
+    const [isReadyToRender, setIsReadyToRender] = useState(false);
 
     useEffect(() => {
         const getWishlist = async () => {
-            const response = await apiClient.post('/wishlist', { userIdFK: user.id }).then((res) => {
+            const response = await apiClient.post('/wishlist', { userIdFK: localStorage.getItem('id') }).then((res) => {
                 setProduts(res.data);
-                console.log(res.data.length)
-                if(res.data.length === 0){
-                    setWasWishListFound(false);
-                }else(setWasWishListFound(true))
+                setWasWishListFound(true);
+                setIsReadyToRender(true);
             }).catch((error) => {
-                    console.log(error);
+                if (error.response.status === 500) {
+                    setWasWishListFound(false);
+                    setIsReadyToRender(true);
+                }
             })
         }
         getWishlist();
-    }, [user]);
+    }, []);
 
-
-    if (wasUserFound === false) {
+    if (!isReadyToRender) {
         return (
-            <div className="container-sm">
-                <h1 className="text-center">Debe de Iniciar Sesión</h1>
+            <div className='container-fluid' style={{ marginTop: '3em' }}>
+                <div className="container d-flex justify-content-center">
+                    <Spinner animation="border" variant="light" />
+                </div>
             </div>
-        );
+        )
     }
 
-    
-    if (wasWishListFound === false) {
+    if (isReadyToRender) {
+
+        if (isLoggedIn === false) {
+            return (
+                <ErrorPage title={'Error'} text={'No tienes autorización para acceder a este recurso.'}></ErrorPage>
+            );
+        }
+
+        if (wasWishListFound === false) {
+            return (
+                <div className="container-sm">
+                    <h1 className="text-center">Aun no hay producto en la Lista de Deseos</h1>
+                </div>
+            );
+        }
+
         return (
-            <div className="container-sm">
-                <h1 className="text-center">Aun no hay producto en la Lista de Deseos</h1>
-            </div>
-        );
-    }
-
-    return (
-
-        <div>
-
             <div className="container wish">
-
                 {
-                    products.map((product, id) => (
-                        <Suspense key={id} fallback={<Spinner />} >
-                            <CardWishList
-                                id={product.id}
-                                idSeller={product.userIdFK}
-                                name={product.name}
-                                price={product.price.toLocaleString()}
-                                img={product.photos}
-                                urlDetalles={`/productDetail/${product.id}`}
-                                userId = {user.id}
-                            />
-                        </Suspense>
+                    products.map((product, index) => (
+                        <CardWishList
+                            key={index}
+                            id={product.id}
+                            idSeller={product.userIdFK}
+                            name={product.name}
+                            price={product.price.toLocaleString()}
+                            img={product.photos}
+                            urlDetalles={`/productDetail/${product.id}`}
+                            userId={localStorage.getItem('id')}
+                        />
                     ))
                 }
-
             </div>
-
-        </div>
-    );
+        );
+    }
 }
+
+
 export default WishList;
