@@ -101,18 +101,21 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                 <div className="offcanvas-body">
                                     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                                         {
+                                            isLoggedIn ? (
+                                                <li className="nav-item">
+                                                    <a className="sidebar-item" aria-current="page" href='/seller'>Mi Perfil</a>
+                                                </li>
+                                            ) : (<div></div>)
+                                        }
+                                        {
                                             isLoggedIn ?
                                                 (
+
                                                     isSeller ?
                                                         (
-                                                            <div>
-                                                                <li className="nav-item">
-                                                                    <a className="sidebar-item" aria-current="page" href='/seller'>Perfil de Vendedor</a>
-                                                                </li>
-                                                                <li className="nav-item">
-                                                                    <a className="sidebar-item" aria-current="page" href='/productInsert'>Publicar Producto</a>
-                                                                </li>
-                                                            </div>
+                                                            <li className="nav-item">
+                                                                <a className="sidebar-item" aria-current="page" href='/productInsert'>Publicar Producto</a>
+                                                            </li>
                                                         ) : (
                                                             <li className="nav-item">
                                                                 <a className="sidebar-item" aria-current="page" href='/productInsert' onClick={convertClientInSeller}>Convertirme en Vendedor</a>
