@@ -8,7 +8,7 @@ import Home from '../pages/home/Home';
 import ProductInsert from '../pages/product/ProductInsert';
 import WishList from '../pages/wishlist/WishList';
 import AdminHome from '../pages/admin/AdminHome';
-import SellerProfile from '../pages/seller/SellerProfile';
+import UserProfile from '../pages/seller/UserProfile';
 
 const RoutesList = () => {
 
@@ -59,7 +59,7 @@ const RoutesList = () => {
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
 
                         {/* Rutas privadas */}
-                        <Route path='/myProfile' element={<SellerProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isSeller={isSeller} setIsSeller={setIsSeller} />} />
+                        <Route path='/myProfile' element={<UserProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isSeller={isSeller} setIsSeller={setIsSeller} />} />
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
