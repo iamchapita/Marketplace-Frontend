@@ -54,6 +54,7 @@ const SellerProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
             const sellerInfoObject = {
                 'firstName': sellerInfo[0]['userFirstName'],
                 'lastName': sellerInfo[0]['userLastName'],
+                'email': sellerInfo[0]['userEmail'],
                 'departmentName': sellerInfo[0]['departmentName'],
                 'municipalityName': sellerInfo[0]['municipalityName']
             }
@@ -65,13 +66,13 @@ const SellerProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
             const sellerInfoObject = {
                 'firstName': products[0]['userFirstName'],
                 'lastName': products[0]['userLastName'],
+                'email': products[0]['userEmail'],
                 'departmentName': products[0]['departmentName'],
                 'municipalityName': products[0]['municipalityName']
             }
             setSellerInfo(sellerInfoObject);
             setReadyToRender(true);
         }
-
     }, [productsWereFound]);
 
     if (!readyToRender) {
@@ -107,6 +108,7 @@ const SellerProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                                         <div className='userInfo'>
                                             <h4>{sellerInfo.firstName + ' ' + sellerInfo.lastName}</h4>
                                             <p>Ubicación: {sellerInfo.departmentName}, {sellerInfo.municipalityName}</p>
+                                            <p>Correo Electrónico: {sellerInfo.email}</p>
                                         </div>
                                         <div className='userStats'>
                                             <p>Proximamente</p>
