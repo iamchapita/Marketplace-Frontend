@@ -102,18 +102,21 @@ const SellerProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                     ) : (
                         <div className='row mx-4 my-3'>
                             <div className='col-md-3'>
-                                <div className='col-md-12 container-style' style={{ margin: '0 0 1em 0' }}>
-                                    <div style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
-                                        <div className='row' style={{ color: 'white' }} >Nombre: {sellerInfo.firstName + ' ' + sellerInfo.lastName}</div>
-                                        <div className='row' style={{ color: 'white' }} >Ubicación</div>
-                                        <div className='row' style={{ color: 'white' }} >{sellerInfo.departmentName}</div>
-                                        <div className='row' style={{ color: 'white' }} >{sellerInfo.municipalityName}</div>
+                                <div className='col-md-12 container-style' style={{ margin: '0 0 1em 0', color: 'white' }}>
+                                    <div className='userInfoContainer' style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
+                                        <div className='userInfo'>
+                                            <h4>{sellerInfo.firstName + ' ' + sellerInfo.lastName}</h4>
+                                            <p>Ubicación: {sellerInfo.departmentName}, {sellerInfo.municipalityName}</p>
+                                        </div>
+                                        <div className='userStats'>
+                                            <p>Proximamente</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div className='col-md-9'>
                                 <div className='col-md-12 container-style'>
-                                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                                    <div className="row row-cols-1 row-cols-xxl-6 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
                                         {
                                             productsWereFound ? (products.map((product, index) => (
                                                 <SellerProductCard
@@ -125,7 +128,7 @@ const SellerProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                                                     createdAt={product.createdAt}
                                                 />
                                             ))) : (
-                                                <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'}/>
+                                                <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'} />
                                             )
                                         }
                                     </div>
