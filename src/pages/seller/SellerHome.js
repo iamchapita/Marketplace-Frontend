@@ -3,7 +3,7 @@ import { useState } from 'react';
 import apiClient from '../../utils/apiClient';
 import { Spinner } from 'react-bootstrap';
 import SellerProductCard from '../../components/SellerProductCard';
-import ErrorPage from '../../components/ErrorPage';
+import CustomizableAlert from '../../components/CustomizableAlert';
 
 const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
@@ -25,11 +25,20 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                 // Se establece el arreglo de productos
                 setProducts(response.data);
                 setProductsWereFound(true);
+                // setReadyToRender(true);
             }).catch((error) => {
                 // Se debe renderizar un error de que no se encontro productos. PENDIENTE.
                 if (error.response.status === 500) {
-                    setProductsWereFound(false);
-                    setReadyToRender(true);
+
+                    apiClient.post('/sellerDetails', {
+                        id: localStorage.getItem('id')
+                    }).then((response) => {
+                        setSellerInfo(response.data);
+                        setProductsWereFound(false);
+                    }).catch(error => {
+                        console.log(error.response.data);
+                    })
+
                 } else {
                     console.log(error.response.data);
                 }
@@ -40,6 +49,17 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
     }, []);
 
     useEffect(() => {
+
+        if (productsWereFound === false) {
+            const sellerInfoObject = {
+                'firstName': sellerInfo[0]['userFirstName'],
+                'lastName': sellerInfo[0]['userLastName'],
+                'departmentName': sellerInfo[0]['departmentName'],
+                'municipalityName': sellerInfo[0]['municipalityName']
+            }
+            setSellerInfo(sellerInfoObject);
+            setReadyToRender(true);
+        }
         // Establece la informacion del usuario del tipo vendedor
         if (products.length > 0) {
             const sellerInfoObject = {
@@ -49,41 +69,29 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                 'municipalityName': products[0]['municipalityName']
             }
             setSellerInfo(sellerInfoObject);
-        }
-
-    }, [products]);
-
-    useEffect(() => {
-
-        if (sellerInfo !== null) {
             setReadyToRender(true);
         }
 
-    }, [sellerInfo])
+    }, [productsWereFound]);
 
     if (!readyToRender) {
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 <div className="container d-flex justify-content-center">
-                    <Spinner animation="border" />
+                    <Spinner animation="border" variant='light' />
                 </div>
             </div>
         )
     }
 
-    if (!isSeller) {
-        return (
-            <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'} />
-        )
-    }
-
-    if (!productsWereFound) {
-        return (
-            <ErrorPage title={'Error'} text={'No se encontraron productos.'} />
-        )
-    }
-
     if (readyToRender) {
+
+        if (!isSeller) {
+            return (
+                <CustomizableAlert title={'Error'} text={'No tienes Autorización para acceder a este recurso.'} />
+            )
+        }
+
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 {
@@ -107,7 +115,7 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                                 <div className='col-md-12 container-style'>
                                     <div className="row row-cols-1 row-cols-md-3 g-4">
                                         {
-                                            products.map((product, index) => (
+                                            productsWereFound ? (products.map((product, index) => (
                                                 <SellerProductCard
                                                     key={index}
                                                     id={product.id}
@@ -116,7 +124,9 @@ const SellerHome = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                                                     path={product.photos}
                                                     createdAt={product.createdAt}
                                                 />
-                                            ))
+                                            ))) : (
+                                                <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'}/>
+                                            )
                                         }
                                     </div>
                                 </div>
