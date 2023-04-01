@@ -47,7 +47,7 @@ function SellerProductCard({ id, name, price, path, createdAt }) {
                 {!isReadyToRender ? (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">
-                            <Spinner animation="border" variant="dark" />
+                            <Spinner animation="border" variant="light" />
                         </div>
                     </div>
                 ) : (
