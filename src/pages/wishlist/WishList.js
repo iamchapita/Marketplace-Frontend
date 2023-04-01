@@ -2,7 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Spinner } from "react-bootstrap";
 import apiClient from "../../utils/apiClient";
 import CardWishList from "../../components/CardWishList";
-import ErrorPage from "../../components/ErrorPage";
+import CustomizableAlert from "../../components/CustomizableAlert";
 
 const WishList = ({ isLoggedIn }) => {
 
@@ -40,7 +40,7 @@ const WishList = ({ isLoggedIn }) => {
 
         if (isLoggedIn === false) {
             return (
-                <ErrorPage title={'Error'} text={'No tienes autorización para acceder a este recurso.'}></ErrorPage>
+                <CustomizableAlert title={'Error'} text={'No tienes autorización para acceder a este recurso.'}></CustomizableAlert>
             );
         }
 

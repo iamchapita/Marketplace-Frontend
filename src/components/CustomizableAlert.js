@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 
-const ErrorPage = ({ title, text }) => {
+const CustomizableAlert = ({ title, text, variant = 'danger' }) => {
     return (
         <Container>
             <Row className="justify-content-md-center mt-5">
-                <Col md="8">
-                    <Alert variant="danger" className="text-center">
+                <Col md="12">
+                    <Alert variant={variant} className="text-center">
                         <h1>{title}</h1>
                         <p>{text}</p>
                     </Alert>
@@ -16,4 +16,4 @@ const ErrorPage = ({ title, text }) => {
     );
 };
 
-export default ErrorPage;
+export default CustomizableAlert;

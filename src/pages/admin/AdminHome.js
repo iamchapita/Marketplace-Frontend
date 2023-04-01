@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import ErrorPage from '../../components/ErrorPage';
+import CustomizableAlert from '../../components/CustomizableAlert';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const AdminHome = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin }) => {
@@ -12,7 +12,7 @@ const AdminHome = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin }) => {
     if (isAdmin === false) {
         return (
             <div>
-                <ErrorPage title={'Error'} text={'No tienes Autorización para acceder a este recurso.'}/>
+                <CustomizableAlert title={'Error'} text={'No tienes Autorización para acceder a este recurso.'}/>
             </div>
         );
     }
