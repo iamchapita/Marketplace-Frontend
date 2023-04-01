@@ -8,7 +8,8 @@ import Home from '../pages/home/Home';
 import ProductInsert from '../pages/product/ProductInsert';
 import WishList from '../pages/wishlist/WishList';
 import AdminHome from '../pages/admin/AdminHome';
-import UserProfile from '../pages/seller/UserProfile';
+import MyProfile from '../pages/user/MyProfile';
+import SellerProfile from '../pages/seller/SellerProfile';
 
 const RoutesList = () => {
 
@@ -57,13 +58,15 @@ const RoutesList = () => {
                         <Route path='/productDetail/:id' element={<ProductDetail />} />
                         <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
+                        <Route path='/userProfile/:id' element={<SellerProfile />} />
 
                         {/* Rutas privadas */}
-                        <Route path='/myProfile' element={<UserProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isSeller={isSeller} setIsSeller={setIsSeller} />} />
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
 
+                        {/* Depende del contexto puede ser privada o pública */}
+                        <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isSeller={isSeller} setIsSeller={setIsSeller} />} />
                     </Routes>
                 </BrowserRouter>
             </header>

@@ -128,7 +128,7 @@ const ProductDetail = () => {
                             {
                                 <div className="product-description">
                                     <h1>{product.name}</h1>
-                                    <h4>Vendedor: <a href={`/sellerDetail/${sellerDetails.id}`}>{sellerDetails.name}</a></h4> 
+                                    <h4>Vendedor: <a href={`/userProfile/${sellerDetails.id}`}>{sellerDetails.name}</a></h4> 
                                     <h4>Precio: L. {product.price.toLocaleString()}</h4>
                                     <h4>Dirección: {sellerDetails.direction}</h4>
                                     <h4>Estado del Producto: {product.status}</h4>

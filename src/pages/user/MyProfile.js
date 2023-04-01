@@ -5,7 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import SellerProductCard from '../../components/SellerProductCard';
 import CustomizableAlert from '../../components/CustomizableAlert';
 
-const UserProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
+const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
     // Variables de estado, Se almacena la informacion a renderizar en la vista
     const [sellerInfo, setSellerInfo] = useState(null);
@@ -144,4 +144,4 @@ const UserProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
     }
 };
 
-export default UserProfile;
+export default MyProfile;
