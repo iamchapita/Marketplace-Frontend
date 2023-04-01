@@ -103,7 +103,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                         {
                                             isLoggedIn ? (
                                                 <li className="nav-item">
-                                                    <a className="sidebar-item" aria-current="page" href='/seller'>Mi Perfil</a>
+                                                    <a className="sidebar-item" aria-current="page" href='/myProfile'>Mi Perfil</a>
                                                 </li>
                                             ) : (<div></div>)
                                         }
