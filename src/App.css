@@ -39,7 +39,7 @@ body {
 	border-color: #22252a;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
-    padding: 3%;
+	padding: 1em;
 }
 
 .center {
@@ -289,16 +289,16 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-#sharebutton{
-    align-items: center;
-    align-self: center; 
+#sharebutton {
+	align-items: center;
+	align-self: center;
 }
 
-button{
-    margin: 1px;
+button {
+	margin: 1px;
 }
 
-#seller-products{
+#seller-products {
 	background-color: #393e46;
 	color: white;
 	padding: 5%;
@@ -398,17 +398,17 @@ a {
 /*********************FORMULARIO********************/
 /***************************************************/
 .input-group-text,
-.formulario textarea{
+.formulario textarea {
 	display: block;
 	margin-bottom: 15px;
 }
-  
+
 .formulario input,
-.formulario select{
+.formulario select {
 	display: block;
 	margin-bottom: 15px;
 }
-  
+
 /**********************IMAGENES*********************/
 /***************************************************/
 .carousel-inner {
@@ -460,4 +460,29 @@ img {
 	margin-left: 250px;
 	margin-right: 250px;
 	border-radius: 5%;
+}
+
+/********************SellerProfile*******************/
+/***************************************************/
+.userInfoContainer {
+	background-color: #393e46;
+	color: white;
+	padding: 1em;
+}
+
+.userInfo {
+	margin-bottom: 1em;
+    padding: 1em;
+    border-color: #22252a;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #303841;
+}
+
+.userStats {
+    border-color: #22252a;
+    border-style: solid;
+	padding: 1em;
+    border-width: 1px;
+    background-color: #303841;
 }
