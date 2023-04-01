@@ -90,8 +90,8 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                                         <Spinner animation="border" variant="light" />
                                     </div>
                                 </div>) : (productImage.map((image, index) => (
-                                    <div className="img-card" >
-                                    <img key={index} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid" />
+                                    <div key={index} className="img-card" >
+                                    <img src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid" />
                                     </div>
                                 )))
                             }
