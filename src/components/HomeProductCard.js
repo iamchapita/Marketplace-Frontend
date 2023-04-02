@@ -74,8 +74,7 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
 
     if (isWhisListStatusInclude) {
         return (
-            <div className="container-home" key={id}>
-                <div className="container card-publication">
+                <div className="container card-publication" key={id}>
                     <div className="card home-card">
                         <div className="account-container">
                             <div className="count-bar">
@@ -110,12 +109,10 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                         </div>
                     </div>
                 </div>
-            </div>
         );
     } else {
         return (
-            <div className="container-home" key={id}>
-                <div className="container card-publication">
+                <div className="container card-publication" key={id}>
                     <div className="card home-card">
                         <div className="account-container">
                             <div className="count-bar">
@@ -137,7 +134,6 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                         </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }

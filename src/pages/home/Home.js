@@ -178,7 +178,7 @@ const Home = ({ isLoggedIn }) => {
                         
                     </nav>
                 </div>
-                
+                <div className="container-home">
                     <div className="container home">
                         <div className="grid-3">
                         {
@@ -199,6 +199,7 @@ const Home = ({ isLoggedIn }) => {
                                 />
                             ))
                         }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -258,7 +259,7 @@ const Home = ({ isLoggedIn }) => {
                         
                     </nav>
                 </div>
-
+                <div className="container-home">
                 <div className="container home">
                     <div className="grid-3">
                     {
@@ -279,8 +280,10 @@ const Home = ({ isLoggedIn }) => {
                         ))
                     }
                     </div>
+                </div>
                 </div>  
-            </div>      );
+            </div>      
+            );
     }
 }
 export default Home;

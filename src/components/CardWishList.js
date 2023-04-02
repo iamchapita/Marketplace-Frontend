@@ -61,23 +61,21 @@ const CardWishList = ({ id, name, price, img, urlDetalles, userId }) => {
     }
 
     return (
-        <div key={id} className="container-WL">
+        <div className="container card-publication" key={id}>
             <div className="cardWL">
-                <div className="row center">
-                    <div className="col-4">
-                        {
-                            !isReadyToRender ? (<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <Spinner animation="border" variant="light" />
-                                </div>
-                            </div>) : (productImage.map((image, index) => (
-                                <div key={index} className="img-card" >
+                        <div className="col-4">
+                            {
+                                !isReadyToRender ? (<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    <div className="d-flex align-items-center justify-content-center">
+                                        <Spinner animation="border" variant="light" />
+                                    </div>
+                                </div>) : (productImage.map((image, index) => (
+                                    <div key={index} className="img-card" >
                                     <img src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid" />
-                                </div>
-                            )))
-                        }
-                    </div>
-                    <div className="col-8">
+                                    </div>
+                                )))
+                            }
+                        </div>
                         <div className="card-body-wl">
                             <h5 className="card-title">{name}</h5>
                             <h6 className="card-text">L {price.toLocaleString()}</h6>
@@ -87,9 +85,7 @@ const CardWishList = ({ id, name, price, img, urlDetalles, userId }) => {
                                 <input className="check-invisible" onClick={() => favorite(id)} type="checkbox" id={`checkwish${id}`} />
                             </div>
                         </div>
-                    </div>
                 </div>
-            </div>
         </div>
     );
 }

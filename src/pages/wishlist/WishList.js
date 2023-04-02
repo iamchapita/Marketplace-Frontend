@@ -53,7 +53,12 @@ const WishList = ({ isLoggedIn }) => {
         }
 
         return (
+            <div className="container-home">
+                <div className="tittle">
+                    <h1>Lista de Deseos</h1>
+                </div>
             <div className="container wish">
+                <div className="grid-3">
                 {
                     products.map((product, index) => (
                         <CardWishList
@@ -68,6 +73,8 @@ const WishList = ({ isLoggedIn }) => {
                         />
                     ))
                 }
+                </div>
+            </div>
             </div>
         );
     }

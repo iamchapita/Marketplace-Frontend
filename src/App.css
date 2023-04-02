@@ -82,24 +82,27 @@ body {
 }
 
 .container-home {
-	background-color: #393e46;
+	background-color: #22252a;
 	border-radius: 10px;
 	border: solid;
 	border-width: 2px;
 	border-color: #393e46;
 	align-items: center;
 	color: white;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	margin-left: 2%;
+	margin-right: 2%;
 	margin-top: 1%;
 	margin-bottom: 1%;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 .home-card {
-	background-color: #22252a;
+	background-color: #393e46;
 	margin-top: 1px;
-	padding: 5px;
 	border: solid;
-	border-color: #22252a;
+	border-color: #393e46;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	height: 400px;
@@ -109,7 +112,7 @@ body {
 .home-card-body {
 	background-color: #393e46;
 	border: solid;
-	border-color: #22252a;
+	border-color: #393e46;
 	border-radius: 10px;
 	margin-top: 1px;
 	padding: 5px;
@@ -138,7 +141,7 @@ body {
 .account-container {
 	background-color: #393e46;
 	border: solid;
-	border-color: #22252a;
+	border-color: #393e46;
 	border-radius: 10px;
 	padding: 5px;
 	height: 60px;
@@ -183,9 +186,21 @@ body {
 
 .col-4 {
 	height: auto;
+	width: 55%;
 	align-self: center;
+	align-items: center;
+	align-content: center;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+.filtro-container {
+	background-color: #22252a;
+	margin: 10px;
+	margin-left: 250px;
+	margin-right: 250px;
+	border-radius: 10%;
+}
+
 
 .home {
 	display: block;
@@ -252,24 +267,35 @@ body {
 }
 
 .cardWL {
-	background-color: #22252a;
+	background-color: #393e46;
 	margin-top: 1px;
-	padding: 5px;
 	border: solid;
-	border-color: #22252a;
+	border-color: #393e46;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
+	height: auto;
+	width: 300px;
 }
 
 .card-body-wl {
 	background-color: #393e46;
 	border: solid;
-	border-color: #22252a;
+	border-color: #393e46;
 	border-radius: 10px;
 	margin-top: 1px;
 	padding: 5px;
 	color: white;
 	height: auto;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#colimgwl{
+	width: 250px;
+	height: auto;
+	border: solid;
+	align-self: center;
+	align-items: center;
+	align-content: center;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -453,13 +479,6 @@ img {
 	width: 150px;
 	height: 150px;
 	display: flex;
-}
-
-.filtro-container {
-	margin: 10px;
-	margin-left: 250px;
-	margin-right: 250px;
-	border-radius: 5%;
 }
 
 /********************SellerProfile*******************/
