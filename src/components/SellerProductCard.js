@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
+import Button from "../components/Button";
 
 function SellerProductCard({ id, name, price, path, createdAt }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
     const [isReadyToRender, setIsReadyToRender] = useState(false);
-    
+
     createdAt = createdAt.split(' ')[0];
 
     useEffect(() => {
@@ -64,6 +65,16 @@ function SellerProductCard({ id, name, price, path, createdAt }) {
                     <h5 className="card-title">{name}</h5>
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
+                </div>
+
+
+                <div className="card-footer">
+                    <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
+                        <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'}/>
+                    </div>
+                    <div style={{ paddingBottom: '0.5em' }}>
+                        <Button type={'button'} fieldLabel={'Dar de Baja'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} />
+                    </div>
                 </div>
                 <div className="card-footer">
                     <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
