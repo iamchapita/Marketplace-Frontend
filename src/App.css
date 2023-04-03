@@ -81,32 +81,27 @@ body {
 	visibility: hidden;
 }
 
-.container-home {
+.container-md {
 	background-color: #22252a;
 	border-radius: 10px;
 	border: solid;
 	border-width: 2px;
-	border-color: #393e46;
+	border-color: #22252a;
 	align-items: center;
 	color: white;
-	padding-top: 1%;
-	padding-bottom: 1%;
-	margin-left: 2%;
-	margin-right: 2%;
 	margin-top: 1%;
 	margin-bottom: 1%;
+	padding: 1%;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 .home-card {
 	background-color: #393e46;
-	margin-top: 1px;
 	border: solid;
 	border-color: #393e46;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
-	height: 400px;
-	width: 300px;
+	height: 420px;
 }
 
 .home-card-body {
@@ -128,6 +123,15 @@ body {
 	grid-column-gap: 10px;
 	grid-row-gap: 0.5em;
 }
+
+.grid-container {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+  }
+  
 
 .grid-6 {
 	margin-top: 5px;
@@ -266,15 +270,15 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-.cardWL {
+.WL-card {
 	background-color: #393e46;
+	padding: 1%;
 	margin-top: 1px;
 	border: solid;
 	border-color: #393e46;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	height: auto;
-	width: 300px;
 }
 
 .card-body-wl {

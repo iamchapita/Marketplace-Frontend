@@ -18,8 +18,8 @@ const WishList = ({ isLoggedIn }) => {
                 setIsReadyToRender(true);
             }).catch((error) => {
                 if (error.response.status === 500) {
-                    setWasWishListFound(false);
-                    setIsReadyToRender(true);
+                setWasWishListFound(false);
+                setIsReadyToRender(true);
                 }
             })
         }
@@ -53,25 +53,25 @@ const WishList = ({ isLoggedIn }) => {
         }
 
         return (
-            <div className="container-home">
+            <div className="container-md">
                 <div className="tittle">
                     <h1>Lista de Deseos</h1>
                 </div>
             <div className="container wish">
-                <div className="grid-3">
+                <div className="grid-container">
                 {
-                    products.map((product, index) => (
-                        <CardWishList
-                            key={index}
-                            id={product.id}
-                            idSeller={product.userIdFK}
-                            name={product.name}
-                            price={product.price.toLocaleString()}
-                            img={product.photos}
-                            urlDetalles={`/productDetail/${product.id}`}
-                            userId={localStorage.getItem('id')}
-                        />
-                    ))
+                products.map((product, index) => (
+                    <CardWishList
+                        key={index}
+                        id={product.id}
+                        idSeller={product.userIdFK}
+                        name={product.name}
+                        price={product.price.toLocaleString()}
+                        img={product.photos}
+                        urlDetalles={`/productDetail/${product.id}`}
+                        userId={localStorage.getItem('id')}
+                    />
+                ))
                 }
                 </div>
             </div>

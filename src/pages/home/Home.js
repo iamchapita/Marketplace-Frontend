@@ -131,56 +131,50 @@ const Home = ({ isLoggedIn }) => {
                 <div className="filtro-container">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                            <div className="grid-6">
-                            <div>
+                        <div className="grid-3">
+                        <div>
                             <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)} >
                                 <option value={0} >todos</option>
                                 {
-                                    categories.map((categorie, id)=>(
-                                        <option  key={id} value={categorie.id} >{categorie.name}</option>
-
-
-                                    ))
+                                categories.map((categorie, id)=>(
+                                    <option  key={id} value={categorie.id} >{categorie.name}</option>
+                                ))
                                 }
                             </select>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}  >
                                 <option value={0} >todos</option>
                                 {
-                                    departaments.map((departament, id)=>(
-                                        <option key={id} value={departament.id}  >{departament.name}</option>
-                                    ))
+                                departaments.map((departament, id)=>(
+                                    <option key={id} value={departament.id}  >{departament.name}</option>
+                                ))
                                 }
-                               
                             </select>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <select className="form-select" >
                                 <option defaultValue={null} >Estrellas de vendedor</option>
                             </select>
-                            </div>
-                            <div>
-                                <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)} ></input>
-                            </div>
-                            <div>
-                                <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}  ></input>
-                            </div>
-                            <div> 
-                                <button className="btn btn-primary" onClick={()=>filter()} >
-                                <i className="material-icons" >search</i>
-                                </button>
-                            </div>
-                            </div>
-                            
-
                         </div>
-                        
+                        <div>
+                            <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)} ></input>
+                        </div>
+                        <div>
+                            <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}  ></input>
+                        </div>
+                        <div> 
+                            <button className="btn btn-primary" onClick={()=>filter()} >
+                            <i className="material-icons" >search</i>
+                            </button>
+                        </div>
+                        </div>
+                        </div> 
                     </nav>
                 </div>
-                <div className="container-home">
+                <div className="container-md">
                     <div className="container home">
-                        <div className="grid-3">
+                        <div className="grid-container">
                         {
                             products.map((product, id) => (
                                 <HomeProductCard
@@ -212,7 +206,7 @@ const Home = ({ isLoggedIn }) => {
                 <div className="filtro-container">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                            <div className="grid-6">
+                            <div className="grid-3">
                             <div>
                             <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)} >
                                 <option value={0} >todos</option>
@@ -259,9 +253,9 @@ const Home = ({ isLoggedIn }) => {
                         
                     </nav>
                 </div>
-                <div className="container-home">
+                <div className="container-md">
                 <div className="container home">
-                    <div className="grid-3">
+                    <div className="grid-container">
                     {
                         products.map((product, id) => (
                             <div>
