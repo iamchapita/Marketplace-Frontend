@@ -1,7 +1,7 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const Button = ({ type, fieldLabel, onClick, buttonClass = 'success', tooltipText = '' }) => {
+const Button = ({ type, fieldLabel, onClick, buttonClass = 'success', tooltipText = '', diabled = false }) => {
 
     if (tooltipText.length > 0) {
         const renderTooltip = (props) => (
@@ -16,7 +16,7 @@ const Button = ({ type, fieldLabel, onClick, buttonClass = 'success', tooltipTex
                 delay={{ show: 250, hide: 400 }}
                 overlay={renderTooltip}
             >
-                <button className={`btn btn-${buttonClass}`} type={type} onClick={onClick}>{fieldLabel}</button>
+                <button className={`btn btn-${buttonClass}`} type={type} onClick={onClick} disabled={ diabled ? 'disabled' : ''} >{fieldLabel} </button>
             </OverlayTrigger>
         );
     } else {
