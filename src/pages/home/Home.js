@@ -128,12 +128,13 @@ const Home = ({ isLoggedIn }) => {
     if (isWhisListStatusInclude) {
         return (
             <div>
-                <div className="filtro-container">
+
+                <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                        <div className="grid-3">
-                        <div>
-                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)} >
+                        <div className="form-group row">
+                        <div className="col-sm-2 col-md-2" id="select-filter">
+                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)}>
                                 <option value={0} >todos</option>
                                 {
                                 categories.map((categorie, id)=>(
@@ -142,8 +143,8 @@ const Home = ({ isLoggedIn }) => {
                                 }
                             </select>
                         </div>
-                        <div>
-                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}  >
+                        <div className="col-sm-2 col-md-2" id="select-filter">
+                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}>
                                 <option value={0} >todos</option>
                                 {
                                 departaments.map((departament, id)=>(
@@ -152,26 +153,32 @@ const Home = ({ isLoggedIn }) => {
                                 }
                             </select>
                         </div>
-                        <div>
+                        <div className="col-sm-2 col-md-2" id="select-filter">
                             <select className="form-select" >
                                 <option defaultValue={null} >Estrellas de vendedor</option>
                             </select>
                         </div>
-                        <div>
-                            <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)} ></input>
+                        <div className="col-sm-2 col-md-2" id="input-filter">
+                            <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)}></input>
                         </div>
-                        <div>
-                            <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}  ></input>
+                        <div className="col-sm-2 col-md-2" id="input-filter">
+                            <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}></input>
                         </div>
-                        <div> 
+                        <div className="col-sm-1 col-md-1" id="button-filter"> 
                             <button className="btn btn-primary" onClick={()=>filter()} >
                             <i className="material-icons" >search</i>
+                            </button>
+                        </div>
+                        <div className="col-sm-1 col-md-1" id="button-filter"> 
+                            <button className="btn btn-primary" onClick={()=>filter()} >
+                            <i className="material-icons" >clear_all</i>
                             </button>
                         </div>
                         </div>
                         </div> 
                     </nav>
                 </div>
+
                 <div className="container-md">
                     <div className="container home">
                         <div className="grid-container">
@@ -202,57 +209,58 @@ const Home = ({ isLoggedIn }) => {
 
     if (isWhisListStatusInclude === false) {
         return (
-           <div>
-                <div className="filtro-container">
+            <div>
+                
+                <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                            <div className="grid-3">
-                            <div>
-                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)} >
+                        <div className="form-group row">
+                        <div className="col-sm-2 col-md-2">
+                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)}>
                                 <option value={0} >todos</option>
                                 {
-                                    categories.map((categorie, id)=>(
-                                        <option  key={id} value={categorie.id} >{categorie.name}</option>
-
-
-                                    ))
+                                categories.map((categorie, id)=>(
+                                    <option  key={id} value={categorie.id} >{categorie.name}</option>
+                                ))
                                 }
                             </select>
-                            </div>
-                            <div>
-                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}  >
+                        </div>
+                        <div className="col-sm-2 col-md-2">
+                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}>
                                 <option value={0} >todos</option>
                                 {
-                                    departaments.map((departament, id)=>(
-                                        <option key={id} value={departament.id}  >{departament.name}</option>
-                                    ))
+                                departaments.map((departament, id)=>(
+                                    <option key={id} value={departament.id}  >{departament.name}</option>
+                                ))
                                 }
-                               
                             </select>
-                            </div>
-                            <div>
+                        </div>
+                        <div className="col-sm-2 col-md-2">
                             <select className="form-select" >
                                 <option defaultValue={null} >Estrellas de vendedor</option>
                             </select>
-                            </div>
-                            <div>
-                                <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)} ></input>
-                            </div>
-                            <div>
-                                <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}  ></input>
-                            </div>
-                            <div> 
-                                <button className="btn btn-primary" onClick={()=>filter()} >
-                                <i className="material-icons" >search</i>
-                                </button>
-                            </div>
-                            </div>
-                            
-
                         </div>
-                        
+                        <div className="col-sm-2 col-md-2">
+                            <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)}></input>
+                        </div>
+                        <div className="col-sm-2 col-md-2">
+                            <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}></input>
+                        </div>
+                        <div className="col-sm-1 col-md-1"> 
+                            <button className="btn btn-primary" onClick={()=>filter()} >
+                            <i className="material-icons" >search</i>
+                            </button>
+                        </div>
+                        <div className="col-sm-1 col-md-1"> 
+                            <button className="btn btn-primary" onClick={()=>filter()} >
+                            <i className="material-icons" >clear_all</i>
+                            </button>
+                        </div>
+                        </div>
+                        </div> 
                     </nav>
                 </div>
+
                 <div className="container-md">
                 <div className="container home">
                     <div className="grid-container">
