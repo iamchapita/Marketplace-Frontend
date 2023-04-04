@@ -7,9 +7,8 @@ import apiClient from '../utils/apiClient';
 import { useNavigate } from 'react-router-dom';
 
 
-const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsClient, isSeller, setIsSeller, isBanned, setIsBanned, isEnabled, setIsEnabled }) => {
+const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsClient, isSeller, setIsSeller, isBanned, setIsBanned, isEnabled, setIsEnabled, areUserStatusLoaded, setAreUserStatusLoaded }) => {
 
-    const [isReadyToRender, setIsReadyToRender] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,12 +29,12 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                 setIsEnabled(Boolean(response.data.isEnabled));
 
                 setLoggedIn(true);
-                setIsReadyToRender(true);
+                setAreUserStatusLoaded(true);
 
             }).catch((error) => {
                 if (error.response.status === 401) {
                     setLoggedIn(false);
-                    setIsReadyToRender(true);
+                    setAreUserStatusLoaded(true);
                 }
             })
         }
@@ -82,7 +81,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
 
     };
 
-    if (isReadyToRender) {
+    if (areUserStatusLoaded) {
 
         if (!isAdmin) {
             return (
