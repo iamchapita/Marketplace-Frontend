@@ -233,15 +233,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-/* .col-3 {
-	align-items: center;
-	background-color: #22252a;
-	border: solid;
-	border: #22252a;
-	margin-left: 5%;
-	font-family: Arial, Helvetica, sans-serif;
-} */
-
 .col-8 {
 	align-items: center;
 	height: auto;
@@ -285,16 +276,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-#colimgwl{
-	width: 250px;
-	height: auto;
-	border: solid;
-	align-self: center;
-	align-items: center;
-	align-content: center;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 /****************DETALLES DE PRODUCTO***************/
 /***************************************************/
 .product-description {
@@ -309,6 +290,18 @@ body {
 
 .carousel-inner {
 	font-family: Arial, Helvetica, sans-serif;
+}
+
+.container-custom {
+	background-color: #22252a;
+	border-radius: 10px;
+	color: white;
+	margin: 1%;
+	height: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 900px;
+	max-width: 1500px;
+	padding: 1%;
 }
 
 #sharebutton {
