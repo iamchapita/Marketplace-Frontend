@@ -5,9 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import SellerProductCard from '../../components/SellerProductCard';
 import CustomizableAlert from '../../components/CustomizableAlert';
 
-const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
-
-    // CORREGIR ERROR DE INICIO DE SESION
+const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
 
     // Variables de estado, Se almacena la informacion a renderizar en la vista
     const [sellerInfo, setSellerInfo] = useState(null);
@@ -29,7 +27,6 @@ const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                 setProductsWereFound(true);
                 // setReadyToRender(true);
             }).catch((error) => {
-                // Se debe renderizar un error de que no se encontro productos. PENDIENTE.
                 if (error.response.status === 500) {
 
                     apiClient.post('/sellerDetails', {
@@ -38,7 +35,7 @@ const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                         setSellerInfo(response.data);
                         setProductsWereFound(false);
                     }).catch(error => {
-                        console.log(error.response.data);
+                        setSellerInfo(false);
                     })
 
                 } else {
@@ -52,32 +49,38 @@ const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
     useEffect(() => {
 
-        if (productsWereFound === false) {
-            const sellerInfoObject = {
-                'firstName': sellerInfo[0]['userFirstName'],
-                'lastName': sellerInfo[0]['userLastName'],
-                'email': sellerInfo[0]['userEmail'],
-                'departmentName': sellerInfo[0]['departmentName'],
-                'municipalityName': sellerInfo[0]['municipalityName']
+        if(areUserStatusLoaded && isLoggedIn){
+            if (productsWereFound === false) {
+                const sellerInfoObject = {
+                    'firstName': sellerInfo[0]['userFirstName'],
+                    'lastName': sellerInfo[0]['userLastName'],
+                    'email': sellerInfo[0]['userEmail'],
+                    'departmentName': sellerInfo[0]['departmentName'],
+                    'municipalityName': sellerInfo[0]['municipalityName']
+                }
+                setSellerInfo(sellerInfoObject);
+                setReadyToRender(true);
             }
-            setSellerInfo(sellerInfoObject);
+            // Establece la informacion del usuario del tipo vendedor
+            if (products.length > 0) {
+                const sellerInfoObject = {
+                    'firstName': products[0]['userFirstName'],
+                    'lastName': products[0]['userLastName'],
+                    'email': products[0]['userEmail'],
+                    'departmentName': products[0]['departmentName'],
+                    'municipalityName': products[0]['municipalityName']
+                }
+                setSellerInfo(sellerInfoObject);
+                setReadyToRender(true);
+            }
+        }
+        if(areUserStatusLoaded && !isLoggedIn){
             setReadyToRender(true);
         }
-        // Establece la informacion del usuario del tipo vendedor
-        if (products.length > 0) {
-            const sellerInfoObject = {
-                'firstName': products[0]['userFirstName'],
-                'lastName': products[0]['userLastName'],
-                'email': products[0]['userEmail'],
-                'departmentName': products[0]['departmentName'],
-                'municipalityName': products[0]['municipalityName']
-            }
-            setSellerInfo(sellerInfoObject);
-            setReadyToRender(true);
-        }
+        
     }, [productsWereFound]);
 
-    if (!readyToRender) {
+    if (!areUserStatusLoaded) {
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 <div className="container d-flex justify-content-center">
@@ -89,7 +92,7 @@ const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
     if (readyToRender) {
 
-        if (!isSeller) {
+        if (!isLoggedIn) {
             return (
                 <CustomizableAlert title={'Error'} text={'No tienes Autorización para acceder a este recurso.'} />
             )
