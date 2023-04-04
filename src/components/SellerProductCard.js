@@ -10,33 +10,40 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [productWasSold, setProductWasSold] = useState(wasSold);
     const [productIsAvailable, setProductIsAvailable] = useState(isAvailable);
-    const [productIsBanned, setProductIsBanned] = useState(isBanned);
+    const [performingWasSoldOperation, setPerformingWasSoldOperation] = useState(false);
+    const [performingIsAvailableOperation, setPerformingIsAvailableOperation] = useState(false);
 
     createdAt = createdAt.split(' ')[0];
 
     const handleWasSoldButton = async (productWasSold) => {
 
+        setPerformingWasSoldOperation(true);
         const response = await apiClient.post('/setWasSoldValue', {
             id: id,
             wasSold: !productWasSold
         }).then((response) => {
-            console.log(response);
+            // console.log(response);
             setProductWasSold(!productWasSold);
+            setPerformingWasSoldOperation(false);
         }).catch((error) => {
             console.log(error);
+            setPerformingWasSoldOperation(false);
         });
 
     };
 
     const handleIsAvailableButton = async (productIsAvailable) => {
+        setPerformingIsAvailableOperation(true);
         const response = await apiClient.post('/setIsAvailableValue', {
             id: id,
             isAvailable: !productIsAvailable
         }).then((response) => {
-            console.log(response);
+            // console.log(response);
             setProductIsAvailable(!productIsAvailable);
+            setPerformingIsAvailableOperation(false);
         }).catch((error) => {
             console.log(error);
+            setPerformingIsAvailableOperation(false);
         });
     };
 
@@ -104,20 +111,29 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                     </div>
                     <div style={{ paddingBottom: '0.5em' }}>
                         {
-                            productWasSold ? (
-                                <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                            performingWasSoldOperation ? (
+                                <Button type={'button'}  buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                             ) : (
-                                <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                                productWasSold ? (
+                                    <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                                ) : (
+                                    <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                                )
                             )
                         }
                     </div>
                     <div style={{ paddingBottom: '0.5em' }}>
                         {
-                            productIsAvailable ? (
-                                <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                            performingIsAvailableOperation ? (
+                                <Button type={'button'}  buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                             ) : (
-                                <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                                productIsAvailable ? (
+                                    <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                                ) : (
+                                    <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                                )
                             )
+                            
                         }
                     </div>
                 </div>
