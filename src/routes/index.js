@@ -69,7 +69,7 @@ const RoutesList = () => {
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
 
                         {/* Depende del contexto puede ser privada o pública */}
-                        <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isSeller={isSeller} setIsSeller={setIsSeller} areUserStatusLoaded={areUserStatusLoaded}  setAreUserStatusLoaded={setAreUserStatusLoaded}  />} />
+                        <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded}  setAreUserStatusLoaded={setAreUserStatusLoaded}  />} />
                     </Routes>
                 </BrowserRouter>
             </header>
