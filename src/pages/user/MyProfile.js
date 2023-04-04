@@ -7,12 +7,14 @@ import CustomizableAlert from '../../components/CustomizableAlert';
 
 const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
 
+    // CORREGIR ERROR DE INICIO DE SESION
+
     // Variables de estado, Se almacena la informacion a renderizar en la vista
     const [sellerInfo, setSellerInfo] = useState(null);
     const [products, setProducts] = useState([]);
     const [readyToRender, setReadyToRender] = useState(false);
     const [productsWereFound, setProductsWereFound] = useState(null);
-
+    
     // Se ejecuta cuando se crea el componente y cuando el valor de isLoggedIn cambie
     useEffect(() => {
         const action = async () => {
@@ -118,7 +120,7 @@ const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                             </div>
                             <div className='col-md-9'>
                                 <div className='col-md-12 container-style'>
-                                    <div className="row row-cols-1 row-cols-xxl-6 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
+                                    <div className="row row-cols-1 row-cols-xxl-5 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
                                         {
                                             productsWereFound ? (products.map((product, index) => (
                                                 <SellerProductCard
@@ -127,6 +129,9 @@ const MyProfile = ({ isLoggedIn, setLoggedIn, isSeller, setIsSeller }) => {
                                                     name={product.name}
                                                     price={product.price}
                                                     path={product.photos}
+                                                    isAvailable={product.isAvailable}
+                                                    wasSold={product.wasSold}
+                                                    isBanned={product.isBanned}
                                                     createdAt={product.createdAt}
                                                 />
                                             ))) : (

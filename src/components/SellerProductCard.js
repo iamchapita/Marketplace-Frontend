@@ -3,13 +3,42 @@ import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
 
-function SellerProductCard({ id, name, price, path, createdAt }) {
+function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, createdAt }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
     const [isReadyToRender, setIsReadyToRender] = useState(false);
+    const [productWasSold, setProductWasSold] = useState(wasSold);
+    const [productIsAvailable, setProductIsAvailable] = useState(isAvailable);
+    const [productIsBanned, setProductIsBanned] = useState(isBanned);
 
     createdAt = createdAt.split(' ')[0];
+
+    const handleWasSoldButton = async (productWasSold) => {
+
+        const response = await apiClient.post('/setWasSoldValue', {
+            id: id,
+            wasSold: !productWasSold
+        }).then((response) => {
+            console.log(response);
+            setProductWasSold(!productWasSold);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    };
+
+    const handleIsAvailableButton = async (productIsAvailable) => {
+        const response = await apiClient.post('/setIsAvailableValue', {
+            id: id,
+            isAvailable: !productIsAvailable
+        }).then((response) => {
+            console.log(response);
+            setProductIsAvailable(!productIsAvailable);
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
 
     useEffect(() => {
 
@@ -59,21 +88,37 @@ function SellerProductCard({ id, name, price, path, createdAt }) {
                                     <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid w-100" />
                                 </div>
                             ))}
-                        </div></div>
+                        </div>
+                    </div>
                 )}
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
-
-
                 <div className="card-footer">
                     <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
-                        <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'}/>
+
+                        <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} />
+
                     </div>
                     <div style={{ paddingBottom: '0.5em' }}>
-                        <Button type={'button'} fieldLabel={'Dar de Baja'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} />
+                        {
+                            productWasSold ? (
+                                <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                            ) : (
+                                <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                            )
+                        }
+                    </div>
+                    <div style={{ paddingBottom: '0.5em' }}>
+                        {
+                            productIsAvailable ? (
+                                <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                            ) : (
+                                <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                            )
+                        }
                     </div>
                 </div>
                 <div className="card-footer">
