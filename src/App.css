@@ -414,13 +414,13 @@ a {
 .input-group-text,
 .formulario textarea {
 	display: block;
-	margin-bottom: 15px;
+	margin-bottom: 1em;
 }
 
 .formulario input,
 .formulario select {
 	display: block;
-	margin-bottom: 15px;
+	margin-bottom: 1em;
 }
 
 /**********************IMAGENES*********************/
@@ -495,7 +495,8 @@ img {
 }
 
 .isBanned {
-    border-color: red;
+	border-color: red;
 	border-style: solid;
 	border-width: 1px;
 }
+
