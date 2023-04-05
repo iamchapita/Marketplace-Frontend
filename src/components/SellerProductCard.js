@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
-import ProductEdit from "../pages/product/ProductEdit";
 import { useNavigate } from "react-router-dom";
 
 function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, createdAt, updatedAt }) {
