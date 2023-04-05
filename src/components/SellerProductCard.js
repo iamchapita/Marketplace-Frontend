@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
+import ProductEdit from "../pages/product/ProductEdit";
+import { useNavigate } from "react-router-dom";
 
 function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, createdAt, updatedAt }) {
 
@@ -15,6 +17,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
 
     createdAt = createdAt.split(' ')[0];
     updatedAt = updatedAt.split(' ')[0];
+    const navigate = useNavigate();
 
     const handleWasSoldButton = async (productWasSold) => {
 
@@ -47,6 +50,10 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
             setPerformingIsAvailableOperation(false);
         });
     };
+
+    const handleEditProductButton = () => {
+        navigate(`/productEdit/${id}`);
+    }
 
     useEffect(() => {
 
@@ -122,7 +129,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                 <div className="card-footer">
                     <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
 
-                        <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} />
+                        <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} onClick={handleEditProductButton}/>
 
                     </div>
                     <div style={{ paddingBottom: '0.5em' }}>

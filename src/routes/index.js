@@ -10,6 +10,7 @@ import WishList from '../pages/wishlist/WishList';
 import AdminHome from '../pages/admin/AdminHome';
 import MyProfile from '../pages/user/MyProfile';
 import SellerProfile from '../pages/seller/SellerProfile';
+import ProductEdit from '../pages/product/ProductEdit';
 
 const RoutesList = () => {
 
@@ -38,7 +39,7 @@ const RoutesList = () => {
                         setIsBanned={setIsBanned}
                         isEnabled={isEnabled}
                         setIsEnabled={setIsEnabled}
-                        areUserStatusLoaded={areUserStatusLoaded} 
+                        areUserStatusLoaded={areUserStatusLoaded}
                         setAreUserStatusLoaded={setAreUserStatusLoaded}
                     />
                     <Routes>
@@ -67,9 +68,8 @@ const RoutesList = () => {
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
-
-                        {/* Depende del contexto puede ser privada o pública */}
-                        <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded}  setAreUserStatusLoaded={setAreUserStatusLoaded}  />} />
+                        <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded} setAreUserStatusLoaded={setAreUserStatusLoaded} />} />
+                        <Route path='/productEdit/:id' element={<ProductEdit isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                     </Routes>
                 </BrowserRouter>
             </header>
