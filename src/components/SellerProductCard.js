@@ -3,7 +3,7 @@ import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
 
-function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, createdAt }) {
+function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, createdAt, updatedAt }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
@@ -14,6 +14,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
     const [performingIsAvailableOperation, setPerformingIsAvailableOperation] = useState(false);
 
     createdAt = createdAt.split(' ')[0];
+    updatedAt = updatedAt.split(' ')[0];
 
     const handleWasSoldButton = async (productWasSold) => {
 
@@ -80,7 +81,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
 
     return (
         <div key={id} className="col">
-            <div className="card h-100" id="seller-products">
+            <div className={`card h-100 ${isBanned ? 'isBanned' : ''} `} id="seller-products">
                 {!isReadyToRender ? (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">
@@ -101,6 +102,21 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
+                    {
+                        !isBanned ? (
+                            productIsAvailable ? (
+                                !productWasSold ? (
+                                    <h6 className="card-text">Estado: Disponible</h6>
+                                ) : (
+                                    <h6 className="card-text">Estado: Vendido</h6>
+                                )
+                            ) : (
+                                <h6 className="card-text">Estado: Deshabilitado</h6>
+                            )
+                        ) : (
+                            <h6 className="card-text">Estado: Banneado</h6>
+                        )
+                    }
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
                 <div className="card-footer">
@@ -112,12 +128,12 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                     <div style={{ paddingBottom: '0.5em' }}>
                         {
                             performingWasSoldOperation ? (
-                                <Button type={'button'}  buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
+                                <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                             ) : (
                                 productWasSold ? (
-                                    <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                                    <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
                                 ) : (
-                                    <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} />
+                                    <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
                                 )
                             )
                         }
@@ -125,20 +141,30 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                     <div style={{ paddingBottom: '0.5em' }}>
                         {
                             performingIsAvailableOperation ? (
-                                <Button type={'button'}  buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
+                                <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                             ) : (
                                 productIsAvailable ? (
-                                    <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                                    <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
                                 ) : (
-                                    <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} />
+                                    <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
                                 )
                             )
-                            
+
                         }
                     </div>
                 </div>
                 <div className="card-footer">
-                    <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
+                    {
+                        createdAt === updatedAt ? (
+                            <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
+                        ) : (
+                            <div>
+                                <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
+                                <br></br>
+                                <small className="text-body-secondary">{`Actualizado en: ${updatedAt}`}</small>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
