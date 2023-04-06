@@ -28,21 +28,10 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     const [wasProductFound, setWasProductFound] = useState(false);
     const [productImages, setProductImages] = useState([]);
     const [productExtensions, setProductExtensions] = useState([]);
-    const [base64Format, setBase64Format] = useState(false);
 
+    // Almacena las imagenes del dropzone
     const [images, setImages] = useState([]);
-
-    const handleDrop = (files) => {
-        const imageList = files.map((file) => {
-            if (file.type.includes('image')){
-                return Object.assign(file, {
-                    preview: URL.createObjectURL(file),
-                    base64: false,
-                })
-            }
-        });
-        setImages((prevImages) => prevImages.concat(imageList));
-    };
+    const [areImagesValid, setAreImagesValid] = useState(true);
 
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     // Almacena el valor de la catetoria obtenida en el form
@@ -184,6 +173,24 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
     // }, [photos]);
 
+
+    const handleDrop = (files) => {
+
+        const imageList = files.map((file) => {
+            if (file.type.includes('image')) {
+                return Object.assign(file, {
+                    preview: URL.createObjectURL(file),
+                    base64: false,
+                })
+            } else {
+                setAreImagesValid(false);
+            }
+        });
+
+        setImages((prevImages) => prevImages.concat(imageList));
+
+    };
+
     const nameChangeHandler = (e) => {
         setName(e.target.value);
         nameRegex.test(e.target.value) ? setIsNameValid(true) : setIsNameValid(false);
@@ -251,26 +258,26 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
             setAlertMessage(validationMessages);
             setShowAlert(true);
         } else {
-            setShowAlert(false);
-            const action = async () => {
-                const response = await apiClient.post('/createProduct', {
-                    name: name,
-                    description: description,
-                    price: price,
-                    photos: photosConvertered,
-                    status: status === '1' ? 'Nuevo' : 'Usado',
-                    userIdFK: localStorage.getItem('id'),
-                    categoryIdFK: productCategory
-                }).then((response) => {
-                    // Redireccionando a la ruta base
-                    navigate('/myProfile');
+            // setShowAlert(false);
+            // const action = async () => {
+            //     const response = await apiClient.post('/createProduct', {
+            //         name: name,
+            //         description: description,
+            //         price: price,
+            //         photos: photosConvertered,
+            //         status: status === '1' ? 'Nuevo' : 'Usado',
+            //         userIdFK: localStorage.getItem('id'),
+            //         categoryIdFK: productCategory
+            //     }).then((response) => {
+            //         // Redireccionando a la ruta base
+            //         navigate('/myProfile');
 
-                }).catch((error) => {
-                    setAlertMessage(error.response.data.message);
-                    setShowAlert(true);
-                })
-            }
-            action();
+            //     }).catch((error) => {
+            //         setAlertMessage(error.response.data.message);
+            //         setShowAlert(true);
+            //     })
+            // }
+            // action();
         }
     }
 
@@ -330,7 +337,7 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
                                     <InputText type={'number'} fieldLabel={'Precio'} fieldName={'price'} placeholder={'Ingrese el Precio del Producto'} inputValue={price} onChangeHandler={priceChangeHandler} isValid={isPriceValid} step={true} />
 
-                                    <Dropzone onChange={handleDrop} images={images} />
+                                    <Dropzone onChange={handleDrop} images={images} isValid={areImagesValid} setIsValid={setAreImagesValid} />
 
                                     <SelectInput fieldLabel={'Categoría del Producto'} fieldName={'categoryIdFK'} firstOptionValue={'Seleccione la Categoría del Producto'} optionsValues={productCategories} inputValue={productCategory} onChangeHandler={productCategoryChangeHandler} required={true} />
 
