@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import apiClient from '../../utils/apiClient';
 import InputText from '../../components/InputText';
 import TextArea from "../../components/TextArea";
-import InputFile from "../../components/InputFile";
 import Button from '../../components/Button';
 import SelectInput from "../../components/SelectInput";
 import Alert from "../../components/common/Alert";
+import { Spinner } from "react-bootstrap";
+import CustomizableAlert from '../../components/CustomizableAlert';
+import Dropzone from "../../components/Dropzone";
 
+const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
-const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
+    const { id } = useParams();
 
     const [name, setName] = useState('');
     const [isNameValid, setIsNameValid] = useState(false);
@@ -21,24 +24,39 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
     const [isPhotosValid, setIsPhotosValid] = useState(false);
     const [status, setStatus] = useState('');
     const [isStatusValid, setIsStatusValid] = useState(false);
+    const [product, setProduct] = useState([]);
+    const [wasProductFound, setWasProductFound] = useState(false);
+    const [productImages, setProductImages] = useState([]);
+    const [productExtensions, setProductExtensions] = useState([]);
+    const [base64Format, setBase64Format] = useState(false);
 
+    const [images, setImages] = useState([]);
+
+    const handleDrop = (files) => {
+        const imageList = files.map((file) => {
+            if (file.type.includes('image')){
+                return Object.assign(file, {
+                    preview: URL.createObjectURL(file),
+                    base64: false,
+                })
+            }
+        });
+        setImages((prevImages) => prevImages.concat(imageList));
+    };
+
+    const [isReadyToRender, setIsReadyToRender] = useState(false);
     // Almacena el valor de la catetoria obtenida en el form
     const [productCategory, setProductCategory] = useState('');
     const [isProductCategoryValid, setIsProductCategoryValid] = useState(false);
-
     // Almacena todas las categorias obtenidas desde la base de datos
     const [productCategories, setProductCategories] = useState([]);
-
     // Controla el Alert de error
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
-
-    //  Variable que almacena el mensaje de error retornado en el Alert
-    var validationMessages = '';
-
     // Variable que almacena las fotos convertidas
     const [photosConvertered, setPhotosConvertered] = useState({});
-
+    //  Variable que almacena el mensaje de error retornado en el Alert
+    var validationMessages = '';
     // Se utiliza para redireccionar a una ruta
     const navigate = useNavigate();
 
@@ -49,44 +67,122 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
     const statusRegex = /^[12]$/;
     const categoryRegex = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/
 
-    // Obtiene las categorias de los productos desde la base de datos
     useEffect(() => {
-
         const action = async () => {
-            try {
-                const response = await apiClient.get('/categories', {
-                }).then((response) => {
-                    setProductCategories(response.data);
-                }).catch((error) => {
-                    console.log(error);
-                })
-            } catch (error) {
-            }
+            const response = await apiClient.get(`/product/${id}`).then((response) => {
+
+                if (localStorage.getItem('id') === String(response.data.userId)) {
+                    setWasProductFound(true);
+                    setProduct(response.data);
+                } else {
+                    setWasProductFound('Unauthorized');
+                    setIsReadyToRender(true);
+                }
+
+            }).catch((error) => {
+                if (error.response.status === 500) {
+                    setWasProductFound(false);
+                    setIsReadyToRender(true);
+                }
+            });
         }
 
         action();
     }, []);
 
-    // Se ejecuta cada vez que el valor de photos cambie
-    // Aqui se realiza la validacion y conversion de los archivos recibidos desde el form
+    // Obtiene las imagenes del producto
     useEffect(() => {
 
-        let photosConverteredArray = [];
+        const action = async () => {
+            await apiClient.post('/getProductImages', {
+                path: product['photos']
+            }).then((response) => {
+                setProductImages(response.data);
+            }).catch((error) => {
+                setAlertMessage(error.response.data.message);
+            });
 
-        photos.map((photo) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(photo);
+        }
 
-            reader.onload = () => {
-                const base64String = ((reader.result).split(';')[1]).split(',')[1];
-                let photoData = { 'name': photo.name, 'base64Image': base64String };
-                photosConverteredArray.push(photoData);
-            }
-        });
+        if (product.length !== 0) {
+            action();
+        }
 
-        setPhotosConvertered(photosConverteredArray);
-        setIsPhotosValid(true);
-    }, [photos]);
+    }, [product]);
+
+    useEffect(() => {
+        if (productImages.length !== 0) {
+
+            const imageList = productImages.map((image) => {
+                const base64Image = image.base64Image;
+                const name = image.name
+                // Convertir la imagen base64 a un Blob
+                const byteString = atob(base64Image);
+                const mimeString = `image/${name.split('.')[1]}`;
+                const arrayBuffer = new ArrayBuffer(byteString.length);
+                const intArray = new Uint8Array(arrayBuffer);
+                for (let i = 0; i < byteString.length; i++) {
+                    intArray[i] = byteString.charCodeAt(i);
+                }
+                const blob = new Blob([arrayBuffer], { type: mimeString });
+
+                // Crear un objeto tipo File con el Blob y el nombre del archivo
+                let file = new File([blob], name, { type: mimeString });
+
+                Object.assign(file, {
+                    preview: URL.createObjectURL(file),
+                    base64: true,
+                })
+
+                return file;
+            })
+
+            setImages((prevImages) => prevImages.concat(imageList));
+            setIsReadyToRender(true);
+        }
+    }, [productImages]);
+
+
+    // Obtiene las categorias de los productos desde la base de datos
+    useEffect(() => {
+
+        const action = async () => {
+
+            const response = await apiClient.get('/categories', {
+            }).then((response) => {
+                setProductCategories(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+
+        if (product !== null) {
+            action();
+        }
+
+    }, [product]);
+
+    // Se ejecuta cada vez que el valor de photos cambie
+    // Aqui se realiza la validacion y conversion de los archivos recibidos desde el form
+    // useEffect(() => {
+
+    //     let photosConverteredArray = [];
+
+    //     photos.map((photo) => {
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(photo);
+
+    //         reader.onload = () => {
+    //             const base64String = ((reader.result).split(';')[1]).split(',')[1];
+    //             let photoData = { 'name': photo.name, 'base64Image': base64String };
+    //             photosConverteredArray.push(photoData);
+    //         }
+    //     });
+
+    //     setPhotosConvertered(photosConverteredArray);
+    //     setIsPhotosValid(true);
+
+    // }, [photos]);
 
     const nameChangeHandler = (e) => {
         setName(e.target.value);
@@ -157,65 +253,99 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
         } else {
             setShowAlert(false);
             const action = async () => {
-                try {
-                    const response = await apiClient.get('/user').then((response) => {
-                        var id = response.data['id'];
+                const response = await apiClient.post('/createProduct', {
+                    name: name,
+                    description: description,
+                    price: price,
+                    photos: photosConvertered,
+                    status: status === '1' ? 'Nuevo' : 'Usado',
+                    userIdFK: localStorage.getItem('id'),
+                    categoryIdFK: productCategory
+                }).then((response) => {
+                    // Redireccionando a la ruta base
+                    navigate('/myProfile');
 
-                        apiClient.post('/createProduct', {
-                            name: name,
-                            description: description,
-                            price: price,
-                            photos: photosConvertered,
-                            status: status === '1' ? 'Nuevo' : 'Usado',
-                            userIdFK: id,
-                            categoryIdFK: productCategory
-
-                        }).then((response) => {
-                            // Redireccionando a la ruta base
-                            navigate('/home');
-
-                        }).catch((error) => {
-                            setAlertMessage(error.response.data.message);
-                            setShowAlert(true);
-                        })
-                    }).catch((error) => {
-                        setAlertMessage(error.response.data.message);
-                        setShowAlert(true);
-                    })
-                } catch (error) {
-                }
+                }).catch((error) => {
+                    setAlertMessage(error.response.data.message);
+                    setShowAlert(true);
+                })
             }
             action();
         }
     }
 
-    return (
-        <div className='container-sm'>
-            <div className='tittle'>
-                <h1>Registro de Producto</h1>
-            </div>
-            <div className='row center'>
-                <div className="col-12">
-                <form encType='multipart/form-data' className='formulario'>
-                    <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
-                    <InputText type={'text'} fieldLabel={'Nombre'} fieldName={'name'} placeholder={'Ingrese un nombre descriptivo del Producto'} inputValue={name} onChangeHandler={nameChangeHandler} isValid={isNameValid} />
-
-                    <TextArea fieldLabel={'Descripción'} fieldName={'description'} placeholder={'Brinde una descripción amplia del producto'} inputValue={description} onChangeHandler={descriptionChangeHandler} isValid={isDescriptionValid} />
-
-                    <InputText type={'number'} fieldLabel={'Precio'} fieldName={'price'} placeholder={'Ingrese el Precio del Producto'} inputValue={price} onChangeHandler={priceChangeHandler} isValid={isPriceValid} step={true} />
-
-                    <InputFile type={'file'} fieldLabel={'Fotografías'} fieldName={'photos'} placeholder={'Suba fotografías del Producto'} inputValue={photos} onChangeHandler={photosChangeHandler} required={true} isValid={isPhotosValid} accept={['image/*']} />
-
-                    <SelectInput fieldLabel={'Categoría del Producto'} fieldName={'categoryIdFK'} firstOptionValue={'Seleccione la Categoría del Producto'} optionsValues={productCategories} inputValue={productCategory} onChangeHandler={productCategoryChangeHandler} required={true} />
-
-                    <SelectInput fieldLabel={'Estado del Producto'} fieldName={status} firstOptionValue={'Seleccione el Estado del Producto'} optionsValues={[{ 'id': 1, 'name': 'Nuevo' }, { 'id': 2, 'name': 'Usado' }]} inputValue={status} onChangeHandler={statusChangeHandler} required={true} />
-
-                    <Button type={'submit'} fieldLabel={'Registrar Producto'} onClick={submitHandler} />
-                </form>
+    if (areUserStatusLoaded === false) {
+        return (
+            <div className='container-fluid' style={{ marginTop: '3em' }}>
+                <div className="container d-flex justify-content-center">
+                    <Spinner animation="border" variant='light' />
                 </div>
             </div>
-        </div>
-    );
+        )
+    }
+
+    if (areUserStatusLoaded === true) {
+
+        if (isSeller === false) {
+            return (
+                <CustomizableAlert title={'Error'} text={'No tienes autorización para acceder a este recurso.'} variant={'danger'} />
+            )
+        }
+
+        if (isReadyToRender === false) {
+            return (
+                <div className='container-fluid' style={{ marginTop: '3em' }}>
+                    <div className="container d-flex justify-content-center">
+                        <Spinner animation="border" variant='light' />
+                    </div>
+                </div>
+            )
+        } else {
+
+            if (wasProductFound === false) {
+                return (
+                    <CustomizableAlert title={'Error'} text={'No se encontró el producto.'} variant={'danger'} />
+                )
+            }
+
+            if (wasProductFound === 'Unauthorized') {
+                return (
+                    <CustomizableAlert title={'Error'} text={'No tienes autorización para acceder a este recurso.'} variant={'danger'} />
+                )
+            }
+
+            if (product.length !== 0) {
+                return (
+                    <div className='container-sm'>
+                        <div className='tittle'>
+                            <h1>Editar Producto</h1>
+                        </div>
+                        <div className='row center'>
+                            <div className="col-12">
+                                <form encType='multipart/form-data' className='formulario'>
+                                    <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
+                                    <InputText type={'text'} fieldLabel={'Nombre'} fieldName={'name'} placeholder={'Ingrese un nombre descriptivo del Producto'} inputValue={name} onChangeHandler={nameChangeHandler} isValid={isNameValid} />
+
+                                    <TextArea fieldLabel={'Descripción'} fieldName={'description'} placeholder={'Brinde una descripción amplia del producto'} inputValue={description} onChangeHandler={descriptionChangeHandler} isValid={isDescriptionValid} />
+
+                                    <InputText type={'number'} fieldLabel={'Precio'} fieldName={'price'} placeholder={'Ingrese el Precio del Producto'} inputValue={price} onChangeHandler={priceChangeHandler} isValid={isPriceValid} step={true} />
+
+                                    <Dropzone onChange={handleDrop} images={images} />
+
+                                    <SelectInput fieldLabel={'Categoría del Producto'} fieldName={'categoryIdFK'} firstOptionValue={'Seleccione la Categoría del Producto'} optionsValues={productCategories} inputValue={productCategory} onChangeHandler={productCategoryChangeHandler} required={true} />
+
+                                    <SelectInput fieldLabel={'Estado del Producto'} fieldName={status} firstOptionValue={'Seleccione el Estado del Producto'} optionsValues={[{ 'id': 1, 'name': 'Nuevo' }, { 'id': 2, 'name': 'Usado' }]} inputValue={status} onChangeHandler={statusChangeHandler} required={true} />
+
+                                    <Button type={'submit'} fieldLabel={'Actualizar Producto'} onClick={submitHandler} />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+        }
+    }
 }
 
-export default ProductInsert;
+export default ProductEdit;
