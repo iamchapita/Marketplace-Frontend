@@ -43,7 +43,8 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
                                 src={typeof file === "string" ? file : URL.createObjectURL(file)}
                                 alt={`Thumbnail ${index + 1}`}
                                 className="img-fluid rounded mt-3"
-                            />
+                                style={{ width: '15em', height: '20em', objectFit: 'cover'}}
+                            />px
                             <div className="card-body d-flex justify-content-center">
                                 <button
                                     type="button"
