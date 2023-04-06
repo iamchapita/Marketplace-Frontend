@@ -336,6 +336,22 @@ select:invalid {
 	border-color: red;
 }
 
+/*********************DROPZONE**********************/
+/***************************************************/
+
+.dropzone{
+    border-color: white;
+	border-style: solid;
+	border-width: 1px;
+    background-color: white;
+    color: gray;
+}
+
+.invalid {
+    border-color: red;
+}
+
+
 /***********************NAVBAR**********************/
 /***************************************************/
 .navbar {
