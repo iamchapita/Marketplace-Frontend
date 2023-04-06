@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6, images = [], isValid = true, setIsValid }) => {
 
     const [files, setFiles] = useState(images);
-    
+
     useEffect(() => {
         renderThumbnails();
     }, [files]);
@@ -26,7 +26,7 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
         const newFiles = [...files];
         newFiles.splice(index, 1);
 
-        setIsValid(newFiles.every(file => file.type.includes(accept.split('/')[0])));
+        setIsValid(newFiles.every(file => file.type.includes(accept.split('/')[0])) && newFiles.length < 7);
 
         setFiles(newFiles);
         onChange(newFiles);
@@ -57,7 +57,7 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
 
                     ) : (
                         <div className={`card invalid`}>
-                            <p className="text-center" style={{ color: 'black', marginTop:'1em' }}>Tipo de Archivo no válido.</p>
+                            <p className="text-center" style={{ color: 'black', marginTop: '1em' }}>Tipo de Archivo no válido.</p>
                             <div className="card-body d-flex justify-content-center">
                                 <button
                                     type="button"
