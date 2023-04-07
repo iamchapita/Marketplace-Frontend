@@ -123,7 +123,7 @@ const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
                             </div>
                             <div className='col-md-9'>
                                 <div className='col-md-12 container-style'>
-                                    <div className="row row-cols-1 row-cols-xxl-5 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
+                                    <div className="row row-cols-1 row-cols-sm-2 row-cols-xxl-4 row-cols-xl-3 g-4">
                                         {
                                             productsWereFound ? (products.map((product, index) => (
                                                 <SellerProductCard
