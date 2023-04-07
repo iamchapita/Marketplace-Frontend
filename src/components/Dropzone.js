@@ -71,9 +71,6 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
                         </div>
                     )
                 }
-
-
-
             </div>
         ));
     };
