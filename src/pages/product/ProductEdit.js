@@ -20,14 +20,11 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     const [isDescriptionValid, setIsDescriptionValid] = useState(false);
     const [price, setPrice] = useState('');
     const [isPriceValid, setIsPriceValid] = useState(false);
-    const [photos, setPhotos] = useState([]);
-    const [isPhotosValid, setIsPhotosValid] = useState(false);
     const [status, setStatus] = useState('');
     const [isStatusValid, setIsStatusValid] = useState(false);
     const [product, setProduct] = useState([]);
     const [wasProductFound, setWasProductFound] = useState(false);
     const [productImages, setProductImages] = useState([]);
-    const [productExtensions, setProductExtensions] = useState([]);
 
     // Almacena las imagenes del dropzone
     const [images, setImages] = useState([]);
@@ -63,6 +60,16 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                 if (localStorage.getItem('id') === String(response.data.userId)) {
                     setWasProductFound(true);
                     setProduct(response.data);
+                    setName(response.data.name);
+                    setIsNameValid(true);
+                    setDescription(response.data.description);
+                    setIsDescriptionValid(true);
+                    setPrice(response.data.price);
+                    setIsPriceValid(true);
+                    setProductCategory(response.data.categoryIdFK);
+                    setIsProductCategoryValid(true);
+                    setStatus(response.data.status === 'Nuevo' ? 1 : 2);
+                    setIsStatusValid(true);
                 } else {
                     setWasProductFound('Unauthorized');
                     setIsReadyToRender(true);
@@ -118,11 +125,6 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                 // Crear un objeto tipo File con el Blob y el nombre del archivo
                 let file = new File([blob], name, { type: mimeString });
 
-                Object.assign(file, {
-                    preview: URL.createObjectURL(file),
-                    base64: true,
-                })
-
                 return file;
             })
 
@@ -130,7 +132,6 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
             setIsReadyToRender(true);
         }
     }, [productImages]);
-
 
     // Obtiene las categorias de los productos desde la base de datos
     useEffect(() => {
@@ -151,46 +152,6 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
     }, [product]);
 
-    // Se ejecuta cada vez que el valor de photos cambie
-    // Aqui se realiza la validacion y conversion de los archivos recibidos desde el form
-    // useEffect(() => {
-
-    //     let photosConverteredArray = [];
-
-    //     photos.map((photo) => {
-    //         const reader = new FileReader();
-    //         reader.readAsDataURL(photo);
-
-    //         reader.onload = () => {
-    //             const base64String = ((reader.result).split(';')[1]).split(',')[1];
-    //             let photoData = { 'name': photo.name, 'base64Image': base64String };
-    //             photosConverteredArray.push(photoData);
-    //         }
-    //     });
-
-    //     setPhotosConvertered(photosConverteredArray);
-    //     setIsPhotosValid(true);
-
-    // }, [photos]);
-
-
-    const handleDrop = (files) => {
-
-        const imageList = files.map((file) => {
-            if (file.type.includes('image')) {
-                return Object.assign(file, {
-                    preview: URL.createObjectURL(file),
-                    base64: false,
-                })
-            } else {
-                setAreImagesValid(false);
-            }
-        });
-
-        setImages((prevImages) => prevImages.concat(imageList));
-
-    };
-
     const nameChangeHandler = (e) => {
         setName(e.target.value);
         nameRegex.test(e.target.value) ? setIsNameValid(true) : setIsNameValid(false);
@@ -206,11 +167,6 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
         priceRegex.test(e.target.value) ? setIsPriceValid(true) : setIsPriceValid(false);
     }
 
-    const photosChangeHandler = (e) => {
-        const filesArray = Array.from(e.target.files);
-        setPhotos(filesArray);
-    }
-
     const statusChangeHandler = (e) => {
         setStatus(e.target.value);
         statusRegex.test(e.target.value) ? setIsStatusValid(true) : setIsStatusValid(false);
@@ -223,29 +179,28 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
     const validateFields = () => {
 
+        console.log(images);
+
         !nameRegex.test(name) ? validationMessages = validationMessages + '<br>El contenido del campo Nombre no es válido.' : validationMessages = validationMessages + '';
 
         !descriptionRegex.test(description) ? validationMessages = validationMessages + '<br>El contenido del campo Descripción no es válido.' : validationMessages = validationMessages + '';
 
         !priceRegex.test(price) ? validationMessages = validationMessages + '<br>El contenido del campo Precio no es válido.' : validationMessages = validationMessages + '';
 
-        photos.map((photo) => {
-            const fileType = String(photo.type).split('/')[0];
-
-            if (fileType !== 'image') {
-
-                !validationMessages.includes('tipo imagen') ? validationMessages = validationMessages + '<br>Los archivos cargados no son del tipo imagen.' : validationMessages = validationMessages + '';
-                setIsPhotosValid(false);
+        images.map((image) => {
+            if (!image.type.includes('image')) {
+                !validationMessages.includes('tipo imagen') ? validationMessages = validationMessages + '<br>Al menos uno de los archivos cargados no es del tipo imagen.' : validationMessages = validationMessages + '';
+                setAreImagesValid(false);
             }
         });
 
-        photos.length > 6 ? validationMessages = validationMessages + '<br>Solamente se pueden subir 6 imágenes por producto.' : validationMessages = validationMessages + '';
+        images.length > 6 ? validationMessages = validationMessages + '<br>Solamente se pueden subir 6 imágenes por producto.' : validationMessages = validationMessages + '';
 
-        photos.length === 0 ? validationMessages = validationMessages + '<br>No se ha seleccionado ningún archivo.' : validationMessages = validationMessages + '';
+        images.length === 0 ? validationMessages = validationMessages + '<br>No se ha seleccionado ningún archivo.' : validationMessages = validationMessages + '';
 
-        !categoryRegex.test(productCategory) ? validationMessages = validationMessages + '<br> El valor de Estado del Producto no es válido.' : validationMessages = validationMessages + '';
+        !isStatusValid ? validationMessages = validationMessages + '<br> El valor de Estado del Producto no es válido.' : validationMessages = validationMessages + '';
 
-        !statusRegex.test(status) ? validationMessages = validationMessages + '<br> El valor de Categoría del Producto no es válido.' : validationMessages = validationMessages + '';
+        !isProductCategoryValid ? validationMessages = validationMessages + '<br> El valor de Categoría del Producto no es válido.' : validationMessages = validationMessages + '';
 
     }
 
@@ -258,7 +213,7 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
             setAlertMessage(validationMessages);
             setShowAlert(true);
         } else {
-            // setShowAlert(false);
+            setShowAlert(false);
             // const action = async () => {
             //     const response = await apiClient.post('/createProduct', {
             //         name: name,
@@ -337,7 +292,7 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
                                     <InputText type={'number'} fieldLabel={'Precio'} fieldName={'price'} placeholder={'Ingrese el Precio del Producto'} inputValue={price} onChangeHandler={priceChangeHandler} isValid={isPriceValid} step={true} />
 
-                                    <Dropzone onChange={handleDrop} images={images} isValid={areImagesValid} setIsValid={setAreImagesValid} />
+                                    <Dropzone images={images} setImages={setImages} setImages={setImages} isValid={areImagesValid} setIsValid={setAreImagesValid} />
 
                                     <SelectInput fieldLabel={'Categoría del Producto'} fieldName={'categoryIdFK'} firstOptionValue={'Seleccione la Categoría del Producto'} optionsValues={productCategories} inputValue={productCategory} onChangeHandler={productCategoryChangeHandler} required={true} />
 

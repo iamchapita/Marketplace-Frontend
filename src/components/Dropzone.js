@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6, images = [], isValid = true, setIsValid }) => {
+const Dropzone = ({ accept = "image/*", multiple = true, maxFiles = 6, images = [], setImages, isValid = true, setIsValid }) => {
 
     const [files, setFiles] = useState(images);
 
@@ -17,10 +17,15 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
                 setIsValid(false);
             }
 
-            setFiles([...files, ...acceptedFiles]);
-            onChange([...files, ...acceptedFiles]);
+            const newFiles = acceptedFiles.filter((file) => {
+                return !files.some((existingFile) => existingFile.name === file.name);
+            });
+
+            setFiles([...files, ...newFiles]);
+            setImages([...files, ...newFiles]);
         }
     });
+
 
     const handleRemove = (index) => {
         const newFiles = [...files];
@@ -29,10 +34,11 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
         setIsValid(newFiles.every(file => file.type.includes(accept.split('/')[0])) && newFiles.length < 7);
 
         setFiles(newFiles);
-        onChange(newFiles);
+        setImages(newFiles);
     };
 
     const renderThumbnails = () => {
+
         return files.map((file, index) => (
             <div key={index} className="col-sm-6 col-md-4 col-lg-3 my-3">
                 {
@@ -43,7 +49,7 @@ const Dropzone = ({ onChange, accept = "image/*", multiple = true, maxFiles = 6,
                                 src={typeof file === "string" ? file : URL.createObjectURL(file)}
                                 alt={`Thumbnail ${index + 1}`}
                                 className="img-fluid rounded mt-3"
-                                style={{ width: '15em', height: '20em', objectFit: 'cover'}}
+                                style={{ width: '15em', height: '20em', objectFit: 'cover' }}
                             />px
                             <div className="card-body d-flex justify-content-center">
                                 <button
