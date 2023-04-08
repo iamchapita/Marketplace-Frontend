@@ -67,7 +67,7 @@ const RoutesList = () => {
                         {/* Rutas privadas */}
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
-                        <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+                        <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded} setAreUserStatusLoaded={setAreUserStatusLoaded} />} />
                         <Route path='/productEdit/:id' element={<ProductEdit isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                     </Routes>
