@@ -133,6 +133,7 @@ const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
                                                     price={product.price}
                                                     path={product.photos}
                                                     isAvailable={product.isAvailable}
+                                                    amount={product.amount}
                                                     wasSold={product.wasSold}
                                                     isBanned={product.isBanned}
                                                     createdAt={product.createdAt}
