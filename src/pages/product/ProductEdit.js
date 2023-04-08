@@ -22,6 +22,8 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     const [isPriceValid, setIsPriceValid] = useState(false);
     const [status, setStatus] = useState('');
     const [isStatusValid, setIsStatusValid] = useState(false);
+    const [amount, setAmount] = useState('');
+    const [isAmountValid, setIsAmountValid] = useState(false);
     const [product, setProduct] = useState([]);
     const [wasProductFound, setWasProductFound] = useState(false);
     const [productImages, setProductImages] = useState([]);
@@ -47,11 +49,12 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     const navigate = useNavigate();
 
     // Expresiones regulares para validacion
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-\_\.\,\;\:\(\)\"\'\!]{2,50}$/;
-    const descriptionRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-\_\.\,\;\:\(\)\"\'\!]{10,250}$/;
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-_.;:()"'!]{2,50}$/;
+    const descriptionRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-_.,;:()"'!]{10,250}$/;
     const priceRegex = /^\d+(?:\.\d{1,2})?$/;
     const statusRegex = /^[12]$/;
-    const categoryRegex = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/
+    const categoryRegex = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/;
+    const amountRegex = /^[1-9]\d*$/
 
     useEffect(() => {
         const action = async () => {
@@ -70,6 +73,8 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                     setIsProductCategoryValid(true);
                     setStatus(response.data.status === 'Nuevo' ? 1 : 2);
                     setIsStatusValid(true);
+                    setAmount(response.data.amount);
+                    setIsAmountValid(true);
                 } else {
                     setWasProductFound('Unauthorized');
                     setIsReadyToRender(true);
@@ -170,7 +175,7 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                     }
                 }
             });
-            
+
             setPhotosConvertered(photosConverteredArray);
         }
 
@@ -194,6 +199,11 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     const statusChangeHandler = (e) => {
         setStatus(e.target.value);
         statusRegex.test(e.target.value) ? setIsStatusValid(true) : setIsStatusValid(false);
+    }
+
+    const amountChangeHandler = (e) => {
+        setAmount(e.target.value);
+        amountRegex.test(e.target.value) ? setIsAmountValid(true) : setIsAmountValid(false);
     }
 
     const productCategoryChangeHandler = (e) => {
@@ -222,6 +232,8 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
 
         !isStatusValid ? validationMessages = validationMessages + '<br> El valor de Estado del Producto no es válido.' : validationMessages = validationMessages + '';
 
+        !isAmountValid ? validationMessages = validationMessages + '<br> El valor de Cantidad no es válido.' : validationMessages = validationMessages + '';
+
         !isProductCategoryValid ? validationMessages = validationMessages + '<br> El valor de Categoría del Producto no es válido.' : validationMessages = validationMessages + '';
 
     }
@@ -243,6 +255,7 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                     price: price,
                     photos: photosConvertered,
                     status: status === 1 ? 'Nuevo' : 'Usado',
+                    amount: amount,
                     userIdFK: localStorage.getItem('id'),
                     categoryIdFK: productCategory,
                     id: id
@@ -314,7 +327,9 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                         <div className='row center'>
                             <div className="col-12">
                                 <form encType='multipart/form-data' className='formulario'>
+
                                     <Alert text={alertMessage} showAlert={showAlert} setShowAlert={setShowAlert} />
+
                                     <InputText type={'text'} fieldLabel={'Nombre'} fieldName={'name'} placeholder={'Ingrese un nombre descriptivo del Producto'} inputValue={name} onChangeHandler={nameChangeHandler} isValid={isNameValid} />
 
                                     <TextArea fieldLabel={'Descripción'} fieldName={'description'} placeholder={'Brinde una descripción amplia del producto'} inputValue={description} onChangeHandler={descriptionChangeHandler} isValid={isDescriptionValid} />
@@ -326,6 +341,8 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                                     <SelectInput fieldLabel={'Categoría del Producto'} fieldName={'categoryIdFK'} firstOptionValue={'Seleccione la Categoría del Producto'} optionsValues={productCategories} inputValue={productCategory} onChangeHandler={productCategoryChangeHandler} required={true} />
 
                                     <SelectInput fieldLabel={'Estado del Producto'} fieldName={status} firstOptionValue={'Seleccione el Estado del Producto'} optionsValues={[{ 'id': 1, 'name': 'Nuevo' }, { 'id': 2, 'name': 'Usado' }]} inputValue={status} onChangeHandler={statusChangeHandler} required={true} />
+
+                                    <InputText type={'number'} fieldLabel={'Cantidad'} fieldName={'amount'} placeholder={'Ingrese la cantidad de unidades disponibles del producto'} inputValue={amount} onChangeHandler={amountChangeHandler} isValid={isAmountValid} />
 
                                     <Button type={'submit'} fieldLabel={'Actualizar Producto'} onClick={submitHandler} />
                                 </form>
