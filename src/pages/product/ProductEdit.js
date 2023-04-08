@@ -128,7 +128,7 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
                 return file;
             })
 
-            setImages((prevImages) => prevImages.concat(imageList));
+            setImages(imageList);
             setIsReadyToRender(true);
         }
     }, [productImages]);
@@ -151,6 +151,30 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
         }
 
     }, [product]);
+
+    useEffect(() => {
+
+        let photosConverteredArray = [];
+
+        if (images.length > 0) {
+
+            images.map((image) => {
+                if (image.type.includes('image')) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(image);
+
+                    reader.onload = () => {
+                        const base64String = ((reader.result).split(';')[1]).split(',')[1];
+                        let photoData = { 'name': image.name, 'base64Image': base64String };
+                        photosConverteredArray.push(photoData);
+                    }
+                }
+            });
+            
+            setPhotosConvertered(photosConverteredArray);
+        }
+
+    }, [images]);
 
     const nameChangeHandler = (e) => {
         setName(e.target.value);
@@ -178,8 +202,6 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     }
 
     const validateFields = () => {
-
-        console.log(images);
 
         !nameRegex.test(name) ? validationMessages = validationMessages + '<br>El contenido del campo Nombre no es válido.' : validationMessages = validationMessages + '';
 
@@ -214,25 +236,26 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
             setShowAlert(true);
         } else {
             setShowAlert(false);
-            // const action = async () => {
-            //     const response = await apiClient.post('/createProduct', {
-            //         name: name,
-            //         description: description,
-            //         price: price,
-            //         photos: photosConvertered,
-            //         status: status === '1' ? 'Nuevo' : 'Usado',
-            //         userIdFK: localStorage.getItem('id'),
-            //         categoryIdFK: productCategory
-            //     }).then((response) => {
-            //         // Redireccionando a la ruta base
-            //         navigate('/myProfile');
+            const action = async () => {
+                await apiClient.post('/updateProduct', {
+                    name: name,
+                    description: description,
+                    price: price,
+                    photos: photosConvertered,
+                    status: status === 1 ? 'Nuevo' : 'Usado',
+                    userIdFK: localStorage.getItem('id'),
+                    categoryIdFK: productCategory,
+                    id: id
+                }).then((response) => {
+                    // Redireccionando a la ruta base
+                    navigate('/myProfile');
 
-            //     }).catch((error) => {
-            //         setAlertMessage(error.response.data.message);
-            //         setShowAlert(true);
-            //     })
-            // }
-            // action();
+                }).catch((error) => {
+                    setAlertMessage(error.response.data.message);
+                    setShowAlert(true);
+                })
+            }
+            action();
         }
     }
 
@@ -247,6 +270,12 @@ const ProductEdit = ({ isLoggedIn, isSeller, areUserStatusLoaded }) => {
     }
 
     if (areUserStatusLoaded === true) {
+
+        if (isLoggedIn === false) {
+            return (
+                <CustomizableAlert title={'Error'} text={'No tienes autorización para acceder a este recurso.'} variant={'danger'} />
+            )
+        }
 
         if (isSeller === false) {
             return (
