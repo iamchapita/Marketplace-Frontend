@@ -4,7 +4,7 @@ import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
-function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, createdAt, updatedAt }) {
+function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold, isBanned, createdAt, updatedAt }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
@@ -14,8 +14,6 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
     const [performingWasSoldOperation, setPerformingWasSoldOperation] = useState(false);
     const [performingIsAvailableOperation, setPerformingIsAvailableOperation] = useState(false);
 
-    createdAt = createdAt.split(' ')[0];
-    updatedAt = updatedAt.split(' ')[0];
     const navigate = useNavigate();
 
     const handleWasSoldButton = async (productWasSold) => {
@@ -123,12 +121,15 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                             <h6 className="card-text">Estado: Banneado</h6>
                         )
                     }
+                    {
+                        <h6 className="card-text">Cantidad: {amount}</h6>
+                    }
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
                 <div className="card-footer">
                     <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
 
-                        <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} onClick={handleEditProductButton}/>
+                        <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} onClick={handleEditProductButton} />
 
                     </div>
                     <div style={{ paddingBottom: '0.5em' }}>
@@ -155,20 +156,22 @@ function SellerProductCard({ id, name, price, path, isAvailable, wasSold, isBann
                                     <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
                                 )
                             )
-
                         }
                     </div>
                 </div>
                 <div className="card-footer">
+                    <small className="text-body-secondary">{`Publicado en: ${new Date(createdAt).toLocaleString('es-HN', { hour12: true })}`}</small>
+                    <br></br>
                     {
-                        createdAt === updatedAt ? (
-                            <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
+                        updatedAt !== null ? (
+
+                            updatedAt !== createdAt ? (
+                                <small className="text-body-secondary">{`Actualizado en: ${new Date(updatedAt).toLocaleString('es-HN', { hour12: true })}`}</small>
+                            ) : (
+                                <div></div>
+                            )
                         ) : (
-                            <div>
-                                <small className="text-body-secondary">{`Publicado en: ${createdAt}`}</small>
-                                <br></br>
-                                <small className="text-body-secondary">{`Actualizado en: ${updatedAt}`}</small>
-                            </div>
+                            <div></div>
                         )
                     }
                 </div>
