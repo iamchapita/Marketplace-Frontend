@@ -129,7 +129,7 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
                                                         amount={product.amount}
                                                         createdAt={product.createdAt}
                                                         updatedAt={null}
-                                                        isSeller={false}
+                                                        hasProductOwnership={false}
                                                     />
                                                 )
                                             ))) : (

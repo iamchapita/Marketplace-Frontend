@@ -138,6 +138,7 @@ const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
                                                     isBanned={product.isBanned}
                                                     createdAt={product.createdAt}
                                                     updatedAt={product.updatedAt}
+                                                    hasProductOwnership={true}
                                                 />
                                             ))) : (
                                                 <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'} />

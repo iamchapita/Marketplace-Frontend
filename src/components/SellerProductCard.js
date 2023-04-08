@@ -4,7 +4,7 @@ import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
-function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold, isBanned, createdAt, updatedAt, isSeller = true }) {
+function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold, isBanned, createdAt, updatedAt, hasProductOwnership }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
@@ -107,7 +107,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
 
                     {
-                        isSeller ? (
+                        hasProductOwnership ? (
                             !isBanned ? (
                                 productIsAvailable ? (
                                     !productWasSold ? (
@@ -135,7 +135,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
                 {
-                    isSeller ? (
+                    hasProductOwnership ? (
                         <div className="card-footer">
                             <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
 
