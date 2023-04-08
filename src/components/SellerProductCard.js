@@ -4,7 +4,7 @@ import { Spinner } from "react-bootstrap";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
-function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold, isBanned, createdAt, updatedAt }) {
+function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold, isBanned, createdAt, updatedAt, isSeller = true }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
@@ -23,7 +23,6 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
             id: id,
             wasSold: !productWasSold
         }).then((response) => {
-            // console.log(response);
             setProductWasSold(!productWasSold);
             setPerformingWasSoldOperation(false);
         }).catch((error) => {
@@ -106,19 +105,28 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
+
                     {
-                        !isBanned ? (
-                            productIsAvailable ? (
-                                !productWasSold ? (
-                                    <h6 className="card-text">Estado: Disponible</h6>
+                        isSeller ? (
+                            !isBanned ? (
+                                productIsAvailable ? (
+                                    !productWasSold ? (
+                                        <h6 className="card-text">Estado: Disponible</h6>
+                                    ) : (
+                                        <h6 className="card-text">Estado: Vendido</h6>
+                                    )
                                 ) : (
-                                    <h6 className="card-text">Estado: Vendido</h6>
+                                    <h6 className="card-text">Estado: Deshabilitado</h6>
                                 )
                             ) : (
-                                <h6 className="card-text">Estado: Deshabilitado</h6>
+                                <h6 className="card-text">Estado: Banneado</h6>
                             )
                         ) : (
-                            <h6 className="card-text">Estado: Banneado</h6>
+                            !productWasSold ? (
+                                <h6 className="card-text">Estado: Disponible</h6>
+                            ) : (
+                                <h6 className="card-text">Estado: Vendido</h6>
+                            )
                         )
                     }
                     {
@@ -126,39 +134,45 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                     }
                     <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                 </div>
-                <div className="card-footer">
-                    <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
+                {
+                    isSeller ? (
+                        <div className="card-footer">
+                            <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
 
-                        <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} onClick={handleEditProductButton} />
+                                <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} onClick={handleEditProductButton} />
 
-                    </div>
-                    <div style={{ paddingBottom: '0.5em' }}>
-                        {
-                            performingWasSoldOperation ? (
-                                <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
-                            ) : (
-                                productWasSold ? (
-                                    <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
-                                ) : (
-                                    <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
-                                )
-                            )
-                        }
-                    </div>
-                    <div style={{ paddingBottom: '0.5em' }}>
-                        {
-                            performingIsAvailableOperation ? (
-                                <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
-                            ) : (
-                                productIsAvailable ? (
-                                    <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
-                                ) : (
-                                    <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
-                                )
-                            )
-                        }
-                    </div>
-                </div>
+                            </div>
+                            <div style={{ paddingBottom: '0.5em' }}>
+                                {
+                                    performingWasSoldOperation ? (
+                                        <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
+                                    ) : (
+                                        productWasSold ? (
+                                            <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
+                                        ) : (
+                                            <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
+                                        )
+                                    )
+                                }
+                            </div>
+                            <div style={{ paddingBottom: '0.5em' }}>
+                                {
+                                    performingIsAvailableOperation ? (
+                                        <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
+                                    ) : (
+                                        productIsAvailable ? (
+                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
+                                        ) : (
+                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
+                                        )
+                                    )
+                                }
+                            </div>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )
+                }
                 <div className="card-footer">
                     <small className="text-body-secondary">{`Publicado en: ${new Date(createdAt).toLocaleString('es-HN', { hour12: true })}`}</small>
                     <br></br>

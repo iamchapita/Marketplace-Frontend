@@ -5,7 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import SellerProductCard from '../../components/SellerProductCard';
 import CustomizableAlert from '../../components/CustomizableAlert';
 
-const SellerProfile = () => {
+const SellerProfile = ({ areUserStatusLoaded }) => {
 
     // Variables de estado, Se almacena la informacion a renderizar en la vista
     const [sellerInfo, setSellerInfo] = useState(null);
@@ -27,7 +27,6 @@ const SellerProfile = () => {
                 // Se establece el arreglo de productos
                 setProducts(response.data);
                 setProductsWereFound(true);
-                // setReadyToRender(true);
             }).catch((error) => {
                 // Se debe renderizar un error de que no se encontro productos. PENDIENTE.
                 if (error.response.status === 500) {
@@ -77,7 +76,8 @@ const SellerProfile = () => {
         }
     }, [productsWereFound]);
 
-    if (!readyToRender) {
+    if (!areUserStatusLoaded) {
+
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 <div className="container d-flex justify-content-center">
@@ -87,13 +87,13 @@ const SellerProfile = () => {
         )
     }
 
-    if (readyToRender) {
+    if (areUserStatusLoaded) {
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 {
                     !readyToRender ? (
                         <div className="container d-flex justify-content-center">
-                            <Spinner animation="border" />
+                            <Spinner animation="border" variant='light' />
                         </div>
                     ) : (
                         <div className='row mx-4 my-3'>
@@ -116,14 +116,22 @@ const SellerProfile = () => {
                                     <div className="row row-cols-1 row-cols-xxl-6 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
                                         {
                                             productsWereFound ? (products.map((product, index) => (
-                                                <SellerProductCard
-                                                    key={index}
-                                                    id={product.id}
-                                                    name={product.name}
-                                                    price={product.price}
-                                                    path={product.photos}
-                                                    createdAt={product.createdAt}
-                                                />
+                                                product.isBanned ? (
+                                                    <div></div>
+                                                ) : (
+                                                    <SellerProductCard
+                                                        key={index}
+                                                        id={product.id}
+                                                        name={product.name}
+                                                        price={product.price}
+                                                        path={product.photos}
+                                                        isAvailable={product.isAvailable}
+                                                        amount={product.amount}
+                                                        createdAt={product.createdAt}
+                                                        updatedAt={null}
+                                                        isSeller={false}
+                                                    />
+                                                )
                                             ))) : (
                                                 <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'} />
                                             )
