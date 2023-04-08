@@ -20,6 +20,8 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
     const [photos, setPhotos] = useState([]);
     const [isPhotosValid, setIsPhotosValid] = useState(false);
     const [status, setStatus] = useState('');
+    const [amount, setAmount] = useState('');
+    const [isAmountValid, setIsAmountValid] = useState(false);
     const [isStatusValid, setIsStatusValid] = useState(false);
 
     // Almacena el valor de la catetoria obtenida en el form
@@ -43,11 +45,12 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
     const navigate = useNavigate();
 
     // Expresiones regulares para validacion
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-\_\.\,\;\:\(\)\"\'\!]{2,50}$/;
-    const descriptionRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-\_\.\,\;\:\(\)\"\'\!]{10,250}$/;
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-_.;:()"'!]{2,50}$/;
+    const descriptionRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-_.,;:()"'!]{10,250}$/;
     const priceRegex = /^\d+(?:\.\d{1,2})?$/;
     const statusRegex = /^[12]$/;
-    const categoryRegex = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/
+    const categoryRegex = /^(0?[1-9]|[1-2][0-9]|3[0-1])$/;
+    const amountRegex = /^[1-9]\d*$/
 
     // Obtiene las categorias de los productos desde la base de datos
     useEffect(() => {
@@ -113,6 +116,11 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
         statusRegex.test(e.target.value) ? setIsStatusValid(true) : setIsStatusValid(false);
     }
 
+    const amountChangeHandler = (e) => {
+        setAmount(e.target.value);
+        amountRegex.test(e.target.value) ? setIsAmountValid(true) : setIsAmountValid(false);
+    }
+
     const productCategoryChangeHandler = (e) => {
         setProductCategory(e.target.value);
         categoryRegex.test(e.target.value) ? setIsProductCategoryValid(true) : setIsProductCategoryValid(false);
@@ -140,9 +148,11 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
 
         photos.length === 0 ? validationMessages = validationMessages + '<br>No se ha seleccionado ningún archivo.' : validationMessages = validationMessages + '';
 
-        !categoryRegex.test(productCategory) ? validationMessages = validationMessages + '<br> El valor de Estado del Producto no es válido.' : validationMessages = validationMessages + '';
-
         !statusRegex.test(status) ? validationMessages = validationMessages + '<br> El valor de Categoría del Producto no es válido.' : validationMessages = validationMessages + '';
+
+        !isAmountValid ? validationMessages = validationMessages + '<br> El valor de Cantidad no es válido.' : validationMessages = validationMessages + '';
+
+        !categoryRegex.test(productCategory) ? validationMessages = validationMessages + '<br> El valor de Estado del Producto no es válido.' : validationMessages = validationMessages + '';
 
     }
 
@@ -167,6 +177,7 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
                             price: price,
                             photos: photosConvertered,
                             status: status === '1' ? 'Nuevo' : 'Usado',
+                            amount: amount, 
                             userIdFK: id,
                             categoryIdFK: productCategory
 
@@ -209,6 +220,8 @@ const ProductInsert = ({ isLoggedIn, setLoggedIn }) => {
                     <SelectInput fieldLabel={'Categoría del Producto'} fieldName={'categoryIdFK'} firstOptionValue={'Seleccione la Categoría del Producto'} optionsValues={productCategories} inputValue={productCategory} onChangeHandler={productCategoryChangeHandler} required={true} />
 
                     <SelectInput fieldLabel={'Estado del Producto'} fieldName={status} firstOptionValue={'Seleccione el Estado del Producto'} optionsValues={[{ 'id': 1, 'name': 'Nuevo' }, { 'id': 2, 'name': 'Usado' }]} inputValue={status} onChangeHandler={statusChangeHandler} required={true} />
+
+                    <InputText type={'number'} fieldLabel={'Cantidad'} fieldName={'amount'} placeholder={'Ingrese la cantidad de unidades disponibles del producto'} inputValue={amount} onChangeHandler={amountChangeHandler} isValid={isAmountValid} />
 
                     <Button type={'submit'} fieldLabel={'Registrar Producto'} onClick={submitHandler} />
                 </form>
