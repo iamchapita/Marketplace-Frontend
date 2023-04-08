@@ -24,8 +24,8 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
                 // Este id se guarda en el componente de login.
                 sellerId: id
             }).then((response) => {
-                // Se establece el arreglo de productos
-                setProducts(response.data);
+                // Se establece el arreglo de productos no Banneados
+                setProducts(response.data.filter(product => product.isBanned === 0));
                 setProductsWereFound(true);
             }).catch((error) => {
                 // Se debe renderizar un error de que no se encontro productos. PENDIENTE.
@@ -116,22 +116,18 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
                                     <div className="row row-cols-1 row-cols-xxl-6 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
                                         {
                                             productsWereFound ? (products.map((product, index) => (
-                                                product.isBanned ? (
-                                                    <div></div>
-                                                ) : (
-                                                    <SellerProductCard
-                                                        key={index}
-                                                        id={product.id}
-                                                        name={product.name}
-                                                        price={product.price}
-                                                        path={product.photos}
-                                                        isAvailable={product.isAvailable}
-                                                        amount={product.amount}
-                                                        createdAt={product.createdAt}
-                                                        updatedAt={null}
-                                                        hasProductOwnership={false}
-                                                    />
-                                                )
+                                                <SellerProductCard
+                                                    key={index}
+                                                    id={product.id}
+                                                    name={product.name}
+                                                    price={product.price}
+                                                    path={product.photos}
+                                                    isAvailable={product.isAvailable}
+                                                    amount={product.amount}
+                                                    createdAt={product.createdAt}
+                                                    updatedAt={null}
+                                                    hasProductOwnership={false}
+                                                />
                                             ))) : (
                                                 <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'} />
                                             )
