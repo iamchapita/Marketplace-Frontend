@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import apiClient from '../../utils/apiClient';
 import { Spinner } from 'react-bootstrap';
 import SellerProductCard from '../../components/SellerProductCard';
@@ -13,6 +13,7 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
     const [readyToRender, setReadyToRender] = useState(false);
     const [productsWereFound, setProductsWereFound] = useState(null);
 
+    const navigate = useNavigate();
     const { id } = useParams();
 
     // Se ejecuta cuando se crea el componente y cuando el valor de isLoggedIn cambie
@@ -45,8 +46,12 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
                 }
             });
         }
-        action();
 
+        if (id === localStorage.getItem('id')) {
+            navigate('/myProfile');
+        } else {
+            action();
+        }
     }, []);
 
     useEffect(() => {
