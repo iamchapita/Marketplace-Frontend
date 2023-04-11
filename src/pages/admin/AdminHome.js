@@ -59,7 +59,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
         return (
             <div className='container-md' style={{ color: 'black' }}>
-                <h1 className="text-center" style={{ color: 'white' }}>Bienvenido al Modulo de Administrador</h1>
+                <h1 className="text-center" style={{ color: 'white' }}>Bienvenido al Módulo de Administrador</h1>
                 <h4 className="text-center" style={{ color: 'white' }}>¿Qué desea gestionar?</h4>
                 {
                     !isReadyToRender ? (
@@ -73,7 +73,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             <div className="col">
                                 <div className="card h-100" style={{ borderColor: '#0d6efd', borderStyle: 'solid', borderWidth: '2px' }}>
                                     <div className="card-body">
-                                        <h5 className="card-title">Modulo de Usuarios</h5>
+                                        <h5 className="card-title">Módulo de Usuarios</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Administre el acceso de los usuarios a la aplicación.</p>
                                         <a href="/usersModule" className="btn btn-primary">Ir</a>
                                     </div>
@@ -83,7 +83,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             <div className="col">
                                 <div className="card h-100" style={{ borderColor: '#6c757d', borderStyle: 'solid', borderWidth: '2px' }}>
                                     <div className="card-body">
-                                        <h5 className="card-title">Modulo de Productos</h5>
+                                        <h5 className="card-title">Módulo de Productos</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Administre los productos que se muestran a los usuarios de la aplicación.</p>
                                         <a href="#" className="btn btn-secondary">Ir</a>
                                     </div>
@@ -93,7 +93,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             <div className="col">
                                 <div className="card h-100" style={{ borderColor: '#dc3545', borderStyle: 'solid', borderWidth: '2px' }}>
                                     <div className="card-body">
-                                        <h5 className="card-title">Modulo de Denuncias</h5>
+                                        <h5 className="card-title">Módulo de Denuncias</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Administre las denuncias de los compradores hacia los vendedores.</p>
                                         <a href="#" className="btn btn-danger">Ir</a>
                                     </div>
@@ -105,7 +105,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             <div className="col">
                                 <div className="card h-100" style={{ borderColor: '#ffc107', borderStyle: 'solid', borderWidth: '2px' }}>
                                     <div className="card-body">
-                                        <h5 className="card-title">Modulo de Estadística</h5>
+                                        <h5 className="card-title">Módulo de Estadística</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Acceda a un resumen estadístico de las ventas, productos y usuarios de la aplicación.</p>
                                         <a href="#" className="btn btn-warning">Ir</a>
                                     </div>
