@@ -341,18 +341,17 @@ select:invalid {
 /*********************DROPZONE**********************/
 /***************************************************/
 
-.dropzone{
-    border-color: white;
+.dropzone {
+	border-color: white;
 	border-style: solid;
 	border-width: 1px;
-    background-color: white;
-    color: gray;
+	background-color: white;
+	color: gray;
 }
 
 .invalid {
-    border-color: red;
+	border-color: red;
 }
-
 
 /***********************NAVBAR**********************/
 /***************************************************/
@@ -518,3 +517,9 @@ img {
 	border-width: 1px;
 }
 
+/*****************Módulo de Usuarios****************/
+/***************************************************/
+#registerPerPage {
+	width: 11em;
+    margin-top: 3em;
+}
