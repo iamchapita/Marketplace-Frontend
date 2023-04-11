@@ -10,37 +10,51 @@ const Home = ({ isLoggedIn }) => {
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [userId, setUserId] = useState(null);
     const [isWhisListStatusInclude, setIsWhisListStatusInclude] = useState(null);
-    const [categories , setCategories] = useState(null)
+    const [categories, setCategories] = useState(null)
     const [departaments, setDepartaments] = useState(null);
-    const [category , setCategory] = useState(null)
+    const [category, setCategory] = useState(null)
     const [department, setDepartment] = useState(null);
     const [page, setPage] = useState(1);
+    const [name, setname] = useState('');
 
     const [pricemin, setPricemin] = useState(0)
     const [pricemax, setPricemax] = useState(0)
 
-    const filter = async() =>{
+    const filter = async () => {
         await apiClient.post('/productst',
-        {
-            id : userId,
-            category : category,
-            department : department,
-            page : page, 
-            pricemin : pricemin, 
-            pricemax : pricemax
-        }).then((res)=>{
-            setProducts(res.data);
+            {
+                id: userId,
+                category: category,
+                department: department,
+                page: page,
+                pricemin: pricemin,
+                pricemax: pricemax
+            }).then((res) => {
+                setProducts(res.data);
 
-        }).catch((error) => {
+            }).catch((error) => {
                 console.log(error)
             });
-       
+
 
     }
 
-    useEffect(()=>{
-        const getCategories = async () =>{
-            await apiClient.get('/categories').then((res)=>{
+    const searchProduct = async () => {
+        await apiClient.get('/buscaproduct',
+            {
+                name: name
+            }).then((res) => {
+                setProducts(res.data);
+
+            }).catch((error) => {
+                console.log(error)
+            });
+    }
+
+
+    useEffect(() => {
+        const getCategories = async () => {
+            await apiClient.get('/categories').then((res) => {
                 setCategories(res.data)
             }).catch((error) => {
                 console.log(error)
@@ -48,11 +62,11 @@ const Home = ({ isLoggedIn }) => {
         }
         getCategories();
 
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        const getDepartaments = async () =>{
-            await apiClient.get('/departments').then((res)=>{
+    useEffect(() => {
+        const getDepartaments = async () => {
+            await apiClient.get('/departments').then((res) => {
                 setDepartaments(res.data)
             }).catch((error) => {
                 console.log(error)
@@ -60,7 +74,7 @@ const Home = ({ isLoggedIn }) => {
         }
         getDepartaments();
 
-    },[])
+    }, [])
 
     useEffect(() => {
         const getUser = async () => {
@@ -76,7 +90,7 @@ const Home = ({ isLoggedIn }) => {
 
     useEffect(() => {
 
-        if(isLoggedIn === false) {
+        if (isLoggedIn === false) {
             setIsWhisListStatusInclude(false);
             // setUserId(false);
         }
@@ -111,8 +125,8 @@ const Home = ({ isLoggedIn }) => {
 
 
     if (!isReadyToRender) {
-        
-        if(products !== null){
+
+        if (products !== null) {
             setIsReadyToRender(true);
         }
 
@@ -132,74 +146,94 @@ const Home = ({ isLoggedIn }) => {
                 <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                        <div className="form-group row">
-                        <div className="col-sm-2 col-md-2" id="select-filter">
-                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)}>
-                                <option value={0} >todos</option>
-                                {
-                                categories.map((categorie, id)=>(
-                                    <option  key={id} value={categorie.id} >{categorie.name}</option>
-                                ))
-                                }
-                            </select>
+
+
+                            <div class="container-fluid">
+
+                                <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                                    <button className="btn btn-primary" onClick={() =>searchProduct()} >
+                                        <i className="material-icons" >search</i>
+                                    </button>
+                                </form>
+                            </div>
+
+
+
+                            <div className="form-group row">
+                                <div className="col-sm-2 col-md-2" id="select-filter">
+                                    <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
+                                        <option value={0} >todos</option>
+                                        {
+                                            categories.map((categorie, id) => (
+                                                <option key={id} value={categorie.id} >{categorie.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className="col-sm-2 col-md-2" id="select-filter">
+                                    <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
+                                        <option value={0} >todos</option>
+                                        {
+                                            departaments.map((departament, id) => (
+                                                <option key={id} value={departament.id}  >{departament.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className="col-sm-2 col-md-2" id="select-filter">
+                                    <select className="form-select" >
+                                        <option defaultValue={null} >Estrellas de vendedor</option>
+                                    </select>
+                                </div>
+                                <div className="col-sm-2 col-md-2" id="input-filter">
+                                    <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e) => setPricemin(e.target.value)}></input>
+                                </div>
+                                <div className="col-sm-2 col-md-2" id="input-filter">
+                                    <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
+                                </div>
+                                <div className="col-sm-1 col-md-1" id="button-filter">
+                                    <button className="btn btn-primary" onClick={() => filter()} >
+                                        <i className="material-icons" >search</i>
+                                    </button>
+                                </div>
+                                <div className="col-sm-1 col-md-1" id="button-filter">
+                                    <button className="btn btn-primary" onClick={() => filter()} >
+                                        <i className="material-icons" >clear_all</i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="col-sm-2 col-md-2" id="select-filter">
-                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}>
-                                <option value={0} >todos</option>
-                                {
-                                departaments.map((departament, id)=>(
-                                    <option key={id} value={departament.id}  >{departament.name}</option>
-                                ))
-                                }
-                            </select>
-                        </div>
-                        <div className="col-sm-2 col-md-2" id="select-filter">
-                            <select className="form-select" >
-                                <option defaultValue={null} >Estrellas de vendedor</option>
-                            </select>
-                        </div>
-                        <div className="col-sm-2 col-md-2" id="input-filter">
-                            <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)}></input>
-                        </div>
-                        <div className="col-sm-2 col-md-2" id="input-filter">
-                            <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}></input>
-                        </div>
-                        <div className="col-sm-1 col-md-1" id="button-filter"> 
-                            <button className="btn btn-primary" onClick={()=>filter()} >
-                            <i className="material-icons" >search</i>
-                            </button>
-                        </div>
-                        <div className="col-sm-1 col-md-1" id="button-filter"> 
-                            <button className="btn btn-primary" onClick={()=>filter()} >
-                            <i className="material-icons" >clear_all</i>
-                            </button>
-                        </div>
-                        </div>
-                        </div> 
                     </nav>
                 </div>
 
                 <div className="container-md">
                     <div className="container home">
                         <div className="grid-container">
-                        {
-                            products.map((product, id) => (
-                                <HomeProductCard
-                                    key={id}
-                                    id={product.id}
-                                    userId={userId}
-                                    name={product.name}
-                                    price={product.price.toLocaleString()}
-                                    urlDetalles={`/productDetail/${product.id}`}
-                                    path={product.photos}
-                                    idSeller={product.userIdFK}
-                                    nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                    isWhisListStatusInclude={true}
-                                    heart={product.isProductInWishList}
-                                // description={product.description}
-                                />
-                            ))
-                        }
+                            {products && products.map((product, id) => {
+
+
+                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+
+
+                                    return (
+                                        <HomeProductCard
+                                            key={id}
+                                            id={product.id}
+                                            userId={userId}
+                                            name={product.name}
+                                            price={product.price.toLocaleString()}
+                                            urlDetalles={`/productDetail/${product.id}`}
+                                            path={product.photos}
+                                            idSeller={product.userIdFK}
+                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                            isWhisListStatusInclude={true}
+                                            heart={product.isProductInWishList}
+                                        />
+                                    );
+                                }
+                                return null;
+                            })}
                         </div>
                     </div>
                 </div>
@@ -210,82 +244,99 @@ const Home = ({ isLoggedIn }) => {
     if (isWhisListStatusInclude === false) {
         return (
             <div>
-                
+
+                <div class="container-fluid">
+
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                        <button className="btn btn-primary" onClick={() => searchProduct()} >
+                            <i className="material-icons" >search</i>
+                        </button>
+                    </form>
+                </div>
+
                 <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                        <div className="form-group row">
-                        <div className="col-sm-2 col-md-2">
-                            <select className="form-select" placeholder="Categoría" onChange={(e)=>setCategory(e.target.value)}>
-                                <option value={0} >todos</option>
-                                {
-                                categories.map((categorie, id)=>(
-                                    <option  key={id} value={categorie.id} >{categorie.name}</option>
-                                ))
-                                }
-                            </select>
+                            <div className="form-group row">
+                                <div className="col-sm-2 col-md-2">
+                                    <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
+                                        <option value={0} >todos</option>
+                                        {
+                                            categories.map((categorie, id) => (
+                                                <option key={id} value={categorie.id} >{categorie.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className="col-sm-2 col-md-2">
+                                    <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
+                                        <option value={0} >todos</option>
+                                        {
+                                            departaments.map((departament, id) => (
+                                                <option key={id} value={departament.id}  >{departament.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className="col-sm-2 col-md-2">
+                                    <select className="form-select" >
+                                        <option defaultValue={null} >Estrellas de vendedor</option>
+                                    </select>
+                                </div>
+                                <div className="col-sm-2 col-md-2">
+                                    <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e) => setPricemin(e.target.value)}></input>
+                                </div>
+                                <div className="col-sm-2 col-md-2">
+                                    <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
+                                </div>
+                                <div className="col-sm-1 col-md-1">
+                                    <button className="btn btn-primary" onClick={() => filter()} >
+                                        <i className="material-icons" >search</i>
+                                    </button>
+                                </div>
+                                <div className="col-sm-1 col-md-1">
+                                    <button className="btn btn-primary" onClick={() => filter()} >
+                                        <i className="material-icons" >clear_all</i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="col-sm-2 col-md-2">
-                            <select className="form-select" placeholder="Departamento"  onChange={(e)=>setDepartment(e.target.value)}>
-                                <option value={0} >todos</option>
-                                {
-                                departaments.map((departament, id)=>(
-                                    <option key={id} value={departament.id}  >{departament.name}</option>
-                                ))
-                                }
-                            </select>
-                        </div>
-                        <div className="col-sm-2 col-md-2">
-                            <select className="form-select" >
-                                <option defaultValue={null} >Estrellas de vendedor</option>
-                            </select>
-                        </div>
-                        <div className="col-sm-2 col-md-2">
-                            <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e)=>setPricemin(e.target.value)}></input>
-                        </div>
-                        <div className="col-sm-2 col-md-2">
-                            <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e)=>setPricemax(e.target.value)}></input>
-                        </div>
-                        <div className="col-sm-1 col-md-1"> 
-                            <button className="btn btn-primary" onClick={()=>filter()} >
-                            <i className="material-icons" >search</i>
-                            </button>
-                        </div>
-                        <div className="col-sm-1 col-md-1"> 
-                            <button className="btn btn-primary" onClick={()=>filter()} >
-                            <i className="material-icons" >clear_all</i>
-                            </button>
-                        </div>
-                        </div>
-                        </div> 
                     </nav>
                 </div>
 
                 <div className="container-md">
-                <div className="container home">
-                    <div className="grid-container">
-                    {
-                        products.map((product, id) => (
-                            <div>
-                            <HomeProductCard
-                                key={id}
-                                id={product.id}
-                                name={product.name}
-                                price={product.price}
-                                urlDetalles={`/productDetail/${product.id}`}
-                                path={product.photos}
-                                idSeller={product.userIdFK}
-                                nameSeller={product.userFirstName + ' ' + product.userLastName}
-                            // description={product.description}
-                            />
-                            </div>
-                        ))
-                    }
+                    <div className="container home">
+                        <div className="grid-container">
+                            {products && products.map((product, id) => {
+
+
+                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+
+
+                                    return (
+                                        <HomeProductCard
+                                            key={id}
+                                            id={product.id}
+                                            userId={userId}
+                                            name={product.name}
+                                            price={product.price.toLocaleString()}
+                                            urlDetalles={`/productDetail/${product.id}`}
+                                            path={product.photos}
+                                            idSeller={product.userIdFK}
+                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                            isWhisListStatusInclude={true}
+                                            heart={product.isProductInWishList}
+                                        />
+                                    );
+                                }
+                                return null;
+                            })}
+                        </div>
                     </div>
                 </div>
-                </div>  
-            </div>      
-            );
+            </div>
+        );
     }
 }
 export default Home;
