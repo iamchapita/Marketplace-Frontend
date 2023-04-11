@@ -20,6 +20,48 @@ const Home = ({ isLoggedIn }) => {
     const [pricemin, setPricemin] = useState(0)
     const [pricemax, setPricemax] = useState(0)
 
+    const [sortBy, setSortBy] = useState(''); // Estado para almacenar la opción de ordenamiento seleccionada
+    const [sortOrder, setSortOrder] = useState('asc'); // Estado para almacenar el orden de ordenamiento (ascendente o descendente)
+
+    const handleSortByChange = (e) => {
+        setSortBy(e.target.value);
+    }
+
+    const handleSortOrderChange = (e) => {
+        setSortOrder(e.target.value);
+    } 
+
+    // Función para realizar el ordenamiento de los productos
+    const sortProducts = (products) => {
+        if (sortBy === 'date') {
+        return products.sort((a, b) => {
+            if (sortOrder === 'asc') {
+            return new Date(a.date) - new Date(b.date);
+            } else {
+            return new Date(b.date) - new Date(a.date);
+            }
+        });
+        } else if (sortBy === 'price') {
+        return products.sort((a, b) => {
+            if (sortOrder === 'asc') {
+            return a.price - b.price;
+            } else {
+            return b.price - a.price;
+            }
+        });
+        } else if (sortBy === 'name') {
+        return products.sort((a, b) => {
+            if (sortOrder === 'asc') {
+            return a.name.localeCompare(b.name);
+            } else {
+            return b.name.localeCompare(a.name);
+            }
+        });
+        } else {
+        return products;
+        }   
+    }
+
     const filter = async () => {
         await apiClient.post('/productst',
             {
@@ -209,34 +251,52 @@ const Home = ({ isLoggedIn }) => {
 
                 <div className="container-md">
                     <div className="container home">
+                        <div className="container-sm">
+                        <div className="row">
+                        <div className="col-6">
+                            <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
+                                <option value="">Ordenar por...</option>
+                                <option value="date">Fecha de Registro</option>
+                                <option value="price">Precio</option>
+                                <option value="name">Nombre</option>
+                            </select>
+                        </div>
+                        {/* Select para seleccionar el orden de ordenamiento */}
+                        <div className="col-6">
+                            <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
+                                <option value="asc">Ascendente</option>
+                                <option value="desc">Descendente</option>
+                            </select>
+                        </div>
+                        </div>
+                        </div>
+
                         <div className="grid-container">
-                            {products && products.map((product, id) => {
-
-
-                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
-
-
-                                    return (
-                                        <HomeProductCard
-                                            key={id}
-                                            id={product.id}
-                                            userId={userId}
-                                            name={product.name}
-                                            price={product.price.toLocaleString()}
-                                            urlDetalles={`/productDetail/${product.id}`}
-                                            path={product.photos}
-                                            idSeller={product.userIdFK}
-                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                            isWhisListStatusInclude={true}
-                                            heart={product.isProductInWishList}
-                                        />
-                                    );
-                                }
-                                return null;
-                            })}
+                        {/* Renderizado de los productos ordenados */}
+                        {sortProducts(products).map((product, id) => {
+                            if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+                            return (
+                                <HomeProductCard
+                                key={id}
+                                id={product.id}
+                                userId={userId}
+                                name={product.name}
+                                price={product.price.toLocaleString()}
+                                urlDetalles={`/productDetail/${product.id}`}
+                                path={product.photos}
+                                idSeller={product.userIdFK}
+                                nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                isWhisListStatusInclude={true}
+                                heart={product.isProductInWishList}
+                                />
+                            );
+                            }
+                            return null;
+                        })}
                         </div>
                     </div>
                 </div>
+                    
             </div>
         );
     }
@@ -307,34 +367,52 @@ const Home = ({ isLoggedIn }) => {
 
                 <div className="container-md">
                     <div className="container home">
+                        <div className="container-sm">
+                        <div className="row">
+                        <div className="col-6">
+                            <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
+                                <option value="">Ordenar por...</option>
+                                <option value="date">Fecha de Registro</option>
+                                <option value="price">Precio</option>
+                                <option value="name">Nombre</option>
+                            </select>
+                        </div>
+                        {/* Select para seleccionar el orden de ordenamiento */}
+                        <div className="col-6">
+                            <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
+                                <option value="asc">Ascendente</option>
+                                <option value="desc">Descendente</option>
+                            </select>
+                        </div>
+                        </div>
+                        </div>
+                        
                         <div className="grid-container">
-                            {products && products.map((product, id) => {
-
-
-                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
-
-
-                                    return (
-                                        <HomeProductCard
-                                            key={id}
-                                            id={product.id}
-                                            userId={userId}
-                                            name={product.name}
-                                            price={product.price.toLocaleString()}
-                                            urlDetalles={`/productDetail/${product.id}`}
-                                            path={product.photos}
-                                            idSeller={product.userIdFK}
-                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                            isWhisListStatusInclude={true}
-                                            heart={product.isProductInWishList}
-                                        />
-                                    );
-                                }
-                                return null;
-                            })}
+                        {/* Renderizado de los productos ordenados */}
+                        {sortProducts(products).map((product, id) => {
+                            if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+                            return (
+                                <HomeProductCard
+                                key={id}
+                                id={product.id}
+                                userId={userId}
+                                name={product.name}
+                                price={product.price.toLocaleString()}
+                                urlDetalles={`/productDetail/${product.id}`}
+                                path={product.photos}
+                                idSeller={product.userIdFK}
+                                nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                isWhisListStatusInclude={true}
+                                heart={product.isProductInWishList}
+                                />
+                            );
+                            }
+                            return null;
+                        })}
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }
