@@ -11,12 +11,17 @@ const ProductModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [dataToRender, setDataToRender] = useState();
     const [paginateLinks, setPaginateLinks] = useState([]);
 
-    const headings = ['#', 'Nombre', 'Descripción', 'Precio', 'Estado del Producto', 'Cantidad', 'Disponible para Comprar', 'Disponible para Comprar', 'Banneado', 'Fecha de Publicación'];
+    const headings = ['#', 'Nombre', 'Descripción', 'Precio', 'Estado del Producto', 'Cantidad', 'Visibilidad', 'Disponible para Comprar', 'Banneado', 'Fecha de Publicación'];
 
     useEffect(() => {
 
         const action = async () => {
             await apiClient.get(`/getAllProducts/${registerPerPageValue}`).then((response) => {
+
+                response.data.data.map((product) => {
+                    product.createdAt = new Date(product.createdAt).toLocaleString('es-HN', { hour12: true })
+                });
+
                 setDataToRender(response.data.data);
                 setPaginateLinks(response.data.links);
                 setIsReadyToRender(true);
