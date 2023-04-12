@@ -29,37 +29,37 @@ const Home = ({ isLoggedIn }) => {
 
     const handleSortOrderChange = (e) => {
         setSortOrder(e.target.value);
-    } 
+    }
 
     // Función para realizar el ordenamiento de los productos
     const sortProducts = (products) => {
         if (sortBy === 'date') {
-        return products.sort((a, b) => {
-            if (sortOrder === 'asc') {
-            return new Date(a.date) - new Date(b.date);
-            } else {
-            return new Date(b.date) - new Date(a.date);
-            }
-        });
+            return products.sort((a, b) => {
+                if (sortOrder === 'asc') {
+                    return new Date(a.date) - new Date(b.date);
+                } else {
+                    return new Date(b.date) - new Date(a.date);
+                }
+            });
         } else if (sortBy === 'price') {
-        return products.sort((a, b) => {
-            if (sortOrder === 'asc') {
-            return a.price - b.price;
-            } else {
-            return b.price - a.price;
-            }
-        });
+            return products.sort((a, b) => {
+                if (sortOrder === 'asc') {
+                    return a.price - b.price;
+                } else {
+                    return b.price - a.price;
+                }
+            });
         } else if (sortBy === 'name') {
-        return products.sort((a, b) => {
-            if (sortOrder === 'asc') {
-            return a.name.localeCompare(b.name);
-            } else {
-            return b.name.localeCompare(a.name);
-            }
-        });
+            return products.sort((a, b) => {
+                if (sortOrder === 'asc') {
+                    return a.name.localeCompare(b.name);
+                } else {
+                    return b.name.localeCompare(a.name);
+                }
+            });
         } else {
-        return products;
-        }   
+            return products;
+        }
     }
 
     const filter = async () => {
@@ -194,15 +194,13 @@ const Home = ({ isLoggedIn }) => {
 
                                 <form class="d-flex" role="search">
                                     <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
-                                    <button className="btn btn-primary" onClick={() =>searchProduct()} >
-                                        <i className="material-icons" >search</i>
-                                    </button>
+                                    
                                 </form>
                             </div>
 
 
 
-                            <div className="form-group row">
+                            <div className="form-group row mt-sm-5">
                                 <div className="col-sm-2 col-md-2" id="select-filter">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
                                         <option value={0} >todos</option>
@@ -252,51 +250,51 @@ const Home = ({ isLoggedIn }) => {
                 <div className="container-md">
                     <div className="container home">
                         <div className="container-sm">
-                        <div className="row">
-                        <div className="col-6">
-                            <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
-                                <option value="">Ordenar por...</option>
-                                <option value="date">Fecha de Registro</option>
-                                <option value="price">Precio</option>
-                                <option value="name">Nombre</option>
-                            </select>
-                        </div>
-                        {/* Select para seleccionar el orden de ordenamiento */}
-                        <div className="col-6">
-                            <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
-                                <option value="asc">Ascendente</option>
-                                <option value="desc">Descendente</option>
-                            </select>
-                        </div>
-                        </div>
+                            <div className="row">
+                                <div className="col-6">
+                                    <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
+                                        <option value="">Ordenar por...</option>
+                                        <option value="date">Fecha de Registro</option>
+                                        <option value="price">Precio</option>
+                                        <option value="name">Nombre</option>
+                                    </select>
+                                </div>
+                                {/* Select para seleccionar el orden de ordenamiento */}
+                                <div className="col-6">
+                                    <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="grid-container">
-                        {/* Renderizado de los productos ordenados */}
-                        {sortProducts(products).map((product, id) => {
-                            if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
-                            return (
-                                <HomeProductCard
-                                key={id}
-                                id={product.id}
-                                userId={userId}
-                                name={product.name}
-                                price={product.price.toLocaleString()}
-                                urlDetalles={`/productDetail/${product.id}`}
-                                path={product.photos}
-                                idSeller={product.userIdFK}
-                                nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                isWhisListStatusInclude={true}
-                                heart={product.isProductInWishList}
-                                />
-                            );
-                            }
-                            return null;
-                        })}
+                            {/* Renderizado de los productos ordenados */}
+                            {sortProducts(products).map((product, id) => {
+                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+                                    return (
+                                        <HomeProductCard
+                                            key={id}
+                                            id={product.id}
+                                            userId={userId}
+                                            name={product.name}
+                                            price={product.price.toLocaleString()}
+                                            urlDetalles={`/productDetail/${product.id}`}
+                                            path={product.photos}
+                                            idSeller={product.userIdFK}
+                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                            isWhisListStatusInclude={true}
+                                            heart={product.isProductInWishList}
+                                        />
+                                    );
+                                }
+                                return null;
+                            })}
                         </div>
                     </div>
                 </div>
-                    
+
             </div>
         );
     }
@@ -305,20 +303,20 @@ const Home = ({ isLoggedIn }) => {
         return (
             <div>
 
-                <div class="container-fluid">
 
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
-                        <button className="btn btn-primary" onClick={() => searchProduct()} >
-                            <i className="material-icons" >search</i>
-                        </button>
-                    </form>
-                </div>
 
                 <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                            <div className="form-group row">
+
+                            <div class="container-fluid">
+
+                                <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                                    
+                                </form>
+                            </div>
+                            <div className="form-group row mt-sm-5">
                                 <div className="col-sm-2 col-md-2">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
                                         <option value={0} >todos</option>
@@ -368,47 +366,48 @@ const Home = ({ isLoggedIn }) => {
                 <div className="container-md">
                     <div className="container home">
                         <div className="container-sm">
-                        <div className="row">
-                        <div className="col-6">
-                            <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
-                                <option value="">Ordenar por...</option>
-                                <option value="date">Fecha de Registro</option>
-                                <option value="price">Precio</option>
-                                <option value="name">Nombre</option>
-                            </select>
+                            <div className="row">
+                                <div className="col-6">
+                                    <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
+                                        <option value="">Ordenar por...</option>
+                                        <option value="date">Fecha de Registro</option>
+                                        <option value="price">Precio</option>
+                                        <option value="name">Nombre</option>
+                                    </select>
+                                </div>
+                                {/* Select para seleccionar el orden de ordenamiento */}
+                                <div className="col-6">
+                                    <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        {/* Select para seleccionar el orden de ordenamiento */}
-                        <div className="col-6">
-                            <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
-                                <option value="asc">Ascendente</option>
-                                <option value="desc">Descendente</option>
-                            </select>
-                        </div>
-                        </div>
-                        </div>
-                        
+
                         <div className="grid-container">
-                        {/* Renderizado de los productos ordenados */}
-                        {sortProducts(products).map((product, id) => {
-                            if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
-                            return (
-                                <HomeProductCard
-                                key={id}
-                                id={product.id}
-                                userId={userId}
-                                name={product.name}
-                                price={product.price.toLocaleString()}
-                                urlDetalles={`/productDetail/${product.id}`}
-                                path={product.photos}
-                                idSeller={product.userIdFK}
-                                nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                isWhisListStatusInclude={true}
-                                heart={product.isProductInWishList}
-                                />
-                            );
-                            }
-                            return null;
-                        })}
+                            {/* Renderizado de los productos ordenados */}
+                            {sortProducts(products).map((product, id) => {
+                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+                                    return (
+                                        <HomeProductCard
+                                            key={id}
+                                            id={product.id}
+                                            userId={userId}
+                                            name={product.name}
+                                            price={product.price.toLocaleString()}
+                                            urlDetalles={`/productDetail/${product.id}`}
+                                            path={product.photos}
+                                            idSeller={product.userIdFK}
+                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                            isWhisListStatusInclude={true}
+                                            heart={product.isProductInWishList}
+                                        />
+                                    );
+                                }
+                                return null;
+                            })}
+
                         </div>
                     </div>
                 </div>
