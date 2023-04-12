@@ -75,7 +75,7 @@ const UsersModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         }
 
         return (
-            <div className='container container-style' style={{ color: 'black' }}>
+            <div className='container-md container-style' style={{ color: 'black' }}>
                 <h1 className="text-center" style={{ color: 'white' }} >Módulo de Usuarios</h1>
                 <div id="registerPerPage">
                     <div className="form-floating">
