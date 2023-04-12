@@ -20,6 +20,7 @@ const ProductModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
                 response.data.data.map((product) => {
                     product.createdAt = new Date(product.createdAt).toLocaleString('es-HN', { hour12: true })
+                    product.price = product.price.toLocaleString()
                 });
 
                 setDataToRender(response.data.data);
