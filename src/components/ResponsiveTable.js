@@ -14,7 +14,7 @@ const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, 
                     setIsReadyToRender(true);
                 }).catch((error) => {
                     console.log(error);
-                })
+                });
         }
     };
 
@@ -33,7 +33,7 @@ const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, 
                 <div className="table-responsive" style={{ marginTop: '2em' }}>
                     <table className="table table-bordered table-light table-hover align-middle" id="table">
                         <thead className="table-dark">
-                            <tr className="text-center">
+                            <tr className="text-center" style={{ verticalAlign: 'middle' }}>
                                 {
                                     headings.map((value, index) => (
                                         <th key={index}>{value}</th>
@@ -44,8 +44,8 @@ const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, 
                         <tbody>
                             {
                                 data.map((object, index) => (
-                                    <tr key={index}>
-                                        <td className="text-center">{index + 1}</td>
+                                    <tr className="text-center" key={index}>
+                                        <td>{index + 1}</td>
                                         {
                                             Object.values(object).map((value, subIndex) => (
                                                 <td key={subIndex}>{value}</td>
