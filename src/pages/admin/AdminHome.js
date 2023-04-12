@@ -85,7 +85,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                     <div className="card-body">
                                         <h5 className="card-title">Modulo de Productos</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Administre los productos que se muestran a los usuarios de la aplicación.</p>
-                                        <a href="#" className="btn btn-secondary">Ir</a>
+                                        <a href="/productsModule" className="btn btn-secondary">Ir</a>
                                     </div>
                                     <div className="card-footer text-body-secondary">{`Productos Registrados: ${productsTotal}`}</div>
                                 </div>
