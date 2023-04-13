@@ -27,9 +27,9 @@ body {
 	border-color: #22252a;
 	align-items: center;
 	color: white;
-	margin-top: 3em;
-	margin-bottom: 3em;
-	padding: 1em;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	padding: 1%;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -39,7 +39,6 @@ body {
 	border-color: #22252a;
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
-	margin-bottom: 3em;
 	padding: 1em;
 }
 
@@ -340,17 +339,18 @@ select:invalid {
 /*********************DROPZONE**********************/
 /***************************************************/
 
-.dropzone {
-	border-color: white;
+.dropzone{
+    border-color: white;
 	border-style: solid;
 	border-width: 1px;
-	background-color: white;
-	color: gray;
+    background-color: white;
+    color: gray;
 }
 
 .invalid {
-	border-color: red;
+    border-color: red;
 }
+
 
 /***********************NAVBAR**********************/
 /***************************************************/
@@ -516,9 +516,10 @@ img {
 	border-width: 1px;
 }
 
-/*****************Módulo de Usuarios****************/
-/***************************************************/
-#registerPerPage {
-	width: 11em;
-    margin-top: 3em;
+.star-active{
+	color: #fde166;
+}
+.btn-invisible{
+	background-color: #303841;
+	border : none;
 }
