@@ -12,9 +12,128 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
     const [products, setProducts] = useState([]);
     const [readyToRender, setReadyToRender] = useState(false);
     const [productsWereFound, setProductsWereFound] = useState(null);
+    const [idClient, setIdClient] = useState();
+    const [idSeller, setIdSeller] = useState();
+    const [rating, setRating] = useState();
+
+    const [star1, setStar1] = useState(false);
+    const [star2, setStar2] = useState(false);
+    const [star3, setStar3] = useState(false);
+    const [star4, setStar4] = useState(false);
+    const [star5, setStar5] = useState(false);
 
     const navigate = useNavigate();
     const { id } = useParams();
+
+
+    
+
+    const valueStar = async(e) =>{
+       
+        if(e === 1){
+            setStar1(true);
+            setStar2(false);
+            setStar3(false);
+            setStar4(false);
+            setStar5(false);
+        }else if(e === 2){
+            setStar1(true);
+            setStar2(true);
+            setStar3(false);
+            setStar4(false);
+            setStar5(false);
+           
+        }
+        else if(e === 3){
+            setStar1(true);
+            setStar2(true);
+            setStar3(true);
+            setStar4(false);
+            setStar5(false);
+        }
+        else if(e === 4){
+            setStar1(true);
+            setStar2(true);
+            setStar3(true);
+            setStar4(true);
+            setStar5(false);
+        }
+        else if(e === 5){
+            setStar1(true);
+            setStar2(true);
+            setStar3(true);
+             setStar4(true);
+            setStar5(true); 
+        }
+        
+        setIdSeller(id);
+        await apiClient.post('/rating',{
+            userIdFK : localStorage.getItem('id'), 
+            ratedUserIdFK : parseInt(id), 
+            rating : e
+        }).then((res)=>{
+        
+            
+        }).catch((error) => {
+            console.log(error)
+        });
+    }
+
+    // aqui se hace un llamado al usuario registrado para agarrar el id
+
+    useEffect(() => {
+        const getrating = async () => {
+            await apiClient.post('/getrating', { 
+                userIdFK : localStorage.getItem('id'), 
+                ratedUserIdFK : id
+            }).then((res) => { 
+                setRating(res.data[0].rating);
+                if(res.data[0].rating === 1){
+                    setStar1(true);
+                    setStar2(false);
+                    setStar3(false);
+                    setStar4(false);
+                    setStar5(false);
+                }else if(res.data[0].rating === 2){
+                    setStar1(true);
+                    setStar2(true);
+                    setStar3(false);
+                    setStar4(false);
+                    setStar5(false);
+                   
+                }
+                else if(res.data[0].rating === 3){
+                    setStar1(true);
+                    setStar2(true); 
+                    setStar3(true);
+                    setStar4(false);
+                    setStar5(false);
+                }
+                else if(res.data[0].rating === 4){
+                    setStar1(true);
+                    setStar2(true);
+                    setStar3(true);
+                    setStar4(true);
+                    setStar5(false);
+                }
+                else if(res.data[0].rating === 5){
+                    setStar1(true);
+                    setStar2(true);
+                    setStar3(true);
+                     setStar4(true);
+                    setStar5(true); 
+                }
+                
+                
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+        
+        getrating(idClient, parseInt(id));
+    }, [])
+
+    
 
     // Se ejecuta cuando se crea el componente y cuando el valor de isLoggedIn cambie
     useEffect(() => {
@@ -53,6 +172,8 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
             action();
         }
     }, []);
+
+
 
     useEffect(() => {
 
@@ -112,6 +233,11 @@ const SellerProfile = ({ areUserStatusLoaded }) => {
                                         </div>
                                         <div className='userStats'>
                                             <p>Proximamente</p>
+                                            <button id="b1" className='btn-invisible' value="1" onClick={(e)=>valueStar(1)} ><i className={`material-icons ${star1 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                            <button id="b2" className='btn-invisible' value="2" onClick={(e)=>valueStar(2)} ><i className={`material-icons ${star2 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                            <button id="b3" className='btn-invisible' value="3" onClick={(e)=>valueStar(3)} ><i className={`material-icons ${star3 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                            <button id="b4" className='btn-invisible' value="4" onClick={(e)=>valueStar(4)} ><i className={`material-icons ${star4 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                            <button id="b5" className='btn-invisible' value="5" onClick={(e)=>valueStar(5)} ><i className={`material-icons ${star5 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
                                         </div>
                                     </div>
                                 </div>
