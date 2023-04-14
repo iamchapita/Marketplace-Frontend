@@ -22,44 +22,44 @@ const Home = ({ isLoggedIn }) => {
 
     const [sortBy, setSortBy] = useState(''); // Estado para almacenar la opción de ordenamiento seleccionada
     const [sortOrder, setSortOrder] = useState('asc'); // Estado para almacenar el orden de ordenamiento (ascendente o descendente)
-
+  
     const handleSortByChange = (e) => {
-        setSortBy(e.target.value);
+      setSortBy(e.target.value);
     }
-
+  
     const handleSortOrderChange = (e) => {
-        setSortOrder(e.target.value);
+      setSortOrder(e.target.value);
     }
-
+  
     // Función para realizar el ordenamiento de los productos
     const sortProducts = (products) => {
-        if (sortBy === 'date') {
-            return products.sort((a, b) => {
-                if (sortOrder === 'asc') {
-                    return new Date(a.date) - new Date(b.date);
-                } else {
-                    return new Date(b.date) - new Date(a.date);
-                }
-            });
-        } else if (sortBy === 'price') {
-            return products.sort((a, b) => {
-                if (sortOrder === 'asc') {
-                    return a.price - b.price;
-                } else {
-                    return b.price - a.price;
-                }
-            });
-        } else if (sortBy === 'name') {
-            return products.sort((a, b) => {
-                if (sortOrder === 'asc') {
-                    return a.name.localeCompare(b.name);
-                } else {
-                    return b.name.localeCompare(a.name);
-                }
-            });
-        } else {
-            return products;
-        }
+      if (sortBy === 'createdAt') {
+        return products.sort((a, b) => {
+          if (sortOrder === 'asc') {
+            return new Date(a.createdAt) - new Date(b.createdAt);
+          } else {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          }
+        });
+      } else if (sortBy === 'price') {
+        return products.sort((a, b) => {
+          if (sortOrder === 'asc') {
+            return a.price - b.price;
+          } else {
+            return b.price - a.price;
+          }
+        });
+      } else if (sortBy === 'name') {
+        return products.sort((a, b) => {
+          if (sortOrder === 'asc') {
+            return a.name.localeCompare(b.name);
+          } else {
+            return b.name.localeCompare(a.name);
+          }
+        });
+      } else {
+        return products;
+      }
     }
 
     const filter = async () => {
@@ -257,19 +257,20 @@ const Home = ({ isLoggedIn }) => {
 
                 <div className="container-md">
                     <div className="container home">
-                        <div className="container-sm">
+                        <div>
                             <div className="row">
                                 <div className="col-6">
-                                    <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
+                                    <select className="form-select" value={sortBy} onChange={handleSortByChange}>
                                         <option value="">Ordenar por...</option>
-                                        <option value="date">Fecha de Registro</option>
+                                        <option value="createdAt">Fecha de Publicacion</option>
                                         <option value="price">Precio</option>
                                         <option value="name">Nombre</option>
                                     </select>
                                 </div>
                                 {/* Select para seleccionar el orden de ordenamiento */}
                                 <div className="col-6">
-                                    <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
+                                    <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
+                                        <option value="">De Forma...</option>
                                         <option value="asc">Ascendente</option>
                                         <option value="desc">Descendente</option>
                                     </select>
@@ -288,6 +289,7 @@ const Home = ({ isLoggedIn }) => {
                                             userId={userId}
                                             name={product.name}
                                             price={product.price.toLocaleString()}
+                                            createdAt={product.createdAt}
                                             urlDetalles={`/productDetail/${product.id}`}
                                             path={product.photos}
                                             idSeller={product.userIdFK}
@@ -373,19 +375,20 @@ const Home = ({ isLoggedIn }) => {
 
                 <div className="container-md">
                     <div className="container home">
-                        <div className="container-sm">
+                        <div>
                             <div className="row">
                                 <div className="col-6">
-                                    <select className="form-select" placeholder="Departamento" value={sortBy} onChange={handleSortByChange}>
+                                    <select className="form-select" value={sortBy} onChange={handleSortByChange}>
                                         <option value="">Ordenar por...</option>
-                                        <option value="date">Fecha de Registro</option>
+                                        <option value="createdAt">Fecha de Publicacion</option>
                                         <option value="price">Precio</option>
                                         <option value="name">Nombre</option>
                                     </select>
                                 </div>
                                 {/* Select para seleccionar el orden de ordenamiento */}
                                 <div className="col-6">
-                                    <select className="form-select" placeholder="Departamento" value={sortOrder} onChange={handleSortOrderChange}>
+                                    <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
+                                        <option value="">De Forma...</option>
                                         <option value="asc">Ascendente</option>
                                         <option value="desc">Descendente</option>
                                     </select>
@@ -404,6 +407,7 @@ const Home = ({ isLoggedIn }) => {
                                             userId={userId}
                                             name={product.name}
                                             price={product.price.toLocaleString()}
+                                            createdAt={product.createdAt}
                                             urlDetalles={`/productDetail/${product.id}`}
                                             path={product.photos}
                                             idSeller={product.userIdFK}
@@ -415,7 +419,6 @@ const Home = ({ isLoggedIn }) => {
                                 }
                                 return null;
                             })}
-
                         </div>
                     </div>
                 </div>
