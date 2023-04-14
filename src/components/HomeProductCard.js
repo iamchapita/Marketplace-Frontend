@@ -99,10 +99,13 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                             <h6 className="card-text" >L {price.toLocaleString()}</h6>
                             <a className="card-link" href={urlDetalles}>Detalles</a>
                             <div className="check-container">
+                            
                                 <label id={`labelCheck${id}`} htmlFor={`check${id}`}>
                                     <i className={`material-icons ${favoriteClass ? 'icon-favorite-active ' : 'icon-favorite'}`} >favorite</i>
                                 </label>
                                 <input className="check-invisible" onClick={() => favorite(id)} type="checkbox" id={`check${id}`} />
+
+
                             </div>
                         </div>
 

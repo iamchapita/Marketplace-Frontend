@@ -2,7 +2,7 @@ import React, { useState, useEffect, } from "react";
 import apiClient from "../../utils/apiClient";
 import HomeProductCard from "../../components/HomeProductCard";
 import { Spinner } from "react-bootstrap";
-import { async } from "q";
+
 
 const Home = ({ isLoggedIn }) => {
 
@@ -131,7 +131,6 @@ const Home = ({ isLoggedIn }) => {
     }, []);
 
     useEffect(() => {
-
         if (isLoggedIn === false) {
             setIsWhisListStatusInclude(false);
             // setUserId(false);
@@ -152,7 +151,16 @@ const Home = ({ isLoggedIn }) => {
             } else {
                 await apiClient.get(`/productsWishList/${userId}`).then((response) => {
                     setProducts(response.data);
-                    setIsWhisListStatusInclude(true);
+                    
+                        if(localStorage.getItem('isAdmin') ==='0'){
+                            setIsWhisListStatusInclude(true);
+                        }else{
+                            setIsWhisListStatusInclude(false);
+                        }
+                        
+                    
+                   
+                    
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -190,10 +198,10 @@ const Home = ({ isLoggedIn }) => {
                         <div className="container-fluid" >
 
 
-                            <div class="container-fluid">
+                            <div className="container-fluid">
 
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                                <form className="d-flex" role="search">
+                                    <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
                                     
                                 </form>
                             </div>
@@ -203,7 +211,7 @@ const Home = ({ isLoggedIn }) => {
                             <div className="form-group row mt-sm-5">
                                 <div className="col-sm-2 col-md-2" id="select-filter">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
-                                        <option value={0} >todos</option>
+                                        <option value={0} >Categoría</option>
                                         {
                                             categories.map((categorie, id) => (
                                                 <option key={id} value={categorie.id} >{categorie.name}</option>
@@ -213,7 +221,7 @@ const Home = ({ isLoggedIn }) => {
                                 </div>
                                 <div className="col-sm-2 col-md-2" id="select-filter">
                                     <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
-                                        <option value={0} >todos</option>
+                                        <option value={0} >Departamento</option>
                                         {
                                             departaments.map((departament, id) => (
                                                 <option key={id} value={departament.id}  >{departament.name}</option>
@@ -234,7 +242,7 @@ const Home = ({ isLoggedIn }) => {
                                 </div>
                                 <div className="col-sm-1 col-md-1" id="button-filter">
                                     <button className="btn btn-primary" onClick={() => filter()} >
-                                        <i className="material-icons" >search</i>
+                                        <i className="material-icons " >search</i>
                                     </button>
                                 </div>
                                 <div className="col-sm-1 col-md-1" id="button-filter">
@@ -299,7 +307,7 @@ const Home = ({ isLoggedIn }) => {
         );
     }
 
-    if (isWhisListStatusInclude === false) {
+    if (isWhisListStatusInclude === false ) {
         return (
             <div>
 
@@ -309,17 +317,17 @@ const Home = ({ isLoggedIn }) => {
                     <nav className="navbar">
                         <div className="container-fluid" >
 
-                            <div class="container-fluid">
+                            <div className="container-fluid">
 
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                                <form className="d-flex" role="search">
+                                    <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
                                     
                                 </form>
                             </div>
                             <div className="form-group row mt-sm-5">
                                 <div className="col-sm-2 col-md-2">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
-                                        <option value={0} >todos</option>
+                                        <option value={0} >Categoria</option>
                                         {
                                             categories.map((categorie, id) => (
                                                 <option key={id} value={categorie.id} >{categorie.name}</option>
@@ -329,7 +337,7 @@ const Home = ({ isLoggedIn }) => {
                                 </div>
                                 <div className="col-sm-2 col-md-2">
                                     <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
-                                        <option value={0} >todos</option>
+                                        <option value={0} >Departamento</option>
                                         {
                                             departaments.map((departament, id) => (
                                                 <option key={id} value={departament.id}  >{departament.name}</option>
@@ -400,7 +408,7 @@ const Home = ({ isLoggedIn }) => {
                                             path={product.photos}
                                             idSeller={product.userIdFK}
                                             nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                            isWhisListStatusInclude={true}
+                                            isWhisListStatusInclude={false}
                                             heart={product.isProductInWishList}
                                         />
                                     );
@@ -415,5 +423,6 @@ const Home = ({ isLoggedIn }) => {
             </div>
         );
     }
+   
 }
 export default Home;

@@ -13,6 +13,7 @@ import SellerProfile from '../pages/seller/SellerProfile';
 import ProductEdit from '../pages/product/ProductEdit';
 import UsersModule from '../pages/admin/modules/UsersModule';
 import ProductModule from '../pages/admin/modules/ProductModule';
+import ChatGeneral from '../components/ChatGeneral';
 
 
 const RoutesList = () => {
@@ -77,6 +78,7 @@ const RoutesList = () => {
                         {/* Rutas de Adminstracion */}
                         <Route path='/usersModule' element={<UsersModule isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/productsModule' element={<ProductModule isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
+                        <Route path='/chat' element={<ChatGeneral />} />
 
                     </Routes>
                 </BrowserRouter>
