@@ -33,33 +33,33 @@ const Home = ({ isLoggedIn }) => {
   
     // Función para realizar el ordenamiento de los productos
     const sortProducts = (products) => {
-      if (sortBy === 'createdAt') {
-        return products.sort((a, b) => {
-          if (sortOrder === 'asc') {
-            return new Date(a.createdAt) - new Date(b.createdAt);
+        if (sortBy === 'createdAt') {
+            return products.sort((a, b) => {
+              if (sortOrder === 'asc') {
+                return new Date(a.createdAt) - new Date(b.createdAt);
+              } else {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+              }
+            });
+          } else if (sortBy === 'price') {
+            return products.sort((a, b) => {
+              if (sortOrder === 'asc') {
+                return a.price - b.price;
+              } else {
+                return b.price - a.price;
+              }
+            });
+          } else if (sortBy === 'name') {
+            return products.sort((a, b) => {
+              if (sortOrder === 'asc') {
+                return a.name.localeCompare(b.name);
+              } else {
+                return b.name.localeCompare(a.name);
+              }
+            });
           } else {
-            return new Date(b.createdAt) - new Date(a.createdAt);
+            return products;
           }
-        });
-      } else if (sortBy === 'price') {
-        return products.sort((a, b) => {
-          if (sortOrder === 'asc') {
-            return a.price - b.price;
-          } else {
-            return b.price - a.price;
-          }
-        });
-      } else if (sortBy === 'name') {
-        return products.sort((a, b) => {
-          if (sortOrder === 'asc') {
-            return a.name.localeCompare(b.name);
-          } else {
-            return b.name.localeCompare(a.name);
-          }
-        });
-      } else {
-        return products;
-      }
     }
 
     const filter = async () => {
