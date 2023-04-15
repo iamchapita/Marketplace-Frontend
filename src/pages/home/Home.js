@@ -22,44 +22,44 @@ const Home = ({ isLoggedIn }) => {
 
     const [sortBy, setSortBy] = useState(''); // Estado para almacenar la opción de ordenamiento seleccionada
     const [sortOrder, setSortOrder] = useState('asc'); // Estado para almacenar el orden de ordenamiento (ascendente o descendente)
-  
+
     const handleSortByChange = (e) => {
-      setSortBy(e.target.value);
+        setSortBy(e.target.value);
     }
-  
+
     const handleSortOrderChange = (e) => {
-      setSortOrder(e.target.value);
+        setSortOrder(e.target.value);
     }
-  
+
     // Función para realizar el ordenamiento de los productos
     const sortProducts = (products) => {
         if (sortBy === 'createdAt') {
             return products.sort((a, b) => {
-              if (sortOrder === 'asc') {
-                return new Date(a.createdAt) - new Date(b.createdAt);
-              } else {
-                return new Date(b.createdAt) - new Date(a.createdAt);
-              }
+                if (sortOrder === 'asc') {
+                    return new Date(a.createdAt) - new Date(b.createdAt);
+                } else {
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                }
             });
-          } else if (sortBy === 'price') {
+        } else if (sortBy === 'price') {
             return products.sort((a, b) => {
-              if (sortOrder === 'asc') {
-                return a.price - b.price;
-              } else {
-                return b.price - a.price;
-              }
+                if (sortOrder === 'asc') {
+                    return a.price - b.price;
+                } else {
+                    return b.price - a.price;
+                }
             });
-          } else if (sortBy === 'name') {
+        } else if (sortBy === 'name') {
             return products.sort((a, b) => {
-              if (sortOrder === 'asc') {
-                return a.name.localeCompare(b.name);
-              } else {
-                return b.name.localeCompare(a.name);
-              }
+                if (sortOrder === 'asc') {
+                    return a.name.localeCompare(b.name);
+                } else {
+                    return b.name.localeCompare(a.name);
+                }
             });
-          } else {
+        } else {
             return products;
-          }
+        }
     }
 
     const filter = async () => {
@@ -133,7 +133,6 @@ const Home = ({ isLoggedIn }) => {
     useEffect(() => {
         if (isLoggedIn === false) {
             setIsWhisListStatusInclude(false);
-            // setUserId(false);
         }
 
     }, [isLoggedIn])
@@ -151,16 +150,12 @@ const Home = ({ isLoggedIn }) => {
             } else {
                 await apiClient.get(`/productsWishList/${userId}`).then((response) => {
                     setProducts(response.data);
-                    
-                        if(localStorage.getItem('isAdmin') ==='0'){
-                            setIsWhisListStatusInclude(true);
-                        }else{
-                            setIsWhisListStatusInclude(false);
-                        }
-                        
-                    
-                   
-                    
+
+                    if (localStorage.getItem('isAdmin') === '0') {
+                        setIsWhisListStatusInclude(true);
+                    } else {
+                        setIsWhisListStatusInclude(false);
+                    }
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -187,27 +182,17 @@ const Home = ({ isLoggedIn }) => {
                 </div>
             </div>
         );
-    }
-
-    if (isWhisListStatusInclude) {
+    } else {
         return (
             <div>
-
                 <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-
-
                             <div className="container-fluid">
-
                                 <form className="d-flex" role="search">
                                     <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
-                                    
                                 </form>
                             </div>
-
-
-
                             <div className="form-group row mt-sm-5">
                                 <div className="col-sm-2 col-md-2" id="select-filter">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
@@ -277,7 +262,6 @@ const Home = ({ isLoggedIn }) => {
                                 </div>
                             </div>
                         </div>
-
                         <div className="grid-container">
                             {/* Renderizado de los productos ordenados */}
                             {sortProducts(products).map((product, id) => {
@@ -294,7 +278,7 @@ const Home = ({ isLoggedIn }) => {
                                             path={product.photos}
                                             idSeller={product.userIdFK}
                                             nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                            isWhisListStatusInclude={true}
+                                            isWhisListStatusInclude={isWhisListStatusInclude}
                                             heart={product.isProductInWishList}
                                         />
                                     );
@@ -308,124 +292,6 @@ const Home = ({ isLoggedIn }) => {
             </div>
         );
     }
-
-    if (isWhisListStatusInclude === false ) {
-        return (
-            <div>
-
-
-
-                <div className="container-sm">
-                    <nav className="navbar">
-                        <div className="container-fluid" >
-
-                            <div className="container-fluid">
-
-                                <form className="d-flex" role="search">
-                                    <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
-                                    
-                                </form>
-                            </div>
-                            <div className="form-group row mt-sm-5">
-                                <div className="col-sm-2 col-md-2">
-                                    <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
-                                        <option value={0} >Categoria</option>
-                                        {
-                                            categories.map((categorie, id) => (
-                                                <option key={id} value={categorie.id} >{categorie.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <div className="col-sm-2 col-md-2">
-                                    <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
-                                        <option value={0} >Departamento</option>
-                                        {
-                                            departaments.map((departament, id) => (
-                                                <option key={id} value={departament.id}  >{departament.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <div className="col-sm-2 col-md-2">
-                                    <select className="form-select" >
-                                        <option defaultValue={null} >Estrellas de vendedor</option>
-                                    </select>
-                                </div>
-                                <div className="col-sm-2 col-md-2">
-                                    <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e) => setPricemin(e.target.value)}></input>
-                                </div>
-                                <div className="col-sm-2 col-md-2">
-                                    <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
-                                </div>
-                                <div className="col-sm-1 col-md-1">
-                                    <button className="btn btn-primary" onClick={() => filter()} >
-                                        <i className="material-icons" >search</i>
-                                    </button>
-                                </div>
-                                <div className="col-sm-1 col-md-1">
-                                    <button className="btn btn-primary" onClick={() => filter()} >
-                                        <i className="material-icons" >clear_all</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-
-                <div className="container-md">
-                    <div className="container home">
-                        <div>
-                            <div className="row">
-                                <div className="col-6">
-                                    <select className="form-select" value={sortBy} onChange={handleSortByChange}>
-                                        <option value="">Ordenar por...</option>
-                                        <option value="createdAt">Fecha de Publicacion</option>
-                                        <option value="price">Precio</option>
-                                        <option value="name">Nombre</option>
-                                    </select>
-                                </div>
-                                {/* Select para seleccionar el orden de ordenamiento */}
-                                <div className="col-6">
-                                    <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
-                                        <option value="">De Forma...</option>
-                                        <option value="asc">Ascendente</option>
-                                        <option value="desc">Descendente</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="grid-container">
-                            {/* Renderizado de los productos ordenados */}
-                            {sortProducts(products).map((product, id) => {
-                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
-                                    return (
-                                        <HomeProductCard
-                                            key={id}
-                                            id={product.id}
-                                            userId={userId}
-                                            name={product.name}
-                                            price={product.price.toLocaleString()}
-                                            createdAt={product.createdAt}
-                                            urlDetalles={`/productDetail/${product.id}`}
-                                            path={product.photos}
-                                            idSeller={product.userIdFK}
-                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                            isWhisListStatusInclude={false}
-                                            heart={product.isProductInWishList}
-                                        />
-                                    );
-                                }
-                                return null;
-                            })}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        );
-    }
-   
 }
+
 export default Home;
