@@ -19,12 +19,7 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
         const action = async () => {
             await apiClient.get(`/getAllProducts/${registerPerPageValue}`).then((response) => {
-
-                response.data.data.map((product) => {
-                    product.createdAt = new Date(product.createdAt).toLocaleString('es-HN', { hour12: true })
-                    product.price = product.price.toLocaleString()
-                });
-
+                formatFields(response);
                 setDataToRender(response.data.data);
                 setPaginateLinks(response.data.links);
                 setIsReadyToRender(true);
@@ -34,6 +29,15 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         }
         action();
     }, []);
+
+    const formatFields = (response) => {
+        response = response.data.data.map((product) => {
+            product.createdAt = new Date(product.createdAt).toLocaleString('es-HN', { hour12: true })
+            product.price = product.price.toLocaleString()
+        });
+
+        return response;
+    };
 
     const handleRegisterPerPageChange = (e) => {
         setRegisterPerPageValue(e.target.value);
@@ -104,6 +108,7 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                     </div>
                 </div>
                 <ResponsiveTable
+                    formartFunction={formatFields}
                     headings={headings}
                     isReadyToRender={isReadyToRender}
                     setIsReadyToRender={setIsReadyToRender}
