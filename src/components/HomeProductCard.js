@@ -75,7 +75,7 @@ function HomeProductCard({ id, userId, name, price, urlDetalles, path, idSeller,
                     <div className="account-container">
                         <div className="count-bar">
                             <i className="material-icons icon-perfil" >person</i>
-                            <a className="link-perfil" >{nameSeller}</a>
+                            <a className="link-perfil" href={`/userProfile/${idSeller}`} >{nameSeller}</a>
                         </div>
                     </div>
                     <div className="col-4">
