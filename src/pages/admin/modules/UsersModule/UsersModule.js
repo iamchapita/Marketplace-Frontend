@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
-import CustomizableAlert from "../../../components/CustomizableAlert";
-import apiClient from "../../../utils/apiClient";
-import ResponsiveTable from "../../../components/ResponsiveTable";
+import CustomizableAlert from "../../../../components/CustomizableAlert";
+import apiClient from "../../../../utils/apiClient";
+import ResponsiveTable from "../../../../components/ResponsiveTable";
 
 const UsersModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
