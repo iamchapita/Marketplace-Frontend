@@ -11,7 +11,9 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [dataToRender, setDataToRender] = useState();
     const [paginateLinks, setPaginateLinks] = useState([]);
 
-    const headings = ['#', 'Nombre', 'Descripción', 'Precio', 'Estado del Producto', 'Cantidad', 'Visibilidad', 'Disponible para Comprar', 'Banneado', 'Fecha de Publicación'];
+    const operations = [{ 'name': 'Detalles', 'url': '/productDetail/' }];
+
+    const headings = ['#', 'Nombre', 'Precio', 'Estado del Producto', 'Cantidad', 'Visibilidad', 'Disponible para Comprar', 'Banneado', 'Fecha de Publicación', 'Operación'];
 
     useEffect(() => {
 
@@ -109,6 +111,7 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                     setData={setDataToRender}
                     paginateLinks={paginateLinks}
                     setLinks={setPaginateLinks}
+                    operations={operations}
                 />
             </div>
         );
