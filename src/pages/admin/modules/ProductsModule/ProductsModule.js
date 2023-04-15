@@ -15,19 +15,19 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
     const headings = ['#', 'Nombre', 'Precio', 'Estado del Producto', 'Cantidad', 'Visibilidad', 'Disponible para Comprar', 'Banneado', 'Fecha de Publicación', 'Operación'];
 
-    useEffect(() => {
+    const action = async (value) => {
+        await apiClient.get(`/getAllProducts/${value}`).then((response) => {
+            formatFields(response);
+            setDataToRender(response.data.data);
+            setPaginateLinks(response.data.links);
+            setIsReadyToRender(true);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 
-        const action = async () => {
-            await apiClient.get(`/getAllProducts/${registerPerPageValue}`).then((response) => {
-                formatFields(response);
-                setDataToRender(response.data.data);
-                setPaginateLinks(response.data.links);
-                setIsReadyToRender(true);
-            }).catch((error) => {
-                console.log(error);
-            });
-        }
-        action();
+    useEffect(() => {
+        action(registerPerPageValue);
     }, []);
 
     const formatFields = (response) => {
@@ -41,20 +41,8 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
     const handleRegisterPerPageChange = (e) => {
         setRegisterPerPageValue(e.target.value);
-
-        const action = async () => {
-            setIsReadyToRender(false);
-            await apiClient.get(`/getAllProducts/${e.target.value}`).then((response) => {
-                setDataToRender(response.data.data);
-                setPaginateLinks(response.data.links);
-                setIsReadyToRender(true);
-            }).catch((error) => {
-                console.log(error);
-            });
-        }
-
-        action();
-
+        setIsReadyToRender(false);
+        action(e.target.value);
     }
 
     if (!areUserStatusLoaded) {
