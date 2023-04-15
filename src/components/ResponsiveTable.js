@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import apiClient from "../utils/apiClient";
 
-const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, setData, paginateLinks, setLinks }) => {
+const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, setData, paginateLinks, setLinks, operations = false, formartFunction = false }) => {
 
     const handlePaginator = async (url) => {
         if (url !== null) {
             setIsReadyToRender(false);
             await apiClient.get(url).
                 then((response) => {
+                    if (formartFunction !== false) {
+                        formartFunction(response);
+                    }
                     setData(response.data.data);
                     setLinks(response.data.links);
                     setIsReadyToRender(true);
@@ -45,11 +48,25 @@ const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, 
                             {
                                 data.map((object, index) => (
                                     <tr className="text-center" key={index}>
-                                        <td>{index + 1}</td>
                                         {
                                             Object.values(object).map((value, subIndex) => (
                                                 <td key={subIndex}>{value}</td>
                                             ))
+                                        }
+                                        {
+                                            operations !== false ? (
+                                                operations.map((operation) => (
+                                                    <td key={index}>
+                                                        <a
+                                                            className="btn btn-primary"
+                                                            href={`${operation.url}${object.id}`}
+                                                        >{operation.name}
+                                                        </a>
+                                                    </td>
+                                                ))
+                                            ) : (
+                                                <td key={index}>N/A</td>
+                                            )
                                         }
                                     </tr>
                                 ))
