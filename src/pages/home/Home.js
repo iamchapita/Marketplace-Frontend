@@ -33,12 +33,12 @@ const Home = ({ isLoggedIn }) => {
 
     // Función para realizar el ordenamiento de los productos
     const sortProducts = (products) => {
-        if (sortBy === 'createdAt') {
+        if (sortBy === 'created_at') {
             return products.sort((a, b) => {
                 if (sortOrder === 'asc') {
-                    return new Date(a.createdAt) - new Date(b.createdAt);
+                    return new Date(a.created_at) - new Date(b.created_at);
                 } else {
-                    return new Date(b.createdAt) - new Date(a.createdAt);
+                    return new Date(b.created_at) - new Date(a.created_at);
                 }
             });
         } else if (sortBy === 'price') {
@@ -188,12 +188,19 @@ const Home = ({ isLoggedIn }) => {
                 <div className="container-sm">
                     <nav className="navbar">
                         <div className="container-fluid" >
-                            <div className="container-fluid">
-                                <form className="d-flex" role="search">
-                                    <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
-                                </form>
+                            
+                            <div className="container home-container">
+                                <div className="home-tittle">
+                                    <h4>Buscar</h4>
+                                </div>
+                                <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
                             </div>
-                            <div className="form-group row mt-sm-5">
+
+                            <div className="container home-container">
+                            <div className="home-tittle">
+                                <h4>Filtrar</h4>
+                            </div>
+                            <div className="row">
                                 <div className="col-sm-2 col-md-2" id="select-filter">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
                                         <option value={0} >Categoría</option>
@@ -226,34 +233,33 @@ const Home = ({ isLoggedIn }) => {
                                     <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
                                 </div>
                                 <div className="col-sm-1 col-md-1" id="button-filter">
-                                    <button className="btn btn-primary" onClick={() => filter()} >
-                                        <i className="material-icons " >search</i>
+                                    <button className="btn btn-primary" onClick={() => filter()}>
+                                    Aplicar 
                                     </button>
                                 </div>
                                 <div className="col-sm-1 col-md-1" id="button-filter">
-                                    <button className="btn btn-primary" onClick={() => filter()} >
-                                        <i className="material-icons" >clear_all</i>
+                                    <button className="btn btn-danger">
+                                    Borrar
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                    </nav>
-                </div>
-
-                <div className="container-md">
-                    <div className="container home">
-                        <div>
+                            </div>
+                            
+                            <div className="container home-container">
+                            <div className="home-tittle">
+                                <h4>Ordenar</h4>
+                            </div>
                             <div className="row">
-                                <div className="col-6">
+                                <div className="col-sm-6 col-md-6" id="select-filter">
                                     <select className="form-select" value={sortBy} onChange={handleSortByChange}>
                                         <option value="">Ordenar por...</option>
-                                        <option value="createdAt">Fecha de Publicacion</option>
+                                        <option value="created_at">Fecha de Publicacion</option>
                                         <option value="price">Precio</option>
                                         <option value="name">Nombre</option>
                                     </select>
                                 </div>
                                 {/* Select para seleccionar el orden de ordenamiento */}
-                                <div className="col-6">
+                                <div className="col-sm-6 col-md-6" id="select-filter">
                                     <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
                                         <option value="">De Forma...</option>
                                         <option value="asc">Ascendente</option>
@@ -261,7 +267,14 @@ const Home = ({ isLoggedIn }) => {
                                     </select>
                                 </div>
                             </div>
+                            </div>
+
                         </div>
+                    </nav>
+                </div>
+
+                <div className="container-md">
+                    <div className="container home">
                         <div className="grid-container">
                             {/* Renderizado de los productos ordenados */}
                             {sortProducts(products).map((product, id) => {
