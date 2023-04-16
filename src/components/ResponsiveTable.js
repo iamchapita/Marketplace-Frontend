@@ -74,7 +74,7 @@ const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, 
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example">
+                <nav style={{ marginTop: '2em' }} aria-label="Page navigation example">
                     <ul className="pagination justify-content-center">
                         <ul className="pagination">
                             {paginateLinks.map(link => (

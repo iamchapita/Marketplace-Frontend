@@ -185,7 +185,7 @@ const Home = ({ isLoggedIn }) => {
     } else {
         return (
             <div>
-                <div className="container-md">
+                <div className="container-md container-style">
                     <div className="hidden-section">
                         <div className="home-top-section">
                             <div className="home-tittle">
@@ -266,7 +266,7 @@ const Home = ({ isLoggedIn }) => {
                     </div>
                 </div>
 
-                <div className="container-md">
+                <div className="container-md container-style">
                     <div className="grid-container">
                         {/* Renderizado de los productos ordenados */}
                         {sortProducts(products).map((product, id) => {

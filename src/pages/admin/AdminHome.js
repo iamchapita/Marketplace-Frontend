@@ -58,7 +58,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         }
 
         return (
-            <div className='container-md' style={{ color: 'black' }}>
+            <div className='container-md container-style' style={{ color: 'black', padding: '2em' }}>
                 <h1 className="text-center" style={{ color: 'white' }}>Bienvenido al Modulo de Administrador</h1>
                 <h4 className="text-center" style={{ color: 'white' }}>¿Qué desea gestionar?</h4>
                 {

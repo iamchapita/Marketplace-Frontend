@@ -53,7 +53,7 @@ const WishList = ({ isLoggedIn }) => {
         }
 
         return (
-            <div className="container-md">
+            <div className="container-md container-style">
                 <div className="tittle">
                     <h1>Lista de Deseos</h1>
                 </div>
