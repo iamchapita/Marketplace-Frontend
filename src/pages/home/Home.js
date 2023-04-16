@@ -33,12 +33,12 @@ const Home = ({ isLoggedIn }) => {
 
     // Función para realizar el ordenamiento de los productos
     const sortProducts = (products) => {
-        if (sortBy === 'created_at') {
+        if (sortBy === 'createdAt') {
             return products.sort((a, b) => {
                 if (sortOrder === 'asc') {
-                    return new Date(a.created_at) - new Date(b.created_at);
+                    return new Date(a.createdAt) - new Date(b.createdAt);
                 } else {
-                    return new Date(b.created_at) - new Date(a.created_at);
+                    return new Date(b.createdAt) - new Date(a.createdAt);
                 }
             });
         } else if (sortBy === 'price') {
@@ -253,7 +253,7 @@ const Home = ({ isLoggedIn }) => {
                                 <div className="col-sm-6 col-md-6" id="select-filter">
                                     <select className="form-select" value={sortBy} onChange={handleSortByChange}>
                                         <option value="">Ordenar por...</option>
-                                        <option value="created_at">Fecha de Publicacion</option>
+                                        <option value="createdAt">Fecha de Publicacion</option>
                                         <option value="price">Precio</option>
                                         <option value="name">Nombre</option>
                                     </select>
