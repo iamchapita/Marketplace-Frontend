@@ -185,23 +185,20 @@ const Home = ({ isLoggedIn }) => {
     } else {
         return (
             <div>
-                <div className="container-sm">
-                    <nav className="navbar">
-                        <div className="container-fluid" >
-                            
-                            <div className="container home-container">
-                                <div className="home-tittle">
-                                    <h4>Buscar</h4>
-                                </div>
-                                <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                <div className="container-md">
+                    <div className="hidden-section">
+                        <div className="home-top-section">
+                            <div className="home-tittle">
+                                <h4>Buscar</h4>
                             </div>
-
-                            <div className="container home-container">
+                            <input className="form-control" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                        </div>
+                        <div className="home-top-section">
                             <div className="home-tittle">
                                 <h4>Filtrar</h4>
                             </div>
                             <div className="row">
-                                <div className="col-sm-2 col-md-2" id="select-filter">
+                                <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
                                     <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
                                         <option value={0} >Categoría</option>
                                         {
@@ -211,7 +208,7 @@ const Home = ({ isLoggedIn }) => {
                                         }
                                     </select>
                                 </div>
-                                <div className="col-sm-2 col-md-2" id="select-filter">
+                                <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
                                     <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
                                         <option value={0} >Departamento</option>
                                         {
@@ -221,36 +218,34 @@ const Home = ({ isLoggedIn }) => {
                                         }
                                     </select>
                                 </div>
-                                <div className="col-sm-2 col-md-2" id="select-filter">
+                                <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
                                     <select className="form-select" >
                                         <option defaultValue={null} >Estrellas de vendedor</option>
                                     </select>
                                 </div>
-                                <div className="col-sm-2 col-md-2" id="input-filter">
+                                <div className="col-sm-6 col-md-6 col-lg-6 pb-3">
                                     <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e) => setPricemin(e.target.value)}></input>
                                 </div>
-                                <div className="col-sm-2 col-md-2" id="input-filter">
+                                <div className="col-sm-6 col-md-6 col-lg-6 pb-3">
                                     <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
                                 </div>
-                                <div className="col-sm-1 col-md-1" id="button-filter">
-                                    <button className="btn btn-primary" onClick={() => filter()}>
-                                    Aplicar 
+                                <div className="d-flex col-sm-12 col-md-12 col-lg-12 justify-content-center">
+                                    <button className="btn btn-primary m-3" onClick={() => filter()}>
+                                        Aplicar
                                     </button>
-                                </div>
-                                <div className="col-sm-1 col-md-1" id="button-filter">
-                                    <button className="btn btn-danger">
-                                    Borrar
+                                    <button className="btn btn-danger m-3">
+                                        Borrar
                                     </button>
                                 </div>
                             </div>
-                            </div>
-                            
-                            <div className="container home-container">
+                        </div>
+
+                        <div className="home-top-section">
                             <div className="home-tittle">
                                 <h4>Ordenar</h4>
                             </div>
                             <div className="row">
-                                <div className="col-sm-6 col-md-6" id="select-filter">
+                                <div className="col-sm-6 col-md-6 pb-3">
                                     <select className="form-select" value={sortBy} onChange={handleSortByChange}>
                                         <option value="">Ordenar por...</option>
                                         <option value="createdAt">Fecha de Publicacion</option>
@@ -259,7 +254,7 @@ const Home = ({ isLoggedIn }) => {
                                     </select>
                                 </div>
                                 {/* Select para seleccionar el orden de ordenamiento */}
-                                <div className="col-sm-6 col-md-6" id="select-filter">
+                                <div className="col-sm-6 col-md-6 pb-3">
                                     <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
                                         <option value="">De Forma...</option>
                                         <option value="asc">Ascendente</option>
@@ -267,41 +262,36 @@ const Home = ({ isLoggedIn }) => {
                                     </select>
                                 </div>
                             </div>
-                            </div>
-
-                        </div>
-                    </nav>
-                </div>
-
-                <div className="container-md">
-                    <div className="container home">
-                        <div className="grid-container">
-                            {/* Renderizado de los productos ordenados */}
-                            {sortProducts(products).map((product, id) => {
-                                if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
-                                    return (
-                                        <HomeProductCard
-                                            key={id}
-                                            id={product.id}
-                                            userId={userId}
-                                            name={product.name}
-                                            price={product.price.toLocaleString()}
-                                            createdAt={product.createdAt}
-                                            urlDetalles={`/productDetail/${product.id}`}
-                                            path={product.photos}
-                                            idSeller={product.userIdFK}
-                                            nameSeller={product.userFirstName + ' ' + product.userLastName}
-                                            isWhisListStatusInclude={isWhisListStatusInclude}
-                                            heart={product.isProductInWishList}
-                                        />
-                                    );
-                                }
-                                return null;
-                            })}
                         </div>
                     </div>
                 </div>
 
+                <div className="container-md">
+                    <div className="grid-container">
+                        {/* Renderizado de los productos ordenados */}
+                        {sortProducts(products).map((product, id) => {
+                            if (product.name && product.name.toLowerCase().includes(name.toLowerCase())) {
+                                return (
+                                    <HomeProductCard
+                                        key={id}
+                                        id={product.id}
+                                        userId={userId}
+                                        name={product.name}
+                                        price={product.price.toLocaleString()}
+                                        createdAt={product.createdAt}
+                                        urlDetalles={`/productDetail/${product.id}`}
+                                        path={product.photos}
+                                        idSeller={product.userIdFK}
+                                        nameSeller={product.userFirstName + ' ' + product.userLastName}
+                                        isWhisListStatusInclude={isWhisListStatusInclude}
+                                        heart={product.isProductInWishList}
+                                    />
+                                );
+                            }
+                            return null;
+                        })}
+                    </div>
+                </div>
             </div>
         );
     }
