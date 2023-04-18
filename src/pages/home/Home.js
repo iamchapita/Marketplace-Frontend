@@ -186,81 +186,83 @@ const Home = ({ isLoggedIn }) => {
         return (
             <div>
                 <div className="container-md container-style">
-                    <div className="hidden-section">
-                        <div className="home-top-section">
-                            <div className="home-tittle">
-                                <h4>Buscar</h4>
-                            </div>
-                            <input className="form-control" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
+                    <div className="home-top-section">
+                        <div className="home-tittle">
+                            <h4>Buscar</h4>
                         </div>
-                        <div className="home-top-section">
-                            <div className="home-tittle">
-                                <h4>Filtrar</h4>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
-                                    <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
-                                        <option value={0} >Categoría</option>
-                                        {
-                                            categories.map((categorie, id) => (
-                                                <option key={id} value={categorie.id} >{categorie.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
-                                    <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
-                                        <option value={0} >Departamento</option>
-                                        {
-                                            departaments.map((departament, id) => (
-                                                <option key={id} value={departament.id}  >{departament.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
-                                    <select className="form-select" >
-                                        <option defaultValue={null} >Estrellas de vendedor</option>
-                                    </select>
-                                </div>
-                                <div className="col-sm-6 col-md-6 col-lg-6 pb-3">
-                                    <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e) => setPricemin(e.target.value)}></input>
-                                </div>
-                                <div className="col-sm-6 col-md-6 col-lg-6 pb-3">
-                                    <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
-                                </div>
-                                <div className="d-flex col-sm-12 col-md-12 col-lg-12 justify-content-center">
-                                    <button className="btn btn-primary m-3" onClick={() => filter()}>
-                                        Aplicar
-                                    </button>
-                                    <button className="btn btn-danger m-3">
-                                        Borrar
-                                    </button>
-                                </div>
+                        <div className="row">
+                            <div className="col-sm-12 col-md-12 col-lg-12 pb-3">
+                                <input className="form-control" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
                             </div>
                         </div>
+                    </div>
+                    <div className="home-top-section">
+                        <div className="home-tittle">
+                            <h4>Filtrar</h4>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
+                                <select className="form-select" placeholder="Categoría" onChange={(e) => setCategory(e.target.value)}>
+                                    <option value={0} >Categoría</option>
+                                    {
+                                        categories.map((categorie, id) => (
+                                            <option key={id} value={categorie.id} >{categorie.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
+                                <select className="form-select" placeholder="Departamento" onChange={(e) => setDepartment(e.target.value)}>
+                                    <option value={0} >Departamento</option>
+                                    {
+                                        departaments.map((departament, id) => (
+                                            <option key={id} value={departament.id}  >{departament.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <div className="col-sm-4 col-md-4 col-lg-4 pb-3">
+                                <select className="form-select" >
+                                    <option defaultValue={null} >Estrellas de vendedor</option>
+                                </select>
+                            </div>
+                            <div className="col-sm-6 col-md-6 col-lg-6 pb-3">
+                                <input className="form-control" type="number" placeholder="Precio mínimo" onChange={(e) => setPricemin(e.target.value)}></input>
+                            </div>
+                            <div className="col-sm-6 col-md-6 col-lg-6 pb-3">
+                                <input className="form-control" type="number" placeholder="Precio máximo" onChange={(e) => setPricemax(e.target.value)}></input>
+                            </div>
+                            <div className="d-flex col-sm-12 col-md-12 col-lg-12 justify-content-center">
+                                <button className="btn btn-primary m-3" onClick={() => filter()}>
+                                    Aplicar
+                                </button>
+                                <button className="btn btn-danger m-3">
+                                    Borrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div className="home-top-section">
-                            <div className="home-tittle">
-                                <h4>Ordenar</h4>
+                    <div className="home-top-section">
+                        <div className="home-tittle">
+                            <h4>Ordenar</h4>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-6 col-md-6 pb-3">
+                                <select className="form-select" value={sortBy} onChange={handleSortByChange}>
+                                    <option value="">Ordenar por...</option>
+                                    <option value="createdAt">Fecha de Publicacion</option>
+                                    <option value="price">Precio</option>
+                                    <option value="name">Nombre</option>
+                                </select>
                             </div>
-                            <div className="row">
-                                <div className="col-sm-6 col-md-6 pb-3">
-                                    <select className="form-select" value={sortBy} onChange={handleSortByChange}>
-                                        <option value="">Ordenar por...</option>
-                                        <option value="createdAt">Fecha de Publicacion</option>
-                                        <option value="price">Precio</option>
-                                        <option value="name">Nombre</option>
-                                    </select>
-                                </div>
-                                {/* Select para seleccionar el orden de ordenamiento */}
-                                <div className="col-sm-6 col-md-6 pb-3">
-                                    <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
-                                        <option value="">De Forma...</option>
-                                        <option value="asc">Ascendente</option>
-                                        <option value="desc">Descendente</option>
-                                    </select>
-                                </div>
+                            {/* Select para seleccionar el orden de ordenamiento */}
+                            <div className="col-sm-6 col-md-6 pb-3">
+                                <select className="form-select" value={sortOrder} onChange={handleSortOrderChange}>
+                                    <option value="">De Forma...</option>
+                                    <option value="asc">Ascendente</option>
+                                    <option value="desc">Descendente</option>
+                                </select>
                             </div>
                         </div>
                     </div>
