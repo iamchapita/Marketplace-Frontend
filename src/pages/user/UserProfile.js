@@ -135,12 +135,16 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
 
     useEffect(() => {
         const action = async () => {
-            // Obtiene los productos del vendedor
-            const response = await apiClient.post('/getProductsBySeller', {
-                // Envia el id del usuario vendedor. Se obtiene desde localstorage.
-                // Este id se guarda en el componente de login.
-                sellerId: id,
-            }).then((response) => {
+
+            let data = {
+                sellerId: id
+            }
+
+            if (isAdmin === false) {
+                data.isBannedStatus = false
+            }
+
+            await apiClient.post('/getProductsBySeller', data).then((response) => {
                 setProducts(response.data);
                 setProductsWereFound(true);
             }).catch((error) => {
@@ -161,12 +165,15 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                 }
             });
         }
+
         if (id === localStorage.getItem('id')) {
             navigate('/myProfile');
         } else {
-            action();
+            if (areUserStatusLoaded === true) {
+                action();
+            }
         }
-    }, []);
+    }, [areUserStatusLoaded]);
 
     useEffect(() => {
         if (productsWereFound === false) {
