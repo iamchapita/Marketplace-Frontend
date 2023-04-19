@@ -9,12 +9,11 @@ import ProductInsert from '../pages/product/ProductInsert';
 import WishList from '../pages/wishlist/WishList';
 import AdminHome from '../pages/admin/AdminHome';
 import MyProfile from '../pages/user/MyProfile';
-import SellerProfile from '../pages/seller/SellerProfile';
+import UserProfile from '../pages/user/UserProfile';
 import ProductEdit from '../pages/product/ProductEdit';
 import UsersModule from '../pages/admin/modules/UsersModule/UsersModule';
 import ProductsModule from '../pages/admin/modules/ProductsModule/ProductsModule';
 import ChatGeneral from '../components/ChatGeneral';
-import UserDetail from '../pages/admin/modules/UsersModule/UserDetail';
 
 const RoutesList = () => {
 
@@ -66,21 +65,21 @@ const RoutesList = () => {
                         <Route path='/productDetail/:id' element={<ProductDetail />} />
                         <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
-                        <Route path='/userProfile/:id' element={<SellerProfile areUserStatusLoaded={areUserStatusLoaded} />} />
-
+                        
                         {/* Rutas privadas */}
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
-                        <Route path='/userDetail/:id' element={<UserDetail isLoggedIn={isLoggedIn} isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded} setAreUserStatusLoaded={setAreUserStatusLoaded} />} />
-
                         <Route path='/productEdit/:id' element={<ProductEdit isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
 
                         {/* Rutas de Adminstracion */}
                         <Route path='/usersModule' element={<UsersModule isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/productsModule' element={<ProductsModule isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/chat' element={<ChatGeneral />} />
+
+                        {/* Rutas segun contexto */}
+                        <Route path='/userProfile/:id' element={<UserProfile isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
 
                     </Routes>
                 </BrowserRouter>

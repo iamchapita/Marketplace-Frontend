@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import apiClient from '../../utils/apiClient';
 import { Spinner } from 'react-bootstrap';
-import SellerProductCard from '../../components/SellerProductCard';
+import ProductCard from '../../components/ProductCard';
 import CustomizableAlert from '../../components/CustomizableAlert';
 
 const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
@@ -126,7 +126,7 @@ const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
                                     <div className="row row-cols-1 row-cols-sm-2 row-cols-xxl-4 row-cols-xl-3 g-4">
                                         {
                                             productsWereFound ? (products.map((product, index) => (
-                                                <SellerProductCard
+                                                <ProductCard
                                                     key={index}
                                                     id={product.id}
                                                     name={product.name}

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
 import { Spinner } from "react-bootstrap";
-import Button from "../components/Button";
+import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
-function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold, isBanned, createdAt, updatedAt, hasProductOwnership }) {
+function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, amount, createdAt, updatedAt, hasProductOwnership, isAdmin = false }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [productWasSold, setProductWasSold] = useState(wasSold);
     const [productIsAvailable, setProductIsAvailable] = useState(isAvailable);
+    const [productIsBanned, setProductIsBanned] = useState(isBanned);
     const [performingWasSoldOperation, setPerformingWasSoldOperation] = useState(false);
     const [performingIsAvailableOperation, setPerformingIsAvailableOperation] = useState(false);
+    const [performingIsBannedOperation, setPerformingIsBannedOperation] = useState(false);
 
     const navigate = useNavigate();
 
@@ -38,12 +40,25 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
             id: id,
             isAvailable: !productIsAvailable
         }).then((response) => {
-            // console.log(response);
             setProductIsAvailable(!productIsAvailable);
             setPerformingIsAvailableOperation(false);
         }).catch((error) => {
             console.log(error);
             setPerformingIsAvailableOperation(false);
+        });
+    };
+
+    const handleIsBannedOperation = async (productIsBanned) => {
+        setPerformingIsBannedOperation(true);
+
+        await apiClient.post('/setProductIsBanned', {
+            id: id,
+            isBanned: !productIsBanned
+        }).then((response) => {
+            setProductIsBanned(!productIsBanned);
+            setPerformingIsBannedOperation(false);
+        }).catch((error) => {
+            console.log(error);
         });
     };
 
@@ -84,7 +99,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
 
     return (
         <div key={id} className="col">
-            <div className={`card h-100 ${isBanned ? 'isBanned' : ''} `} id="seller-products">
+            <div className={`card h-100 ${productIsBanned ? 'isBanned' : ''} `} id="seller-products">
                 {!isReadyToRender ? (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">
@@ -105,10 +120,9 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <h6 className="card-text">L {price.toLocaleString()}</h6>
-
                     {
                         hasProductOwnership ? (
-                            !isBanned ? (
+                            !productIsBanned ? (
                                 productIsAvailable ? (
                                     !productWasSold ? (
                                         <h6 className="card-text">Estado: Disponible</h6>
@@ -122,10 +136,27 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                                 <h6 className="card-text">Estado: Banneado</h6>
                             )
                         ) : (
-                            !productWasSold ? (
-                                <h6 className="card-text">Estado: Disponible</h6>
+
+                            isAdmin ? (
+                                !productIsBanned ? (
+                                    productIsAvailable ? (
+                                        !productWasSold ? (
+                                            <h6 className="card-text">Estado: Disponible</h6>
+                                        ) : (
+                                            <h6 className="card-text">Estado: Vendido</h6>
+                                        )
+                                    ) : (
+                                        <h6 className="card-text">Estado: Deshabilitado</h6>
+                                    )
+                                ) : (
+                                    <h6 className="card-text">Estado: Banneado</h6>
+                                )
                             ) : (
-                                <h6 className="card-text">Estado: Vendido</h6>
+                                !productWasSold ? (
+                                    <h6 className="card-text">Estado: Disponible</h6>
+                                ) : (
+                                    <h6 className="card-text">Estado: Vendido</h6>
+                                )
                             )
                         )
                     }
@@ -138,9 +169,7 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                     hasProductOwnership ? (
                         <div className="card-footer">
                             <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
-
-                                <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={isBanned ? true : false} onClick={handleEditProductButton} />
-
+                                <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={productIsBanned ? true : false} onClick={handleEditProductButton} />
                             </div>
                             <div style={{ paddingBottom: '0.5em' }}>
                                 {
@@ -148,9 +177,9 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                                         <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                     ) : (
                                         productWasSold ? (
-                                            <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={productIsBanned ? true : false} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={isBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={productIsBanned ? true : false} />
                                         )
                                     )
                                 }
@@ -161,16 +190,51 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
                                         <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                     ) : (
                                         productIsAvailable ? (
-                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={isBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
                                         )
                                     )
                                 }
                             </div>
                         </div>
                     ) : (
-                        <div></div>
+                        isAdmin ? (
+                            performingIsBannedOperation ? (
+                                <Button
+                                    type={'button'}
+                                    buttonClass={'danger'}
+                                    tooltipText={'Espera'}
+                                    diabled={!performingIsBannedOperation}
+                                    onClick={() => { handleIsBannedOperation(productIsBanned) }}
+                                    fieldLabel={
+                                        <Spinner
+                                            animation="border"
+                                            variant="light"
+                                            size="sm"
+                                        />
+                                    }
+                                />
+                            ) : (
+                                <Button
+                                    type={'button'}
+                                    buttonClass={'danger'}
+                                    onClick={() => { handleIsBannedOperation(productIsBanned) }}
+                                    tooltipText={
+                                        productIsBanned ?
+                                            'Desbanee el producto.' :
+                                            'Banee el producto.'
+                                    }
+                                    fieldLabel={
+                                        productIsBanned ?
+                                            'Desbannear' :
+                                            'Bannear'
+                                    }
+                                />
+                            )
+                        ) : (
+                            <div></div>
+                        )
                     )
                 }
                 <div className="card-footer">
@@ -194,4 +258,4 @@ function SellerProductCard({ id, name, price, path, isAvailable, amount, wasSold
     );
 }
 
-export default SellerProductCard;
+export default ProductCard;

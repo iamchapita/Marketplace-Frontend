@@ -11,7 +11,7 @@ const UsersModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [dataToRender, setDataToRender] = useState(null);
     const [paginateLinks, setPaginateLinks] = useState([]);
 
-    const operations = [{ 'name': 'Detalles', 'url': '/userDetail/' }];
+    const operations = [{ 'name': 'Detalles', 'url': '/userProfile/' }];
     const headings = ['#', 'Nombre', 'DNI', 'Tipo de Usuario', 'Banneado', 'Estado', 'Operación'];
 
     useEffect(() => {
