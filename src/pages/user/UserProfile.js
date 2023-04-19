@@ -328,7 +328,7 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                                                     isBanned={product.isBanned}
                                                     amount={product.amount}
                                                     createdAt={product.createdAt}
-                                                    updatedAt={null}
+                                                    updatedAt={product.updatedAt}
                                                     hasProductOwnership={false}
                                                     isAdmin={isAdmin}
                                                 />
