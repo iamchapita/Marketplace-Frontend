@@ -14,7 +14,7 @@ import ProductEdit from '../pages/product/ProductEdit';
 import UsersModule from '../pages/admin/modules/UsersModule/UsersModule';
 import ProductsModule from '../pages/admin/modules/ProductsModule/ProductsModule';
 import ChatGeneral from '../components/ChatGeneral';
-
+import UserDetail from '../pages/admin/modules/UsersModule/UserDetail';
 
 const RoutesList = () => {
 
@@ -72,7 +72,9 @@ const RoutesList = () => {
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
+                        <Route path='/userDetail/:id' element={<UserDetail isLoggedIn={isLoggedIn} isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded} setAreUserStatusLoaded={setAreUserStatusLoaded} />} />
+
                         <Route path='/productEdit/:id' element={<ProductEdit isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
 
                         {/* Rutas de Adminstracion */}
