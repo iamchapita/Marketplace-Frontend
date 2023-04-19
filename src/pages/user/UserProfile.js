@@ -288,11 +288,19 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                                         </div>
                                         <div className='userStats'>
                                             <p>Proximamente</p>
-                                            <button id="b1" className='btn-invisible' value="1" onClick={(e) => valueStar(1)} ><i className={`material-icons ${star1 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
-                                            <button id="b2" className='btn-invisible' value="2" onClick={(e) => valueStar(2)} ><i className={`material-icons ${star2 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
-                                            <button id="b3" className='btn-invisible' value="3" onClick={(e) => valueStar(3)} ><i className={`material-icons ${star3 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
-                                            <button id="b4" className='btn-invisible' value="4" onClick={(e) => valueStar(4)} ><i className={`material-icons ${star4 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
-                                            <button id="b5" className='btn-invisible' value="5" onClick={(e) => valueStar(5)} ><i className={`material-icons ${star5 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                            {
+                                                isAdmin ? (
+                                                    <div></div>
+                                                ) : (
+                                                    <div>
+                                                        <button id="b1" className='btn-invisible' value="1" onClick={(e) => valueStar(1)} ><i className={`material-icons ${star1 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                                        <button id="b2" className='btn-invisible' value="2" onClick={(e) => valueStar(2)} ><i className={`material-icons ${star2 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                                        <button id="b3" className='btn-invisible' value="3" onClick={(e) => valueStar(3)} ><i className={`material-icons ${star3 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                                        <button id="b4" className='btn-invisible' value="4" onClick={(e) => valueStar(4)} ><i className={`material-icons ${star4 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                                        <button id="b5" className='btn-invisible' value="5" onClick={(e) => valueStar(5)} ><i className={`material-icons ${star5 ? 'star-active ' : 'icon-star'}`} >grade</i></button>
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>
