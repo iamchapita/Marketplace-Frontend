@@ -108,7 +108,7 @@ const MyProfile = ({ isLoggedIn, areUserStatusLoaded }) => {
                     ) : (
                         <div className='row mx-4 my-3'>
                             <div className='col-md-3'>
-                                <div className='col-md-12 container-style' style={{ margin: '0 0 1em 0', color: 'white' }}>
+                                <div className='col-md-12 container-style' style={{ color: 'white' }}>
                                     <div className='userInfoContainer' style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
                                         <div className='userInfo'>
                                             <h4>{sellerInfo.firstName + ' ' + sellerInfo.lastName}</h4>
