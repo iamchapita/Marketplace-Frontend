@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import apiClient from "../utils/apiClient";
 
-const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, setData, paginateLinks, setLinks, operations = false, formartFunction = false }) => {
+const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, setData, paginateLinks, setLinks, operations = false, formatFunction = false }) => {
 
     const handlePaginator = async (url) => {
         if (url !== null) {
             setIsReadyToRender(false);
             await apiClient.get(url).
                 then((response) => {
-                    if (formartFunction !== false) {
-                        formartFunction(response);
+                    if (formatFunction !== false) {
+                        formatFunction(response);
                     }
                     setData(response.data.data);
                     setLinks(response.data.links);
