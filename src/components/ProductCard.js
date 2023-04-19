@@ -241,15 +241,10 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                     <small className="text-body-secondary">{`Publicado en: ${new Date(createdAt).toLocaleString('es-HN', { hour12: true })}`}</small>
                     <br></br>
                     {
-                        updatedAt !== null ? (
-
-                            updatedAt !== createdAt ? (
+                        updatedAt && updatedAt !== createdAt && (
+                            hasProductOwnership || isAdmin ? (
                                 <small className="text-body-secondary">{`Actualizado en: ${new Date(updatedAt).toLocaleString('es-HN', { hour12: true })}`}</small>
-                            ) : (
-                                <div></div>
-                            )
-                        ) : (
-                            <div></div>
+                            ) : null
                         )
                     }
                 </div>
