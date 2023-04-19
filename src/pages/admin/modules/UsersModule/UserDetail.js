@@ -111,6 +111,16 @@ const UserDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         )
     } else {
 
+        if (!readyToRender) {
+            return (
+                <div className='container-fluid' style={{ marginTop: '3em' }}>
+                    <div className="container d-flex justify-content-center">
+                        <Spinner animation="border" variant='light' />
+                    </div>
+                </div>
+            )
+        }
+
         if (isAdmin === false) {
             return (
                 <CustomizableAlert title={'Error'} text={'No tienes Autorización para acceder a este recurso.'} />
