@@ -507,6 +507,12 @@ img {
 	border-width: 1px;
 }
 
+.isAvailable {
+	border-color: #fcba03;
+	border-style: solid;
+	border-width: 1px;
+}
+
 #registerPerPage {
 	width: 11em;
 	margin-top: 3em;

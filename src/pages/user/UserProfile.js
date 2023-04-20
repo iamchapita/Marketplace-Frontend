@@ -212,10 +212,26 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                 id: id,
                 isBanned: !isBanned
             }).then((response) => {
-                setIsBanned(!isBanned);
-                setIsPerformingAction(false);
+
+                let data = {
+                    sellerId: id
+                }
+
+                if (isAdmin === false) {
+                    data.isBannedStatus = false
+                }
+
+                apiClient.post('/getProductsBySeller', data).then((response) => {
+                    setProducts(response.data);
+                    setProductsWereFound(true);
+                    setIsBanned(!isBanned);
+                    setIsPerformingAction(false);
+                }).catch((error) => {
+                    console.log(error);
+                });
+
             }).catch((error) => {
-                console.log(error.response.data);
+                console.log(error);
             });
         };
         action();
@@ -316,24 +332,31 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                                 <div className='col-md-12 container-style'>
                                     <div className="row row-cols-1 row-cols-xxl-6 row-cols-xl-4 row-cols-md-3 row-cols-sm-2 g-4">
                                         {
-                                            productsWereFound ? (products.map((product, index) => (
-                                                <ProductCard
-                                                    key={index}
-                                                    id={product.id}
-                                                    name={product.name}
-                                                    price={product.price}
-                                                    path={product.photos}
-                                                    isAvailable={product.isAvailable}
-                                                    wasSold={product.wasSold}
-                                                    isBanned={product.isBanned}
-                                                    amount={product.amount}
-                                                    createdAt={product.createdAt}
-                                                    updatedAt={product.updatedAt}
-                                                    hasProductOwnership={false}
-                                                    isAdmin={isAdmin}
-                                                />
-                                            ))) : (
-                                                <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'} />
+                                            isPerformingAction ? (
+                                                <div className="container d-flex align-items-center justify-content-center" style={{ marginTop: '2em' }}>
+                                                    <Spinner animation="border" variant='light' />
+                                                </div>
+                                            ) : (
+                                                productsWereFound ? (products.map((product, index) => (
+                                                    <ProductCard
+                                                        key={index}
+                                                        id={product.id}
+                                                        name={product.name}
+                                                        price={product.price}
+                                                        path={product.photos}
+                                                        isAvailable={product.isAvailable}
+                                                        wasSold={product.wasSold}
+                                                        isBanned={product.isBanned}
+                                                        amount={product.amount}
+                                                        createdAt={product.createdAt}
+                                                        updatedAt={product.updatedAt}
+                                                        hasProductOwnership={false}
+                                                        isAdmin={isAdmin}
+                                                    />
+                                                )))
+                                                    : (
+                                                        <CustomizableAlert title={''} text={'No se han publicado Productos'} variant={'info'} />
+                                                    )
                                             )
                                         }
                                     </div>
@@ -342,7 +365,7 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                         </div>
                     )
                 }
-            </div>
+            </div >
         );
     }
 };

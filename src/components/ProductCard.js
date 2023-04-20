@@ -99,7 +99,7 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
 
     return (
         <div key={id} className="col">
-            <div className={`card h-100 ${productIsBanned ? 'isBanned' : ''} `} id="seller-products">
+            <div className={`card h-100 ${productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : ''} `} id="seller-products">
                 {!isReadyToRender ? (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">
@@ -187,12 +187,12 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                             <div style={{ paddingBottom: '0.5em' }}>
                                 {
                                     performingIsAvailableOperation ? (
-                                        <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
+                                        <Button type={'button'} buttonClass={'warning'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                     ) : (
                                         productIsAvailable ? (
-                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'danger'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'warning'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'danger'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'warning'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
                                         )
                                     )
                                 }
