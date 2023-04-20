@@ -160,6 +160,9 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                 </div>
                                 <div className="offcanvas-body">
                                     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                        <li className="nav-item">
+                                            <a className="sidebar-item" aria-current="page" href='/admin'>Módulo de Administrador</a>
+                                        </li>
                                         {
                                             isLoggedIn ?
                                                 (
@@ -167,9 +170,6 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                                         <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/logout' : '/login'} onClick={isLoggedIn ? onLogout : onLogin}>{isLoggedIn ? 'Cerrar Sesión' : 'Inicio de Sesión'}</a>
                                                     </li>
                                                 ) : (<div></div>)
-                                        }
-                                        {
-                                            isAdmin ? (<div></div>) : (<div></div>)
                                         }
                                     </ul>
                                 </div>
