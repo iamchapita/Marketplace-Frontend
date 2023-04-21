@@ -59,13 +59,12 @@ const RoutesList = () => {
                                     setIsSeller={setIsSeller}
                                     setIsEnabled={setIsEnabled}
                                 />}
-
                         />
                         <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-                        <Route path='/productDetail/:id' element={<ProductDetail />} />
+                        <Route path='/productDetail/:id' element={<ProductDetail isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
-                        
+
                         {/* Rutas privadas */}
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
                         <Route path='/wishlist' element={<WishList isLoggedIn={isLoggedIn} />} />
