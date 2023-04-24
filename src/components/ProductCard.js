@@ -98,7 +98,7 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
 
     return (
         <div key={id} className="col">
-            <div className={`card h-100 ${isAdmin ? (productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : '') : (' ')}`} id="seller-products">
+            <div className={`card h-100 ${isAdmin || hasProductOwnership ? (productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : '') : (' ')}`} id="seller-products">
                 {!isReadyToRender ? (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div className="d-flex align-items-center justify-content-center">
