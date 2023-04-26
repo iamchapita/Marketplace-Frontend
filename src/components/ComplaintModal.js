@@ -6,7 +6,7 @@ import InputFile from "../components/InputFile";
 import Alert from "../components/common/Alert";
 import Button from "./Button";
 
-const ComplaintModal = ({ sellerDetails, productDetails, productImages, productExtensions, showModal, setShowModal, isPerformingAction, setIsPerformingAction }) => {
+const ComplaintModal = ({ sellerDetails, productDetails, complaintSent, setComplaintSent, showModal, setShowModal, isPerformingAction, setIsPerformingAction }) => {
 
     const [alertMessage, setAlertMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
@@ -17,11 +17,23 @@ const ComplaintModal = ({ sellerDetails, productDetails, productImages, productE
     const [evidencesConvertered, setEvidencesConvertered] = useState([]);
     const [alertType, setAlertType] = useState('danger');
     const [strongTextAlert, setStrongTextAlert] = useState('Ups!');
-    const [complaintSent, setComplaintSent] = useState(false);
 
     let validationMessages = "";
 
     const descriptionRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d\-_.,;:()"'!]{15,250}$/;
+
+    useEffect(() => {
+
+        if (complaintSent === true) {
+            setComplaintSent(true);
+            setAlertType('danger');
+            setStrongTextAlert('Ups!');
+            setAlertMessage('Ya has denunciado este cliente.');
+            setIsDescriptionValid(true);
+            setShowAlert(true);
+        }
+
+    }, [complaintSent])
 
     useEffect(() => {
 
@@ -134,7 +146,7 @@ const ComplaintModal = ({ sellerDetails, productDetails, productImages, productE
                     type={"button"}
                     buttonClass={"secondary"}
                     fieldLabel={"Cerrar"}
-                    onClick={() => { handleCloseModal(); setDescription(''); setEvidences([]); setComplaintSent(false); setShowAlert(false); setIsDescriptionValid(false);}}
+                    onClick={() => { handleCloseModal(); setDescription(''); setEvidences([]); setComplaintSent(false); setShowAlert(false); setIsDescriptionValid(false); }}
                 />
                 {
                     isPerformingAction ? (
@@ -142,7 +154,7 @@ const ComplaintModal = ({ sellerDetails, productDetails, productImages, productE
                             type={'button'}
                             buttonClass={'danger'}
                             tooltipText={'Espera'}
-                            diabled={!isPerformingAction}
+                            disabled={!isPerformingAction}
                             fieldLabel={
                                 <Spinner
                                     animation="border"
@@ -155,9 +167,10 @@ const ComplaintModal = ({ sellerDetails, productDetails, productImages, productE
                         <Button
                             type={"button"}
                             buttonClass={"danger"}
-                            fieldLabel={"Denunciar"}
+                            fieldLabel={"Enviar Denuncia"}
+                            tooltipText={'Envía la denuncia para posterior revisión por parte de la administración.'}
                             onClick={submitHandler}
-                            disabled={complaintSent}
+                            disabled={true}
                         />
                     )
                 }

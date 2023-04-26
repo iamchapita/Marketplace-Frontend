@@ -25,9 +25,9 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
     const { id } = useParams();
 
     useEffect(() => {
-        const action = async () => {
+        const getProductInfo = async () => {
             try {
-                const response = await apiClient.get(`/product/${id}`).then((productResponse) => {
+                await apiClient.get(`/product/${id}`).then((productResponse) => {
                     setProduct(productResponse.data);
                     setIsAvailable(Boolean(productResponse.data.isAvailable));
                     setIsBanned(Boolean(productResponse.data.isBanned));
@@ -48,7 +48,25 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
                 setWaitingResponse(false);
             }
         }
-        action();
+
+        const getComplaintStatus = async () => {
+
+            await apiClient.post('/getAComplaint', {
+                userIdFK: localStorage.getItem('id'),
+                productIdFK: id
+            }).then((respose) => {
+                setComplaintSent(true);
+            }).catch((error) => {
+                if (error.response.status === 500) {
+                    setComplaintSent(false);
+                }
+            })
+
+        }
+
+        getProductInfo();
+        getComplaintStatus();
+
     }, [id]);
 
     useEffect(() => {
@@ -201,7 +219,7 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
                                                 type={'button'}
                                                 buttonClass={'danger'}
                                                 tooltipText={'Espera'}
-                                                diabled={!isPerformingAction}
+                                                disabled={!isPerformingAction}
                                                 fieldLabel={
                                                     <Spinner
                                                         animation="border"
@@ -242,7 +260,7 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
                                                         type={'button'}
                                                         buttonClass={'danger'}
                                                         tooltipText={'Espera'}
-                                                        diabled={!isPerformingAction}
+                                                        disabled={!isPerformingAction}
                                                         fieldLabel={
                                                             <Spinner
                                                                 animation="border"
@@ -273,9 +291,11 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
                                     )
                                 )
                             }
-                            <ComplaintModal 
+                            <ComplaintModal
                                 sellerDetails={sellerDetails}
                                 productDetails={product}
+                                complaintSent={complaintSent}
+                                setComplaintSent={setComplaintSent}
                                 showModal={showModal}
                                 setShowModal={setShowModal}
                                 isPerformingAction={isPerformingAction}
