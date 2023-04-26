@@ -15,7 +15,7 @@ import UsersModule from '../pages/admin/modules/UsersModule/UsersModule';
 import ProductsModule from '../pages/admin/modules/ProductsModule/ProductsModule';
 import ChatGeneral from '../components/ChatGeneral';
 import Suscription from '../components/Suscription';
-
+import PopularProduct from '../pages/popular/PopularProduct';
 
 const RoutesList = () => {
 
@@ -66,6 +66,7 @@ const RoutesList = () => {
                         <Route path='/productDetail/:id' element={<ProductDetail isAdmin={isAdmin} isLoggedIn={isLoggedIn} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
+                        <Route path='/popular' element={<PopularProduct isLoggedIn={isLoggedIn} />} />
 
                         {/* Rutas privadas */}
                         <Route path='/productInsert' element={<ProductInsert isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
