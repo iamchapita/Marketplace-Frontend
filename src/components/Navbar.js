@@ -131,6 +131,15 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                                         <a className="sidebar-item" aria-current="page" href='/wishlist'>Lista de Deseos</a>
                                                     </li>
                                                 ) : (<div></div>)
+                                                
+                                        }
+                                        {
+                                            isLoggedIn ?
+                                                (
+                                                    <li className="nav-item">
+                                                        <a className="sidebar-item" aria-current="page" href="/suscription">Suscripciones</a>
+                                                    </li>
+                                                ) : (<div></div>)
                                         }
                                         <li className="nav-item">
                                             <a className="sidebar-item" aria-current="page" href={isLoggedIn ? '/logout' : '/login'} onClick={isLoggedIn ? onLogout : onLogin}>{isLoggedIn ? 'Cerrar Sesión' : 'Inicio de Sesión'}</a>

@@ -399,6 +399,26 @@ a {
 	text-decoration: none;
 }
 
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+th, td {
+	border: 4px solid; 
+	border-color: #393e46;
+	padding: 8px;
+	text-align: center;
+}
+
+td{
+	color: white;
+}
+
+th {
+	background-color: #393e46;
+	font-size: larger;
+}
+
 /*********************FORMULARIO********************/
 /***************************************************/
 .input-group-text,

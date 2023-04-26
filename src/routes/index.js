@@ -14,6 +14,8 @@ import ProductEdit from '../pages/product/ProductEdit';
 import UsersModule from '../pages/admin/modules/UsersModule/UsersModule';
 import ProductsModule from '../pages/admin/modules/ProductsModule/ProductsModule';
 import ChatGeneral from '../components/ChatGeneral';
+import Suscription from '../components/Suscription';
+
 
 const RoutesList = () => {
 
@@ -71,6 +73,7 @@ const RoutesList = () => {
                         <Route path='/admin' element={<AdminHome isLoggedIn={isLoggedIn} isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/myProfile' element={<MyProfile isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} areUserStatusLoaded={areUserStatusLoaded} setAreUserStatusLoaded={setAreUserStatusLoaded} />} />
                         <Route path='/productEdit/:id' element={<ProductEdit isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
+                        <Route path='/suscription' element={<Suscription isLoggedIn={isLoggedIn}/>}/>
 
                         {/* Rutas de Adminstracion */}
                         <Route path='/usersModule' element={<UsersModule isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
