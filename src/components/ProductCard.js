@@ -167,7 +167,7 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                     hasProductOwnership ? (
                         <div className="card-footer">
                             <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
-                                <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} diabled={productIsBanned ? true : false} onClick={handleEditProductButton} />
+                                <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} disabled={productIsBanned ? true : false} onClick={handleEditProductButton} />
                             </div>
                             <div style={{ paddingBottom: '0.5em' }}>
                                 {
@@ -175,9 +175,9 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                                         <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                     ) : (
                                         productWasSold ? (
-                                            <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={productIsBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} disabled={productIsBanned ? true : false} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} diabled={productIsBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} disabled={productIsBanned ? true : false} />
                                         )
                                     )
                                 }
@@ -188,9 +188,9 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                                         <Button type={'button'} buttonClass={'warning'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                     ) : (
                                         productIsAvailable ? (
-                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'warning'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'warning'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} disabled={productIsBanned ? true : false} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'warning'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} diabled={productIsBanned ? true : false} />
+                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'warning'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} disabled={productIsBanned ? true : false} />
                                         )
                                     )
                                 }
@@ -203,7 +203,7 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                                     type={'button'}
                                     buttonClass={'danger'}
                                     tooltipText={'Espera'}
-                                    diabled={!performingIsBannedOperation}
+                                    disabled={!performingIsBannedOperation}
                                     onClick={() => { handleIsBannedOperation(productIsBanned) }}
                                     fieldLabel={
                                         <Spinner

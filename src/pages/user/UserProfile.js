@@ -142,7 +142,7 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
 
             if (isAdmin === false) {
                 data.isBannedStatus = false,
-                data.isAvailableStatus = true
+                    data.isAvailableStatus = true
             }
 
             await apiClient.post('/getProductsBySeller', data).then((response) => {
@@ -275,7 +275,7 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                                                                 type={'button'}
                                                                 buttonClass={'danger'}
                                                                 tooltipText={'Espera'}
-                                                                diabled={!isPerformingAction}
+                                                                disabled={!isPerformingAction}
                                                                 fieldLabel={
                                                                     <Spinner
                                                                         animation="border"
