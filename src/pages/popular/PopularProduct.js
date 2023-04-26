@@ -57,6 +57,9 @@ const PopularProduct = ({ isLoggedIn }) => {
         return (
             <div>
                 <div className="container-md container-style">
+                    <div className="tittle">
+                        <h1>Articulos Populares</h1>
+                    </div>
                     <div className="grid-container">
                     {
                     products.map((product, index) => (
