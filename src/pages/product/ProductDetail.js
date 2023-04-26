@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiClient from '../../utils/apiClient';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Modal } from 'react-bootstrap';
 import Button from "../../components/Button";
-
 import ShareButton from "../../components/shareButton";
+import ComplaintForm from "../../components/ComplaintForm";
 
-const ProductDetail = ({ isAdmin, areUserStatusLoaded }) => {
+const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
 
     const [waitingResponse, setWaitingResponse] = useState(true);
     const [wasProductFound, setWasProductFound] = useState(null);
     const [responseMessage, setResponseMessage] = useState('');
-    // La variable product almacena un objeto
     const [product, setProduct] = useState([]);
     const [isBanned, setIsBanned] = useState(null);
     const [isAvailable, setIsAvailable] = useState(null);
@@ -19,6 +18,8 @@ const ProductDetail = ({ isAdmin, areUserStatusLoaded }) => {
     const [productImages, setProductImages] = useState([]);
     const [productExtensions, setProductExtensions] = useState([]);
     const [sellerDetails, setSellerDetails] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [isProductOwner, setIsProductOwner] = useState(null);
 
     const { id } = useParams();
 
@@ -29,6 +30,7 @@ const ProductDetail = ({ isAdmin, areUserStatusLoaded }) => {
                     setProduct(productResponse.data);
                     setIsAvailable(Boolean(productResponse.data.isAvailable));
                     setIsBanned(Boolean(productResponse.data.isBanned));
+                    setIsProductOwner(parseInt(localStorage.getItem("id")) === productResponse.data.userIdFK)
                     const sellerData = {
                         'id': productResponse.data.userIdFK,
                         'name': productResponse.data.userFirstName + ' ' + productResponse.data.userLastName,
@@ -84,6 +86,9 @@ const ProductDetail = ({ isAdmin, areUserStatusLoaded }) => {
             }
         }
     }, [productImages]);
+
+    const handleCloseModal = () => setShowModal(false);
+    const handleShowModal = () => setShowModal(true);
 
     const handleBanButtonAction = () => {
         setIsPerformingAction(true);
@@ -227,9 +232,69 @@ const ProductDetail = ({ isAdmin, areUserStatusLoaded }) => {
                                         </div>
                                     )
                                 ) : (
-                                    <ShareButton />
+                                    isLoggedIn ? (
+                                        isProductOwner === false ? (
+                                            isPerformingAction ? (
+                                                <div>
+                                                    <hr></hr>
+                                                    <ShareButton />
+                                                    <Button
+                                                        type={'button'}
+                                                        buttonClass={'danger'}
+                                                        tooltipText={'Espera'}
+                                                        diabled={!isPerformingAction}
+                                                        fieldLabel={
+                                                            <Spinner
+                                                                animation="border"
+                                                                variant="light"
+                                                                size="sm"
+                                                            />
+                                                        }
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <hr></hr>
+                                                    <ShareButton />
+                                                    <Button
+                                                        type={'button'}
+                                                        buttonClass={'danger'}
+                                                        tooltipText={'Denuncia cualquier producto Sospechoso. '}
+                                                        fieldLabel={"Denunciar"}
+                                                        onClick={() => { handleShowModal() }}
+                                                    />
+                                                </div>
+                                            )
+                                        ) : (
+                                            <ShareButton />
+                                        )
+                                    ) : (
+                                        <ShareButton />
+                                    )
                                 )
                             }
+                            <Modal show={showModal} onHide={handleCloseModal} size="xl" backdrop="static">
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Enviar Denuncia</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <ComplaintForm sellerDetails={sellerDetails} productDetails={product} productImages={productImages} productExtensions={productExtensions}/>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button
+                                        type={"button"}
+                                        buttonClass={"secondary"}
+                                        fieldLabel={"Cerrar"}
+                                        onClick={() => { handleCloseModal() }}
+                                    />
+                                    <Button
+                                        type={"button"}
+                                        buttonClass={"danger"}
+                                        fieldLabel={"Denunciar"}
+                                        onClick={() => { handleCloseModal(); setIsPerformingAction(true) }}
+                                    />
+                                </Modal.Footer>
+                            </Modal>
                         </div>
                     </div>
                 </div>

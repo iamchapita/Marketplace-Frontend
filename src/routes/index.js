@@ -61,7 +61,7 @@ const RoutesList = () => {
                                 />}
                         />
                         <Route path="/register" element={<UserRegistration isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
-                        <Route path='/productDetail/:id' element={<ProductDetail isAdmin={isAdmin} areUserStatusLoaded={areUserStatusLoaded} />} />
+                        <Route path='/productDetail/:id' element={<ProductDetail isAdmin={isAdmin} isLoggedIn={isLoggedIn} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/home' element={<Home isLoggedIn={isLoggedIn} />} />
                         <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
 
