@@ -146,7 +146,7 @@ const ComplaintModal = ({ sellerDetails, productDetails, complaintSent, setCompl
                     type={"button"}
                     buttonClass={"secondary"}
                     fieldLabel={"Cerrar"}
-                    onClick={() => { handleCloseModal(); setDescription(''); setEvidences([]); setComplaintSent(false); setShowAlert(false); setIsDescriptionValid(false); }}
+                    onClick={() => { handleCloseModal() }}
                 />
                 {
                     isPerformingAction ? (
