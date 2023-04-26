@@ -4,7 +4,7 @@ import apiClient from '../../utils/apiClient';
 import { Spinner, Modal } from 'react-bootstrap';
 import Button from "../../components/Button";
 import ShareButton from "../../components/shareButton";
-import ComplaintForm from "../../components/ComplaintForm";
+import ComplaintModal from "../../components/ComplaintModal";
 
 const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
 
@@ -20,6 +20,7 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
     const [sellerDetails, setSellerDetails] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [isProductOwner, setIsProductOwner] = useState(null);
+    const [complaintSent, setComplaintSent] = useState(false);
 
     const { id } = useParams();
 
@@ -87,9 +88,6 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
         }
     }, [productImages]);
 
-    const handleCloseModal = () => setShowModal(false);
-    const handleShowModal = () => setShowModal(true);
-
     const handleBanButtonAction = () => {
         setIsPerformingAction(true);
 
@@ -107,6 +105,8 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
         };
         action();
     };
+
+    const handleShowModal = () => setShowModal(true);
 
     if (areUserStatusLoaded === false) {
         return (
@@ -273,28 +273,14 @@ const ProductDetail = ({ isAdmin, isLoggedIn, areUserStatusLoaded }) => {
                                     )
                                 )
                             }
-                            <Modal show={showModal} onHide={handleCloseModal} size="xl" backdrop="static">
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Enviar Denuncia</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <ComplaintForm sellerDetails={sellerDetails} productDetails={product} productImages={productImages} productExtensions={productExtensions}/>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button
-                                        type={"button"}
-                                        buttonClass={"secondary"}
-                                        fieldLabel={"Cerrar"}
-                                        onClick={() => { handleCloseModal() }}
-                                    />
-                                    <Button
-                                        type={"button"}
-                                        buttonClass={"danger"}
-                                        fieldLabel={"Denunciar"}
-                                        onClick={() => { handleCloseModal(); setIsPerformingAction(true) }}
-                                    />
-                                </Modal.Footer>
-                            </Modal>
+                            <ComplaintModal 
+                                sellerDetails={sellerDetails}
+                                productDetails={product}
+                                showModal={showModal}
+                                setShowModal={setShowModal}
+                                isPerformingAction={isPerformingAction}
+                                setIsPerformingAction={setIsPerformingAction}
+                            />
                         </div>
                     </div>
                 </div>
