@@ -26,9 +26,9 @@ const ComplaintModal = ({ sellerDetails, productDetails, complaintSent, setCompl
 
         if (complaintSent === true) {
             setComplaintSent(true);
-            setAlertType('danger');
-            setStrongTextAlert('Ups!');
-            setAlertMessage('Ya has denunciado este cliente.');
+            setAlertType('info');
+            setStrongTextAlert('¡Completado!');
+            setAlertMessage('Denuncia Enviada.');
             setIsDescriptionValid(true);
             setShowAlert(true);
         }
@@ -170,7 +170,7 @@ const ComplaintModal = ({ sellerDetails, productDetails, complaintSent, setCompl
                             fieldLabel={"Enviar Denuncia"}
                             tooltipText={'Envía la denuncia para posterior revisión por parte de la administración.'}
                             onClick={submitHandler}
-                            disabled={true}
+                            disabled={complaintSent}
                         />
                     )
                 }
