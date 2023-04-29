@@ -141,8 +141,8 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
             }
 
             if (isAdmin === false) {
-                data.isBannedStatus = false,
-                    data.isAvailableStatus = true
+                data.isBannedStatus = false;
+                data.isAvailableStatus = true;
             }
 
             await apiClient.post('/getProductsBySeller', data).then((response) => {
