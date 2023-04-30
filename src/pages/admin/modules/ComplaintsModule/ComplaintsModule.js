@@ -13,7 +13,7 @@ const ComplaintsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
     const operations = [{ 'name': 'Detalles', 'url': '/complaintDetail/' }];
 
-    const headings = ['#', 'Usuario Denunciado', 'Producto Denunciado', 'Estado', 'Fecha de Denuncia', 'Fecha de Dictamen', 'Operación'];
+    const headings = ['#', 'Usuario Denunciado', 'Producto Denunciado', 'Estado de Revisión', 'Dictamen', 'Fecha de Dictamen', 'Fecha de Denuncia', 'Operación'];
 
     const action = async (value) => {
         await apiClient.get(`/getAllComplaints/${value}`).then((response) => {
