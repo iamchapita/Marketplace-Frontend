@@ -8,7 +8,8 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [usersTotal, setUsersTotal] = useState();
-    const [productsTotal, setProductsTotal] = useState()
+    const [productsTotal, setProductsTotal] = useState();
+    const [complaintsTotal, setComplaintsTotal] = useState();
 
     useEffect(() => {
         const action = async () => {
@@ -25,6 +26,17 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         const action = async () => {
             await apiClient.get('/getProductsStatistics').then((response) => {
                 setProductsTotal(response.data.total);
+            }).catch((error) => {
+                console.log(error.response);
+            });
+        }
+        action();
+    }, [isLoggedIn = true]);
+
+    useEffect(() => {
+        const action = async () => {
+            await apiClient.get('/getComplaintsStatistics').then((response) => {
+                setComplaintsTotal(response.data.pendingComplaints);
                 setIsReadyToRender(true);
             }).catch((error) => {
                 console.log(error.response);
@@ -32,6 +44,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         }
         action();
     }, [isLoggedIn = true]);
+
 
     if (isLoggedIn === false) {
         return <Navigate to="/login" replace />
@@ -95,10 +108,10 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                     <div className="card-body">
                                         <h5 className="card-title">Modulo de Denuncias</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Administre las denuncias de los compradores hacia los vendedores.</p>
-                                        <a href="#" className="btn btn-danger">Ir</a>
+                                        <a href="/complaintsModule" className="btn btn-danger">Ir</a>
                                     </div>
-                                    <div className="card-footer text-body-secondary">
-                                        Denuncias Pendientes:
+                                    <div className="card-footer text-body-secondary">{`
+                                        Denuncias Pendientes: ${complaintsTotal}`}
                                     </div>
                                 </div>
                             </div>
