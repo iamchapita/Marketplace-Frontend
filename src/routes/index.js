@@ -16,7 +16,7 @@ import ProductsModule from '../pages/admin/modules/ProductsModule/ProductsModule
 import ChatGeneral from '../components/ChatGeneral';
 import Suscription from '../components/Suscription';
 import PopularProduct from '../pages/popular/PopularProduct';
-import ComplatinsModule from '../pages/admin/modules/ComplaintsModule/ComplaintsModule';
+import ComplaintsModule from '../pages/admin/modules/ComplaintsModule/ComplaintsModule';
 
 const RoutesList = () => {
 
@@ -81,7 +81,7 @@ const RoutesList = () => {
                         <Route path='/usersModule' element={<UsersModule isLoggedIn={isLoggedIn} isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/productsModule' element={<ProductsModule isLoggedIn={isLoggedIn}
                         isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
-                        <Route path='/complaintsModule' element={<ComplatinsModule isLoggedIn={isLoggedIn}
+                        <Route path='/complaintsModule' element={<ComplaintsModule isLoggedIn={isLoggedIn}
                         isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
 
                         <Route path='/chat' element={<ChatGeneral />} />
