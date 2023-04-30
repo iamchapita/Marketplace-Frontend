@@ -228,7 +228,13 @@ const UserProfile = ({ isAdmin, areUserStatusLoaded }) => {
                     setIsBanned(!isBanned);
                     setIsPerformingAction(false);
                 }).catch((error) => {
-                    console.log(error);
+                    if (error.response.status === 500) {
+                        setProductsWereFound(false);
+                        setIsBanned(!isBanned);
+                        setIsPerformingAction(false);
+                    } else {
+                        console.log(error.response);
+                    }
                 });
 
             }).catch((error) => {
