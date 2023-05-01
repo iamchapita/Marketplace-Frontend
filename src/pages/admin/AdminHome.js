@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CustomizableAlert from '../../components/CustomizableAlert';
 import { Spinner } from 'react-bootstrap';
 import apiClient from '../../utils/apiClient';
@@ -10,28 +10,29 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [usersTotal, setUsersTotal] = useState();
     const [productsTotal, setProductsTotal] = useState();
     const [complaintsTotal, setComplaintsTotal] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const action = async () => {
             await apiClient.get('/getUsersStatistics').then((response) => {
                 setUsersTotal(response.data.total);
             }).catch((error) => {
-                console.log(error.response);
+
             });
         }
         action();
-    }, [isLoggedIn = true]);
+    }, [isLoggedIn]);
 
     useEffect(() => {
         const action = async () => {
             await apiClient.get('/getProductsStatistics').then((response) => {
                 setProductsTotal(response.data.total);
             }).catch((error) => {
-                console.log(error.response);
+
             });
         }
         action();
-    }, [isLoggedIn = true]);
+    }, [isLoggedIn]);
 
     useEffect(() => {
         const action = async () => {
@@ -39,18 +40,14 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                 setComplaintsTotal(response.data.pendingComplaints);
                 setIsReadyToRender(true);
             }).catch((error) => {
-                console.log(error.response);
+
             });
         }
         action();
-    }, [isLoggedIn = true]);
+    }, [isLoggedIn]);
 
 
-    if (isLoggedIn === false) {
-        return <Navigate to="/login" replace />
-    }
-
-    if (!areUserStatusLoaded) {
+    if (areUserStatusLoaded === false) {
         return (
             <div className='container-fluid' style={{ marginTop: '3em' }}>
                 <div className="container d-flex justify-content-center">
@@ -60,7 +57,12 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         )
     }
 
-    if (areUserStatusLoaded) {
+    if (areUserStatusLoaded === true) {
+
+        if (isLoggedIn === false) {
+
+            return navigate("/login", 'replace');
+        }
 
         if (isAdmin === false) {
             return (
