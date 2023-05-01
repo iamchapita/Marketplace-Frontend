@@ -485,6 +485,7 @@ img {
 	border-style: solid;
 	border-width: 1px;
 	background-color: #303841;
+	margin: 0;
 }
 
 .userStats {
