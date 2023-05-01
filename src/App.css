@@ -497,6 +497,21 @@ img {
 	background-color: #303841;
 }
 
+.complaintContainer {
+	background-color: #393e46;
+	color: white;
+	padding: 1em;
+}
+
+.complaintInfo {
+	padding: 1em;
+	border-color: #22252a;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #303841;
+	margin: 0;
+}
+
 .isBanned {
 	border-color: red;
 	border-style: solid;
