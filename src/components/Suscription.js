@@ -1,43 +1,78 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect } from 'react';
+import apiClient from '../utils/apiClient';
 
-const Suscription = ({ isLoggedIn }) => {
-     
-    const [aplicarActive, setAplicarActive] = useState(true);
+const Subscriptions = ({ userId }) => {
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-    const handleAplicarClick = () => {
-      setAplicarActive(false);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await apiClient.get('/categories');
+        setCategories(response.data);
+      } catch (error) {
+        console.error(error);
+        alert('Ocurrió un error al cargar las categorías.');
+      }
     };
-  
-    const handleBorrarClick = () => {
-      setAplicarActive(true);
-    };
+    fetchCategories();
+  }, []);
 
-    return (
-        <div className="container-sm">
-            <div className="tittle">
-            <h1>Suscripciones de Categorias</h1>
-            </div>
-            <div>
-                <table>
-                    <thead>
-                        <th>Categorias</th>
-                        <th>Suscripcion</th>
-                    </thead>
-                    <tbody>
-                        <td>
-                            Lista de Categorias
-                        </td>
-                        <td>
-                        <div className="form-check form-switch d-flex justify-content-center">
-                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-                        </div>
-                        </td>
-                    </tbody>
-                </table>
-            </div>
+  const handleCategorySelect = (categoryId) => {
+    if (selectedCategories.includes(categoryId)) {
+      setSelectedCategories(selectedCategories.filter((id) => id !== categoryId));
+    } else {
+      setSelectedCategories([...selectedCategories, categoryId]);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await apiClient.post('/subscription', { 
+        userIdFk: localStorage.getItem('id'), 
+        categoryIdFK: selectedCategories 
+    });
+      alert('Suscripciones guardadas exitosamente.');
+    } catch (error) {
+      console.error(error);
+      alert('Ocurrió un error al guardar las suscripciones.');
+    }
+  };
+
+  return (
+    <div className='container-sm'>
+        <div className='tittle'>
+          <h1>Suscripciones</h1>
         </div>
-    );
+      <div>
+          <form onSubmit={handleSubmit} className='d-flex justify-content-center align-items-center'>
+            <div className='form-group'>
+              {categories.map((category) => (
+                <div className='form-check form-switch' key={category.id}>
+                  <input
+                    className='form-check-input'
+                    type='checkbox'
+                    id={`category-${category.id}`}
+                    value={category.id}
+                    checked={selectedCategories.includes(category.id)}
+                    onChange={() => handleCategorySelect(category.id)}
+                  />
+                  <label className='form-check-label' htmlFor={`category-${category.id}`}>
+                    {category.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+            <div className='form-group d-flex justify-content-center align-items-center'>
+              <button type='submit' className='btn btn-primary'>
+                Guardar suscripciones
+              </button>
+            </div>
+          </form>
+      </div>
+    </div>
+  );
+};
 
-}
-
-export default Suscription;
+export default Subscriptions;
