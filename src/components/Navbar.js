@@ -15,7 +15,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
 
         const action = async () => {
 
-            const response = await apiClient.get('/user').then((response) => {
+            await apiClient.get('/user').then((response) => {
 
                 localStorage.setItem('id', response.data.id);
                 localStorage.setItem('isAdmin', response.data.isAdmin);
@@ -132,7 +132,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn, isAdmin, setIsAdmin, isClient, setIsC
                                                         <a className="sidebar-item" aria-current="page" href='/wishlist'>Lista de Deseos</a>
                                                     </li>
                                                 ) : (<div></div>)
-                                                
+
                                         }
                                         {
                                             isLoggedIn ?
