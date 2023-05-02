@@ -99,16 +99,14 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
     return (
         <div key={id} className="col">
             <div className={`card h-100 ${isAdmin || hasProductOwnership ? (productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : '') : (' ')}`} id="seller-products">
+                {
+                    complaintModule ? (
+                        <div className="card-header text-center pt-4">
+                            <h3>Producto Denunciado</h3>
+                        </div>
+                    ) : (null)
+                }
                 <div className="paddingContainer">
-                    {
-                        complaintModule ? (
-                            <div className="paddingContainer">
-                                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                    <h3>Producto Denunciado</h3>
-                                </div>
-                            </div>
-                        ) : (null)
-                    }
                     <div className="paddingContainer">
                         {!isReadyToRender ? (
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
