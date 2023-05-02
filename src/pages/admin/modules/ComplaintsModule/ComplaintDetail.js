@@ -5,15 +5,15 @@ import apiClient from "../../../../utils/apiClient";
 import { useParams } from "react-router-dom";
 import Button from "../../../../components/Button";
 import ProductCard from "../../../../components/ProductCard";
+import ComplaintCard from "./ComplaintCard";
 
 
 const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [isPerformingAction, setIsPerformingAction] = useState(false);
-    const [conmplaintDetails, setComplaintDetails] = useState(null);
-    const [complaintWasApproved, setComplaintWasApproved] = useState(false);
-    const [productDetails, setProductetails] = useState(null);
+    const [complaintDetails, setComplaintDetails] = useState(null);
+    const [productDetails, setProductDetails] = useState(null);
     const [complaintOwnerDetails, setComplaintOwnerDetails] = useState(null);
     const [reportedUserDetails, setReportedUserDetails] = useState(null);
     const [complaintOwnerIsBanned, setComplaintOwnerIsBanned] = useState(null);
@@ -38,12 +38,10 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                 setComplaintOwnerIsBanned(Boolean(complaintOwnerData.complaintOwnerIsBanned));
                 setReportedUserDetails(reportedUserData);
                 setReportedUserIsBanned(Boolean(reportedUserData.reportedUserIsBanned));
-                setProductetails(productData);
-                setComplaintWasApproved(
-                    complaintData.complaintWasApproved !== 'N/D' ? Boolean(complaintData.complaintWasApproved) : 'N/D'
-                );
+                setProductDetails(productData);
                 setIsReadyToRender(true);
 
+                console.log(complaintData);
 
             }).catch((error) => {
                 console.log(error);
@@ -150,7 +148,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                     ) : (
                         <div className='row mx-4 my-3' style={{ color: "white" }}>
                             <div className='col-12 container-style'>
-                                <h1 className="text-center">Detalles de Denuncia</h1>
+                                <h1 className="text-center">Denuncia</h1>
                                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-4 g-2 mt-4">
                                     <div className="col col-sm-6 col-md-4 col-xl-3 col-xxl-3 p-2 mt-0">
                                         <div className={complaintOwnerIsBanned ? 'userInfoContainer isBanned' : 'userInfoContainer'} style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
@@ -282,6 +280,18 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                                     hasProductOwnership={false}
                                                     isAdmin={true}
                                                     complaintModule={true}
+                                                />
+                                                <ComplaintCard
+                                                    id={id}
+                                                    description={complaintDetails.complaintDescription}
+                                                    isAwaitingResponse={complaintDetails.complaintIsAwaitingResponse}
+                                                    wasApproved={complaintDetails.complaintWasApproved !== 'N/D' ?
+                                                        Boolean(complaintDetails.complaintWasApproved)
+                                                        : 'N/D'}
+                                                    path={complaintDetails.complaintEvidences}
+                                                    createdAt={complaintDetails.complaintCreatedAt}
+                                                    updatedAt={complaintDetails.complaintUpdatedAt}
+                                                    isAdmin={true}
                                                 />
                                             </div>
                                         </div>
