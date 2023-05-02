@@ -4,6 +4,8 @@ import apiClient from '../utils/apiClient';
 const Subscriptions = ({ userId }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+ const [subscriptionState, setSubscriptionState] = useState(false);
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -40,6 +42,20 @@ const Subscriptions = ({ userId }) => {
     }
   };
 
+  const handleSwitchToggle = async () => {
+    const newSubscriptionState = !subscriptionState;
+
+    try {
+      await apiClient.post('/state', { 
+        userIdFk: localStorage.getItem('id'), 
+        subscriptionState: newSubscriptionState 
+      });
+      setSubscriptionState(newSubscriptionState);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className='container-sm'>
         <div className='tittle'>
@@ -70,6 +86,12 @@ const Subscriptions = ({ userId }) => {
               </button>
             </div>
           </form>
+      </div>
+      <div>
+        <label className='form-check form-switch d-flex justify-content-center align-items-center'>
+          <input className='form-check-input' type="checkbox" checked={subscriptionState} onChange={handleSwitchToggle} />
+          Activar/desactivar suscripción
+        </label>
       </div>
     </div>
   );
