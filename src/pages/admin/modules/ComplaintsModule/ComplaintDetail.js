@@ -4,6 +4,7 @@ import CustomizableAlert from "../../../../components/CustomizableAlert";
 import apiClient from "../../../../utils/apiClient";
 import { useParams } from "react-router-dom";
 import Button from "../../../../components/Button";
+import ProductCard from "../../../../components/ProductCard";
 
 
 const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
@@ -11,6 +12,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [isReadyToRender, setIsReadyToRender] = useState(false);
     const [isPerformingAction, setIsPerformingAction] = useState(false);
     const [conmplaintDetails, setComplaintDetails] = useState(null);
+    const [complaintWasApproved, setComplaintWasApproved] = useState(false);
     const [productDetails, setProductetails] = useState(null);
     const [complaintOwnerDetails, setComplaintOwnerDetails] = useState(null);
     const [reportedUserDetails, setReportedUserDetails] = useState(null);
@@ -27,13 +29,21 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                 id: id
             }).then((response) => {
 
-                const [complaintOwnerData, reportedUserData, productData] = extractData(response.data);
+                // formatData(response.data);
+
+                const [complaintOwnerData, reportedUserData, productData, complaintData] = extractData(response.data);
+
+                setComplaintDetails(complaintData);
                 setComplaintOwnerDetails(complaintOwnerData);
                 setComplaintOwnerIsBanned(Boolean(complaintOwnerData.complaintOwnerIsBanned));
                 setReportedUserDetails(reportedUserData);
                 setReportedUserIsBanned(Boolean(reportedUserData.reportedUserIsBanned));
                 setProductetails(productData);
+                setComplaintWasApproved(
+                    complaintData.complaintWasApproved !== 'N/D' ? Boolean(complaintData.complaintWasApproved) : 'N/D'
+                );
                 setIsReadyToRender(true);
+
 
             }).catch((error) => {
                 console.log(error);
@@ -44,18 +54,38 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     }, []);
 
     const extractData = (data) => {
-        return Object.entries(data).reduce(([o1, o2, o3], [key, value]) => {
+        return Object.entries(data).reduce(([o1, o2, o3, o4], [key, value]) => {
             if (key.startsWith("complaintOwner")) {
                 o1[key] = value;
             } else if (key.startsWith("reportedUser")) {
                 o2[key] = value;
             } else if (key.startsWith("product")) {
                 o3[key] = value;
+            } else if (key.startsWith("complaint")) {
+                o4[key] = value;
             }
-            return [o1, o2, o3];
-        }, [{}, {}, {}]);
+            return [o1, o2, o3, o4];
+        }, [{}, {}, {}, {}]);
     };
 
+    const formatData = (data) => {
+        const dateRegex = /^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}$/;
+        const priceRegex = /^price|Price$|price|Price$/;
+        let object = {};
+
+        data = Object.keys(data).map((key) => {
+
+            if (dateRegex.test(data[key])) {
+                object[key] = data[key] = new Date(data[key]).toLocaleString('es-HN', { hour12: true })
+            } else if (priceRegex.test(key)) {
+                object[key] = `L. ${data[key].toLocaleString()}`
+            } else {
+                object[key] = data[key]
+            }
+        });
+
+        return object;
+    };
 
     const handleBanButton = (type) => {
         setIsPerformingAction(true);
@@ -122,7 +152,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             <div className='col-12 container-style'>
                                 <h1 className="text-center">Detalles de Denuncia</h1>
                                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-4 g-2 mt-4">
-                                    <div className="col col-sm-6 col-md-4 col-xl-3 col-xxl-3 p-2">
+                                    <div className="col col-sm-6 col-md-4 col-xl-3 col-xxl-3 p-2 mt-0">
                                         <div className={complaintOwnerIsBanned ? 'userInfoContainer isBanned' : 'userInfoContainer'} style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
                                             <div className='userInfo'>
                                                 <div className="p-0">
@@ -130,7 +160,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                                     <hr style={{ marginTop: 0 }}></hr>
                                                     <a className="link-perfil" href={`/userProfile/${complaintOwnerDetails.complaintOwnerId}`} ><h4>{complaintOwnerDetails.complaintOwnerName}</h4></a>
                                                 </div>
-                                                <div className="p-0" style={{ marginTop: '1em' }}>
+                                                <div className="p-0 mt-3">
                                                     <p>Ubicación: {complaintOwnerDetails.complaintOwnerDeparmentName + ', ' + complaintOwnerDetails.complaintOwnerMunicipalityName}</p>
                                                     <p>Correo Electrónico: {complaintOwnerDetails.complaintOwnerEmail}</p>
                                                 </div>
@@ -185,7 +215,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                                     <hr style={{ marginTop: 0 }}></hr>
                                                     <a className="link-perfil" href={`/userProfile/${reportedUserDetails.reportedUserId}`}><h4>{reportedUserDetails.reportedUserName}</h4></a>
                                                 </div>
-                                                <div className="p-0" style={{ marginTop: '1em' }}>
+                                                <div className="p-0 mt-3">
                                                     <p>Ubicación: {reportedUserDetails.reportedUserDeparmentName + ', ' + reportedUserDetails.reportedUserMunicipalityName}</p>
                                                     <p>Correo Electrónico: {reportedUserDetails.reportedUserEmail}</p>
                                                 </div>
@@ -234,10 +264,25 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col col-sm-6 col-md-8 col-xl-9 col-xxl-9 p-2">
+                                    <div className="col col-sm-6 col-md-8 col-xl-9 col-xxl-9 p-2 mt-0">
                                         <div className="complaintContainer">
-                                            <div className="complaintInfo">
-
+                                            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2  row-cols-xl-2 row-cols-xxl-4">
+                                                <ProductCard
+                                                    key={1}
+                                                    id={productDetails.productId}
+                                                    name={productDetails.productName}
+                                                    price={productDetails.productPrice}
+                                                    path={productDetails.productPhotos}
+                                                    isAvailable={productDetails.productIsAvailable}
+                                                    wasSold={productDetails.productWasSold}
+                                                    isBanned={productDetails.productIsBanned}
+                                                    amount={productDetails.productAmount}
+                                                    createdAt={productDetails.productCreatedAt}
+                                                    updatedAt={null}
+                                                    hasProductOwnership={false}
+                                                    isAdmin={true}
+                                                    complaintModule={true}
+                                                />
                                             </div>
                                         </div>
                                     </div>
