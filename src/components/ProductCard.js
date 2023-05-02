@@ -4,7 +4,7 @@ import { Spinner } from "react-bootstrap";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
-function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, amount, createdAt, updatedAt, hasProductOwnership, isAdmin = false }) {
+function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, amount, createdAt, updatedAt, hasProductOwnership, isAdmin = false, complaintModule = false }) {
 
     const [productImage, setProductImage] = useState([]);
     const [productExtension, setProductExtension] = useState('');
@@ -100,23 +100,34 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
         <div key={id} className="col">
             <div className={`card h-100 ${isAdmin || hasProductOwnership ? (productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : '') : (' ')}`} id="seller-products">
                 <div className="paddingContainer">
-                    {!isReadyToRender ? (
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <div className="d-flex align-items-center justify-content-center">
-                                <Spinner animation="border" variant="light" />
+                    {
+                        complaintModule ? (
+                            <div className="paddingContainer">
+                                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    <h3>Producto Denunciado</h3>
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <div className="d-flex align-items-center justify-content-center">
-                                {productImage.map((image, index) => (
-                                    <div key={`${id}-${index}`} className="img-card">
-                                        <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid w-100" />
-                                    </div>
-                                ))}
+                        ) : (null)
+                    }
+                    <div className="paddingContainer">
+                        {!isReadyToRender ? (
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <Spinner animation="border" variant="light" />
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        ) : (
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    {productImage.map((image, index) => (
+                                        <div key={`${id}-${index}`} className="img-card">
+                                            <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid w-100" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
                         <h6 className="card-text">L {price.toLocaleString()}</h6>
