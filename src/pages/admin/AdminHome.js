@@ -122,7 +122,7 @@ const AdminHome = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                     <div className="card-body">
                                         <h5 className="card-title">Modulo de Estadística</h5>
                                         <p className="card-text" style={{ height: '4em' }}>Acceda a un resumen estadístico de las ventas, productos y usuarios de la aplicación.</p>
-                                        <a href="#" className="btn btn-warning">Ir</a>
+                                        <a href="/StatisticsModule" className="btn btn-warning">Ir</a>
                                     </div>
                                     <div className="card-footer text-body-secondary">
                                         Métricas Disponibles:

@@ -18,6 +18,7 @@ import Suscription from '../components/Suscription';
 import PopularProduct from '../pages/popular/PopularProduct';
 import ComplaintsModule from '../pages/admin/modules/ComplaintsModule/ComplaintsModule';
 import ComplaintDetail from '../pages/admin/modules/ComplaintsModule/ComplaintDetail';
+import StatisticsModule from '../pages/admin/modules/StatisticsModule/StatisticsModule';
 
 const RoutesList = () => {
 
@@ -86,6 +87,8 @@ const RoutesList = () => {
                         isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
                         <Route path='/complaintDetail/:id' element={<ComplaintDetail isLoggedIn={isLoggedIn}
                         isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
+                        <Route path='/StatisticsModule' element={<StatisticsModule isLoggedIn={isLoggedIn}
+                            isSeller={isSeller} areUserStatusLoaded={areUserStatusLoaded} />} />
 
                         <Route path='/chat' element={<ChatGeneral />} />
 
