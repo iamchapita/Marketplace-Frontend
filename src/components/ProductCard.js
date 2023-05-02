@@ -99,43 +99,29 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
     return (
         <div key={id} className="col">
             <div className={`card h-100 ${isAdmin || hasProductOwnership ? (productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : '') : (' ')}`} id="seller-products">
-                {!isReadyToRender ? (
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <div className="d-flex align-items-center justify-content-center">
-                            <Spinner animation="border" variant="light" />
+                <div className="paddingContainer">
+                    {!isReadyToRender ? (
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <div className="d-flex align-items-center justify-content-center">
+                                <Spinner animation="border" variant="light" />
+                            </div>
                         </div>
-                    </div>
-                ) : (
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <div className="d-flex align-items-center justify-content-center">
-                            {productImage.map((image, index) => (
-                                <div key={`${id}-${index}`} className="img-card">
-                                    <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid w-100" />
-                                </div>
-                            ))}
+                    ) : (
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <div className="d-flex align-items-center justify-content-center">
+                                {productImage.map((image, index) => (
+                                    <div key={`${id}-${index}`} className="img-card">
+                                        <img key={`${id}-${index}`} src={`data:image/${productExtension[index]};base64,${image.base64Image}`} className="img-fluid w-100" />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )}
-                <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                    <h6 className="card-text">L {price.toLocaleString()}</h6>
-                    {
-                        hasProductOwnership ? (
-                            !productIsBanned ? (
-                                productIsAvailable ? (
-                                    !productWasSold ? (
-                                        <h6 className="card-text">Estado: Disponible</h6>
-                                    ) : (
-                                        <h6 className="card-text">Estado: Vendido</h6>
-                                    )
-                                ) : (
-                                    <h6 className="card-text">Estado: Deshabilitado</h6>
-                                )
-                            ) : (
-                                <h6 className="card-text">Estado: Banneado</h6>
-                            )
-                        ) : (
-                            isAdmin ? (
+                    )}
+                    <div className="card-body">
+                        <h5 className="card-title">{name}</h5>
+                        <h6 className="card-text">L {price.toLocaleString()}</h6>
+                        {
+                            hasProductOwnership ? (
                                 !productIsBanned ? (
                                     productIsAvailable ? (
                                         !productWasSold ? (
@@ -150,91 +136,113 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                                     <h6 className="card-text">Estado: Banneado</h6>
                                 )
                             ) : (
-                                !productWasSold ? (
-                                    <h6 className="card-text">Estado: Disponible</h6>
+                                isAdmin ? (
+                                    !productIsBanned ? (
+                                        productIsAvailable ? (
+                                            !productWasSold ? (
+                                                <h6 className="card-text">Estado: Disponible</h6>
+                                            ) : (
+                                                <h6 className="card-text">Estado: Vendido</h6>
+                                            )
+                                        ) : (
+                                            <h6 className="card-text">Estado: Deshabilitado</h6>
+                                        )
+                                    ) : (
+                                        <h6 className="card-text">Estado: Banneado</h6>
+                                    )
                                 ) : (
-                                    <h6 className="card-text">Estado: Vendido</h6>
+                                    !productWasSold ? (
+                                        <h6 className="card-text">Estado: Disponible</h6>
+                                    ) : (
+                                        <h6 className="card-text">Estado: Vendido</h6>
+                                    )
                                 )
                             )
-                        )
-                    }
-                    {
-                        <h6 className="card-text">Cantidad: {amount}</h6>
-                    }
-                    <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
+                        }
+                        {
+                            <h6 className="card-text">Cantidad: {amount}</h6>
+                        }
+                        <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
+                    </div>
                 </div>
-                {
-                    hasProductOwnership ? (
-                        <div className="card-footer">
-                            <div style={{ paddingBottom: '0.5em', paddingTop: '0.5em' }}>
-                                <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} disabled={productIsBanned ? true : false} onClick={handleEditProductButton} />
-                            </div>
-                            <div style={{ paddingBottom: '0.5em' }}>
-                                {
-                                    performingWasSoldOperation ? (
-                                        <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
-                                    ) : (
-                                        productWasSold ? (
-                                            <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} disabled={productIsBanned ? true : false} />
+                <div className="card-footer">
+                    {
+                        hasProductOwnership ? (
+                            <div className="pt-1 pb-1">
+                                <div className="pt-1 pb-1">
+                                    <Button type={'button'} fieldLabel={'Editar producto'} buttonClass={'success'} tooltipText={'Editar campos del producto como el precio, nombre e imágenes.'} disabled={productIsBanned ? true : false} onClick={handleEditProductButton} />
+                                </div>
+                                <div className="pt-1 pb-1">
+                                    {
+                                        performingWasSoldOperation ? (
+                                            <Button type={'button'} buttonClass={'info'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} disabled={productIsBanned ? true : false} />
+                                            productWasSold ? (
+                                                <Button type={'button'} fieldLabel={'Habilitar para la Venta'} buttonClass={'info'} tooltipText={'Marca el Prouducto como disponible para la venta.'} onClick={() => { handleWasSoldButton(productWasSold) }} disabled={productIsBanned ? true : false} />
+                                            ) : (
+                                                <Button type={'button'} fieldLabel={'Marcar como Vendido'} buttonClass={'info'} tooltipText={'Marca el Prouducto como vendido.'} onClick={() => { handleWasSoldButton(productWasSold) }} disabled={productIsBanned ? true : false} />
+                                            )
                                         )
-                                    )
-                                }
-                            </div>
-                            <div style={{ paddingBottom: '0.5em' }}>
-                                {
-                                    performingIsAvailableOperation ? (
-                                        <Button type={'button'} buttonClass={'warning'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
-                                    ) : (
-                                        productIsAvailable ? (
-                                            <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'warning'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} disabled={productIsBanned ? true : false} />
+                                    }
+                                </div>
+                                <div className="pt-1 pb-1">
+                                    {
+                                        performingIsAvailableOperation ? (
+                                            <Button type={'button'} buttonClass={'warning'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'warning'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} disabled={productIsBanned ? true : false} />
+                                            productIsAvailable ? (
+                                                <Button type={'button'} fieldLabel={'Deshabilitar'} buttonClass={'warning'} tooltipText={'El producto no aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} disabled={productIsBanned ? true : false} />
+                                            ) : (
+                                                <Button type={'button'} fieldLabel={'Habilitar'} buttonClass={'warning'} tooltipText={'El producto aparece disponible para comprar.'} onClick={() => { handleIsAvailableButton(productIsAvailable) }} disabled={productIsBanned ? true : false} />
+                                            )
                                         )
-                                    )
-                                }
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        isAdmin ? (
-                            performingIsBannedOperation ? (
-                                <Button
-                                    type={'button'}
-                                    buttonClass={'danger'}
-                                    tooltipText={'Espera'}
-                                    disabled={!performingIsBannedOperation}
-                                    onClick={() => { handleIsBannedOperation(productIsBanned) }}
-                                    fieldLabel={
-                                        <Spinner
-                                            animation="border"
-                                            variant="light"
-                                            size="sm"
-                                        />
-                                    }
-                                />
-                            ) : (
-                                <Button
-                                    type={'button'}
-                                    buttonClass={'danger'}
-                                    onClick={() => { handleIsBannedOperation(productIsBanned) }}
-                                    tooltipText={
-                                        productIsBanned ?
-                                            'Desbanee el producto.' :
-                                            'Banee el producto.'
-                                    }
-                                    fieldLabel={
-                                        productIsBanned ?
-                                            'Desbannear' :
-                                            'Bannear'
-                                    }
-                                />
-                            )
                         ) : (
-                            <div></div>
+                            isAdmin ? (
+                                performingIsBannedOperation ? (
+                                    <div className="pt-1 pb-1">
+                                        <Button
+                                            type={'button'}
+                                            buttonClass={'danger'}
+                                            tooltipText={'Espera'}
+                                            disabled={!performingIsBannedOperation}
+                                            onClick={() => { handleIsBannedOperation(productIsBanned) }}
+                                            fieldLabel={
+                                                <Spinner
+                                                    animation="border"
+                                                    variant="light"
+                                                    size="sm"
+                                                />
+                                            }
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="pt-1 pb-1">
+                                        <Button
+                                            type={'button'}
+                                            buttonClass={'danger'}
+                                            onClick={() => { handleIsBannedOperation(productIsBanned) }}
+                                            tooltipText={
+                                                productIsBanned ?
+                                                    'Desbanee el producto.' :
+                                                    'Banee el producto.'
+                                            }
+                                            fieldLabel={
+                                                productIsBanned ?
+                                                    'Desbannear' :
+                                                    'Bannear'
+                                            }
+                                        />
+                                    </div>
+                                )
+                            ) : (
+                                null
+                            )
                         )
-                    )
-                }
+                    }
+                </div>
                 <div className="card-footer">
                     <small className="text-body-secondary">{`Publicado en: ${new Date(createdAt).toLocaleString('es-HN', { hour12: true })}`}</small>
                     <br></br>
