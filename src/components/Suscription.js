@@ -86,33 +86,43 @@ const Subscriptions = ({ userId }) => {
           <p>Cargando categorías...</p>
           ) : (
             <form onSubmit={handleSubmit} className='d-flex justify-content-center align-items-center'>
-              <div className='form-group'>
-                {categories.map((category) => (
-                  <div className='form-check form-switch' key={category.id}>
-                    <input
-                      className='form-check-input'
-                      type='checkbox'
-                      id={`category-${category.id}`}
-                      value={category.id}
-                      checked={selectedCategories.includes(category.id) || subscribedCategories.includes(category.id)}
-                      onChange={() => handleCategorySelect(category.id)}
-                    />
-                    <label className='form-check-label' htmlFor={`category-${category.id}`}>
-                      {category.name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <div className='form-group d-flex justify-content-center align-items-center'>
-                <button type='submit' className='btn btn-primary'>
-                  Guardar suscripciones
-                </button>
+              <div className='row'>
+                
+                <div className='col-sm-12 col-md-12 d-flex justify-content-center align-items-center' id='subscription'>
+                <div className='form-group'>
+                  {categories.map((category) => (
+                    <div className='form-check form-switch' key={category.id}>
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        id={`category-${category.id}`}
+                        value={category.id}
+                        checked={selectedCategories.includes(category.id) || subscribedCategories.includes(category.id)}
+                        onChange={() => handleCategorySelect(category.id)}
+                      />
+                      <label className='form-check-label' htmlFor={`category-${category.id}`}>
+                        {category.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                </div>
+                
+                <div className='col-sm-12 col-md-12 d-flex justify-content-center align-items-center' id='subscription'>
+                <div className='form-group d-flex justify-content-center align-items-center'>
+                  <button type='submit' className='btn btn-primary'>
+                    Guardar suscripciones
+                  </button>
+                </div>
+                </div>
+
               </div>
             </form>
           )}
       </div>
+
       <div>
-        <label className='form-check form-switch d-flex justify-content-center align-items-center'>
+        <label className='form-check form-switch d-flex justify-content-center align-items-center' id='subscription'>
           <input
             className='form-check-input'
             type='checkbox'
@@ -122,6 +132,7 @@ const Subscriptions = ({ userId }) => {
           Activar/desactivar suscripción
         </label>
       </div>
+
     </div>
   );
 };

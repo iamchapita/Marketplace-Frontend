@@ -296,6 +296,10 @@ button {
 	color: white;
 }
 
+#subscription {
+	margin: 1em;
+}
+
 /****************BORDES DE LOS CAMPOS***************/
 /***************************************************/
 input.invalid {
