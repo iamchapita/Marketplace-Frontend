@@ -77,6 +77,21 @@ const Subscriptions = ({ userId }) => {
     }
   };
 
+  const handleSavePDF = async () => {
+    try {
+      const response = await apiClient.get(`/pdf?userIdFK=${localStorage.getItem('id')}` , { responseType: 'blob' });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Mis-Suscripciones.pdf');
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error(error);
+      alert('Ocurrió un error al generar el PDF.');
+    }
+  };
+
   return (
     <div className='container-sm'>
         <div className='tittle'>
@@ -89,24 +104,44 @@ const Subscriptions = ({ userId }) => {
               <div className='row'>
                 
                 <div className='col-sm-12 col-md-12 d-flex justify-content-center align-items-center' id='subscription'>
-                <div className='form-group'>
-                  {categories.map((category) => (
-                    <div className='form-check form-switch' key={category.id}>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        id={`category-${category.id}`}
-                        value={category.id}
-                        checked={selectedCategories.includes(category.id) || subscribedCategories.includes(category.id)}
-                        onChange={() => handleCategorySelect(category.id)}
-                      />
-                      <label className='form-check-label' htmlFor={`category-${category.id}`}>
-                        {category.name}
-                      </label>
+                  <div className='form-group row'>
+                    <div className='col-md-6'>
+                      {categories.slice(0, Math.ceil(categories.length / 2)).map((category) => (
+                        <div className='form-check form-switch' key={category.id}>
+                          <input
+                            className='form-check-input'
+                            type='checkbox'
+                            id={`category-${category.id}`}
+                            value={category.id}
+                            checked={selectedCategories.includes(category.id) || subscribedCategories.includes(category.id)}
+                            onChange={() => handleCategorySelect(category.id)}
+                          />
+                          <label className='form-check-label' htmlFor={`category-${category.id}`}>
+                            {category.name}
+                          </label>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                    <div className='col-md-6'>
+                      {categories.slice(Math.ceil(categories.length / 2)).map((category) => (
+                        <div className='form-check form-switch' key={category.id}>
+                          <input
+                            className='form-check-input'
+                            type='checkbox'
+                            id={`category-${category.id}`}
+                            value={category.id}
+                            checked={selectedCategories.includes(category.id) || subscribedCategories.includes(category.id)}
+                            onChange={() => handleCategorySelect(category.id)}
+                          />
+                          <label className='form-check-label' htmlFor={`category-${category.id}`}>
+                            {category.name}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                </div>
+
                 
                 <div className='col-sm-12 col-md-12 d-flex justify-content-center align-items-center' id='subscription'>
                 <div className='form-group d-flex justify-content-center align-items-center'>
@@ -131,6 +166,12 @@ const Subscriptions = ({ userId }) => {
           />
           Activar/desactivar suscripción
         </label>
+      </div>
+
+      <div className='d-flex justify-content-center align-items-center'>
+        <button onClick={handleSavePDF} className='btn btn-secondary'>
+          Descargar Mis Suscripciones
+        </button>
       </div>
 
     </div>
