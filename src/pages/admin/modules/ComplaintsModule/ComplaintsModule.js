@@ -33,6 +33,7 @@ const ComplaintsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const formatFields = (response) => {
         response = response.data.data.map((complaint) => {
             complaint.createdAt = new Date(complaint.createdAt).toLocaleString('es-HN', { hour12: true })
+            complaint.updatedAt = complaint.updatedAt !== 'N/D' ? new Date(complaint.updatedAt).toLocaleString('es-HN', { hour12: true }) : 'N/D';
         });
 
         return response;
