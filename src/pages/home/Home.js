@@ -77,9 +77,19 @@ const Home = ({ isLoggedIn }) => {
             }).catch((error) => {
                 console.log(error)
             });
-
-
     }
+
+    const resetFilter = async () => {
+        await apiClient.post('/productst',
+            {
+                id: userId,
+                page: page
+            }).then((res) => {
+                setProducts(res.data);
+            }).catch((error) => {
+                console.log(error)
+            });
+    };
 
     const searchProduct = async () => {
         await apiClient.get('/buscaproduct',
@@ -190,11 +200,22 @@ const Home = ({ isLoggedIn }) => {
                         <div className="home-tittle">
                             <h4>Buscar</h4>
                         </div>
-                        <div className="row">
-                            <div className="col-sm-12 col-md-12 col-lg-12 pb-3">
-                                <input className="form-control" type="search" placeholder="Buscar Producto" aria-label="Buscador" onChange={(e) => setname(e.target.value)}></input>
-                            </div>
-                        </div>
+                    <div className="row">
+                    <div className="col-sm-12 col-md-12 col-lg-12 pb-3">
+                    <input className="form-control" 
+                            type="search" 
+                            placeholder="Buscar Producto" 
+                            aria-label="Buscador" 
+                            onChange={(e) => {
+                            const regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\d]+$/;
+                            if (regex.test(e.target.value)) {
+                                setname(e.target.value);
+                            }
+                            }}
+                    />
+                    </div>
+                    </div>
+
                     </div>
                     <div className="home-top-section">
                         <div className="home-tittle">
@@ -236,7 +257,7 @@ const Home = ({ isLoggedIn }) => {
                                 <button className="btn btn-primary m-3" onClick={() => filter()}>
                                     Aplicar
                                 </button>
-                                <button className="btn btn-danger m-3">
+                                <button className="btn btn-danger m-3" onClick={() => resetFilter()}>
                                     Borrar
                                 </button>
                             </div>
