@@ -428,17 +428,6 @@ th {
 
 /*********************FORMULARIO********************/
 /***************************************************/
-.input-group-text,
-.formulario textarea {
-	display: block;
-	margin-bottom: 1em;
-}
-
-.formulario input,
-.formulario select {
-	display: block;
-	margin-bottom: 1em;
-}
 
 /**********************IMAGENES*********************/
 /***************************************************/
