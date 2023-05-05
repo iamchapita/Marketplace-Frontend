@@ -76,13 +76,16 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
 
         return (
-            <div>
+            <div className="container-sm">
+                <div className="tittle">
+                    <h1>Estadisticas</h1>
+                </div>
                 <div>
-                    <button onClick={handleButtonClick}>Mostrar y Ocultar Gráfico de Registro</button>
+                    <button className="btn btn-primary" onClick={handleButtonClick} id="subscription">Mostrar y Ocultar Gráfico de Registro</button>
 
                     {/* Graficas de productos Por departamento */}
                     {showChart && (
-                        <div>
+                        <div className="d-flex justify-content-center align-items-center">
                             {/*
                             <div className="bg-white">
                                 {/* Graficas de productos Insertados
@@ -106,7 +109,9 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             </div> */}
 
                             <div>
+                                <div className="tittle">
                                 <h3>Total de Productos Registrados por Mes</h3>
+                                </div>
                                 <div>
                                     {products.length > 0 ? (
                                         <PieChart width={600} height={300}>
@@ -139,13 +144,16 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
                 {/* Graficas de productos vendidos por departamentos  */}
                 <div>
-                    <button onClick={handleButtonClickSale}>Mostrar y Ocultar Gráfico Ventas</button>
+                    <button className="btn btn-success" onClick={handleButtonClickSale} id="subscription">Mostrar y Ocultar Gráfico Ventas</button>
 
                     {/* Graficas de productos Por departamento */}
                     {showChart1 && (
-                        <div className="bg-white">
+                        <div className="d-flex justify-content-center align-items-center">
+                            <div>
                             {/* Graficas de productos Insertados */}
-                            <h2>Gráfica de Productos Vendidos</h2>
+                            <div className="tittle"> 
+                            <h3>Gráfica de Productos Vendidos</h3>
+                            </div>
                             <BarChart width={600} height={300} data={sales}>
                                 <XAxis dataKey="departamento" stroke="#1E90FF" />
 
@@ -157,6 +165,7 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                 <Bar dataKey="Total_ProductosVendidos" fill="#1E90FF" barSize={30} />
 
                             </BarChart>
+                            </div>
                         </div>
                     )}
 
