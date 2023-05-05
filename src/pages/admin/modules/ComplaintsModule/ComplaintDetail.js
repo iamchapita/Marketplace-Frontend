@@ -149,7 +149,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                         <div className='row mx-4 my-3' style={{ color: "white" }}>
                             <div className='col-12 container-style'>
                                 <h1 className="text-center">Denuncia</h1>
-                                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-4 g-2 mt-4">
+                                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-4 mt-4">
                                     <div className="col col-sm-6 col-md-4 col-xl-3 col-xxl-3 p-2 mt-0">
                                         <div className={complaintOwnerIsBanned ? 'userInfoContainer isBanned' : 'userInfoContainer'} style={{ padding: '1em 1em 1em 1em', wordWrap: 'break-word' }}>
                                             <div className='userInfo'>
@@ -261,26 +261,28 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
                                             </div>
                                         </div>
+                                        <div style={{ marginTop: '1em' }}>
+                                            <ProductCard
+                                                key={1}
+                                                id={productDetails.productId}
+                                                name={productDetails.productName}
+                                                price={productDetails.productPrice}
+                                                path={productDetails.productPhotos}
+                                                isAvailable={productDetails.productIsAvailable}
+                                                wasSold={productDetails.productWasSold}
+                                                isBanned={productDetails.productIsBanned}
+                                                amount={productDetails.productAmount}
+                                                createdAt={productDetails.productCreatedAt}
+                                                updatedAt={null}
+                                                hasProductOwnership={false}
+                                                isAdmin={true}
+                                                complaintModule={true}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="col col-sm-6 col-md-8 col-xl-9 col-xxl-9 p-2 mt-0">
                                         <div className="complaintContainer">
                                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2  row-cols-xl-2 row-cols-xxl-4">
-                                                <ProductCard
-                                                    key={1}
-                                                    id={productDetails.productId}
-                                                    name={productDetails.productName}
-                                                    price={productDetails.productPrice}
-                                                    path={productDetails.productPhotos}
-                                                    isAvailable={productDetails.productIsAvailable}
-                                                    wasSold={productDetails.productWasSold}
-                                                    isBanned={productDetails.productIsBanned}
-                                                    amount={productDetails.productAmount}
-                                                    createdAt={productDetails.productCreatedAt}
-                                                    updatedAt={null}
-                                                    hasProductOwnership={false}
-                                                    isAdmin={true}
-                                                    complaintModule={true}
-                                                />
                                                 <ComplaintCard
                                                     id={id}
                                                     description={complaintDetails.complaintDescription}
@@ -291,7 +293,6 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                                     path={complaintDetails.complaintEvidences}
                                                     createdAt={complaintDetails.complaintCreatedAt}
                                                     updatedAt={complaintDetails.complaintUpdatedAt}
-                                                    isAdmin={true}
                                                 />
                                             </div>
                                         </div>
