@@ -121,7 +121,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                                         isPerformingOperattion ? (
                                             <Button type={'button'} buttonClass={'success'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Aceptar'} buttonClass={'success'} tooltipText={'Aceptar Denuncia.'} onClick={() => { handleWasApprovedValue(true) }} disabled={isAwaitingResponseValue ? false : true} />
+                                            <Button type={'button'} fieldLabel={'Aceptar'} buttonClass={'success'} tooltipText={'Aceptar Denuncia.'} onClick={() => { handleWasApprovedValue(true) }}/>
                                         )
                                     }
                                 </div>
@@ -130,7 +130,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                                         isPerformingOperattion ? (
                                             <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Denegar'} buttonClass={'danger'} tooltipText={'Denegar Denuncia.'} onClick={() => { handleWasApprovedValue(false) }} disabled={isAwaitingResponseValue ? false : true} />
+                                            <Button type={'button'} fieldLabel={'Denegar'} buttonClass={'danger'} tooltipText={'Denegar Denuncia.'} onClick={() => { handleWasApprovedValue(false) }}/>
                                         )
                                     }
                                 </div>
