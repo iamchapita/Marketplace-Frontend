@@ -29,8 +29,6 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                 id: id
             }).then((response) => {
 
-                // formatData(response.data);
-
                 const [complaintOwnerData, reportedUserData, productData, complaintData] = extractData(response.data);
 
                 setComplaintDetails(complaintData);
@@ -40,8 +38,6 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                 setReportedUserIsBanned(Boolean(reportedUserData.reportedUserIsBanned));
                 setProductDetails(productData);
                 setIsReadyToRender(true);
-
-                console.log(complaintData);
 
             }).catch((error) => {
                 console.log(error);
@@ -138,7 +134,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         }
 
         return (
-            <div className='container-fluid' style={{ marginTop: '3em' }}>
+            <div className='container-xl'>
                 {
                     !isReadyToRender ? (
                         <div className="container d-flex justify-content-center">
