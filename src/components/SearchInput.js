@@ -8,15 +8,17 @@ const SearchInput = ({ fieldName, placeholder, url, regex, registerPerPageValue,
 
     const action = async (registersAmount, value) => {
 
-        setIsReadyToRender(false);
+        if (isValid === true) {
+            setIsReadyToRender(false);
 
-        await apiClient.get(`${url}/${registersAmount}/${value}`).then((response) => {
-            setDataToRender(response.data.data);
-            setPaginateLinks(response.data.links);
-            setIsReadyToRender(true);
-        }).catch((error) => {
-            console.log(error);
-        });
+            await apiClient.get(`${url}/${registersAmount}/${value}`).then((response) => {
+                setDataToRender(response.data.data);
+                setPaginateLinks(response.data.links);
+                setIsReadyToRender(true);
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
 
     }
 
