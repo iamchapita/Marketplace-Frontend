@@ -200,21 +200,21 @@ const Home = ({ isLoggedIn }) => {
                         <div className="home-tittle">
                             <h4>Buscar</h4>
                         </div>
-                    <div className="row">
-                    <div className="col-sm-12 col-md-12 col-lg-12 pb-3">
-                    <input className="form-control" 
-                            type="search" 
-                            placeholder="Buscar Producto" 
-                            aria-label="Buscador" 
-                            onChange={(e) => {
-                            const regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\d]+$/;
-                            if (regex.test(e.target.value)) {
-                                setname(e.target.value);
-                            }
-                            }}
-                    />
-                    </div>
-                    </div>
+                        <div className="row">
+                            <div className="col-sm-12 col-md-12 col-lg-12 pb-3">
+                                <input className="form-control"
+                                    type="search"
+                                    placeholder="Buscar Producto"
+                                    aria-label="Buscador"
+                                    onChange={(e) => {
+                                        const regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\d]+$/;
+                                        if (regex.test(e.target.value)) {
+                                            setname(e.target.value);
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </div>
 
                     </div>
                     <div className="home-top-section">
