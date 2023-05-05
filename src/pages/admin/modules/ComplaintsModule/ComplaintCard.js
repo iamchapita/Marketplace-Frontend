@@ -16,8 +16,8 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
         const getComplaintImages = async () => {
             await apiClient.post('/getComplaintEvidences', {
                 path: path
-            }).then((respose) => {
-                setComplaintImages(respose.data);
+            }).then((response) => {
+                setComplaintImages(response.data);
                 setIsReadyToRender(true);
             }).catch((error) => {
                 console.log(error.response.data);
@@ -29,10 +29,20 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
 
     const handleWasApprovedValue = (wasApprovedValue) => {
         setIsPerformingOperattion(true);
-        setWasApprovedValue(wasApprovedValue);
-        setIsPerformingOperattion(false);
-        setIsAwaitingResponse(false);
-        console.log(wasApprovedValue);
+
+        const setWasAproved = async () => {
+            await apiClient.post('/setWasApproved', {
+                id: id,
+                wasApproved: wasApprovedValue
+            }).then((response) => {
+                setWasApprovedValue(wasApprovedValue);
+                setIsAwaitingResponse(false);
+                setIsPerformingOperattion(false);
+            }).catch((error) => {
+                console.log(error.response.data);
+            });
+        }
+        setWasAproved();
     }
 
     if (!isReadyToRender) {
@@ -46,7 +56,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
     } else {
         return (
             <div key={id} className="col-sm-12 col-md-12 col-xl-12 col-xxl-12">
-                <div className="card h-100" id="seller-products">
+                <div className={`card h-100 ${wasApprovedValue === true ? 'isBanned' : ''}`} id="seller-products">
                     <div className="card-header text-center pt-4">
                         <h3>Detalles Denuncia</h3>
                     </div>
@@ -59,7 +69,8 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                                 Evidencias:
                             </p>
 
-                            <div id="carouselExampleIndicators" className="carousel carousel-dark slide" style={{ height: '80%' }}>
+                            <div id="carouselExampleIndicators" className="carousel carousel-dark slide"
+                                style={{ height: '60vh' }}>
                                 <div className="carousel-indicators">
                                     {
                                         complaintImages.map((image, index) => (
@@ -99,6 +110,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                                     <span className="visually-hidden">Next</span>
                                 </button>
                             </div>
+
                         </div>
                     </div>
                     <div className="card-footer">
