@@ -78,7 +78,7 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         return (
             <div className="container-sm">
                 <div className="tittle">
-                    <h1>Estadisticas</h1>
+                    <h1>Estadísticas</h1>
                 </div>
                 <div>
                     <button className="btn btn-primary" onClick={handleButtonClick} id="subscription">Mostrar y Ocultar Gráfico de Registro</button>
