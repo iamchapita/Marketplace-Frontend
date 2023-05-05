@@ -3,6 +3,7 @@ import { Spinner } from "react-bootstrap";
 import CustomizableAlert from "../../../../components/CustomizableAlert";
 import apiClient from "../../../../utils/apiClient";
 import ResponsiveTable from "../../../../components/ResponsiveTable";
+import SearchInput from "../../../../components/SearchInput";
 
 const ComplaintsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
 
@@ -12,6 +13,7 @@ const ComplaintsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [paginateLinks, setPaginateLinks] = useState([]);
 
     const operations = [{ 'name': 'Detalles', 'url': '/complaintDetail/' }];
+    const regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\d]+$/;
 
     const headings = ['#', 'Usuario Denunciante', 'Usuario Denunciado', 'Producto Denunciado', 'Estado de Revisión', 'Dictamen', 'Fecha de Dictamen', 'Fecha de Denuncia', 'Operación'];
 
@@ -77,23 +79,35 @@ const ComplaintsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         return (
             <div className='container-md container-style' style={{ color: 'black' }}>
                 <h1 className="text-center" style={{ color: 'white' }} >Módulo de Denuncias</h1>
-                <div id="registerPerPage">
-                    <div className="form-floating">
-                        <select
-                            className="form-select"
-                            id="floatingSelect"
-                            aria-label="Floating label select example"
-                            value={registerPerPageValue}
-                            onChange={handleRegisterPerPageChange}
-                        >
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="30">30</option>
-                        </select>
-                        <label htmlFor="floatingSelect">Registros por Página</label>
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-xl-2 row-cols-xxl-2 mt-5 g-2">
+                    <div className="col cols-sm-8 cols-md-2 cols-xl-6 cols-xxl-6">
+                        <SearchInput
+                            fieldName={'usersSearchValue'}
+                            placeholder={'Buscar Denuncias por Nombres de Usuario'}
+                            regex={regex}
+                            setIsReadyToRender={setIsReadyToRender}
+                            url={'/getAllComplaints'}
+                            registerPerPageValue={String(registerPerPageValue)}
+                            setDataToRender={setDataToRender}
+                            setPaginateLinks={setPaginateLinks}
+                        />
+                    </div>
+                    <div className="col cols-sm-12 cols-md-4 cols-xl-4 cols-xxl-4">
+                        <div className="input-group">
+                            <label className='input-group-text'>Registros por Página</label>
+                            <select
+                                className="form-select"
+                                value={registerPerPageValue}
+                                onChange={handleRegisterPerPageChange}
+                            >
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <ResponsiveTable
