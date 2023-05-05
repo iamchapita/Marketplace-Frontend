@@ -283,9 +283,7 @@ const ComplaintDetail = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                                                     id={id}
                                                     description={complaintDetails.complaintDescription}
                                                     isAwaitingResponse={complaintDetails.complaintIsAwaitingResponse}
-                                                    wasApproved={complaintDetails.complaintWasApproved !== 'N/D' ?
-                                                        Boolean(complaintDetails.complaintWasApproved)
-                                                        : 'N/D'}
+                                                    wasApproved={parseInt(complaintDetails.complaintWasApproved)}
                                                     path={complaintDetails.complaintEvidences}
                                                     createdAt={complaintDetails.complaintCreatedAt}
                                                     updatedAt={complaintDetails.complaintUpdatedAt}

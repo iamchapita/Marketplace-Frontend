@@ -6,8 +6,8 @@ import apiClient from "../../../../utils/apiClient";
 function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path, createdAt, updatedAt }) {
 
     const [complaintImages, setComplaintImages] = useState([]);
-    const [wasApprovedValue, setWasApprovedValue] = useState(wasApproved);
-    const [isAwaitingResponseValue, setIsAwaitingResponse] = useState(isAwaitingResponse);
+    const [wasApprovedValue, setWasApprovedValue] = useState(Boolean(wasApproved));
+    const [isAwaitingResponseValue, setIsAwaitingResponse] = useState(Boolean(isAwaitingResponse));
     const [isPerformingOperattion, setIsPerformingOperattion] = useState(false);
     const [isReadyToRender, setIsReadyToRender] = useState(false);
 
@@ -121,7 +121,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                                         isPerformingOperattion ? (
                                             <Button type={'button'} buttonClass={'success'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Aceptar'} buttonClass={'success'} tooltipText={'Aceptar Denuncia.'} onClick={() => { handleWasApprovedValue(true) }}/>
+                                            <Button type={'button'} fieldLabel={'Aceptar'} buttonClass={'success'} tooltipText={'Aceptar Denuncia.'} onClick={() => { handleWasApprovedValue(true) }} />
                                         )
                                     }
                                 </div>
@@ -130,7 +130,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                                         isPerformingOperattion ? (
                                             <Button type={'button'} buttonClass={'danger'} tooltipText={'Espera'} fieldLabel={<Spinner animation="border" variant="light" size="sm" />} />
                                         ) : (
-                                            <Button type={'button'} fieldLabel={'Denegar'} buttonClass={'danger'} tooltipText={'Denegar Denuncia.'} onClick={() => { handleWasApprovedValue(false) }}/>
+                                            <Button type={'button'} fieldLabel={'Denegar'} buttonClass={'danger'} tooltipText={'Denegar Denuncia.'} onClick={() => { handleWasApprovedValue(false) }} />
                                         )
                                     }
                                 </div>
@@ -138,7 +138,7 @@ function ComplaintCard({ id, description, isAwaitingResponse, wasApproved, path,
                         }
                     </div>
                     <div className="card-footer">
-                        <small>Dictamen: {typeof (wasApprovedValue) === "string" ? wasApprovedValue : (wasApprovedValue ? 'Denuncia Aceptada' : 'Denuncia Denegada')}</small>
+                        <small>Dictamen: {isAwaitingResponseValue === true ? 'N/D' : (wasApprovedValue === true ? 'Denuncia Aceptada' : 'Denuncia Denegada')}</small>
                     </div>
                     <div className="card-footer">
                         <small className="text-body-secondary">{`Realizada en: ${new Date(createdAt).toLocaleString('es-HN', { hour12: true })}`}</small>
