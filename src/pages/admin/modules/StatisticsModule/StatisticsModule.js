@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import CustomizableAlert from "../../../../components/CustomizableAlert";
 import apiClient from "../../../../utils/apiClient";
-import { Area, YAxis, Line, CartesianGrid, ComposedChart, BarChart, XAxis, Tooltip, Legend, Bar, ResponsiveContainer } from 'recharts';
-
+import { Area, YAxis, Line, CartesianGrid, ComposedChart, BarChart, XAxis, Bar, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 
 const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const [products, setProducts] = useState([]);
@@ -70,33 +70,68 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
         };
 
 
+        const COLORS = ['#FF69B4', '#1E90FF', '#00CC00', '#800080', '#8B4513', '#FFD700'];
+
+
+
 
         return (
             <div>
                 <div>
-                    <button onClick={handleButtonClick}>Mostrar y Ocultar Gráfico Usuarios</button>
+                    <button onClick={handleButtonClick}>Mostrar y Ocultar Gráfico de Registro</button>
 
                     {/* Graficas de productos Por departamento */}
                     {showChart && (
-                        <div className="bg-white">
-                            {/* Graficas de productos Insertados */}
-                            <h2>Gráfica de Productos Registrados</h2>
-                            <BarChart
-                                data={products}
-                                width={600}
-                                height={300}>
-                                <XAxis dataKey="nombre_mes" stroke="#8884d8" />
-                                <YAxis />
-                                <Tooltip wrapperStyle={{ width: 100, backgroundColor: '#ccc' }} />
-                                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                                <Bar dataKey="Día" fill="#8884d8" barSize={30} />
-                                <Bar dataKey="Nombre" fill="#8884d8" barSize={30} />
-                                <Bar dataKey="Año" fill="#8884d8" barSize={30} />
-                                <Line type="monotone" dataKey="Día" stroke="#ff7300" />
+                        <div>
+                            {/*
+                            <div className="bg-white">
+                                {/* Graficas de productos Insertados
+                                <h2>Gráfica de Productos Registrados</h2>
+                                <BarChart
+                                    data={products}
+                                    width={600}
+                                    height={300}>
+                                    <XAxis dataKey="nombre_mes" stroke="#8884d8" />
+                                    <YAxis />
+                                    <Tooltip wrapperStyle={{ width: 100, backgroundColor: '#ccc' }} />
+                                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                                    <Bar dataKey="Día" fill="#8884d8" barSize={30} />
+                                    <Bar dataKey="Nombre" fill="#8884d8" barSize={30} />
+                                    <Bar dataKey="Año" fill="#8884d8" barSize={30} />
+                                    <Line type="monotone" dataKey="Día" stroke="#ff7300" />
 
-                            </BarChart>
-                           
+                                </BarChart>
 
+
+                            </div> */}
+
+                            <div>
+                                <h3>Total de Productos Registrados por Mes</h3>
+                                <div>
+                                    {products.length > 0 ? (
+                                        <PieChart width={600} height={300}>
+                                            <Pie
+                                                data={products}
+                                                dataKey="total_productos"
+                                                nameKey="nombre_mes"
+                                                cx="50%"
+                                                cy="50%"
+                                                outerRadius={100}
+                                                fill="#8884d8"
+                                                label={(entry) => entry.nombre_mes}
+                                            >
+                                                {products.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                ))}
+                                            </Pie>
+                                            <Legend />
+                                            <Tooltip />
+                                        </PieChart>
+                                    ) : (
+                                        <div>Cargando datos...</div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     )}
 
@@ -113,14 +148,14 @@ const StatisticsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
                             <h2>Gráfica de Productos Vendidos</h2>
                             <BarChart width={600} height={300} data={sales}>
                                 <XAxis dataKey="departamento" stroke="#1E90FF" />
-                                
+
                                 <YAxis />
                                 <Tooltip wrapperStyle={{ width: 100, backgroundColor: '#ccc' }} />
-                                
+
                                 <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                                <Bar dataKey="Nombre"  fill="#800080" barSize={30} />
-                                <Bar dataKey="Total_ProductosVendidos"  fill="#1E90FF" barSize={30} />
-                               
+                                <Bar dataKey="Nombre" fill="#800080" barSize={30} />
+                                <Bar dataKey="Total_ProductosVendidos" fill="#1E90FF" barSize={30} />
+
                             </BarChart>
                         </div>
                     )}
