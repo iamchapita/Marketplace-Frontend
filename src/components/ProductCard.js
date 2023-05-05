@@ -128,48 +128,48 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
                     </div>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                        <h6 className="card-text">L {price.toLocaleString()}</h6>
+                        <p className="card-text">L {price.toLocaleString()}</p>
                         {
                             hasProductOwnership ? (
                                 !productIsBanned ? (
                                     productIsAvailable ? (
                                         !productWasSold ? (
-                                            <h6 className="card-text">Estado: Disponible</h6>
+                                            <p className="card-text">Estado: Disponible</p>
                                         ) : (
-                                            <h6 className="card-text">Estado: Vendido</h6>
+                                            <p className="card-text">Estado: Vendido</p>
                                         )
                                     ) : (
-                                        <h6 className="card-text">Estado: Deshabilitado</h6>
+                                        <p className="card-text">Estado: Deshabilitado</p>
                                     )
                                 ) : (
-                                    <h6 className="card-text">Estado: Banneado</h6>
+                                    <p className="card-text">Estado: Banneado</p>
                                 )
                             ) : (
                                 isAdmin ? (
                                     !productIsBanned ? (
                                         productIsAvailable ? (
                                             !productWasSold ? (
-                                                <h6 className="card-text">Estado: Disponible</h6>
+                                                <p className="card-text">Estado: Disponible</p>
                                             ) : (
-                                                <h6 className="card-text">Estado: Vendido</h6>
+                                                <p className="card-text">Estado: Vendido</p>
                                             )
                                         ) : (
-                                            <h6 className="card-text">Estado: Deshabilitado</h6>
+                                            <p className="card-text">Estado: Deshabilitado</p>
                                         )
                                     ) : (
-                                        <h6 className="card-text">Estado: Banneado</h6>
+                                        <p className="card-text">Estado: Banneado</p>
                                     )
                                 ) : (
                                     !productWasSold ? (
-                                        <h6 className="card-text">Estado: Disponible</h6>
+                                        <p className="card-text">Estado: Disponible</p>
                                     ) : (
-                                        <h6 className="card-text">Estado: Vendido</h6>
+                                        <p className="card-text">Estado: Vendido</p>
                                     )
                                 )
                             )
                         }
                         {
-                            <h6 className="card-text">Cantidad: {amount}</h6>
+                            <p className="card-text">Cantidad: {amount}</p>
                         }
                         <a className="card-link" href={`/productDetail/${id}`}>Detalles</a>
                     </div>
