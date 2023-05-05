@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import apiClient from "../utils/apiClient";
+import CustomizableAlert from "../components/CustomizableAlert";
 
 const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, setData, paginateLinks, setLinks, operations = false, formatFunction = false }) => {
 
@@ -31,6 +32,13 @@ const ResponsiveTable = ({ headings, isReadyToRender, setIsReadyToRender, data, 
         );
 
     } else {
+
+        if (data === undefined) {
+            return (
+                <CustomizableAlert title={'Ups!'} text={'No se encontraron registros'} variant="info" />
+            );
+        }
+
         return (
             <div>
                 <div className="table-responsive" style={{ marginTop: '2em' }}>
