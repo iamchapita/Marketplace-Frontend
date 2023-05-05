@@ -97,7 +97,7 @@ function ProductCard({ id, name, price, path, isAvailable, wasSold, isBanned, am
     }, [productImage]);
 
     return (
-        <div key={id} className="col col-sm-6 col-md-6 col-xl-3 col-xxl-3">
+        <div key={id} className="col">
             <div className={`card h-100 ${isAdmin || hasProductOwnership ? (productIsBanned ? 'isBanned' : !productIsAvailable ? 'isAvailable' : '') : (' ')}`} id="seller-products">
                 {
                     complaintModule ? (
