@@ -16,7 +16,8 @@ const ComplaintsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const headings = ['#', 'Usuario Denunciante', 'Usuario Denunciado', 'Producto Denunciado', 'Estado de Revisión', 'Dictamen', 'Fecha de Dictamen', 'Fecha de Denuncia', 'Operación'];
 
     const action = async (value) => {
-        await apiClient.get(`/getAllComplaints/${value}`).then((response) => {
+        const randomQueryParam = Math.random().toString(36).substring(7); // generando una cadena aleatoria para el parámetro de consulta
+        await apiClient.get(`/getAllComplaints/${value}?cache=${randomQueryParam}`).then((response) => {
             formatFields(response);
             setDataToRender(response.data.data);
             setPaginateLinks(response.data.links);

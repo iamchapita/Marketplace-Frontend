@@ -16,7 +16,8 @@ const ProductsModule = ({ isLoggedIn, isAdmin, areUserStatusLoaded }) => {
     const headings = ['#', 'Nombre', 'Precio', 'Estado del Producto', 'Cantidad', 'Visibilidad', 'Disponible para Comprar', 'Banneado', 'Fecha de Publicación', 'Operación'];
 
     const action = async (value) => {
-        await apiClient.get(`/getAllProducts/${value}`).then((response) => {
+        const randomQueryParam = Math.random().toString(36).substring(7); // generando una cadena aleatoria para el parámetro de consulta
+        await apiClient.get(`/getAllProducts/${value}?cache=${randomQueryParam}`).then((response) => {
             formatFields(response);
             setDataToRender(response.data.data);
             setPaginateLinks(response.data.links);
